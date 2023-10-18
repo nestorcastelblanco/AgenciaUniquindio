@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-10-12T23:17:05.287647900Z</date>
+  <millis>1697152625287</millis>
+  <nanos>647900</nanos>
+  <sequence>1</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>registrarCliente</method>
+  <thread>17</thread>
+  <message>Se registro un nuevo cliente</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-10-12T23:21:25.701445200Z</date>
+  <millis>1697152885701</millis>
+  <nanos>445200</nanos>
+  <sequence>1</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>registrarCliente</method>
+  <thread>17</thread>
+  <message>Se registro un nuevo cliente</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-10-13T00:05:48.363578200Z</date>
+  <millis>1697155548363</millis>
+  <nanos>578200</nanos>
+  <sequence>4</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>registrarCliente</method>
+  <thread>17</thread>
+  <message>Se registro un nuevo cliente</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-10-13T00:20:30.705839900Z</date>
+  <millis>1697156430705</millis>
+  <nanos>839900</nanos>
+  <sequence>2</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>registrarCliente</method>
+  <thread>17</thread>
+  <message>Se registro un nuevo cliente</message>
+</record>
+<record>
+  <date>2023-10-13T00:20:35.439151Z</date>
+  <millis>1697156435439</millis>
+  <nanos>151000</nanos>
+  <sequence>4</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>ingresarCliente</method>
+  <thread>17</thread>
+  <message>Se genero el ingreso de un cliente: co.edu.uniquindio.model.Clientes@6080b21c</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-10-17T14:49:50.015472500Z</date>
+  <millis>1697554190015</millis>
+  <nanos>472500</nanos>
+  <sequence>2</sequence>
+  <logger>co.edu.uniquindio.model.Borrador</logger>
+  <level>SEVERE</level>
+  <class>co.edu.uniquindio.model.Borrador</class>
+  <method>escribirCliente</method>
+  <thread>17</thread>
+  <message>src\textos\clientes.txt (El sistema no puede encontrar la ruta especificada)</message>
+</record>
+<record>
+  <date>2023-10-17T14:49:50.022989100Z</date>
+  <millis>1697554190022</millis>
+  <nanos>989100</nanos>
+  <sequence>3</sequence>
+  <logger>co.edu.uniquindio.model.Borrador</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Borrador</class>
+  <method>registrarCliente</method>
+  <thread>17</thread>
+  <message>Se registro un nuevo cliente</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
