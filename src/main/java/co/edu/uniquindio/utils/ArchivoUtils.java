@@ -1,6 +1,7 @@
 package co.edu.uniquindio.utils;
 
 import co.edu.uniquindio.model.Clientes;
+import co.edu.uniquindio.model.Destinos;
 import co.edu.uniquindio.model.Guias;
 
 import java.beans.XMLDecoder;
@@ -89,6 +90,15 @@ public class ArchivoUtils {
         try (ObjectOutputStream salida = new ObjectOutputStream(new FileOutputStream(ruta))) {
             salida.writeObject(guias);
             System.out.println("Guias serializados correctamente.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public static void serializarArraylistDestinos (String ruta, ArrayList<Destinos> guias)
+    {
+        try (ObjectOutputStream salida = new ObjectOutputStream(new FileOutputStream(ruta))) {
+            salida.writeObject(guias);
+            System.out.println("Destinos serializados correctamente.");
         } catch (IOException e) {
             e.printStackTrace();
         }

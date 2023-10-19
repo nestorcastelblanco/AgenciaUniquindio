@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="396.0" prefWidth="326.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.controller.RegistroDestinoController">
+      <TextField fx:id="descripcion" layoutX="32.0" layoutY="197.0" prefHeight="29.0" prefWidth="267.0">
+         <font>
+            <Font name="Franklin Gothic Medium Cond" size="16.0" />
+         </font></TextField>
+      <Label layoutX="32.0" layoutY="172.0" prefHeight="25.0" prefWidth="81.0" text="Descripcion">
+         <font>
+            <Font name="Franklin Gothic Book" size="15.0" />
+         </font></Label>
+      <Button fx:id="botonRegreso" layoutX="30.0" layoutY="348.0" mnemonicParsing="false" onAction="#regresar" prefHeight="38.0" prefWidth="98.0" text="Regresar" textOverrun="LEADING_ELLIPSIS" />
+      <Label layoutX="32.0" layoutY="226.0" prefHeight="25.0" prefWidth="110.0" text="Clima">
+         <font>
+            <Font name="Franklin Gothic Book" size="15.0" />
+         </font>
+      </Label>
+      <Label contentDisplay="CENTER" layoutX="20.0" layoutY="-9.0" prefHeight="83.0" prefWidth="287.0" text="Registro de Destino">
+         <font>
+            <Font name="Franklin Gothic Book" size="34.0" />
+         </font>
+      </Label>
+      <Button fx:id="botonRegistro" layoutX="195.0" layoutY="348.0" mnemonicParsing="false" onAction="#registrarDestino" prefHeight="38.0" prefWidth="98.0" text="Registrarse" textOverrun="LEADING_ELLIPSIS" />
+   <TextField fx:id="nombre" layoutX="32.0" layoutY="83.0" prefHeight="29.0" prefWidth="267.0">
+      <font>
+         <Font name="Franklin Gothic Medium Cond" size="16.0" />
+      </font>
+   </TextField>
+   <Label layoutX="32.0" layoutY="58.0" prefHeight="25.0" prefWidth="81.0" text="Nombre">
+      <font>
+         <Font name="Franklin Gothic Book" size="15.0" />
+      </font>
+   </Label>
+   <Label layoutX="32.0" layoutY="112.0" prefHeight="25.0" prefWidth="110.0" text="Ciudad">
+      <font>
+         <Font name="Franklin Gothic Book" size="15.0" />
+      </font>
+   </Label>
+   <TextField fx:id="ciudad" layoutX="32.0" layoutY="137.0" prefHeight="29.0" prefWidth="267.0">
+      <font>
+         <Font name="Franklin Gothic Medium Cond" size="16.0" />
+      </font>
+   </TextField>
+   <TextField fx:id="clima" layoutX="32.0" layoutY="251.0" prefHeight="29.0" prefWidth="267.0" />
+   <Label layoutX="34.0" layoutY="280.0" prefHeight="25.0" prefWidth="110.0" text="Imagenes">
+      <font>
+         <Font name="Franklin Gothic Book" size="15.0" />
+      </font>
+   </Label>
+   <TextField fx:id="imagenes" layoutX="34.0" layoutY="305.0" prefHeight="29.0" prefWidth="267.0" />
+</AnchorPane>

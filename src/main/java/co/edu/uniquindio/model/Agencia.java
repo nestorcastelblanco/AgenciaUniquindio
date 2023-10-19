@@ -26,7 +26,11 @@ import java.util.logging.Logger;
 public class Agencia {
     private static final String RUTA_CLIENTES = "src/main/resources/textos/clientes.txt";
     private static final String RUTA_GUIAS = "src/main/resources/textos/guias.ser";
+    private static final String RUTA_DESTINOS = "src/main/resources/textos/destinos.ser";
+    private static final String RUTA_PAQUETES = "src/main/resources/textos/paquetes.ser";
+    private static final String RUTA_RESERVAS = "src/main/resources/textos/reservas.ser";
     private static Clientes CLIENTE_SESION = new Clientes();
+    private static ArrayList<Destinos> destinos = new ArrayList<>();
     private static ArrayList<Clientes> clientes = new ArrayList<>();
     private static ArrayList<Guias> guias = new ArrayList<>();
     private static final Logger LOGGER=Logger.getLogger(Agencia.class.getName());
@@ -35,6 +39,7 @@ public class Agencia {
     {
         leerClientes();
         leerGuias();
+        leerDestinos();
         for(int i = 0 ; i<clientes.size();i++)
         {
             System.out.println(clientes.get(i).getNombreCompleto() + " Usuario: " + clientes.get(i).getUsuario() + " Clave: " + clientes.get(i).getContrasena());
@@ -42,6 +47,10 @@ public class Agencia {
         for(int i = 0 ; i<guias.size();i++)
         {
             System.out.println(guias.get(i).getNombre());
+        }
+        for(int i = 0 ; i<destinos.size();i++)
+        {
+            System.out.println(destinos.get(i).getNombre());
         }
     }
     private Agencia()
@@ -184,6 +193,15 @@ public class Agencia {
         System.out.println(guia.getLenguajes().toString());
         return guia;
     }
+    private Destinos llenarArrayImagenes(String imagenes, Destinos destinos) {
+        String[] leng = imagenes.split(",");
+        for (int i  = 0; i<leng.length ; i++)
+        {
+            destinos.addImagenes(leng[i]);
+        }
+        System.out.println(destinos.getImagenes().toString());
+        return destinos;
+    }
 
     public void ingresarCliente(String usuario, String contrasena) throws CampoRepetido
     {
@@ -242,6 +260,18 @@ public class Agencia {
             System.out.println("Guias deserializados correctamente.");
             for (Guias guia : vehiculo) {
                 guias.add(guia);
+            }
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+    public static void leerDestinos()
+    {
+        try (ObjectInputStream entrada = new ObjectInputStream(new FileInputStream(RUTA_DESTINOS))) {
+            ArrayList<Destinos> vehiculo = (ArrayList<Destinos>) entrada.readObject();
+            System.out.println("Destinos deserializados correctamente.");
+            for (Destinos guia : vehiculo) {
+                destinos.add(guia);
             }
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -313,5 +343,32 @@ public class Agencia {
                 escribirClientes();
             }
         }
+    }
+    public void registrarDestino(String nombre, String ciudad, String descripcion, String imagenes, String clima) throws CampoRepetido,CampoObligatorioException,CampoVacioException{
+        if (ciudad == null || nombre.isEmpty()) {
+            throw new CampoObligatorioException("Es necesario ingresar el nombre");
+        }
+        if (agencia.verificarIdentificacion(nombre)) {
+            throw new CampoRepetido("Ya se encuentra un Destino registrado con este nombre");
+        }
+        if (descripcion == null || descripcion.isEmpty()) {
+            throw new CampoObligatorioException("Es necesario ingresar la descripcion");
+        }
+        if (imagenes == null || imagenes.isEmpty()) {
+            throw new CampoObligatorioException("Es necesario ingresar imagenes del Destino");
+        }
+        if (clima == null || clima.isEmpty()) {
+            throw new CampoObligatorioException("Es necesario ingresar el clima del Destino");
+        }
+        Destinos destino = Destinos.builder().
+                nombre(nombre).
+                ciudad(ciudad).
+                clima(clima).
+                descripcion(descripcion)
+                .build();
+        destino = llenarArrayImagenes(imagenes,destino);
+        destinos.add(destino);
+        ArchivoUtils.serializarArraylistDestinos(RUTA_DESTINOS,destinos);
+        LOGGER.log(Level.INFO, "Se registro un nuevo Destino");
     }
 }
