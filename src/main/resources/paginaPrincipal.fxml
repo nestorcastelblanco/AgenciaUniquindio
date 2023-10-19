@@ -38,14 +38,14 @@
                   <Font name="Franklin Gothic Medium Cond" size="30.0" />
                </font>
             </Label>
-            <Button fx:id="botonIngreso" layoutX="58.0" layoutY="285.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="103.0" text="Ingresar" />
+            <Button fx:id="botonIngreso" layoutX="58.0" layoutY="285.0" mnemonicParsing="false" onAction="#ingresar" prefHeight="38.0" prefWidth="103.0" text="Ingresar" />
             <Button fx:id="botonRegistro" layoutX="229.0" layoutY="285.0" mnemonicParsing="false" onAction="#registrar" prefHeight="38.0" prefWidth="103.0" text="Registrar" />
             <Label fx:id="ingreso" alignment="CENTER" layoutX="33.0" layoutY="14.0" prefHeight="55.0" prefWidth="309.0" text="INGRESO">
                <font>
                   <Font name="Franklin Gothic Medium Cond" size="38.0" />
                </font>
             </Label>
-            <Button fx:id="botonIngreso1" layoutX="150.0" layoutY="338.0" mnemonicParsing="false" onAction="#admin" prefHeight="38.0" prefWidth="103.0" text="Administracion" />
+            <Button fx:id="botonAdmin" layoutX="150.0" layoutY="338.0" mnemonicParsing="false" onAction="#admin" prefHeight="38.0" prefWidth="103.0" text="Administracion" />
          </children>
       </Pane>
       <ImageView fitHeight="402.0" fitWidth="388.0" layoutX="367.0" layoutY="38.0" pickOnBounds="true">

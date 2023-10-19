@@ -1,2 +1,2 @@
-Cesar Augusto Castelblanco Celis;direccion@sysdatec.edu.co;Calle 4 #14-29;Libano, Tolima;3125497753;cesar;cesar;93294839
-Nestor Felipe Castelblanco;nestorfelipe10@gmail.com;Calle 9N #18-380;Armenia, Quindio;3054194624;nestor;nestor;1104697206
+Nestor Felipe Castelblanco;nestorfelipe10@gmail.com;Calle 9N #18-380;1104697206;Armenia, Quindio;3054194624;felipe;felipe
+Cesar Augusto Castelblanco;cesarcastelblanco@hotmail.com;Calle 4 #14-29;932948;Libano, Tolima;31254977;cesar;cesar

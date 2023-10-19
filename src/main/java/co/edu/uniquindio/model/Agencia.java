@@ -13,9 +13,7 @@ import javafx.stage.Stage;
 import lombok.Getter;
 import lombok.extern.java.Log;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -28,7 +26,7 @@ import java.util.logging.Logger;
 public class Agencia {
     private static final String RUTA_CLIENTES = "src/main/resources/textos/clientes.txt";
     private static final String RUTA_GUIAS = "src/main/resources/textos/guias.ser";
-    private static Clientes CLIENTE_SESION;
+    private static Clientes CLIENTE_SESION = new Clientes();
     private static ArrayList<Clientes> clientes = new ArrayList<>();
     private static ArrayList<Guias> guias = new ArrayList<>();
     private static final Logger LOGGER=Logger.getLogger(Agencia.class.getName());
@@ -37,6 +35,14 @@ public class Agencia {
     {
         leerClientes();
         leerGuias();
+        for(int i = 0 ; i<clientes.size();i++)
+        {
+            System.out.println(clientes.get(i).getNombreCompleto() + " Usuario: " + clientes.get(i).getUsuario() + " Clave: " + clientes.get(i).getContrasena());
+        }
+        for(int i = 0 ; i<guias.size();i++)
+        {
+            System.out.println(guias.get(i).getNombre());
+        }
     }
     private Agencia()
     {
@@ -92,19 +98,21 @@ public class Agencia {
         }
         return state;
     }
-    public Clientes buscarCliente (String usuario, String contrasena)
+    public boolean buscarCliente (String usuario, String contrasena)
     {
-        Clientes cliente = new Clientes();
+        boolean state = false;
         for (Clientes c : clientes)
         {
             if (c.getUsuario().equals(usuario) && c.getContrasena().equals(contrasena))
             {
-                cliente = c;
+                state = true;
+                CLIENTE_SESION = c;
             }
         }
-        return cliente;
+        System.out.println("Cliente encontrado " + CLIENTE_SESION.getNombreCompleto());
+        return state;
     }
-    public void registrarCliente(String nombre, String correo, String direccion,String id, String ciudad, String telefono, String usuario, String contrasena) throws CampoVacioException, CampoObligatorioException, CampoRepetido
+    public void registrarCliente(String nombre, String correo, String direccion,String ciudad, String telefono, String usuario, String contrasena, String id) throws CampoVacioException, CampoObligatorioException, CampoRepetido
     {
         if (nombre == null || nombre.isEmpty()) {
             throw new CampoObligatorioException("Es necesario ingresar el nombre");
@@ -179,11 +187,11 @@ public class Agencia {
 
     public void ingresarCliente(String usuario, String contrasena) throws CampoRepetido
     {
-        if (agencia.buscarCliente(usuario,contrasena) == null) {
+        if (agencia.buscarCliente(usuario,contrasena) == false) {
             throw new CampoRepetido("Las credenciales proporcionadas son erroneas");
+        }else{
+            LOGGER.log(Level.INFO, "Se genero el ingreso de un cliente: " + CLIENTE_SESION.getNombreCompleto() );
         }
-        CLIENTE_SESION = agencia.buscarCliente(usuario,contrasena);
-        LOGGER.log(Level.INFO, "Se genero el ingreso de un cliente: " + CLIENTE_SESION.toString() );
     }
     private void escribirCliente(Clientes cliente) {
         try {
@@ -191,6 +199,25 @@ public class Agencia {
             ArchivoUtils.escribirArchivoBufferedWriter(RUTA_CLIENTES, List.of(linea), true);
         }catch (IOException e){
             LOGGER.severe(e.getMessage());
+        }
+    }
+    private void escribirClientes() {
+        borrarDatosSerializados(RUTA_CLIENTES);
+        try {
+            for (int i = 0 ; i<clientes.size();i++)
+            {
+                String linea = clientes.get(i).getNombreCompleto()+";"+clientes.get(i).getCorreo()+";"+clientes.get(i).getDireccion()+";"+clientes.get(i).getIdentificacion()+";"+clientes.get(i).getCiudad()+";"+clientes.get(i).getTelefono()+";"+clientes.get(i).getUsuario()+";"+clientes.get(i).getContrasena();
+                ArchivoUtils.escribirArchivoBufferedWriter(RUTA_CLIENTES, List.of(linea), true);
+            }
+        }catch (IOException e){
+            LOGGER.severe(e.getMessage());
+        }
+    }
+    public static void borrarDatosSerializados(String archivo) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(archivo))) {
+            // No se escribe nada en el archivo, simplemente se cierra
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
     public void loadStage(String url, Event event, String mensaje){
@@ -203,7 +230,6 @@ public class Agencia {
                 newStage.setScene(scene);
                 newStage.setTitle("Borrador");
                 newStage.show();
-
             } catch (Exception ignored)
             {
                 LOGGER.log(Level.INFO,mensaje);
@@ -213,7 +239,7 @@ public class Agencia {
     {
         try (ObjectInputStream entrada = new ObjectInputStream(new FileInputStream(RUTA_GUIAS))) {
             ArrayList<Guias> vehiculo = (ArrayList<Guias>) entrada.readObject();
-            System.out.println("Vehículos deserializados correctamente.");
+            System.out.println("Guias deserializados correctamente.");
             for (Guias guia : vehiculo) {
                 guias.add(guia);
             }
@@ -227,18 +253,65 @@ public class Agencia {
             for(String linea : lineas){
                 String[] valores = linea.split(";");
                 clientes.add( Clientes.builder()
-                        .identificacion(valores[0])
-                        .nombreCompleto(valores[1])
-                        .telefono(valores[2])
-                        .correo(valores[3])
-                        .ciudad(valores[4])
-                        .direccion(valores[5])
-                        .usuario(valores[6])
-                        .contrasena(valores[7])
+                                .nombreCompleto(valores[0])
+                                .correo(valores[1])
+                                .direccion(valores[2])
+                                .identificacion(valores[3])
+                                .ciudad(valores[4])
+                                .telefono(valores[5])
+                                .usuario(valores[6])
+                                .contrasena(valores[7])
                         .build());
             }
         }catch (IOException e){
             LOGGER.severe(e.getMessage());
+        }
+    }
+    public Clientes clienteSesion() {
+        return CLIENTE_SESION;
+    }
+    public void realizarEdicion(String nombre, String correo, String direccion, String id, String ciudad, String telefono, String usuario, String contrasena) throws CampoRepetido,CampoObligatorioException,CampoVacioException {
+        if (nombre == null || nombre.isEmpty()) {
+            throw new CampoObligatorioException("Es necesario ingresar el nombre");
+        }
+        if (correo == null || correo.isEmpty()) {
+            throw new CampoVacioException("Es necesario ingresar el correo");
+        }
+        if (direccion == null || direccion.isEmpty()) {
+            throw new CampoVacioException("Es necesario ingresar la direccion.");
+        }
+        if (id == null || id.isEmpty()) {
+            throw new CampoRepetido("Ya se encuentra un usuario registrado con la identificacion");
+        }
+        if (ciudad == null || ciudad.isEmpty()) {
+            throw new CampoVacioException("Es necesario ingresar la ciudad de residencia");
+        }
+        if (telefono == null || telefono.isEmpty()) {
+            throw new CampoVacioException("Es necesario ingresar su numero de telefono");
+        }
+        if (!CLIENTE_SESION.getUsuario().equals(usuario) || !CLIENTE_SESION.getContrasena().equals(contrasena))
+        {
+            if (agencia.verificarCredenciales(usuario,contrasena)) {
+                throw new CampoRepetido("Las credenciales proporcionadas no estan disponibles");
+            }
+        }
+        for (int i = 0 ; i< clientes.size() ; i++)
+        {
+            if (CLIENTE_SESION.equals(clientes.get(i)))
+            {
+                Clientes cliente = Clientes.builder()
+                        .nombreCompleto(nombre)
+                        .correo(correo)
+                        .direccion(direccion)
+                        .ciudad(ciudad)
+                        .identificacion(id)
+                        .telefono(telefono)
+                        .usuario(usuario)
+                        .contrasena(contrasena).build();
+                clientes.set(i,cliente);
+                CLIENTE_SESION = cliente;
+                escribirClientes();
+            }
         }
     }
 }

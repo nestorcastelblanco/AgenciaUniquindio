@@ -1,4 +1,7 @@
 package co.edu.uniquindio.controller;
+import co.edu.uniquindio.exceptions.CampoObligatorioException;
+import co.edu.uniquindio.exceptions.CampoRepetido;
+import co.edu.uniquindio.exceptions.CampoVacioException;
 import co.edu.uniquindio.model.Agencia;
 import co.edu.uniquindio.model.Propiedades;
 import javafx.event.ActionEvent;
@@ -10,6 +13,7 @@ import javafx.scene.control.TextField;
 import java.net.URL;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 public class PrincipalController implements Initializable {
     @FXML
@@ -17,7 +21,7 @@ public class PrincipalController implements Initializable {
     @FXML
     private Label ingreso, usuario,contrasena;
     @FXML
-    private Button botonIngreso, botonRegistro, bttCambiar,botonAdministracion;
+    private Button botonIngreso, botonRegistro, bttCambiar,botonAdmin;
     private final Agencia agencia = Agencia.getInstance();
     private final Logger LOGGER = Logger.getLogger(PrincipalController.class.getName());
     private final Propiedades propiedades = Propiedades.getInstance();
@@ -45,7 +49,7 @@ public class PrincipalController implements Initializable {
         ingreso.setText(propiedades.getResourceBundle().getString("ingreso"));
         usuario.setText(propiedades.getResourceBundle().getString("usuarioIngreso"));
         contrasena.setText(propiedades.getResourceBundle().getString("contrasenaIngreso"));
-        botonAdministracion.setText(propiedades.getResourceBundle().getString("bttAdmin"));
+        botonAdmin.setText(propiedades.getResourceBundle().getString("bttAdmin"));
         bttCambiar.setText(propiedades.getResourceBundle().getString("bttIdioma"));
         botonIngreso.setText(propiedades.getResourceBundle().getString("bttIngreso"));
         botonRegistro.setText(propiedades.getResourceBundle().getString("bttRegistro"));
@@ -53,5 +57,15 @@ public class PrincipalController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+    }
+
+    public void ingresar(ActionEvent actionEvent) {
+        try{
+            agencia.ingresarCliente(usuarioIngresado.getText(),contrasenaIngresada.getText());
+            agencia.loadStage("/portalAgencia.fxml",actionEvent,"Se ingresa al portal de la agencia" );
+        }catch (CampoRepetido e)
+        {
+            LOGGER.log(Level.INFO, "Se ingresaron credenciales no validas");
+        }
     }
 }
