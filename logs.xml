@@ -222,9 +222,9 @@
   <millis>1697554190015</millis>
   <nanos>472500</nanos>
   <sequence>2</sequence>
-  <logger>co.edu.uniquindio.model.Borrador</logger>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
   <level>SEVERE</level>
-  <class>co.edu.uniquindio.model.Borrador</class>
+  <class>co.edu.uniquindio.model.Agencia</class>
   <method>escribirCliente</method>
   <thread>17</thread>
   <message>src\textos\clientes.txt (El sistema no puede encontrar la ruta especificada)</message>
@@ -234,9 +234,9 @@
   <millis>1697554190022</millis>
   <nanos>989100</nanos>
   <sequence>3</sequence>
-  <logger>co.edu.uniquindio.model.Borrador</logger>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
   <level>INFO</level>
-  <class>co.edu.uniquindio.model.Borrador</class>
+  <class>co.edu.uniquindio.model.Agencia</class>
   <method>registrarCliente</method>
   <thread>17</thread>
   <message>Se registro un nuevo cliente</message>
@@ -258,3 +258,334 @@
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 </log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-10-18T14:39:13.257098600Z</date>
+  <millis>1697639953257</millis>
+  <nanos>98600</nanos>
+  <sequence>1</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>registrarCliente</method>
+  <thread>17</thread>
+  <message>Se registro un nuevo cliente</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-10-18T15:47:45.758929100Z</date>
+  <millis>1697644065758</millis>
+  <nanos>929100</nanos>
+  <sequence>2</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>loadStage</method>
+  <thread>17</thread>
+  <message>Se ingreso a la pagina de administracion</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-10-18T15:51:38.485803800Z</date>
+  <millis>1697644298485</millis>
+  <nanos>803800</nanos>
+  <sequence>2</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>loadStage</method>
+  <thread>17</thread>
+  <message>Se ingreso a la pagina de administracion</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-10-18T15:52:54.310808700Z</date>
+  <millis>1697644374310</millis>
+  <nanos>808700</nanos>
+  <sequence>3</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>loadStage</method>
+  <thread>17</thread>
+  <message>Se ingreso a la pagina principal</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-10-18T15:57:04.718662800Z</date>
+  <millis>1697644624718</millis>
+  <nanos>662800</nanos>
+  <sequence>3</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>loadStage</method>
+  <thread>17</thread>
+  <message>Se ingreso a la pagina principal</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-10-18T15:57:19.120904600Z</date>
+  <millis>1697644639120</millis>
+  <nanos>904600</nanos>
+  <sequence>3</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>loadStage</method>
+  <thread>17</thread>
+  <message>Se ingreso a la pagina principal</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-10-18T16:03:00.399645100Z</date>
+  <millis>1697644980399</millis>
+  <nanos>645100</nanos>
+  <sequence>3</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>loadStage</method>
+  <thread>17</thread>
+  <message>Se ingreso a la pagina de administracion</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-10-18T16:03:20.166164800Z</date>
+  <millis>1697645000166</millis>
+  <nanos>164800</nanos>
+  <sequence>3</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>loadStage</method>
+  <thread>17</thread>
+  <message>Se ingreso a la pagina de administracion</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-10-18T16:08:14.271064200Z</date>
+  <millis>1697645294271</millis>
+  <nanos>64200</nanos>
+  <sequence>1</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>loadStage</method>
+  <thread>17</thread>
+  <message>Se ingreso a la pagina de administracion</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-10-18T16:08:31.595270400Z</date>
+  <millis>1697645311595</millis>
+  <nanos>270400</nanos>
+  <sequence>0</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>loadStage</method>
+  <thread>17</thread>
+  <message>Se ingreso a la pagina de administracion</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-10-18T16:14:41.065020700Z</date>
+  <millis>1697645681065</millis>
+  <nanos>20700</nanos>
+  <sequence>2</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>loadStage</method>
+  <thread>17</thread>
+  <message>Se ingreso a la pagina administrativa</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-10-18T20:30:06.386290100Z</date>
+  <millis>1697661006386</millis>
+  <nanos>290100</nanos>
+  <sequence>2</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>loadStage</method>
+  <thread>17</thread>
+  <message>Se ingreso a la pagina administrativa</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-10-18T20:36:39.435890500Z</date>
+  <millis>1697661399435</millis>
+  <nanos>890500</nanos>
+  <sequence>3</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>loadStage</method>
+  <thread>17</thread>
+  <message>Se ingreso a la pagina de registro de Guia</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-10-18T21:05:44.303457600Z</date>
+  <millis>1697663144303</millis>
+  <nanos>457600</nanos>
+  <sequence>3</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>loadStage</method>
+  <thread>17</thread>
+  <message>Se ingreso a la pagina de registro de Guia</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-10-19T02:01:32.663030300Z</date>
+  <millis>1697680892663</millis>
+  <nanos>30300</nanos>
+  <sequence>2</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>registrarCliente</method>
+  <thread>17</thread>
+  <message>Se registro un nuevo cliente</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-10-19T02:06:05.267583600Z</date>
+  <millis>1697681165267</millis>
+  <nanos>583600</nanos>
+  <sequence>3</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>registrarGuia</method>
+  <thread>17</thread>
+  <message>Se registro un nuevo guia</message>
+</record>

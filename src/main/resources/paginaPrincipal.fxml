@@ -14,10 +14,6 @@
    <children>
       <ToolBar layoutY="-3.0" prefHeight="35.0" prefWidth="763.0">
         <items>
-          <Button fx:id="botonAdministracion" mnemonicParsing="false" text="Administracion">
-               <font>
-                  <Font name="Franklin Gothic Medium Cond" size="12.0" />
-               </font></Button>
             <Button fx:id="bttCambiar" mnemonicParsing="false" onAction="#cambiarIdioma" text="Cambiar Idioma">
                <font>
                   <Font name="Franklin Gothic Medium Cond" size="12.0" />
@@ -42,14 +38,20 @@
                   <Font name="Franklin Gothic Medium Cond" size="30.0" />
                </font>
             </Label>
-            <Button fx:id="botonIngreso" layoutX="58.0" layoutY="285.0" mnemonicParsing="false"  prefHeight="38.0" prefWidth="103.0" text="Ingresar" />
+            <Button fx:id="botonIngreso" layoutX="58.0" layoutY="285.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="103.0" text="Ingresar" />
             <Button fx:id="botonRegistro" layoutX="229.0" layoutY="285.0" mnemonicParsing="false" onAction="#registrar" prefHeight="38.0" prefWidth="103.0" text="Registrar" />
             <Label fx:id="ingreso" alignment="CENTER" layoutX="33.0" layoutY="14.0" prefHeight="55.0" prefWidth="309.0" text="INGRESO">
                <font>
                   <Font name="Franklin Gothic Medium Cond" size="38.0" />
                </font>
             </Label>
+            <Button fx:id="botonIngreso1" layoutX="150.0" layoutY="338.0" mnemonicParsing="false" onAction="#admin" prefHeight="38.0" prefWidth="103.0" text="Administracion" />
          </children>
       </Pane>
+      <ImageView fitHeight="402.0" fitWidth="388.0" layoutX="367.0" layoutY="38.0" pickOnBounds="true">
+         <image>
+            <Image url="@Imagenes/Logo.jpg" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

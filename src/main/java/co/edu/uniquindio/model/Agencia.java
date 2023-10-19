@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import lombok.Getter;
 import lombok.extern.java.Log;
@@ -15,7 +16,6 @@ import lombok.extern.java.Log;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -25,20 +25,20 @@ import java.util.logging.Logger;
 
 @Log
 @Getter
-public class Borrador {
+public class Agencia {
     private static final String RUTA_CLIENTES = "src/main/resources/textos/clientes.txt";
     private static final String RUTA_GUIAS = "src/main/resources/textos/guias.ser";
     private static Clientes CLIENTE_SESION;
     private static ArrayList<Clientes> clientes = new ArrayList<>();
     private static ArrayList<Guias> guias = new ArrayList<>();
-    private static final Logger LOGGER=Logger.getLogger(Borrador.class.getName());
-    private static Borrador agencia;
+    private static final Logger LOGGER=Logger.getLogger(Agencia.class.getName());
+    private static Agencia agencia;
     public static void inicializarDatos()
     {
         leerClientes();
         leerGuias();
     }
-    private Borrador()
+    private Agencia()
     {
         try {
             LOGGER.addHandler(new FileHandler("logs.xml", true));
@@ -48,11 +48,11 @@ public class Borrador {
             throw new RuntimeException(ex);
         }
     }
-    public static Borrador getInstance()
+    public static Agencia getInstance()
     {
         if(agencia== null)
         {
-            agencia = new Borrador();
+            agencia = new Agencia();
         }
         return agencia;
     }
@@ -74,6 +74,18 @@ public class Borrador {
         for (Clientes c : clientes)
         {
             if (c.getUsuario().equals(usuario) && c.getContrasena().equals(contrasena))
+            {
+                state = true;
+            }
+        }
+        return state;
+    }
+    public boolean verificarIdentificacion(String id)
+    {
+        boolean state = false;
+        for (Guias c : guias)
+        {
+            if (c.getIdentificacion().equals(id))
             {
                 state = true;
             }
@@ -131,6 +143,40 @@ public class Borrador {
         escribirCliente(cliente);
         LOGGER.log(Level.INFO, "Se registro un nuevo cliente");
     }
+    public void registrarGuia(String nombre, String exp, String id, String idiomas) throws CampoRepetido,CampoObligatorioException,CampoVacioException {
+        if (nombre == null || nombre.isEmpty()) {
+            throw new CampoObligatorioException("Es necesario ingresar el nombre");
+        }
+        if (agencia.verificarIdentificacion(id)) {
+            throw new CampoRepetido("Ya se encuentra un guia registrado con esta identificacion");
+        }
+        if (exp == null || exp.isEmpty()) {
+            throw new CampoObligatorioException("Es necesario ingresar el nombre");
+        }
+        if (idiomas == null || idiomas.isEmpty()) {
+            throw new CampoObligatorioException("Es necesario ingresar el nombre");
+        }
+        Guias guia = Guias.builder().
+                nombre(nombre).
+                identificacion(id).
+                exp(exp)
+                .build();
+        guia = llenarArrayIdioma(idiomas,guia);
+        guias.add(guia);
+        ArchivoUtils.serializarArraylist(RUTA_GUIAS,guias);
+        LOGGER.log(Level.INFO, "Se registro un nuevo guia");
+    }
+
+    private Guias llenarArrayIdioma(String idiomas, Guias guia) {
+        String[] leng = idiomas.split(",");
+        for (int i  = 0; i<leng.length ; i++)
+        {
+           guia.addLenguajes(leng[i]);
+        }
+        System.out.println(guia.getLenguajes().toString());
+        return guia;
+    }
+
     public void ingresarCliente(String usuario, String contrasena) throws CampoRepetido
     {
         if (agencia.buscarCliente(usuario,contrasena) == null) {
@@ -151,7 +197,7 @@ public class Borrador {
             try
             {
                 ((Node)(event.getSource())).getScene().getWindow().hide();
-                Parent root = FXMLLoader.load(Objects.requireNonNull(Borrador.class.getResource(url)));
+                Parent root = FXMLLoader.load(Objects.requireNonNull(Agencia.class.getResource(url)));
                 Scene scene = new Scene(root);
                 Stage newStage = new Stage();
                 newStage.setScene(scene);

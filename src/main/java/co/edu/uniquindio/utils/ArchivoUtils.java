@@ -88,7 +88,7 @@ public class ArchivoUtils {
     {
         try (ObjectOutputStream salida = new ObjectOutputStream(new FileOutputStream(ruta))) {
             salida.writeObject(guias);
-            System.out.println("Vehículos serializados correctamente.");
+            System.out.println("Guias serializados correctamente.");
         } catch (IOException e) {
             e.printStackTrace();
         }

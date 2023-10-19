@@ -3,7 +3,7 @@ package co.edu.uniquindio.controller;
 import co.edu.uniquindio.exceptions.CampoObligatorioException;
 import co.edu.uniquindio.exceptions.CampoRepetido;
 import co.edu.uniquindio.exceptions.CampoVacioException;
-import co.edu.uniquindio.model.Borrador;
+import co.edu.uniquindio.model.Agencia;
 import co.edu.uniquindio.model.Propiedades;
 import co.edu.uniquindio.utils.CambioIdiomaEvent;
 import co.edu.uniquindio.utils.CambioIdiomaListener;
@@ -16,7 +16,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
-import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,9 +27,9 @@ public class RegistroController implements Initializable, CambioIdiomaListener {
     private TextField nombreUsuario, correoUsuario, direccionUsuario, ciudadUsuario, telefonoUsuario, usuarioIngresado, contrasenaIngresada, id;
     @FXML
     private Button botonRegreso, botonRegistro, bttCambiar;
-    private final Borrador borrador = Borrador.getInstance();
+    private final Agencia agencia = Agencia.getInstance();
     private final Propiedades propiedades = Propiedades.getInstance();
-    private final Logger LOGGER = Logger.getLogger(RegistroController.class.getName());
+    private final Logger LOGGER = Logger.getLogger(PrincipalController.class.getName());
     @Override
     public void onCambioIdioma(CambioIdiomaEvent evento) {
         cargarTextos();
@@ -55,8 +54,8 @@ public class RegistroController implements Initializable, CambioIdiomaListener {
     }
     public void registrar(ActionEvent actionEvent) {
         try {
-            borrador.registrarCliente(nombreUsuario.getText(), correoUsuario.getText(), direccionUsuario.getText(), ciudadUsuario.getText(), telefonoUsuario.getText(), usuarioIngresado.getText(), contrasenaIngresada.getText(), id.getText());
-            LOGGER.log(Level.FINE, "Se registro un nuevo usuario");
+            agencia.registrarCliente(nombreUsuario.getText(), correoUsuario.getText(), direccionUsuario.getText(), ciudadUsuario.getText(), telefonoUsuario.getText(), usuarioIngresado.getText(), contrasenaIngresada.getText(), id.getText());
+            LOGGER.log(Level.INFO, "Se registro un nuevo usuario");
         } catch (CampoVacioException | CampoRepetido | CampoObligatorioException e) {
             mostrarMensaje(Alert.AlertType.ERROR, e.getMessage());
         }
@@ -68,6 +67,6 @@ public class RegistroController implements Initializable, CambioIdiomaListener {
         alert.show();
     }
     public void regresar(ActionEvent actionEvent) {
-        borrador.loadStage("/Ventanas/ventanaPrincipal.fxml", actionEvent,"Se ingreso a la pagina principal");
+        agencia.loadStage("/paginaPrincipal.fxml", actionEvent,"Se ingreso a la pagina principal");
     }
 }

@@ -1,18 +1,17 @@
 package co.edu.uniquindio.app;
 
-import co.edu.uniquindio.model.Borrador;
+import co.edu.uniquindio.model.Agencia;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderRepeat;
 import javafx.stage.Stage;
 
 public class Principal extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader loader = new FXMLLoader( Principal.class.getResource("/Ventanas/paginaPrincipal.fxml"));
+        FXMLLoader loader = new FXMLLoader( Principal.class.getResource("/paginaPrincipal.fxml"));
         Parent parent = loader.load();
         Scene scene = new Scene(parent);
         stage.setScene(scene);
@@ -21,7 +20,7 @@ public class Principal extends Application {
     }
 
     public static void main(String[] args) {
-        Borrador.inicializarDatos();
+        Agencia.inicializarDatos();
         launch(Principal.class, args );
     }
 }
