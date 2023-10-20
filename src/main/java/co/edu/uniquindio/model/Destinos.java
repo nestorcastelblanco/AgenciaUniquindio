@@ -11,6 +11,7 @@ import java.util.ArrayList;
 @Getter
 @Setter
 @AllArgsConstructor
+
 public class Destinos implements Serializable {
     private String nombre, ciudad, descripcion, clima;
     private static ArrayList<String> imagenes = new ArrayList<>();

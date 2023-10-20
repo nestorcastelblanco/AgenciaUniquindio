@@ -33,7 +33,6 @@ public class RegistroDestinoController implements Initializable, CambioIdiomaLis
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
     }
     public void registrarDestino(ActionEvent actionEvent) {
         try
@@ -45,4 +44,5 @@ public class RegistroDestinoController implements Initializable, CambioIdiomaLis
             throw new RuntimeException(e);
         }
     }
+
 }

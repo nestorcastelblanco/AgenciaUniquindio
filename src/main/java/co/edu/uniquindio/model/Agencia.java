@@ -14,8 +14,11 @@ import lombok.Getter;
 import lombok.extern.java.Log;
 
 import java.io.*;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
@@ -29,8 +32,10 @@ public class Agencia {
     private static final String RUTA_DESTINOS = "src/main/resources/textos/destinos.ser";
     private static final String RUTA_PAQUETES = "src/main/resources/textos/paquetes.ser";
     private static final String RUTA_RESERVAS = "src/main/resources/textos/reservas.ser";
+    private static Paquetes PAQUETE_EDICION = new Paquetes();
     private static Clientes CLIENTE_SESION = new Clientes();
     private static ArrayList<Destinos> destinos = new ArrayList<>();
+    private static ArrayList<Paquetes> paquetes = new ArrayList<>();
     private static ArrayList<Clientes> clientes = new ArrayList<>();
     private static ArrayList<Guias> guias = new ArrayList<>();
     private static final Logger LOGGER=Logger.getLogger(Agencia.class.getName());
@@ -40,18 +45,35 @@ public class Agencia {
         leerClientes();
         leerGuias();
         leerDestinos();
+        leerPaquetes();
+        System.out.println("Clientes: ");
         for(int i = 0 ; i<clientes.size();i++)
         {
             System.out.println(clientes.get(i).getNombreCompleto() + " Usuario: " + clientes.get(i).getUsuario() + " Clave: " + clientes.get(i).getContrasena());
         }
+        System.out.println("Guias: ");
         for(int i = 0 ; i<guias.size();i++)
         {
             System.out.println(guias.get(i).getNombre());
         }
+        System.out.println("Destinos: ");
         for(int i = 0 ; i<destinos.size();i++)
         {
             System.out.println(destinos.get(i).getNombre());
         }
+        System.out.println("Paquetes: ");
+        for(int i = 0 ; i<paquetes.size();i++)
+        {
+            System.out.println(paquetes.get(i).getNombre());
+        }
+    }
+    public ArrayList<Destinos> enviarDestinos ()
+    {
+        return destinos;
+    }
+    public ArrayList<Paquetes> enviarPaquetes ()
+    {
+        return paquetes;
     }
     private Agencia()
     {
@@ -106,6 +128,16 @@ public class Agencia {
             }
         }
         return state;
+    }
+    public String obtenerNombresDestinos(ArrayList<Destinos> destinos) {
+        StringBuilder nombres = new StringBuilder();
+        for (Destinos destino : destinos) {
+            nombres.append(destino.getNombre()).append(", ");
+        }
+        if (nombres.length() > 2) {
+            nombres.setLength(nombres.length() - 2);
+        }
+        return nombres.toString();
     }
     public boolean buscarCliente (String usuario, String contrasena)
     {
@@ -256,9 +288,9 @@ public class Agencia {
     public static void leerGuias()
     {
         try (ObjectInputStream entrada = new ObjectInputStream(new FileInputStream(RUTA_GUIAS))) {
-            ArrayList<Guias> vehiculo = (ArrayList<Guias>) entrada.readObject();
+            ArrayList<Guias> guias1 = (ArrayList<Guias>) entrada.readObject();
             System.out.println("Guias deserializados correctamente.");
-            for (Guias guia : vehiculo) {
+            for (Guias guia : guias1) {
                 guias.add(guia);
             }
         } catch (IOException | ClassNotFoundException e) {
@@ -268,10 +300,20 @@ public class Agencia {
     public static void leerDestinos()
     {
         try (ObjectInputStream entrada = new ObjectInputStream(new FileInputStream(RUTA_DESTINOS))) {
-            ArrayList<Destinos> vehiculo = (ArrayList<Destinos>) entrada.readObject();
+            ArrayList<Destinos> destinos1 = (ArrayList<Destinos>) entrada.readObject();
             System.out.println("Destinos deserializados correctamente.");
-            for (Destinos guia : vehiculo) {
-                destinos.add(guia);
+            destinos.addAll(destinos1);
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+    public static void leerPaquetes()
+    {
+        try (ObjectInputStream entrada = new ObjectInputStream(new FileInputStream(RUTA_PAQUETES))) {
+            ArrayList<Paquetes> paquetes1 = (ArrayList<Paquetes>) entrada.readObject();
+            System.out.println("Destinos deserializados correctamente.");
+            for (Paquetes paquete : paquetes1) {
+                paquetes.add(paquete);
             }
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -345,10 +387,10 @@ public class Agencia {
         }
     }
     public void registrarDestino(String nombre, String ciudad, String descripcion, String imagenes, String clima) throws CampoRepetido,CampoObligatorioException,CampoVacioException{
-        if (ciudad == null || nombre.isEmpty()) {
+        if (ciudad == null || ciudad.isEmpty()) {
             throw new CampoObligatorioException("Es necesario ingresar el nombre");
         }
-        if (agencia.verificarIdentificacion(nombre)) {
+        if (nombre == null || nombre.isEmpty()) {
             throw new CampoRepetido("Ya se encuentra un Destino registrado con este nombre");
         }
         if (descripcion == null || descripcion.isEmpty()) {
@@ -370,5 +412,100 @@ public class Agencia {
         destinos.add(destino);
         ArchivoUtils.serializarArraylistDestinos(RUTA_DESTINOS,destinos);
         LOGGER.log(Level.INFO, "Se registro un nuevo Destino");
+    }
+    public void registrarPaquete(String nombre, ArrayList<Destinos> destinos, LocalDate inicio, LocalDate fin, String servicios,String personas, String valor) throws CampoRepetido,CampoVacioException,CampoObligatorioException
+    {
+        if (nombre== null || nombre.isEmpty()) {
+            throw new CampoObligatorioException("Es necesario ingresar el nombre");
+        }
+        if (destinos == null || destinos.isEmpty()) {
+            throw new CampoRepetido("No se añadieron destinos al paquete");
+        }
+        if (agencia.verificarFechas(inicio, fin) == false) {
+            throw new CampoObligatorioException("Las fechas ingresadas son erroneas");
+        }
+        if (personas == null || personas.isEmpty() || Float.valueOf(personas) <=0 || !verificarNumero(personas)) {
+            throw new CampoObligatorioException("Es necesario ingresar el numero valido de personas");
+        }
+        if (servicios == null || servicios.isEmpty()) {
+            throw new CampoObligatorioException("Es necesario ingresar los servicios del paquete");
+        }
+        if (valor == null || Float.valueOf(valor)<= 0 || valor.isEmpty() || !verificarNumero(valor)) {
+            throw new CampoObligatorioException("Se crearon valores en el precio erroneos");
+        }
+        Paquetes paquete = Paquetes.builder().
+                nombre(nombre)
+                .destinos(destinos)
+                .precio(Float.valueOf(valor))
+                .inicio(inicio)
+                .fin(fin)
+                .servicios(servicios)
+                .numeroPersonas(Integer.parseInt(personas))
+        .build();
+        paquete.setDuracion(inicio.until(fin, ChronoUnit.DAYS)+"");
+        paquetes.add(paquete);
+        ArchivoUtils.serializarArraylistPaquetes(RUTA_PAQUETES,paquetes);
+        LOGGER.log(Level.INFO, "Se registro un nuevo Paquete");
+    }
+    public void editarPaquete(String nombre, ArrayList<Destinos> destinos, LocalDate inicio, LocalDate fin, String servicios,String personas, String valor) throws CampoRepetido,CampoVacioException,CampoObligatorioException
+    {
+        if (nombre== null || nombre.isEmpty()) {
+            throw new CampoObligatorioException("Es necesario ingresar el nombre");
+        }
+        if (destinos == null || destinos.isEmpty()) {
+            throw new CampoRepetido("No se añadieron destinos al paquete");
+        }
+        if (agencia.verificarFechas(inicio, fin) == false) {
+            throw new CampoObligatorioException("Las fechas ingresadas son erroneas");
+        }
+        if (personas == null || personas.isEmpty() || Float.valueOf(personas) <=0 || !verificarNumero(personas)) {
+            throw new CampoObligatorioException("Es necesario ingresar el numero valido de personas");
+        }
+        if (servicios == null || servicios.isEmpty()) {
+            throw new CampoObligatorioException("Es necesario ingresar los servicios del paquete");
+        }
+        if (valor == null || Float.valueOf(valor)<= 0 || valor.isEmpty() || !verificarNumero(valor)) {
+            throw new CampoObligatorioException("Se crearon valores en el precio erroneos");
+        }
+        for (int i = 0 ; i< paquetes.size() ; i++)
+        {
+            if (PAQUETE_EDICION.equals(paquetes.get(i)))
+            {
+                Paquetes paquete = Paquetes.builder().
+                        nombre(nombre)
+                        .destinos(destinos)
+                        .precio(Float.valueOf(valor))
+                        .inicio(inicio)
+                        .fin(fin)
+                        .servicios(servicios)
+                        .numeroPersonas(Integer.parseInt(personas))
+                        .build();
+                paquete.setDuracion(inicio.until(fin, ChronoUnit.DAYS)+"");
+                paquetes.set(i,paquete);;
+                LOGGER.log(Level.INFO, "Se realizo la edicion de un Paquete");
+                PAQUETE_EDICION = paquete;
+                borrarDatosSerializados(RUTA_PAQUETES);
+                ArchivoUtils.serializarArraylistPaquetes(RUTA_PAQUETES,paquetes);
+            }
+        }
+    }
+    private boolean verificarFechas(LocalDate inicio, LocalDate fin) {
+        boolean state = true;
+        if (inicio.isAfter(fin) || inicio.isEqual(LocalDate.now()))
+        {
+            state = false;
+        }
+        return state;
+    }
+    private boolean verificarNumero(String numero)
+    {
+        boolean isNumeric = (numero != null && numero.matches("[0-9]+"));
+        return isNumeric;
+    }
+    public void recibirPaqueteEdicion(Paquetes selectedItem) {
+        PAQUETE_EDICION= selectedItem;
+    }
+    public Paquetes enviarPaqueteEdicion() {
+        return PAQUETE_EDICION;
     }
 }
