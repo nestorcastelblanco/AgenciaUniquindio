@@ -1177,3 +1177,375 @@
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 </log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-10-21T00:14:19.758580800Z</date>
+  <millis>1697847259758</millis>
+  <nanos>580800</nanos>
+  <sequence>13</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>editarPaquete</method>
+  <thread>17</thread>
+  <message>Se realizo la edicion de un Paquete</message>
+</record>
+<record>
+  <date>2023-10-21T00:14:58.414231500Z</date>
+  <millis>1697847298414</millis>
+  <nanos>231500</nanos>
+  <sequence>21</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>editarPaquete</method>
+  <thread>17</thread>
+  <message>Se realizo la edicion de un Paquete</message>
+</record>
+<record>
+  <date>2023-10-21T00:15:16.453354600Z</date>
+  <millis>1697847316453</millis>
+  <nanos>354600</nanos>
+  <sequence>27</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>editarPaquete</method>
+  <thread>17</thread>
+  <message>Se realizo la edicion de un Paquete</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-10-21T02:21:35.979048200Z</date>
+  <millis>1697854895979</millis>
+  <nanos>48200</nanos>
+  <sequence>2</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>ingresarCliente</method>
+  <thread>17</thread>
+  <message>Se genero el ingreso de un cliente: Nestor Felipe Castelblanco</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-10-21T02:28:31.660029600Z</date>
+  <millis>1697855311660</millis>
+  <nanos>29600</nanos>
+  <sequence>0</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>ingresarCliente</method>
+  <thread>17</thread>
+  <message>Se genero el ingreso de un cliente: Nestor Felipe Castelblanco</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-10-21T02:31:05.780157900Z</date>
+  <millis>1697855465780</millis>
+  <nanos>157900</nanos>
+  <sequence>0</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>ingresarCliente</method>
+  <thread>17</thread>
+  <message>Se genero el ingreso de un cliente: Nestor Felipe Castelblanco</message>
+</record>
+<record>
+  <date>2023-10-21T02:31:07.011708500Z</date>
+  <millis>1697855467011</millis>
+  <nanos>708500</nanos>
+  <sequence>3</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>loadStage</method>
+  <thread>17</thread>
+  <message>Se ingresa a la pagina de seleccion de paquete</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-10-21T02:31:26.732325300Z</date>
+  <millis>1697855486732</millis>
+  <nanos>325300</nanos>
+  <sequence>0</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>ingresarCliente</method>
+  <thread>17</thread>
+  <message>Se genero el ingreso de un cliente: Nestor Felipe Castelblanco</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-10-21T02:34:17.035413100Z</date>
+  <millis>1697855657035</millis>
+  <nanos>413100</nanos>
+  <sequence>0</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>ingresarCliente</method>
+  <thread>17</thread>
+  <message>Se genero el ingreso de un cliente: Nestor Felipe Castelblanco</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-10-21T02:38:29.076059700Z</date>
+  <millis>1697855909076</millis>
+  <nanos>59700</nanos>
+  <sequence>0</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>ingresarCliente</method>
+  <thread>17</thread>
+  <message>Se genero el ingreso de un cliente: Nestor Felipe Castelblanco</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-10-21T02:43:24.893002300Z</date>
+  <millis>1697856204893</millis>
+  <nanos>2300</nanos>
+  <sequence>0</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>ingresarCliente</method>
+  <thread>17</thread>
+  <message>Se genero el ingreso de un cliente: Nestor Felipe Castelblanco</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-10-21T03:10:50.100225700Z</date>
+  <millis>1697857850100</millis>
+  <nanos>225700</nanos>
+  <sequence>0</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>ingresarCliente</method>
+  <thread>17</thread>
+  <message>Se genero el ingreso de un cliente: Nestor Felipe Castelblanco</message>
+</record>
+<record>
+  <date>2023-10-21T03:10:52.009645500Z</date>
+  <millis>1697857852009</millis>
+  <nanos>645500</nanos>
+  <sequence>3</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>loadStage</method>
+  <thread>17</thread>
+  <message>Se ingresa a la pagina de seleccion de paquete</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-10-21T03:11:15.460703200Z</date>
+  <millis>1697857875460</millis>
+  <nanos>703200</nanos>
+  <sequence>0</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>ingresarCliente</method>
+  <thread>17</thread>
+  <message>Se genero el ingreso de un cliente: Nestor Felipe Castelblanco</message>
+</record>
+<record>
+  <date>2023-10-21T03:11:18.257630Z</date>
+  <millis>1697857878257</millis>
+  <nanos>630000</nanos>
+  <sequence>3</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>loadStage</method>
+  <thread>17</thread>
+  <message>Se ingresa a la pagina de seleccion de paquete</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-10-21T03:12:39.845583400Z</date>
+  <millis>1697857959845</millis>
+  <nanos>583400</nanos>
+  <sequence>0</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>ingresarCliente</method>
+  <thread>17</thread>
+  <message>Se genero el ingreso de un cliente: Nestor Felipe Castelblanco</message>
+</record>
+<record>
+  <date>2023-10-21T03:12:41.073117Z</date>
+  <millis>1697857961073</millis>
+  <nanos>117000</nanos>
+  <sequence>3</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>loadStage</method>
+  <thread>17</thread>
+  <message>Se ingresa a la pagina de seleccion de paquete</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-10-21T03:13:27.572679400Z</date>
+  <millis>1697858007572</millis>
+  <nanos>679400</nanos>
+  <sequence>0</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>ingresarCliente</method>
+  <thread>17</thread>
+  <message>Se genero el ingreso de un cliente: Nestor Felipe Castelblanco</message>
+</record>
+<record>
+  <date>2023-10-21T03:13:28.593889900Z</date>
+  <millis>1697858008593</millis>
+  <nanos>889900</nanos>
+  <sequence>3</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>loadStage</method>
+  <thread>17</thread>
+  <message>Se ingresa a la pagina de seleccion de paquete</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-10-21T03:15:25.526427600Z</date>
+  <millis>1697858125526</millis>
+  <nanos>427600</nanos>
+  <sequence>0</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>ingresarCliente</method>
+  <thread>17</thread>
+  <message>Se genero el ingreso de un cliente: Nestor Felipe Castelblanco</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-10-21T03:19:36.077553900Z</date>
+  <millis>1697858376077</millis>
+  <nanos>553900</nanos>
+  <sequence>0</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>ingresarCliente</method>
+  <thread>17</thread>
+  <message>Se genero el ingreso de un cliente: Nestor Felipe Castelblanco</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-10-21T03:23:11.286616800Z</date>
+  <millis>1697858591286</millis>
+  <nanos>616800</nanos>
+  <sequence>0</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>ingresarCliente</method>
+  <thread>17</thread>
+  <message>Se genero el ingreso de un cliente: Nestor Felipe Castelblanco</message>
+</record>
+<record>
+  <date>2023-10-21T03:23:13.337978700Z</date>
+  <millis>1697858593337</millis>
+  <nanos>978700</nanos>
+  <sequence>3</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>loadStage</method>
+  <thread>17</thread>
+  <message>Se ingresa a la pagina de seleccion de paquete</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-10-21T03:25:00.197992400Z</date>
+  <millis>1697858700197</millis>
+  <nanos>992400</nanos>
+  <sequence>0</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>ingresarCliente</method>
+  <thread>17</thread>
+  <message>Se genero el ingreso de un cliente: Nestor Felipe Castelblanco</message>
+</record>
+<record>
+  <date>2023-10-21T03:26:25.469054100Z</date>
+  <millis>1697858785469</millis>
+  <nanos>54100</nanos>
+  <sequence>6</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>ingresarCliente</method>
+  <thread>17</thread>
+  <message>Se genero el ingreso de un cliente: Nestor Felipe Castelblanco</message>
+</record>
+</log>

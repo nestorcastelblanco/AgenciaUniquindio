@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="462.0" prefWidth="701.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.controller.SeleccionPaquetesController">
+   <children>
+      <TableView fx:id="tablaPaquetes" layoutX="39.0" layoutY="107.0" prefHeight="277.0" prefWidth="623.0">
+        <columns>
+          <TableColumn fx:id="paquete" prefWidth="105.0" text="Paquete" />
+          <TableColumn fx:id="destinos" prefWidth="109.0" text="Destinos" />
+            <TableColumn fx:id="personas" prefWidth="64.0" text="Personas" />
+            <TableColumn fx:id="servicios" prefWidth="105.0" text="Servicios" />
+            <TableColumn fx:id="valorPersona" prefWidth="100.0" text="Valor Persona" />
+            <TableColumn fx:id="fechaInicio" prefWidth="71.0" text="Inicio" />
+            <TableColumn fx:id="fechaFin" prefWidth="67.0" text="Fin" />
+        </columns>
+      </TableView>
+      <Button layoutX="39.0" layoutY="397.0" mnemonicParsing="false" onAction="#regresar" prefHeight="25.0" prefWidth="112.0" text="Regresar" />
+      <Button layoutX="550.0" layoutY="397.0" mnemonicParsing="false" onAction="#editar" prefHeight="25.0" prefWidth="112.0" text="Editar" />
+      <TextField fx:id="paquetesFiltro" layoutX="39.0" layoutY="61.0" prefHeight="25.0" prefWidth="97.0" />
+      <TextField fx:id="destino" layoutX="151.0" layoutY="61.0" prefHeight="25.0" prefWidth="82.0" />
+      <TextField fx:id="persona" layoutX="252.0" layoutY="61.0" prefHeight="25.0" prefWidth="48.0" />
+      <DatePicker fx:id="inicio" layoutX="518.0" layoutY="61.0" prefHeight="25.0" prefWidth="65.0" />
+      <TextField fx:id="valor" layoutX="420.0" layoutY="61.0" prefHeight="25.0" prefWidth="82.0" />
+      <DatePicker fx:id="fin" layoutX="597.0" layoutY="61.0" prefHeight="25.0" prefWidth="65.0" />
+      <TextField fx:id="services" layoutX="318.0" layoutY="61.0" prefHeight="25.0" prefWidth="82.0" />
+      <Label alignment="CENTER" layoutX="39.0" layoutY="27.0" prefHeight="25.0" prefWidth="97.0" text="Paquete" />
+      <Label alignment="CENTER" layoutX="144.0" layoutY="27.0" prefHeight="25.0" prefWidth="97.0" text="Destinos" />
+      <Label alignment="CENTER" layoutX="248.0" layoutY="27.0" prefHeight="25.0" prefWidth="57.0" text="Personas" />
+      <Label alignment="CENTER" layoutX="331.0" layoutY="27.0" prefHeight="25.0" prefWidth="57.0" text="Servicios" />
+      <Label alignment="CENTER" layoutX="433.0" layoutY="27.0" prefHeight="25.0" prefWidth="57.0" text="Valor" />
+      <Label alignment="CENTER" layoutX="522.0" layoutY="27.0" prefHeight="25.0" prefWidth="57.0" text="Inicio" />
+      <Label alignment="CENTER" layoutX="601.0" layoutY="27.0" prefHeight="25.0" prefWidth="57.0" text="Fin" />
+   </children>
+</AnchorPane>

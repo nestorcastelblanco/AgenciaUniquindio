@@ -33,4 +33,8 @@ public class PortalAgenciaController implements Initializable, CambioIdiomaListe
     public void editarPerfil(ActionEvent actionEvent) {
             agencia.loadStage("/paginaEdicionPerfil.fxml", actionEvent,"Se ingresa al apartado de edicion de perfil");
     }
+
+    public void seleccionPaquetes(ActionEvent actionEvent) {
+            agencia.loadStage("/paginaSeleccionDestino.fxml", actionEvent,"Se ingresa a la pagina de seleccion de paquete");
+    }
 }
