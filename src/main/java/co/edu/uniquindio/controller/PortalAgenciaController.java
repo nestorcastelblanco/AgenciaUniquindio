@@ -1,19 +1,13 @@
 package co.edu.uniquindio.controller;
 
-import co.edu.uniquindio.exceptions.CampoObligatorioException;
-import co.edu.uniquindio.exceptions.CampoRepetido;
-import co.edu.uniquindio.exceptions.CampoVacioException;
 import co.edu.uniquindio.model.Agencia;
 import co.edu.uniquindio.utils.CambioIdiomaEvent;
 import co.edu.uniquindio.utils.CambioIdiomaListener;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TextField;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class PortalAgenciaController implements Initializable, CambioIdiomaListener {
@@ -35,6 +29,6 @@ public class PortalAgenciaController implements Initializable, CambioIdiomaListe
     }
 
     public void seleccionPaquetes(ActionEvent actionEvent) {
-            agencia.loadStage("/paginaSeleccionDestino.fxml", actionEvent,"Se ingresa a la pagina de seleccion de paquete");
+            agencia.loadStage("/paginaClienteSeleccionDestino.fxml", actionEvent,"Se ingresa a la pagina de seleccion de paquete");
     }
 }

@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="462.0" prefWidth="701.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.controller.SeleccionPaquetesController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="462.0" prefWidth="701.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.controller.SeleccionClientePaquetesController">
    <children>
       <TableView fx:id="tablaPaquetes" layoutX="39.0" layoutY="107.0" prefHeight="277.0" prefWidth="623.0">
         <columns>
@@ -22,7 +17,7 @@
         </columns>
       </TableView>
       <Button layoutX="39.0" layoutY="397.0" mnemonicParsing="false" onAction="#regresar" prefHeight="25.0" prefWidth="112.0" text="Regresar" />
-      <Button layoutX="550.0" layoutY="397.0" mnemonicParsing="false" onAction="#editar" prefHeight="25.0" prefWidth="112.0" text="Editar" />
+      <Button layoutX="550.0" layoutY="397.0" mnemonicParsing="false" onAction="#ver" prefHeight="25.0" prefWidth="112.0" text="Ver" />
       <TextField fx:id="paquetesFiltro" layoutX="39.0" layoutY="61.0" prefHeight="25.0" prefWidth="97.0" />
       <TextField fx:id="destino" layoutX="151.0" layoutY="61.0" prefHeight="25.0" prefWidth="82.0" />
       <TextField fx:id="persona" layoutX="252.0" layoutY="61.0" prefHeight="25.0" prefWidth="48.0" />

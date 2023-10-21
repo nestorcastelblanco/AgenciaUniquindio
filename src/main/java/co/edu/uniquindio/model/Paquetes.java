@@ -17,10 +17,4 @@ public class Paquetes implements Serializable {
     private String duracion, servicios, nombre;
     private int numeroPersonas;
     private float precio;
-    public void addDestino(Destinos destinos) {
-        this.destinos.add(destinos);
-    }
-    public ArrayList<Destinos> getImagenes() {
-        return destinos;
-    }
 }

@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="629.0" prefWidth="564.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.controller.SeleccionPaqueteController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="629.0" prefWidth="564.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.controller.CaracteristicasPaqueteController">
    <children>
       <Label layoutX="161.0" layoutY="67.0" prefHeight="33.0" prefWidth="84.0" text="Destinos">
          <font>
@@ -106,19 +106,19 @@
             </Label>
          </children>
       </Pane>
-      <Button layoutX="461.0" layoutY="427.0" mnemonicParsing="false" onAction="#onSiguienteClicked" onMouseClicked="#onSiguienteClicked" prefHeight="60.0" prefWidth="39.0" text="&gt;" />
+      <Button layoutX="461.0" layoutY="427.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="39.0" text="&gt;" />
       <Label alignment="CENTER" layoutX="71.0" layoutY="14.0" prefHeight="33.0" prefWidth="321.0" text="Seleccion de Paquete">
          <font>
             <Font name="Franklin Gothic Medium Cond" size="24.0" />
          </font>
       </Label>
-      <ImageView fitHeight="150.0" fitWidth="171.0" layoutX="392.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="150.0" fitWidth="171.0" layoutX="394.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Imagenes/Logo.jpg" />
          </image>
       </ImageView>
       <ImageView fx:id="imageView" fitHeight="230.0" fitWidth="396.0" layoutX="84.0" layoutY="342.0" pickOnBounds="true" preserveRatio="true" />
-      <Button layoutX="65.0" layoutY="427.0" mnemonicParsing="false" onMouseClicked="#onAnteriorClicked" prefHeight="60.0" prefWidth="39.0" text="&lt;" />
+      <Button layoutX="65.0" layoutY="427.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="39.0" text="&lt;" />
       <Button layoutX="41.0" layoutY="590.0" mnemonicParsing="false" onAction="#regresar" prefHeight="25.0" prefWidth="102.0" text="Regresar" />
       <Button layoutX="410.0" layoutY="590.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="102.0" text="Seleccionar" />
    </children>

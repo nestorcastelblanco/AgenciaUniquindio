@@ -7,7 +7,6 @@ import co.edu.uniquindio.utils.CambioIdiomaListener;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,18 +14,14 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyEvent;
 
 import java.net.URL;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.ResourceBundle;
-import java.util.function.Function;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class SeleccionPaquetesController implements Initializable, CambioIdiomaListener {
+public class SeleccionClientePaquetesController implements Initializable, CambioIdiomaListener {
     private final Agencia agencia = Agencia.getInstance();
     private final Logger LOGGER = Logger.getLogger(PrincipalController.class.getName());
     @FXML
@@ -50,7 +45,7 @@ public class SeleccionPaquetesController implements Initializable, CambioIdiomaL
     @FXML
     private TableColumn<Paquetes, String> fechaFin;
     private ObservableList<Paquetes> paquetes = FXCollections.observableArrayList(agencia.enviarPaquetes());
-    public SeleccionPaquetesController() {
+    public SeleccionClientePaquetesController() {
     }
     @Override
     public void onCambioIdioma(CambioIdiomaEvent evento) {
@@ -98,12 +93,12 @@ public class SeleccionPaquetesController implements Initializable, CambioIdiomaL
         agencia.loadStage("/paginaAdministrativa.fxml", actionEvent, "Se regresa a la pagina administrativa");
     }
 
-    public void editar(ActionEvent actionEvent) {
+    public void ver(ActionEvent actionEvent) {
         if (tablaPaquetes.getSelectionModel().getSelectedIndex() == -1) {
-            LOGGER.log(Level.INFO, "Se intento editar un paquete sin haberlo seleccionado");
+            LOGGER.log(Level.INFO, "Se intento visualizar un paquete sin haberlo seleccionado");
         } else {
-            agencia.recibirPaqueteEdicion(tablaPaquetes.getSelectionModel().getSelectedItem());
-            agencia.loadStage("/paginaEdicionPaquete.fxml",actionEvent,"Se va a editar un paquete");
+            agencia.recibirPaqueteSeleccionado(tablaPaquetes.getSelectionModel().getSelectedItem());
+            agencia.loadStage("/paginaCaracteristicasPaquete.fxml",actionEvent,"Se va a visualizar un paquete");
         }
     }
     private ObservableList<Paquetes> filtrarPorNombre(String nombre) {
@@ -138,4 +133,5 @@ public class SeleccionPaquetesController implements Initializable, CambioIdiomaL
     private ObservableList<Paquetes> filtrarPorFechaFin(LocalDate fechaFin) {
         return paquetes.filtered(paquete -> paquete.getFin().isEqual(fechaFin));
     }
+
 }

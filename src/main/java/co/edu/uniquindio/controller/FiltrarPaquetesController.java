@@ -97,8 +97,8 @@ public class FiltrarPaquetesController implements Initializable, CambioIdiomaLis
         if (tablaPaquetes.getSelectionModel().getSelectedIndex() == -1) {
             LOGGER.log(Level.INFO, "Se intento editar un paquete sin haberlo seleccionado");
         } else {
-            agencia.recibirPaqueteSeleccionado(tablaPaquetes.getSelectionModel().getSelectedItem());
-            agencia.loadStage("/paginaSeleccionPaquete.fxml",actionEvent,"Se va a observar un paquete");
+            agencia.recibirPaqueteEdicion(tablaPaquetes.getSelectionModel().getSelectedItem());
+            agencia.loadStage("/paginaCaracteristicasPaquete.fxml",actionEvent,"Se va a observar un paquete");
         }
     }
     private ObservableList<Paquetes> filtrarPorNombre(String nombre) {
