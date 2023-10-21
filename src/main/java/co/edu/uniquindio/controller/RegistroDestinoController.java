@@ -9,6 +9,7 @@ import co.edu.uniquindio.utils.CambioIdiomaListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
@@ -41,8 +42,14 @@ public class RegistroDestinoController implements Initializable, CambioIdiomaLis
             LOGGER.log(Level.INFO,"Se registro un nuevo Destino al sistema");
             nombre.setText("");ciudad.setText("");descripcion.setText("");imagenes.setText("");clima.setText("");
         } catch (CampoRepetido | CampoObligatorioException | CampoVacioException e) {
-            throw new RuntimeException(e);
+            mostrarMensaje(Alert.AlertType.ERROR, e.getMessage());
         }
+    }
+    public void mostrarMensaje(Alert.AlertType tipo, String mensaje){
+        Alert alert = new Alert(tipo);
+        alert.setHeaderText(null);
+        alert.setContentText(mensaje);
+        alert.show();
     }
 
 }

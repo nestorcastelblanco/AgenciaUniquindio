@@ -14,6 +14,8 @@ import lombok.Getter;
 import lombok.extern.java.Log;
 
 import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -408,7 +410,7 @@ public class Agencia {
         if (descripcion == null || descripcion.isEmpty()) {
             throw new CampoObligatorioException("Es necesario ingresar la descripcion");
         }
-        if (imagenes == null || imagenes.isEmpty()) {
+        if (imagenes == null || imagenes.isEmpty() || !agencia.isImageValid(imagenes)) {
             throw new CampoObligatorioException("Es necesario ingresar imagenes del Destino");
         }
         if (clima == null || clima.isEmpty()) {
@@ -534,5 +536,20 @@ public class Agencia {
 
     public Paquetes paqueteSeleccion() {
         return PAQUETE_SELECCIONADO;
+    }
+    public boolean isImageValid(String imageUrl) {
+        boolean state = false;
+        String[] leng = imageUrl.split(",");
+        for (String ruta : leng) {
+            File archivo = new File(ruta);
+            if (!archivo.exists()) {
+                // La imagen en la ruta especificada no existe
+                System.out.println("La imagen en la ruta '" + ruta + "' no existe.");
+                return false;
+            }
+        }
+        // Todas las imágenes existen
+        System.out.println("Todas las imágenes existen.");
+        return true;
     }
 }
