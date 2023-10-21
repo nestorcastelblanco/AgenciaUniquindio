@@ -141,6 +141,16 @@ public class Agencia {
         }
         return nombres.toString();
     }
+    public String obtenerNombresCiudades(ArrayList<Destinos> destinos) {
+        StringBuilder nombres = new StringBuilder();
+        for (Destinos destino : destinos) {
+            nombres.append(destino.getCiudad()).append(", ");
+        }
+        if (nombres.length() > 2) {
+            nombres.setLength(nombres.length() - 2);
+        }
+        return nombres.toString();
+    }
     public boolean buscarCliente (String usuario, String contrasena)
     {
         boolean state = false;

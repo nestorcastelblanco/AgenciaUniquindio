@@ -46,7 +46,7 @@ public class VistaPaquetesController implements Initializable, CambioIdiomaListe
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         paquete.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombre()));
-        destinos.setCellValueFactory(cellData -> new SimpleStringProperty(agencia.obtenerNombresDestinos(cellData.getValue().getDestinos())));
+        destinos.setCellValueFactory(cellData -> new SimpleStringProperty(agencia.obtenerNombresCiudades(cellData.getValue().getDestinos())));
         personas.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNumeroPersonas() + ""));
         servicios.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getServicios()));
         valorPersona.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPrecio() + ""));
