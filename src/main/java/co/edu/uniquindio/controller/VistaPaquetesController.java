@@ -39,15 +39,12 @@ public class VistaPaquetesController implements Initializable, CambioIdiomaListe
     @FXML
     private TableColumn<Paquetes, String> fechaFin;
     private ObservableList<Paquetes> paquetes = FXCollections.observableArrayList(agencia.enviarPaquetes());
-    ;
-
     @Override
     public void onCambioIdioma(CambioIdiomaEvent evento) {
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
         paquete.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombre()));
         destinos.setCellValueFactory(cellData -> new SimpleStringProperty(agencia.obtenerNombresDestinos(cellData.getValue().getDestinos())));
         personas.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNumeroPersonas() + ""));
@@ -57,11 +54,9 @@ public class VistaPaquetesController implements Initializable, CambioIdiomaListe
         fechaFin.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getFin().toString()));
         tablaPaquetes.setItems(paquetes);
     }
-
     public void regresar(ActionEvent actionEvent) {
         agencia.loadStage("/paginaAdministrativa.fxml", actionEvent, "Se regresa a la pagina administrativa");
     }
-
     public void editar(ActionEvent actionEvent) {
         if (tablaPaquetes.getSelectionModel().getSelectedIndex() == -1) {
             LOGGER.log(Level.INFO, "Se intento editar un paquete sin haberlo seleccionado");

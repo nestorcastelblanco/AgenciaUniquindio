@@ -120,6 +120,7 @@ public class CreacionPaquetesController implements Initializable, CambioIdiomaLi
                 LOGGER.log(Level.INFO,"El destino seleccionado ya fue ingresado al paquete");
             }else {
                 destinosSeleccionados.add(destinos.getSelectionModel().getSelectedItem());
+                System.out.println("Arraylist de destinos seleccionados: " + destinosSeleccionados.toString());
                 LOGGER.log(Level.INFO, "Se establecio un nuevo destino  " + destinos.getSelectionModel().getSelectedItem().getNombre() + " " + destinos.getSelectionModel().getSelectedItem().getCiudad());
             }
         }

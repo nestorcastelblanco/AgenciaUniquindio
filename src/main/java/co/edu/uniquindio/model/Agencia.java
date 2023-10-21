@@ -73,6 +73,8 @@ public class Agencia {
     }
     public ArrayList<Paquetes> enviarPaquetes ()
     {
+        paquetes.removeAll(paquetes);
+        leerPaquetes();
         return paquetes;
     }
     private Agencia()
@@ -311,7 +313,7 @@ public class Agencia {
     {
         try (ObjectInputStream entrada = new ObjectInputStream(new FileInputStream(RUTA_PAQUETES))) {
             ArrayList<Paquetes> paquetes1 = (ArrayList<Paquetes>) entrada.readObject();
-            System.out.println("Destinos deserializados correctamente.");
+            System.out.println("Paquetes deserializados correctamente.");
             for (Paquetes paquete : paquetes1) {
                 paquetes.add(paquete);
             }
@@ -444,6 +446,13 @@ public class Agencia {
         .build();
         paquete.setDuracion(inicio.until(fin, ChronoUnit.DAYS)+"");
         paquetes.add(paquete);
+        for (int i = 0 ; i<paquetes.size();i++)
+        {
+            for (int j=0 ; j<paquetes.get(i).getDestinos().size();j++)
+            {
+                System.out.println("Nombre: " + paquetes.get(i).getNombre() + " Destinos: " + paquetes.get(i).getDestinos().get(j));
+            }
+        }
         ArchivoUtils.serializarArraylistPaquetes(RUTA_PAQUETES,paquetes);
         LOGGER.log(Level.INFO, "Se registro un nuevo Paquete");
     }
