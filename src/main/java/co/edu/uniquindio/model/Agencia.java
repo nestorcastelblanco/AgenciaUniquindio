@@ -32,6 +32,7 @@ public class Agencia {
     private static final String RUTA_DESTINOS = "src/main/resources/textos/destinos.ser";
     private static final String RUTA_PAQUETES = "src/main/resources/textos/paquetes.ser";
     private static final String RUTA_RESERVAS = "src/main/resources/textos/reservas.ser";
+    private static Paquetes PAQUETE_SELECCIONADO = new Paquetes();
     private static Paquetes PAQUETE_EDICION = new Paquetes();
     private static Clientes CLIENTE_SESION = new Clientes();
     private static ArrayList<Destinos> destinos = new ArrayList<>();
@@ -40,8 +41,7 @@ public class Agencia {
     private static ArrayList<Guias> guias = new ArrayList<>();
     private static final Logger LOGGER=Logger.getLogger(Agencia.class.getName());
     private static Agencia agencia;
-    public static void inicializarDatos()
-    {
+    public static void inicializarDatos(){
         leerClientes();
         leerGuias();
         leerDestinos();
@@ -526,5 +526,13 @@ public class Agencia {
     }
     public Paquetes enviarPaqueteEdicion() {
         return PAQUETE_EDICION;
+    }
+
+    public void recibirPaqueteSeleccionado(Paquetes selectedItem) {
+        PAQUETE_SELECCIONADO = selectedItem;
+    }
+
+    public Paquetes paqueteSeleccion() {
+        return PAQUETE_SELECCIONADO;
     }
 }
