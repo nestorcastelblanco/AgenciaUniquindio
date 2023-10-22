@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import lombok.Getter;
@@ -31,12 +32,14 @@ public class Agencia {
     private static final String RUTA_DESTINOS = "src/main/resources/textos/destinos.ser";
     private static final String RUTA_PAQUETES = "src/main/resources/textos/paquetes.ser";
     private static final String RUTA_RESERVAS = "src/main/resources/textos/reservas.ser";
+    private static Reservas RESERVA_EDICION = new Reservas();
     private static Paquetes PAQUETE_SELECCIONADO = new Paquetes();
     private static Paquetes PAQUETE_EDICION = new Paquetes();
     private static Clientes CLIENTE_SESION = new Clientes();
     private static ArrayList<Destinos> destinos = new ArrayList<>();
     private static ArrayList<Paquetes> paquetes = new ArrayList<>();
     private static ArrayList<Clientes> clientes = new ArrayList<>();
+    private static ArrayList<Reservas> reservas = new ArrayList<>();
     private static ArrayList<Guias> guias = new ArrayList<>();
     private static final Logger LOGGER=Logger.getLogger(Agencia.class.getName());
     private static Agencia agencia;
@@ -45,6 +48,7 @@ public class Agencia {
         leerGuias();
         leerDestinos();
         leerPaquetes();
+        leerReservas();
         System.out.println("Clientes: ");
         for(int i = 0 ; i<clientes.size();i++)
         {
@@ -71,7 +75,24 @@ public class Agencia {
         {
             System.out.println(paquetes.get(i).getNombre());
         }
+        for(int i = 0 ; i<reservas.size();i++)
+        {
+            System.out.println(reservas.get(i).getCliente().getNombreCompleto());
+        }
     }
+
+    private static void leerReservas() {
+        try (ObjectInputStream entrada = new ObjectInputStream(new FileInputStream(RUTA_RESERVAS))) {
+            ArrayList<Reservas> paquetes1 = (ArrayList<Reservas>) entrada.readObject();
+            System.out.println("Reservas deserializados correctamente.");
+            for (Reservas paquete : paquetes1) {
+                reservas.add(paquete);
+            }
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
     public ArrayList<Destinos> enviarDestinos ()
     {
         return destinos;
@@ -81,6 +102,12 @@ public class Agencia {
         paquetes.removeAll(paquetes);
         leerPaquetes();
         return paquetes;
+    }
+    public ArrayList<Reservas> enviarReservas()
+    {
+        reservas.removeAll(reservas);
+        leerPaquetes();
+        return reservas;
     }
     private Agencia()
     {
@@ -488,7 +515,7 @@ public class Agencia {
         if (destinos == null || destinos.isEmpty()) {
             throw new CampoRepetido("No se añadieron destinos al paquete");
         }
-        if (agencia.verificarFechas(inicio, fin) == false) {
+        if (!agencia.verificarFechas(inicio, fin)) {
             throw new CampoObligatorioException("Las fechas ingresadas son erroneas");
         }
         if (personas == null || personas.isEmpty() || Float.valueOf(personas) <=0 || !verificarNumero(personas)) {
@@ -511,7 +538,7 @@ public class Agencia {
                         .inicio(inicio)
                         .fin(fin)
                         .servicios(servicios)
-                        .numeroPersonas(Integer.parseInt(personas))
+                        .numeroPersonas(PAQUETE_EDICION.getNumeroPersonas() + Integer.parseInt(personas))
                         .build();
                 paquete.setDuracion(inicio.until(fin, ChronoUnit.DAYS)+"");
                 paquetes.set(i,paquete);;
@@ -530,6 +557,21 @@ public class Agencia {
         }
         return state;
     }
+    private boolean verificarFechasReserva(LocalDate inicio, LocalDate fin, Paquetes paquetes) {
+        boolean state = true;
+        if (inicio.isAfter(fin) || inicio.isEqual(LocalDate.now()))
+        {
+            state = false;
+        }else {
+            if(inicio.isAfter(paquetes.getInicio()) || inicio.isEqual(paquetes.getInicio()) &&
+                fin.isBefore(paquetes.getFin()) || fin.isEqual(paquetes.getFin())){
+                state = true;
+            }else {
+                state = false;
+            }
+        }
+        return state;
+    }
     private boolean verificarNumero(String numero)
     {
         boolean isNumeric = (numero != null && numero.matches("[0-9]+"));
@@ -537,6 +579,9 @@ public class Agencia {
     }
     public void recibirPaqueteEdicion(Paquetes selectedItem) {
         PAQUETE_EDICION= selectedItem;
+    }
+    public void recibirReservaEdicion(Reservas selectedItem) {
+        RESERVA_EDICION= selectedItem;
     }
     public Paquetes enviarPaqueteEdicion() {
         return PAQUETE_EDICION;
@@ -563,5 +608,97 @@ public class Agencia {
         // Todas las imágenes existen
         System.out.println("Todas las imágenes existen.");
         return true;
+    }
+    public ArrayList<Guias> retornarGuias() {
+        return guias;
+    }
+
+    public ArrayList<Guias> enviarGuias() {
+        return guias;
+    }
+
+    public void realizarReserva(Paquetes paquete, Clientes cliente, LocalDate inicio, LocalDate fin, String personas, Guias selectedItem, String pendiente) throws CampoRepetido,CampoObligatorioException,CampoVacioException {
+        if (paquete == null) {
+            throw new CampoObligatorioException("No se cargo el paquete");
+        }
+        if (cliente == null ) {
+            throw new CampoRepetido("No se añadieron destinos al paquete");
+        }
+        if (!agencia.verificarFechasReserva(inicio, fin, paquete)) {
+            throw new CampoObligatorioException("Las fechas ingresadas son erroneas");
+        }
+        if (personas == null || personas.isEmpty() || Float.valueOf(personas) <=0 || !verificarNumero(personas)) {
+            throw new CampoObligatorioException("El numero de personas sobrepasa el cupo");
+        }
+        if (!agencia.verificarPersonasPaquete(paquete,personas)) {
+            throw new CampoObligatorioException("El numero de personas no es valido");
+        }
+        if (!agencia.verificarGuiaDisponible(selectedItem,inicio,fin)) {
+            throw new CampoObligatorioException("El guia no se encuentra disponible en ese rango de fechas");
+        }
+        int numeroPersonas = Integer.parseInt(personas);
+
+        Reservas reserva = Reservas.builder()
+                .paquete(paquete)
+                .cliente(cliente)
+                .fechaSolicitud(inicio)
+                .fechaPlanificada(fin)
+                .numeroPersonas(numeroPersonas)
+                .estado(pendiente)
+                .guia(selectedItem)
+                .build();
+        reservas.add(reserva);
+        ArchivoUtils.serializarArraylistReservas(RUTA_RESERVAS,reservas);
+        for (int i = 0 ; i< paquetes.size() ; i++)
+        {
+            if (paqueteSeleccion().equals(paquetes.get(i)))
+            {
+                Paquetes paqueteN = Paquetes.builder().
+                        nombre(paqueteSeleccion().getNombre())
+                        .destinos(paqueteSeleccion().getDestinos())
+                        .precio(Float.valueOf(paqueteSeleccion().getPrecio()))
+                        .inicio(paqueteSeleccion().getInicio())
+                        .fin(paqueteSeleccion().getFin())
+                        .servicios(paqueteSeleccion().getServicios())
+                        .numeroPersonas(paqueteSeleccion().getNumeroPersonas() - numeroPersonas)
+                        .duracion(paqueteSeleccion().getDuracion())
+                        .build();
+                paquetes.set(i,paqueteN);;
+                LOGGER.log(Level.INFO, "Se realizo la reserva de un Paquete");
+                borrarDatosSerializados(RUTA_PAQUETES);
+                ArchivoUtils.serializarArraylistPaquetes(RUTA_PAQUETES,paquetes);
+            }
+        }
+    }
+
+    private boolean verificarGuiaDisponible(Guias guia,LocalDate inicio, LocalDate fin) {
+        boolean state = true;
+        if (guia == null) {
+            state = true;
+        }else {
+            for (int i = 0 ; i<reservas.size();i++)
+            {
+                if(reservas.get(i).getGuia().equals(guia))
+                {
+                    if(reservas.get(i).getFechaSolicitud().equals(inicio) || reservas.get(i).getFechaSolicitud().isBefore(inicio) &&
+                            reservas.get(i).getFechaPlanificada().equals(fin) || reservas.get(i).getFechaPlanificada().isBefore(fin))
+                    {
+                        state = false;
+                    }
+                }
+            }
+        }
+        return state;
+    }
+
+    private boolean verificarPersonasPaquete(Paquetes paquete, String personas) {
+        boolean state = true;
+        int numPersonas = Integer.parseInt(personas);
+        if(paquete.getNumeroPersonas()>=numPersonas){
+            state= true;
+        }else{
+            state = false;
+        }
+        return state;
     }
 }

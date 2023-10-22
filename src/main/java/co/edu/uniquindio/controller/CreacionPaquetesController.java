@@ -7,16 +7,13 @@ import co.edu.uniquindio.model.Agencia;
 import co.edu.uniquindio.model.Destinos;
 import co.edu.uniquindio.utils.CambioIdiomaEvent;
 import co.edu.uniquindio.utils.CambioIdiomaListener;
-import com.sun.javafx.scene.shape.ArcHelper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.layout.StackPane;
 import javafx.util.Callback;
-
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;

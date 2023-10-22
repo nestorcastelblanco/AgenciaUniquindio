@@ -120,6 +120,6 @@
       <Button layoutX="65.0" layoutY="427.0" mnemonicParsing="false" onAction="#atras" prefHeight="60.0" prefWidth="39.0" text="&lt;" />
       <Button layoutX="461.0" layoutY="427.0" mnemonicParsing="false" onAction="#siguiente" prefHeight="60.0" prefWidth="39.0" text="&gt;" />
       <Button layoutX="41.0" layoutY="590.0" mnemonicParsing="false" onAction="#regresar" prefHeight="25.0" prefWidth="102.0" text="Regresar" />
-      <Button layoutX="410.0" layoutY="590.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="102.0" text="Seleccionar" />
+      <Button layoutX="410.0" layoutY="590.0" mnemonicParsing="false" onAction="#seleccionado" prefHeight="25.0" prefWidth="102.0" text="Seleccionar" />
    </children>
 </AnchorPane>

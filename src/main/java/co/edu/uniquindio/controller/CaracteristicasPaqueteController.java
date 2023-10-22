@@ -10,8 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-
-import java.awt.*;
+import javafx.scene.control.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -83,5 +82,9 @@ public class CaracteristicasPaqueteController implements Initializable, CambioId
             Image imagen = new Image(arrayListImagenes.get(cont));
             imageView.setImage(imagen);
         }
+    }
+
+    public void seleccionado(ActionEvent actionEvent) {
+        agencia.loadStage("/paginaRealizarReserva.fxml", actionEvent, "Se ingresa a realizar una reserva");
     }
 }

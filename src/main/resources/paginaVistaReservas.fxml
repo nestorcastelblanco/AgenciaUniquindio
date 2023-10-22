@@ -7,22 +7,22 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="436.0" prefWidth="701.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.controller.VistaPaquetesController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="436.0" prefWidth="701.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.controller.VistaReservasController">
    <children>
-      <TableView fx:id="tablaPaquetes" layoutX="39.0" layoutY="80.0" prefHeight="277.0" prefWidth="623.0">
+      <TableView fx:id="tablaReservas" layoutX="39.0" layoutY="80.0" prefHeight="277.0" prefWidth="623.0">
         <columns>
           <TableColumn fx:id="paquete" prefWidth="105.0" text="Paquete" />
-          <TableColumn fx:id="destinos" prefWidth="109.0" text="Destinos" />
-            <TableColumn fx:id="personas" prefWidth="64.0" text="Personas" />
-            <TableColumn fx:id="servicios" prefWidth="105.0" text="Servicios" />
-            <TableColumn fx:id="valorPersona" prefWidth="100.0" text="Valor Persona" />
+          <TableColumn fx:id="guia" prefWidth="109.0" text="Guia" />
+            <TableColumn fx:id="cliente" prefWidth="64.0" text="Cliente" />
+            <TableColumn fx:id="personas" prefWidth="105.0" text="Personas" />
+            <TableColumn fx:id="estado" prefWidth="100.0" text="Estado" />
             <TableColumn fx:id="fechaInicio" prefWidth="71.0" text="Inicio" />
             <TableColumn fx:id="fechaFin" prefWidth="67.0" text="Fin" />
         </columns>
       </TableView>
       <Button layoutX="39.0" layoutY="384.0" mnemonicParsing="false" onAction="#regresar" prefHeight="25.0" prefWidth="112.0" text="Regresar" />
       <Button layoutX="550.0" layoutY="384.0" mnemonicParsing="false" onAction="#editar" prefHeight="25.0" prefWidth="112.0" text="Editar" />
-      <Label layoutX="46.0" layoutY="14.0" prefHeight="56.0" prefWidth="609.0" text="PAQUETES ACTUALES OFERTADOS">
+      <Label alignment="CENTER" layoutX="46.0" layoutY="14.0" prefHeight="56.0" prefWidth="609.0" text="RESERVAS REALIZADAS">
          <font>
             <Font name="Franklin Gothic Medium Cond" size="48.0" />
          </font>
