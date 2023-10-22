@@ -42,7 +42,7 @@ public class EdicionReservasController implements Initializable, CambioIdiomaLis
     @FXML
     private DatePicker fechaFin;
     @FXML
-    private TextField personas;
+    private TextField agregarPersonas, quitarPersonas;
     private ObservableList<String> estadosDisponibles = FXCollections.observableArrayList("PENDIENTE", "CONFIRMADA", "CANCELADA");
     public void regresar (ActionEvent e) {
         agencia.loadStage("/paginaAdministrativa.fxml", e, "Se regresa a la pagina administrativa");
@@ -52,6 +52,8 @@ public class EdicionReservasController implements Initializable, CambioIdiomaLis
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        agregarPersonas.setText("0");
+        quitarPersonas.setText("0");
         arrayGuias = agencia.enviarGuias();
         arrayPaquetes = agencia.enviarPaquetes();
         cargarVariables();
@@ -61,7 +63,6 @@ public class EdicionReservasController implements Initializable, CambioIdiomaLis
     }
 
     private void cargarVariables() {
-        personas.setText(agencia.enviarReservaEdicion().getNumeroPersonas()+"");
         fechaInicio = new DatePicker(agencia.enviarReservaEdicion().getFechaSolicitud());
         fechaFin = new DatePicker(agencia.enviarReservaEdicion().getFechaPlanificada());
     }
@@ -76,6 +77,7 @@ public class EdicionReservasController implements Initializable, CambioIdiomaLis
             ObservableList<Paquetes> listaDestinos = FXCollections.observableArrayList(arrayPaquetes);
             System.out.print("Lista comboDestinos" + listaDestinos);
             paquetes.setItems(listaDestinos);
+            paquetes.getSelectionModel().select(agencia.enviarReservaEdicion().getPaquete());
             cargarAtributos();
         }
     }
@@ -120,6 +122,7 @@ public class EdicionReservasController implements Initializable, CambioIdiomaLis
             ObservableList<Guias> listaDestinos = FXCollections.observableArrayList(arrayGuias);
             System.out.print("Lista comboDestinos" + listaDestinos);
             guias.setItems(listaDestinos);
+            guias.getSelectionModel().select(agencia.enviarReservaEdicion().getGuia());
             cargarAtributosGuias();
         }
     }
@@ -157,7 +160,7 @@ public class EdicionReservasController implements Initializable, CambioIdiomaLis
     public void registrarPaquete(ActionEvent actionEvent) {
         try
         {
-            agencia.editarReserva(paquetes.getSelectionModel().getSelectedItem(),fechaInicio.getValue(),fechaFin.getValue(),personas.getText(),guias.getSelectionModel().getSelectedItem(),estado.getSelectionModel().getSelectedItem());
+            agencia.editarReserva(paquetes.getSelectionModel().getSelectedItem(),fechaInicio.getValue(),fechaFin.getValue(),agregarPersonas.getText(),quitarPersonas.getText(),guias.getSelectionModel().getSelectedItem(),estado.getSelectionModel().getSelectedItem());
             LOGGER.log(Level.INFO,"Se edito un paquete");
         } catch (CampoRepetido | CampoObligatorioException | CampoVacioException e) {
             mostrarMensaje(Alert.AlertType.ERROR, e.getMessage());
@@ -165,6 +168,7 @@ public class EdicionReservasController implements Initializable, CambioIdiomaLis
     }
     public void llenarListaEstados() {
         estado.setItems(estadosDisponibles);
+        estado.getSelectionModel().select(agencia.enviarReservaEdicion().getEstado());
     }
     public void mostrarMensaje(Alert.AlertType tipo, String mensaje){
         Alert alert = new Alert(tipo);

@@ -38,13 +38,14 @@ public class VistaReservasController implements Initializable, CambioIdiomaListe
     private TableColumn<Reservas, String> fechaInicio;
     @FXML
     private TableColumn<Reservas, String> fechaFin;
-    private ObservableList<Reservas> reservaciones = FXCollections.observableArrayList(agencia.enviarReservas());
+    private ObservableList<Reservas> reservaciones = FXCollections.observableArrayList();
     @Override
     public void onCambioIdioma(CambioIdiomaEvent evento) {
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        reservaciones = FXCollections.observableArrayList(agencia.enviarReservas());
         paquete.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPaquete().getNombre()));
         guia.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getGuia().getNombre()));
         cliente.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCliente().getNombreCompleto()));

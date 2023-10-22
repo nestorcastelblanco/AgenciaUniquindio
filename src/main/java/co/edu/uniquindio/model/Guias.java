@@ -13,7 +13,6 @@ public class Guias implements Serializable {
     public void addLenguajes(String idioma) {
         this.lenguajes.add(idioma);
     }
-
     public ArrayList<String> getLenguajes() {
         return lenguajes;
     }

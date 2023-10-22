@@ -8,15 +8,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import lombok.Getter;
 import lombok.extern.java.Log;
 
 import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
@@ -35,6 +31,7 @@ public class Agencia {
     private static Reservas RESERVA_EDICION = new Reservas();
     private static Paquetes PAQUETE_SELECCIONADO = new Paquetes();
     private static Paquetes PAQUETE_EDICION = new Paquetes();
+    private static Paquetes PAQUETE_RESERVA = new Paquetes();
     private static Clientes CLIENTE_SESION = new Clientes();
     private static ArrayList<Destinos> destinos = new ArrayList<>();
     private static ArrayList<Paquetes> paquetes = new ArrayList<>();
@@ -106,7 +103,7 @@ public class Agencia {
     public ArrayList<Reservas> enviarReservas()
     {
         reservas.removeAll(reservas);
-        leerPaquetes();
+        leerReservas();
         return reservas;
     }
     private Agencia()
@@ -468,8 +465,8 @@ public class Agencia {
     }
     public void registrarPaquete(String nombre, ArrayList<Destinos> destinos, LocalDate inicio, LocalDate fin, String servicios,String personas, String valor) throws CampoRepetido,CampoVacioException,CampoObligatorioException
     {
-        if (nombre== null || nombre.isEmpty()) {
-            throw new CampoObligatorioException("Es necesario ingresar el nombre");
+        if (nombre== null || nombre.isEmpty() || !agencia.verificarNombrePaquete(nombre)) {
+            throw new CampoObligatorioException("Es necesario ingresar el nombre o el nombre es invalido");
         }
         if (destinos == null || destinos.isEmpty()) {
             throw new CampoRepetido("No se añadieron destinos al paquete");
@@ -507,6 +504,19 @@ public class Agencia {
         ArchivoUtils.serializarArraylistPaquetes(RUTA_PAQUETES,paquetes);
         LOGGER.log(Level.INFO, "Se registro un nuevo Paquete");
     }
+
+    private boolean verificarNombrePaquete(String nombre) {
+        boolean state = true;
+        for (int i = 0; i<paquetes.size();i++)
+        {
+            if(nombre.equals(paquetes.get(i).getNombre()))
+            {
+                state = false;
+            }
+        }
+        return state;
+    }
+
     public void editarPaquete(String nombre, ArrayList<Destinos> destinos, LocalDate inicio, LocalDate fin, String servicios,String personas, String valor) throws CampoRepetido,CampoVacioException,CampoObligatorioException
     {
         if (nombre== null || nombre.isEmpty()) {
@@ -549,24 +559,36 @@ public class Agencia {
             }
         }
     }
-    public void editarReserva(Paquetes paquete,LocalDate inicio, LocalDate fin, String personas, Guias selectedItem, String pendiente) throws CampoRepetido,CampoObligatorioException,CampoVacioException {
+    public void editarReserva(Paquetes paquete, LocalDate inicio, LocalDate fin, String agregarPersonas, String quitarPersonas, Guias selectedItem, String pendiente) throws CampoRepetido,CampoObligatorioException,CampoVacioException {
         if (paquete == null) {
             throw new CampoObligatorioException("No se cargo el paquete");
         }
         if (!agencia.verificarFechasReserva(inicio, fin, paquete)) {
             throw new CampoObligatorioException("Las fechas ingresadas son erroneas");
         }
-        if (personas == null || personas.isEmpty() || Float.valueOf(personas) <=0 || !verificarNumero(personas)) {
+        if (agregarPersonas == null || agregarPersonas.isEmpty() || Integer.parseInt(agregarPersonas) <0 || !verificarNumero(agregarPersonas)) {
             throw new CampoObligatorioException("El numero de personas sobrepasa el cupo");
         }
-        if (!agencia.verificarPersonasPaquete(paquete,personas)) {
+        if (!agencia.verificarPersonasPaquete(paquete,agregarPersonas)) {
             throw new CampoObligatorioException("El numero de personas no es valido");
+        }
+        if (quitarPersonas == null || quitarPersonas.isEmpty() || Integer.parseInt(quitarPersonas) <0 || !verificarNumero(quitarPersonas)) {
+            throw new CampoObligatorioException("El numero de personas sobrepasa el cupo");
+        }
+        if ((RESERVA_EDICION.getNumeroPersonas() - Integer.parseInt(quitarPersonas)) <= 0) {
+            throw new CampoObligatorioException("Se trato de dejar la cantidad de personas menor o igual a 0");
         }
         if (!agencia.verificarGuiaDisponible(selectedItem,inicio,fin)) {
             throw new CampoObligatorioException("El guia no se encuentra disponible en ese rango de fechas");
         }
-        int numeroPersonas = Integer.parseInt(personas);
-        for (int i = 0 ; i< paquetes.size() ; i++)
+        if(selectedItem == null)
+        {
+            selectedItem = new Guias();
+            selectedItem.setNombre("SIN GUIA");
+        }
+        int numeroPersonas = Integer.parseInt(agregarPersonas);
+        int numeroPersonas1 = Integer.parseInt(quitarPersonas);
+        for (int i = 0 ; i< reservas.size() ; i++)
         {
             if (RESERVA_EDICION.equals(reservas.get(i)))
             {
@@ -575,7 +597,7 @@ public class Agencia {
                         .cliente(RESERVA_EDICION.getCliente())
                         .fechaSolicitud(inicio)
                         .fechaPlanificada(fin)
-                        .numeroPersonas(numeroPersonas)
+                        .numeroPersonas(RESERVA_EDICION.getNumeroPersonas() + numeroPersonas - numeroPersonas1)
                         .estado(pendiente)
                         .guia(selectedItem)
                         .build();
@@ -584,6 +606,28 @@ public class Agencia {
                 RESERVA_EDICION = reserva;
                 borrarDatosSerializados(RUTA_RESERVAS);
                 ArchivoUtils.serializarArraylistReservas(RUTA_RESERVAS,reservas);
+            }
+        }
+        for (int i = 0 ; i< paquetes.size() ; i++)
+        {
+            System.out.print("Paquete seleccionado :" + paquete.getNombre() + " "+ paquete.getDestinos());
+            System.out.print("Paquete array :" + paquetes.get(i).getNombre() + " "+ paquetes.get(i).getDestinos());
+            if (paquete.getNombre().equals(paquetes.get(i).getNombre())) {
+                System.out.print("Paquete encontrado :" + paquetes.get(i).getNombre() + " "+ paquetes.get(i).getDestinos());
+                Paquetes paquete1 = Paquetes.builder().
+                        nombre(paquete.getNombre())
+                        .destinos(paquete.getDestinos())
+                        .precio(Float.valueOf(paquete.getPrecio()))
+                        .inicio(paquete.getInicio())
+                        .fin(paquete.getFin())
+                        .servicios(paquete.getServicios())
+                        .numeroPersonas(paquete.getNumeroPersonas() + numeroPersonas1 - numeroPersonas)
+                        .build();
+                paquete1.setDuracion(paquete1.getDuracion());
+                paquetes.set(i,paquete1);;
+                LOGGER.log(Level.INFO, "Se realizo la edicion de un Paquete con base a la edicion de la reserva");
+                borrarDatosSerializados(RUTA_PAQUETES);
+                ArchivoUtils.serializarArraylistPaquetes(RUTA_PAQUETES,paquetes);
             }
         }
     }
@@ -620,6 +664,13 @@ public class Agencia {
     }
     public void recibirReservaEdicion(Reservas selectedItem) {
         RESERVA_EDICION= selectedItem;
+        for (int i = 0 ; i<paquetes.size();i++)
+        {
+            if (paquetes.get(i).equals(selectedItem.getPaquete()))
+            {
+                PAQUETE_RESERVA = selectedItem.getPaquete();
+            }
+        }
     }
     public Paquetes enviarPaqueteEdicion() {
         return PAQUETE_EDICION;
@@ -676,6 +727,11 @@ public class Agencia {
         }
         if (!agencia.verificarGuiaDisponible(selectedItem,inicio,fin)) {
             throw new CampoObligatorioException("El guia no se encuentra disponible en ese rango de fechas");
+        }
+        if(selectedItem == null)
+        {
+            selectedItem = new Guias();
+            selectedItem.setNombre("SIN GUIA");
         }
         int numeroPersonas = Integer.parseInt(personas);
 

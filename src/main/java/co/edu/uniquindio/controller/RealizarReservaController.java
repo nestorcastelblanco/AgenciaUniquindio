@@ -95,8 +95,6 @@ public class RealizarReservaController implements Initializable, CambioIdiomaLis
             }
         });
     }
-
-
     public void reservar(ActionEvent actionEvent) {
         try
         {
