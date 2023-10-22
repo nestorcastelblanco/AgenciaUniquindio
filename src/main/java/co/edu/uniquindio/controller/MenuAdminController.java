@@ -59,4 +59,8 @@ public class MenuAdminController implements Initializable, CambioIdiomaListener 
     public void mostrarPaquetes(ActionEvent actionEvent) {
         agencia.loadStage("/paginaVistaPaquetes.fxml", actionEvent, "Se ingresa a la pagina de vista de paquetes");
     }
+
+    public void reservas(ActionEvent actionEvent) {
+        agencia.loadStage("/paginaVistaReservas.fxml", actionEvent, "Se ingresa a la pagina de vista de reservas");
+    }
 }

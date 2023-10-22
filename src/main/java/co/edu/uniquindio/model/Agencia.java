@@ -549,6 +549,44 @@ public class Agencia {
             }
         }
     }
+    public void editarReserva(Paquetes paquete,LocalDate inicio, LocalDate fin, String personas, Guias selectedItem, String pendiente) throws CampoRepetido,CampoObligatorioException,CampoVacioException {
+        if (paquete == null) {
+            throw new CampoObligatorioException("No se cargo el paquete");
+        }
+        if (!agencia.verificarFechasReserva(inicio, fin, paquete)) {
+            throw new CampoObligatorioException("Las fechas ingresadas son erroneas");
+        }
+        if (personas == null || personas.isEmpty() || Float.valueOf(personas) <=0 || !verificarNumero(personas)) {
+            throw new CampoObligatorioException("El numero de personas sobrepasa el cupo");
+        }
+        if (!agencia.verificarPersonasPaquete(paquete,personas)) {
+            throw new CampoObligatorioException("El numero de personas no es valido");
+        }
+        if (!agencia.verificarGuiaDisponible(selectedItem,inicio,fin)) {
+            throw new CampoObligatorioException("El guia no se encuentra disponible en ese rango de fechas");
+        }
+        int numeroPersonas = Integer.parseInt(personas);
+        for (int i = 0 ; i< paquetes.size() ; i++)
+        {
+            if (RESERVA_EDICION.equals(reservas.get(i)))
+            {
+                Reservas reserva = Reservas.builder()
+                        .paquete(paquete)
+                        .cliente(RESERVA_EDICION.getCliente())
+                        .fechaSolicitud(inicio)
+                        .fechaPlanificada(fin)
+                        .numeroPersonas(numeroPersonas)
+                        .estado(pendiente)
+                        .guia(selectedItem)
+                        .build();
+                reservas.set(i,reserva);;
+                LOGGER.log(Level.INFO, "Se realizo la edicion de una Reserva");
+                RESERVA_EDICION = reserva;
+                borrarDatosSerializados(RUTA_RESERVAS);
+                ArchivoUtils.serializarArraylistReservas(RUTA_RESERVAS,reservas);
+            }
+        }
+    }
     private boolean verificarFechas(LocalDate inicio, LocalDate fin) {
         boolean state = true;
         if (inicio.isAfter(fin) || inicio.isEqual(LocalDate.now()))
@@ -585,6 +623,9 @@ public class Agencia {
     }
     public Paquetes enviarPaqueteEdicion() {
         return PAQUETE_EDICION;
+    }
+    public Reservas enviarReservaEdicion() {
+        return RESERVA_EDICION;
     }
 
     public void recibirPaqueteSeleccionado(Paquetes selectedItem) {

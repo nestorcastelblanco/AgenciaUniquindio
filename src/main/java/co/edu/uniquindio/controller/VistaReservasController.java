@@ -62,7 +62,7 @@ public class VistaReservasController implements Initializable, CambioIdiomaListe
             LOGGER.log(Level.INFO, "Se intento editar un paquete sin haberlo seleccionado");
         } else {
             agencia.recibirReservaEdicion(tablaReservas.getSelectionModel().getSelectedItem());
-            agencia.loadStage("/paginaEdicionPaquete.fxml",actionEvent,"Se va a editar un paquete");
+            agencia.loadStage("/paginaEdicionReserva.fxml",actionEvent,"Se va a editar una reserva");
         }
     }
 }

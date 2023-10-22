@@ -15,7 +15,7 @@
             <Button layoutX="63.0" layoutY="95.0" mnemonicParsing="false" onAction="#registrarDestino" prefHeight="35.0" prefWidth="247.0" text="Registrar Destino" />
             <Button layoutX="63.0" layoutY="166.0" mnemonicParsing="false" onAction="#creacionPaquetes" prefHeight="35.0" prefWidth="247.0" text="Crear Paquetes" />
             <Button layoutX="63.0" layoutY="241.0" mnemonicParsing="false" onAction="#mostrarPaquetes" prefHeight="35.0" prefWidth="247.0" text="Mostrar Paquetes" />
-            <Button layoutX="63.0" layoutY="285.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="247.0" text="Button" />
+            <Button layoutX="63.0" layoutY="285.0" mnemonicParsing="false" onAction="#reservas" prefHeight="35.0" prefWidth="247.0" text="Mostrar Reservas" />
             <Button fx:id="botonRegreso" layoutX="142.0" layoutY="343.0" mnemonicParsing="false" onAction="#regresar" prefHeight="38.0" prefWidth="103.0" text="Regresar">
                <font>
                   <Font name="Franklin Gothic Medium Cond" size="12.0" />
