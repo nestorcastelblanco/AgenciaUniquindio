@@ -18,10 +18,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Objects;
+import java.util.*;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -62,6 +59,12 @@ public class Agencia {
         for(int i = 0 ; i<destinos.size();i++)
         {
             System.out.println(destinos.get(i).getNombre());
+            for(int j=0 ; j<destinos.get(i).getImagenes().size();j++)
+            {
+                System.out.println(destinos.get(i).getImagenes().get(j));
+                System.out.print("entro");
+            }
+            System.out.print("ya");
         }
         System.out.println("Paquetes: ");
         for(int i = 0 ; i<paquetes.size();i++)
@@ -239,14 +242,18 @@ public class Agencia {
         System.out.println(guia.getLenguajes().toString());
         return guia;
     }
-    private Destinos llenarArrayImagenes(String imagenes, Destinos destinos) {
+    private ArrayList<String> llenarArrayImagenes(String imagenes) {
         String[] leng = imagenes.split(",");
-        for (int i  = 0; i<leng.length ; i++)
-        {
-            destinos.addImagenes(leng[i]);
+        ArrayList<String> jpgs = new ArrayList<>();
+        // Verificar si la longitud del array resultante es 1
+        if (leng.length == 1 && !leng[0].isEmpty()) {
+            // Si solo hay un elemento y no está vacío, agregarlo al ArrayList
+            jpgs.add(leng[0]);
+        } else {
+            // Si hay más de un elemento o está vacío, agregarlos al ArrayList
+            jpgs.addAll(Arrays.asList(leng));
         }
-        System.out.println(destinos.getImagenes().toString());
-        return destinos;
+        return jpgs;
     }
 
     public void ingresarCliente(String usuario, String contrasena) throws CampoRepetido
@@ -422,7 +429,12 @@ public class Agencia {
                 clima(clima).
                 descripcion(descripcion)
                 .build();
-        destino = llenarArrayImagenes(imagenes,destino);
+        ArrayList<String> imagenes1 = llenarArrayImagenes(imagenes);
+        for(int i = 0; i<imagenes1.size();i++)
+        {
+            System.out.print(imagenes1.get(i));
+        }
+        destino.setImagenes(imagenes1);
         destinos.add(destino);
         ArchivoUtils.serializarArraylistDestinos(RUTA_DESTINOS,destinos);
         LOGGER.log(Level.INFO, "Se registro un nuevo Destino");
@@ -450,7 +462,7 @@ public class Agencia {
         Paquetes paquete = Paquetes.builder().
                 nombre(nombre)
                 .destinos(destinos)
-                .precio(Float.valueOf(valor))
+                .precio(Float.parseFloat(valor))
                 .inicio(inicio)
                 .fin(fin)
                 .servicios(servicios)

@@ -14,11 +14,14 @@ import java.util.ArrayList;
 
 public class Destinos implements Serializable {
     private String nombre, ciudad, descripcion, clima;
-    private static ArrayList<String> imagenes = new ArrayList<>();
+    private ArrayList<String> imagenes = new ArrayList<>();
     public void addImagenes(String idioma) {
         this.imagenes.add(idioma);
     }
     public ArrayList<String> getImagenes() {
         return imagenes;
+    }
+    public void setImagenes(ArrayList<String> imagen) {
+        imagenes = imagen;
     }
 }

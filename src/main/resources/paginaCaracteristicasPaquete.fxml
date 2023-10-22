@@ -106,7 +106,6 @@
             </Label>
          </children>
       </Pane>
-      <Button layoutX="461.0" layoutY="427.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="39.0" text="&gt;" />
       <Label alignment="CENTER" layoutX="71.0" layoutY="14.0" prefHeight="33.0" prefWidth="321.0" text="Seleccion de Paquete">
          <font>
             <Font name="Franklin Gothic Medium Cond" size="24.0" />
@@ -118,7 +117,8 @@
          </image>
       </ImageView>
       <ImageView fx:id="imageView" fitHeight="230.0" fitWidth="396.0" layoutX="84.0" layoutY="342.0" pickOnBounds="true" preserveRatio="true" />
-      <Button layoutX="65.0" layoutY="427.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="39.0" text="&lt;" />
+      <Button layoutX="65.0" layoutY="427.0" mnemonicParsing="false" onAction="#atras" prefHeight="60.0" prefWidth="39.0" text="&lt;" />
+      <Button layoutX="461.0" layoutY="427.0" mnemonicParsing="false" onAction="#siguiente" prefHeight="60.0" prefWidth="39.0" text="&gt;" />
       <Button layoutX="41.0" layoutY="590.0" mnemonicParsing="false" onAction="#regresar" prefHeight="25.0" prefWidth="102.0" text="Regresar" />
       <Button layoutX="410.0" layoutY="590.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="102.0" text="Seleccionar" />
    </children>
