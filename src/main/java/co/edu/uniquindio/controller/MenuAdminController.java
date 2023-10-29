@@ -23,7 +23,7 @@ public class MenuAdminController implements Initializable, CambioIdiomaListener 
     private Label titulo, nombre, identificacion, labelIdiomas,experiencia;
     @FXML
     private TextField nombreUsuario, id,idiomas, exp;
-    private final Logger LOGGER = Logger.getLogger(PrincipalController.class.getName());
+    private final Logger LOGGER = Logger.getLogger(Agencia.class.getName());
     private final Propiedades propiedades = Propiedades.getInstance();
     private final Agencia agencia = Agencia.getInstance();
     @Override

@@ -29,7 +29,7 @@ public class RegistroController implements Initializable, CambioIdiomaListener {
     private Button botonRegreso, botonRegistro, bttCambiar;
     private final Agencia agencia = Agencia.getInstance();
     private final Propiedades propiedades = Propiedades.getInstance();
-    private final Logger LOGGER = Logger.getLogger(PrincipalController.class.getName());
+    private final Logger LOGGER = Logger.getLogger(Agencia.class.getName());
     @Override
     public void onCambioIdioma(CambioIdiomaEvent evento) {
         cargarTextos();

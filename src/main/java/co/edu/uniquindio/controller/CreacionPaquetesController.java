@@ -24,7 +24,7 @@ public class CreacionPaquetesController implements Initializable, CambioIdiomaLi
     private final Agencia agencia = Agencia.getInstance();
     private static ArrayList<Destinos> destinosCombo = new ArrayList<>();
     private static ArrayList<Destinos> destinosSeleccionados = new ArrayList<>();
-    private static final Logger LOGGER = Logger.getLogger(PrincipalController.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(Agencia.class.getName());
     @FXML
     private Button botonRegreso,botonRegistro, botonCrear, botonCrearDestino, botonDestino;
     @FXML

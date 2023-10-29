@@ -28,6 +28,7 @@ public class Agencia {
     private static final String RUTA_DESTINOS = "src/main/resources/textos/destinos.ser";
     private static final String RUTA_PAQUETES = "src/main/resources/textos/paquetes.ser";
     private static final String RUTA_RESERVAS = "src/main/resources/textos/reservas.ser";
+    private static Reservas RESERVA_CANCELACION = new Reservas();
     private static Reservas RESERVA_EDICION = new Reservas();
     private static Paquetes PAQUETE_SELECCIONADO = new Paquetes();
     private static Paquetes PAQUETE_EDICION = new Paquetes();
@@ -77,7 +78,24 @@ public class Agencia {
             System.out.println(reservas.get(i).getCliente().getNombreCompleto());
         }
     }
-
+    private Agencia()
+    {
+        try {
+            LOGGER.addHandler(new FileHandler("logs.xml", true));
+        }
+        catch (IOException ex)
+        {
+            throw new RuntimeException(ex);
+        }
+    }
+    public static Agencia getInstance()
+    {
+        if(agencia== null)
+        {
+            agencia = new Agencia();
+        }
+        return agencia;
+    }
     private static void leerReservas() {
         try (ObjectInputStream entrada = new ObjectInputStream(new FileInputStream(RUTA_RESERVAS))) {
             ArrayList<Reservas> paquetes1 = (ArrayList<Reservas>) entrada.readObject();
@@ -106,24 +124,20 @@ public class Agencia {
         leerReservas();
         return reservas;
     }
-    private Agencia()
-    {
-        try {
-            LOGGER.addHandler(new FileHandler("logs.xml", true));
-        }
-        catch (IOException ex)
+    public ArrayList<Reservas> enviarReservasCliente() {
+        ArrayList<Reservas> reservasCliente = new ArrayList<>();
+        reservas.removeAll(reservas);
+        leerReservas();
+        for (int i = 0 ; i<reservas.size();i++)
         {
-            throw new RuntimeException(ex);
+            if (reservas.get(i).getCliente().getIdentificacion().equals(CLIENTE_SESION.getIdentificacion()))
+            {
+                reservasCliente.add(reservas.get(i));
+            }
         }
+        return reservasCliente;
     }
-    public static Agencia getInstance()
-    {
-        if(agencia== null)
-        {
-            agencia = new Agencia();
-        }
-        return agencia;
-    }
+
     public Clientes obtenerCliente(String id)
     {
         Clientes cliente = null;
@@ -194,6 +208,16 @@ public class Agencia {
         System.out.println("Cliente encontrado " + CLIENTE_SESION.getNombreCompleto());
         return state;
     }
+    public boolean buscarAdmin (String usuario, String contrasena)
+    {
+        boolean state = false;
+        if (usuario.equals("admin") && contrasena.equals("admin"))
+        {
+            state = true;
+        }
+        return state;
+    }
+
     public void registrarCliente(String nombre, String correo, String direccion,String ciudad, String telefono, String usuario, String contrasena, String id) throws CampoVacioException, CampoObligatorioException, CampoRepetido
     {
         if (nombre == null || nombre.isEmpty()) {
@@ -251,20 +275,24 @@ public class Agencia {
                 identificacion(id).
                 exp(exp)
                 .build();
-        guia = llenarArrayIdioma(idiomas,guia);
+        guia.setLenguajes(llenarArrayIdioma(idiomas));
         guias.add(guia);
         ArchivoUtils.serializarArraylist(RUTA_GUIAS,guias);
         LOGGER.log(Level.INFO, "Se registro un nuevo guia");
     }
 
-    private Guias llenarArrayIdioma(String idiomas, Guias guia) {
+    private ArrayList<String> llenarArrayIdioma(String idiomas) {
         String[] leng = idiomas.split(",");
-        for (int i  = 0; i<leng.length ; i++)
-        {
-           guia.addLenguajes(leng[i]);
+        ArrayList<String> jpgs = new ArrayList<>();
+        // Verificar si la longitud del array resultante es 1
+        if (leng.length == 1 && !leng[0].isEmpty()) {
+            // Si solo hay un elemento y no está vacío, agregarlo al ArrayList
+            jpgs.add(leng[0]);
+        } else {
+            // Si hay más de un elemento o está vacío, agregarlos al ArrayList
+            jpgs.addAll(Arrays.asList(leng));
         }
-        System.out.println(guia.getLenguajes().toString());
-        return guia;
+        return jpgs;
     }
     private ArrayList<String> llenarArrayImagenes(String imagenes) {
         String[] leng = imagenes.split(",");
@@ -283,6 +311,14 @@ public class Agencia {
     public void ingresarCliente(String usuario, String contrasena) throws CampoRepetido
     {
         if (agencia.buscarCliente(usuario,contrasena) == false) {
+            throw new CampoRepetido("Las credenciales proporcionadas son erroneas");
+        }else{
+            LOGGER.log(Level.INFO, "Se genero el ingreso de un cliente: " + CLIENTE_SESION.getNombreCompleto() );
+        }
+    }
+    public void ingresarAdmin(String usuario, String contrasena) throws CampoRepetido
+    {
+        if (!agencia.buscarAdmin(usuario,contrasena)) {
             throw new CampoRepetido("Las credenciales proporcionadas son erroneas");
         }else{
             LOGGER.log(Level.INFO, "Se genero el ingreso de un cliente: " + CLIENTE_SESION.getNombreCompleto() );
@@ -563,8 +599,11 @@ public class Agencia {
         if (paquete == null) {
             throw new CampoObligatorioException("No se cargo el paquete");
         }
-        if (!agencia.verificarFechasReserva(inicio, fin, paquete)) {
-            throw new CampoObligatorioException("Las fechas ingresadas son erroneas");
+        if(!inicio.isEqual(RESERVA_EDICION.getFechaSolicitud()) && !fin.isEqual(RESERVA_EDICION.getFechaPlanificada()))
+        {
+            if (!agencia.verificarFechasReserva(inicio, fin, paquete)) {
+                throw new CampoObligatorioException("Las fechas ingresadas son erroneas");
+            }
         }
         if (agregarPersonas == null || agregarPersonas.isEmpty() || Integer.parseInt(agregarPersonas) <0 || !verificarNumero(agregarPersonas)) {
             throw new CampoObligatorioException("El numero de personas sobrepasa el cupo");
@@ -639,17 +678,23 @@ public class Agencia {
         }
         return state;
     }
-    private boolean verificarFechasReserva(LocalDate inicio, LocalDate fin, Paquetes paquetes) {
+    private boolean verificarFechasReserva(LocalDate inicio, LocalDate fin, Paquetes paquete) {
         boolean state = true;
         if (inicio.isAfter(fin) || inicio.isEqual(LocalDate.now()))
         {
             state = false;
         }else {
-            if(inicio.isAfter(paquetes.getInicio()) || inicio.isEqual(paquetes.getInicio()) &&
-                fin.isBefore(paquetes.getFin()) || fin.isEqual(paquetes.getFin())){
-                state = true;
-            }else {
-                state = false;
+            for (int i = 0 ; i<paquetes.size();i++)
+            {
+                if(paquetes.get(i).getNombre().equals(paquete.getNombre()))
+                {
+                    if(inicio.isAfter(paquetes.get(i).getInicio()) || inicio.isEqual(paquetes.get(i).getInicio()) &&
+                            fin.isBefore(paquetes.get(i).getFin()) || fin.isEqual(paquetes.get(i).getFin())){
+                        state = true;
+                    }else {
+                        state = false;
+                    }
+                }
             }
         }
         return state;
@@ -669,6 +714,25 @@ public class Agencia {
             if (paquetes.get(i).equals(selectedItem.getPaquete()))
             {
                 PAQUETE_RESERVA = selectedItem.getPaquete();
+            }
+        }
+    }
+    public void recibirReservaCancelacion(Reservas selectedItem) {
+        RESERVA_CANCELACION= selectedItem;
+        for (int i = 0 ; i<reservas.size();i++)
+        {
+            if (reservas.get(i).equals(RESERVA_CANCELACION))
+            {
+                for (int j = 0; j<paquetes.size();j++)
+                {
+                    if(paquetes.get(j).getNombre().equals(RESERVA_CANCELACION.getPaquete().getNombre())) {
+                        paquetes.get(j).setNumeroPersonas(paquetes.get(j).getNumeroPersonas() + RESERVA_CANCELACION.getNumeroPersonas());
+                        ArchivoUtils.serializarArraylistPaquetes(RUTA_PAQUETES, paquetes);
+                    }
+                }
+                reservas.remove(i);
+                ArchivoUtils.serializarArraylistReservas(RUTA_RESERVAS,reservas);
+                leerReservas();
             }
         }
     }
@@ -769,7 +833,7 @@ public class Agencia {
     }
 
     private boolean verificarGuiaDisponible(Guias guia,LocalDate inicio, LocalDate fin) {
-        boolean state = true;
+        boolean state = false;
         if (guia == null) {
             state = true;
         }else {
@@ -777,10 +841,12 @@ public class Agencia {
             {
                 if(reservas.get(i).getGuia().equals(guia))
                 {
+                    System.out.println("El guia existe");
                     if(reservas.get(i).getFechaSolicitud().equals(inicio) || reservas.get(i).getFechaSolicitud().isBefore(inicio) &&
-                            reservas.get(i).getFechaPlanificada().equals(fin) || reservas.get(i).getFechaPlanificada().isBefore(fin))
+                           reservas.get(i).getFechaPlanificada().equals(fin) || reservas.get(i).getFechaPlanificada().isBefore(fin))
                     {
-                        state = false;
+                        System.out.println("El guia esta disponible " + reservas.get(i).getGuia().getNombre());
+                        state = true;
                     }
                 }
             }

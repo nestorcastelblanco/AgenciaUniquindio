@@ -22,7 +22,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 public class RealizarReservaController implements Initializable, CambioIdiomaListener {
-    private Logger LOGGER = Logger.getLogger(PrincipalController.class.getName());
+    private Logger LOGGER = Logger.getLogger(Agencia.class.getName());
     private final Agencia agencia = Agencia.getInstance();
     private Paquetes paquete = new Paquetes();
     private Clientes cliente = new Clientes();

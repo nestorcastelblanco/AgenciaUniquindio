@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 public class PortalAgenciaController implements Initializable, CambioIdiomaListener {
         private final Agencia agencia = Agencia.getInstance();
         private final EdicionPerfilController edicionPerfilController = new EdicionPerfilController();
-        private final Logger LOGGER = Logger.getLogger(PrincipalController.class.getName());
+        private final Logger LOGGER = Logger.getLogger(Agencia.class.getName());
         @Override
         public void onCambioIdioma(CambioIdiomaEvent evento) {
         }
@@ -30,5 +30,9 @@ public class PortalAgenciaController implements Initializable, CambioIdiomaListe
 
     public void seleccionPaquetes(ActionEvent actionEvent) {
             agencia.loadStage("/paginaClienteSeleccionDestino.fxml", actionEvent,"Se ingresa a la pagina de seleccion de paquete");
+    }
+
+    public void reservas(ActionEvent actionEvent) {
+            agencia.loadStage("/paginaReservasCliente.fxml", actionEvent, "Se ingreso a la visualizacion de reservas");
     }
 }

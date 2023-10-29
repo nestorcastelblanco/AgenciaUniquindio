@@ -18,6 +18,7 @@
                <font>
                   <Font name="Franklin Gothic Medium Cond" size="12.0" />
                </font></Button>
+            <Button fx:id="botonAdmin" mnemonicParsing="false" onAction="#admin" prefHeight="0.0" prefWidth="119.0" text="Administracion" />
         </items>
       </ToolBar>
       <Pane layoutX="27.0" layoutY="57.0" prefHeight="402.0" prefWidth="372.0">
@@ -45,7 +46,6 @@
                   <Font name="Franklin Gothic Medium Cond" size="38.0" />
                </font>
             </Label>
-            <Button fx:id="botonAdmin" layoutX="150.0" layoutY="338.0" mnemonicParsing="false" onAction="#admin" prefHeight="38.0" prefWidth="103.0" text="Administracion" />
          </children>
       </Pane>
       <ImageView fitHeight="402.0" fitWidth="388.0" layoutX="367.0" layoutY="38.0" pickOnBounds="true">

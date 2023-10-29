@@ -19,7 +19,7 @@ import java.util.logging.Logger;
 
 public class EdicionPerfilController implements Initializable, CambioIdiomaListener {
     private final Agencia agencia = Agencia.getInstance();
-    private final Logger LOGGER = Logger.getLogger(PrincipalController.class.getName());
+    private final Logger LOGGER = Logger.getLogger(Agencia.class.getName());
     @FXML
     private TextField nombreUsuario, correoUsuario, direccionUsuario, id, ciudadUsuario, telefonoUsuario,usuarioIngresado,contrasenaIngresada;
     @Override

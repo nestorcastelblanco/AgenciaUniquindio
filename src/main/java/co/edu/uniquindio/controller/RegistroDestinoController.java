@@ -20,7 +20,7 @@ import java.util.logging.Logger;
 
 public class RegistroDestinoController implements Initializable, CambioIdiomaListener {
     private final Agencia agencia = Agencia.getInstance();
-    private static final Logger LOGGER = Logger.getLogger(PrincipalController.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(Agencia.class.getName());
     @FXML
     private Button botonRegreso,botonRegistro;
     @FXML

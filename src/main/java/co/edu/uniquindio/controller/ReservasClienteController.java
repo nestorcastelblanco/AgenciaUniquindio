@@ -1,7 +1,6 @@
 package co.edu.uniquindio.controller;
 
 import co.edu.uniquindio.model.Agencia;
-import co.edu.uniquindio.model.Paquetes;
 import co.edu.uniquindio.model.Reservas;
 import co.edu.uniquindio.utils.CambioIdiomaEvent;
 import co.edu.uniquindio.utils.CambioIdiomaListener;
@@ -19,7 +18,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class VistaReservasController implements Initializable, CambioIdiomaListener {
+public class ReservasClienteController implements Initializable, CambioIdiomaListener {
     private final Agencia agencia = Agencia.getInstance();
     private final Logger LOGGER = Logger.getLogger(Agencia.class.getName());
     @FXML
@@ -45,7 +44,7 @@ public class VistaReservasController implements Initializable, CambioIdiomaListe
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        reservaciones = FXCollections.observableArrayList(agencia.enviarReservas());
+        reservaciones = FXCollections.observableArrayList(agencia.enviarReservasCliente());
         paquete.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPaquete().getNombre()));
         guia.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getGuia().getNombre()));
         cliente.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCliente().getNombreCompleto()));
@@ -56,14 +55,14 @@ public class VistaReservasController implements Initializable, CambioIdiomaListe
         tablaReservas.setItems(reservaciones);
     }
     public void regresar(ActionEvent actionEvent) {
-        agencia.loadStage("/paginaAdministrativa.fxml", actionEvent, "Se regresa a la pagina administrativa");
+        agencia.loadStage("/portalAgencia.fxml", actionEvent, "Se regresa al portal");
     }
-    public void editar(ActionEvent actionEvent) {
+    public void cancelar(ActionEvent actionEvent) {
         if (tablaReservas.getSelectionModel().getSelectedIndex() == -1) {
-            LOGGER.log(Level.INFO, "Se intento editar un paquete sin haberlo seleccionado");
+            LOGGER.log(Level.INFO, "Se intento cancelar un paquete sin haberlo seleccionado");
         } else {
-            agencia.recibirReservaEdicion(tablaReservas.getSelectionModel().getSelectedItem());
-            agencia.loadStage("/paginaEdicionReserva.fxml",actionEvent,"Se va a editar una reserva");
+            agencia.recibirReservaCancelacion(tablaReservas.getSelectionModel().getSelectedItem());
+            agencia.loadStage("/paginaReservasCliente.fxml",actionEvent, "Se cargo la pagina actualizada");
         }
     }
 }

@@ -1,21 +1,24 @@
 package co.edu.uniquindio.controller;
-import co.edu.uniquindio.exceptions.CampoObligatorioException;
+
 import co.edu.uniquindio.exceptions.CampoRepetido;
-import co.edu.uniquindio.exceptions.CampoVacioException;
 import co.edu.uniquindio.model.Agencia;
 import co.edu.uniquindio.model.Propiedades;
+import co.edu.uniquindio.utils.CambioIdiomaEvent;
+import co.edu.uniquindio.utils.CambioIdiomaListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+
 import java.net.URL;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-public class PrincipalController implements Initializable {
+
+public class IngresoAdminController implements Initializable, CambioIdiomaListener {
     @FXML
     private TextField nombreUsuario, correoUsuario, direccionUsuario, ciudadUsuario, telefonoUsuario, usuarioIngresado, contrasenaIngresada, id;
     @FXML
@@ -25,26 +28,17 @@ public class PrincipalController implements Initializable {
     private final Agencia agencia = Agencia.getInstance();
     private final Logger LOGGER = Logger.getLogger(Agencia.class.getName());
     private final Propiedades propiedades = Propiedades.getInstance();
-    private boolean esIngles = false;
-    @FXML
-    private void cambiarIdioma(ActionEvent event) {
-        // Cambia el idioma
-        if (esIngles) {
-            Propiedades.getInstance().setLocale(new Locale("es", "ES"));
-        } else {
-            Propiedades.getInstance().setLocale(Locale.ENGLISH);
-        }
-        // Invierte el valor de esIngles para la próxima vez
-        esIngles = !esIngles;
-        // Actualiza la interfaz de usuario
-        cargarTextos();
-    }
     public void admin(ActionEvent actionEvent) {
-        agencia.loadStage("/paginaIngresoAdmin.fxml",actionEvent,"Se ingreso a la pagina de ingreso administrativo");
-        LOGGER.log(Level.INFO, "Se ingresa la pagina administrativa");
+        try{
+            agencia.ingresarAdmin(usuarioIngresado.getText(),contrasenaIngresada.getText());
+            agencia.loadStage("/paginaAdministrativa.fxml",actionEvent,"Se ingresa al portal de administracion" );
+        }catch (CampoRepetido e)
+        {
+            LOGGER.log(Level.INFO, "Se ingresaron credenciales no validas");
+        }
     }
-    public void registrar(ActionEvent actionEvent) {
-        agencia.loadStage("/paginaRegistro.fxml", actionEvent ,"Se ingresa a la pestaña de registro");
+    public void volver(ActionEvent actionEvent) {
+        agencia.loadStage("/paginaPrincipal.fxml", actionEvent, "Se vuelve a la pagina principal");
     }
     public void cargarTextos(){
         ingreso.setText(propiedades.getResourceBundle().getString("ingreso"));
@@ -59,14 +53,9 @@ public class PrincipalController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
     }
+    @Override
+    public void onCambioIdioma(CambioIdiomaEvent evento) {
 
-    public void ingresar(ActionEvent actionEvent) {
-        try{
-            agencia.ingresarCliente(usuarioIngresado.getText(),contrasenaIngresada.getText());
-            agencia.loadStage("/portalAgencia.fxml",actionEvent,"Se ingresa al portal de la agencia" );
-        }catch (CampoRepetido e)
-        {
-            LOGGER.log(Level.INFO, "Se ingresaron credenciales no validas");
-        }
     }
+
 }

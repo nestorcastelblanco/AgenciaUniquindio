@@ -56,15 +56,14 @@ public class CaracteristicasPaqueteController implements Initializable, CambioId
         imageView.setImage(imagen);
     }
     public void regresar(ActionEvent actionEvent) {
-        agencia.loadStage("/paginaCaracteristicasPaquete.fxml", actionEvent,"Se carga la ventana de seleccion de paquete");
+        agencia.loadStage("/paginaClienteSeleccionDestino.fxml", actionEvent,"Se carga la ventana de seleccion de paquete");
     }
-
     public void atras(ActionEvent actionEvent){
         cont-=1;
         if(cont == -1)
         {
             cont = numeroImagenes;
-            Image imagen = new Image(arrayListImagenes.get(cont));
+            Image imagen = new Image(arrayListImagenes.get(arrayListImagenes.size()-1));
             imageView.setImage(imagen);
         }else {
             Image imagen = new Image(arrayListImagenes.get(cont));

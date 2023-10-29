@@ -23,7 +23,7 @@ import java.util.logging.Logger;
 
 public class SeleccionClientePaquetesController implements Initializable, CambioIdiomaListener {
     private final Agencia agencia = Agencia.getInstance();
-    private final Logger LOGGER = Logger.getLogger(PrincipalController.class.getName());
+    private final Logger LOGGER = Logger.getLogger(Agencia.class.getName());
     @FXML
     private TextField paquetesFiltro,destino,persona,services,valor;
     @FXML
@@ -90,7 +90,7 @@ public class SeleccionClientePaquetesController implements Initializable, Cambio
     }
 
     public void regresar(ActionEvent actionEvent) {
-        agencia.loadStage("/paginaAdministrativa.fxml", actionEvent, "Se regresa a la pagina administrativa");
+        agencia.loadStage("/portalAgencia.fxml", actionEvent, "Se regresa a la pagina administrativa");
     }
 
     public void ver(ActionEvent actionEvent) {

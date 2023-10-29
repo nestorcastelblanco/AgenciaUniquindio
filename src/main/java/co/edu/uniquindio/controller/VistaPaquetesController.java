@@ -21,7 +21,7 @@ import java.util.logging.Logger;
 
 public class VistaPaquetesController implements Initializable, CambioIdiomaListener {
     private final Agencia agencia = Agencia.getInstance();
-    private final Logger LOGGER = Logger.getLogger(PrincipalController.class.getName());
+    private final Logger LOGGER = Logger.getLogger(Agencia.class.getName());
     @FXML
     private TableView<Paquetes> tablaPaquetes;
     @FXML

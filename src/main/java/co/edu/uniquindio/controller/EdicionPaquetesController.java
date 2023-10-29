@@ -28,7 +28,7 @@ public class EdicionPaquetesController implements Initializable, CambioIdiomaLis
     private static ArrayList<Destinos> destinosComboActuales = new ArrayList<>();
     private static ArrayList<Destinos> destinosSeleccionados = new ArrayList<>();
     private static ArrayList<Destinos> destinosPrevios = new ArrayList<>();
-    private static final Logger LOGGER = Logger.getLogger(PrincipalController.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(Agencia.class.getName());
     @FXML
     private Button botonRegreso,botonRegistro, botonCrear, botonCrearDestino, botonDestino;
     @FXML
