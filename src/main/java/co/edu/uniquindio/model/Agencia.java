@@ -192,9 +192,9 @@ public class Agencia {
     }
     public void enviarCorreo(Clientes cliente, Paquetes paqueteSeleccionado) {
         final String correoEmisor = "traveluniquindio@gmail.com"; // Cambia esto con tu dirección de correo electrónico
-        final String contraseñaEmisor = "Sebas05feliz"; // Cambia esto con tu contraseña de correo electrónico
+        final String contraseñaEmisor = "sgfc sgay apnx qvxq"; // Cambia esto con tu contraseña de correo electrónico
         String asunto = "RESERVACION DE PAQUETE TURISTICO EN TRAVEL UNIQUINDIO";
-        String mensaje = "Buen dia " + cliente.getNombreCompleto() +" la reservacion de su paquete " + paqueteSeleccionado.getNombre() + " fue realizado con exito%n pronto se notificara el estado de su reserva";
+        String mensaje = "Buen dia " + cliente.getNombreCompleto() +" la reservacion de su paquete " + paqueteSeleccionado.getNombre() + " fue realizado con exito, pronto se notificara el estado de su reserva";
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
@@ -217,7 +217,7 @@ public class Agencia {
 
             Transport.send(message);
 
-            System.out.println("Correo enviado satisfactoriamente.");
+            System.out.println("Correo enviado satisfactoriamente a la direccion: " + cliente.getCorreo());
 
         } catch (MessagingException e) {
             e.printStackTrace();

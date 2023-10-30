@@ -4480,3 +4480,60 @@
   <thread>17</thread>
   <message>Se realizo la reserva de un Paquete</message>
 </record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-10-30T04:08:34.930448100Z</date>
+  <millis>1698638914930</millis>
+  <nanos>448100</nanos>
+  <sequence>1</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>ingresarCliente</method>
+  <thread>17</thread>
+  <message>Se genero el ingreso de un cliente: Andres Camilo Castelblanco</message>
+</record>
+<record>
+  <date>2023-10-30T04:09:14.019340100Z</date>
+  <millis>1698638954019</millis>
+  <nanos>340100</nanos>
+  <sequence>9</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>realizarReserva</method>
+  <thread>17</thread>
+  <message>Se realizo la reserva de un Paquete</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-10-30T04:11:27.674082400Z</date>
+  <millis>1698639087674</millis>
+  <nanos>82400</nanos>
+  <sequence>1</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>ingresarCliente</method>
+  <thread>17</thread>
+  <message>Se genero el ingreso de un cliente: Nestor Felipe Castelblanco</message>
+</record>
+<record>
+  <date>2023-10-30T04:11:54.912322700Z</date>
+  <millis>1698639114912</millis>
+  <nanos>322700</nanos>
+  <sequence>4</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>realizarReserva</method>
+  <thread>17</thread>
+  <message>Se realizo la reserva de un Paquete</message>
+</record>
+</log>
