@@ -1,8 +1,9 @@
 package co.edu.uniquindio.model;
-import co.edu.uniquindio.utils.ArchivoUtils;
+
 import co.edu.uniquindio.exceptions.CampoObligatorioException;
 import co.edu.uniquindio.exceptions.CampoRepetido;
 import co.edu.uniquindio.exceptions.CampoVacioException;
+import co.edu.uniquindio.utils.ArchivoUtils;
 import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -11,7 +12,14 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import lombok.Getter;
 import lombok.extern.java.Log;
-
+import java.util.Properties;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.PasswordAuthentication;
 import java.io.*;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -19,6 +27,8 @@ import java.util.*;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Log
 @Getter
@@ -174,6 +184,45 @@ public class Agencia {
         }
         return state;
     }
+    public boolean esCorreoValido(String correo) {
+        String expresionRegular = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(gmail\\.com|hotmail\\.com|uqvirtual\\.edu\\.co|yahoo\\.es)$";
+        Pattern pattern = Pattern.compile(expresionRegular);
+        Matcher matcher = pattern.matcher(correo);
+        return matcher.matches();
+    }
+    public void enviarCorreo(Clientes cliente, Paquetes paqueteSeleccionado) {
+        final String correoEmisor = "traveluniquindio@gmail.com"; // Cambia esto con tu dirección de correo electrónico
+        final String contraseñaEmisor = "Sebas05feliz"; // Cambia esto con tu contraseña de correo electrónico
+        String asunto = "RESERVACION DE PAQUETE TURISTICO EN TRAVEL UNIQUINDIO";
+        String mensaje = "Buen dia " + cliente.getNombreCompleto() +" la reservacion de su paquete " + paqueteSeleccionado.getNombre() + " fue realizado con exito%n pronto se notificara el estado de su reserva";
+        Properties props = new Properties();
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", "smtp.gmail.com"); // Para Gmail
+        props.put("mail.smtp.port", "587"); // Puerto para TLS
+
+        Session session = Session.getInstance(props,
+                new javax.mail.Authenticator() {
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication(correoEmisor, contraseñaEmisor);
+                    }
+                });
+
+        try {
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(correoEmisor));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(cliente.getCorreo()));
+            message.setSubject(asunto);
+            message.setText(mensaje);
+
+            Transport.send(message);
+
+            System.out.println("Correo enviado satisfactoriamente.");
+
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+    }
     public String obtenerNombresDestinos(ArrayList<Destinos> destinos) {
         StringBuilder nombres = new StringBuilder();
         for (Destinos destino : destinos) {
@@ -225,6 +274,9 @@ public class Agencia {
         }
         if (correo == null || correo.isEmpty()) {
             throw new CampoVacioException("Es necesario ingresar el correo");
+        }
+        if (!agencia.esCorreoValido(correo)) {
+            throw new CampoVacioException("Es necesario ingresar un correo valido");
         }
         if (direccion == null || direccion.isEmpty()) {
             throw new CampoVacioException("Es necesario ingresar la direccion.");
@@ -599,7 +651,7 @@ public class Agencia {
         if (paquete == null) {
             throw new CampoObligatorioException("No se cargo el paquete");
         }
-        if(!inicio.isEqual(RESERVA_EDICION.getFechaSolicitud()) && !fin.isEqual(RESERVA_EDICION.getFechaPlanificada()))
+        if(!inicio.isEqual(RESERVA_EDICION.getFechaSolicitud()) || !fin.isEqual(RESERVA_EDICION.getFechaPlanificada()))
         {
             if (!agencia.verificarFechasReserva(inicio, fin, paquete)) {
                 throw new CampoObligatorioException("Las fechas ingresadas son erroneas");
@@ -617,13 +669,17 @@ public class Agencia {
         if ((RESERVA_EDICION.getNumeroPersonas() - Integer.parseInt(quitarPersonas)) <= 0) {
             throw new CampoObligatorioException("Se trato de dejar la cantidad de personas menor o igual a 0");
         }
-        if (!agencia.verificarGuiaDisponible(selectedItem,inicio,fin)) {
-            throw new CampoObligatorioException("El guia no se encuentra disponible en ese rango de fechas");
+        if(!inicio.isEqual(RESERVA_EDICION.getFechaSolicitud()) || !fin.isEqual(RESERVA_EDICION.getFechaPlanificada()))
+        {
+            if (!agencia.verificarGuiaDisponible(selectedItem,inicio,fin)) {
+                throw new CampoObligatorioException("El guia no se encuentra disponible en ese rango de fechas");
+            }
         }
-        if(selectedItem == null)
+        if(selectedItem == null || selectedItem.getNombre().equals("SIN GUIA") || selectedItem.getIdentificacion() == null)
         {
             selectedItem = new Guias();
             selectedItem.setNombre("SIN GUIA");
+            selectedItem.setIdentificacion(null);
         }
         int numeroPersonas = Integer.parseInt(agregarPersonas);
         int numeroPersonas1 = Integer.parseInt(quitarPersonas);
@@ -640,7 +696,7 @@ public class Agencia {
                         .estado(pendiente)
                         .guia(selectedItem)
                         .build();
-                reservas.set(i,reserva);;
+                reservas.set(i,reserva);
                 LOGGER.log(Level.INFO, "Se realizo la edicion de una Reserva");
                 RESERVA_EDICION = reserva;
                 borrarDatosSerializados(RUTA_RESERVAS);
@@ -686,14 +742,17 @@ public class Agencia {
         }else {
             for (int i = 0 ; i<paquetes.size();i++)
             {
-                if(paquetes.get(i).getNombre().equals(paquete.getNombre()))
-                {
-                    if(inicio.isAfter(paquetes.get(i).getInicio()) || inicio.isEqual(paquetes.get(i).getInicio()) &&
-                            fin.isBefore(paquetes.get(i).getFin()) || fin.isEqual(paquetes.get(i).getFin())){
+                if (inicio.isAfter(paquete.getInicio()) || inicio.isEqual(paquete.getInicio())) {
+                    if (fin.isBefore(paquete.getFin()) || fin.isEqual(paquete.getFin())) {
+                        System.out.println("Las fechas de reserva están dentro del rango del paquete.");
                         state = true;
-                    }else {
+                    } else {
+                        System.out.println("La fecha de fin de reserva está fuera del rango del paquete.");
                         state = false;
                     }
+                } else {
+                    System.out.println("La fecha de inicio de reserva está fuera del rango del paquete.");
+                    state = false;
                 }
             }
         }
@@ -709,13 +768,14 @@ public class Agencia {
     }
     public void recibirReservaEdicion(Reservas selectedItem) {
         RESERVA_EDICION= selectedItem;
-        for (int i = 0 ; i<paquetes.size();i++)
+        /*for (int i = 0 ; i<paquetes.size();i++)
         {
             if (paquetes.get(i).equals(selectedItem.getPaquete()))
             {
                 PAQUETE_RESERVA = selectedItem.getPaquete();
             }
         }
+         */
     }
     public void recibirReservaCancelacion(Reservas selectedItem) {
         RESERVA_CANCELACION= selectedItem;
@@ -798,7 +858,7 @@ public class Agencia {
             selectedItem.setNombre("SIN GUIA");
         }
         int numeroPersonas = Integer.parseInt(personas);
-
+        agencia.enviarCorreo(cliente,paquete);
         Reservas reserva = Reservas.builder()
                 .paquete(paquete)
                 .cliente(cliente)
@@ -834,19 +894,28 @@ public class Agencia {
 
     private boolean verificarGuiaDisponible(Guias guia,LocalDate inicio, LocalDate fin) {
         boolean state = false;
-        if (guia == null) {
-            state = true;
+        if (guia == null || guia.getIdentificacion() == null) {
+            return true;
         }else {
             for (int i = 0 ; i<reservas.size();i++)
             {
-                if(reservas.get(i).getGuia().equals(guia))
+                if(reservas.get(i).getGuia().getIdentificacion().equals(guia.getIdentificacion()))
                 {
-                    System.out.println("El guia existe");
-                    if(reservas.get(i).getFechaSolicitud().equals(inicio) || reservas.get(i).getFechaSolicitud().isBefore(inicio) &&
-                           reservas.get(i).getFechaPlanificada().equals(fin) || reservas.get(i).getFechaPlanificada().isBefore(fin))
-                    {
-                        System.out.println("El guia esta disponible " + reservas.get(i).getGuia().getNombre());
-                        state = true;
+
+                    if (inicio.isAfter(reservas.get(i).getFechaSolicitud()) || inicio.isEqual(reservas.get(i).getFechaSolicitud())) {
+                        if (fin.isBefore(reservas.get(i).getFechaPlanificada()) || fin.isEqual(reservas.get(i).getFechaPlanificada())) {
+                            System.out.println("El guia se encuentra disponible en las fechas de seleccionadas ");
+                            LOGGER.log(Level.INFO, "El guia se encuentra disponible en las fechas de seleccionadas ");
+                            state = true;
+                        } else {
+                            System.out.println("El guia no se encuentra disponible en las fechas de seleccionadas ");
+                            LOGGER.log(Level.INFO, "El guia no se encuentra disponible en las fechas de seleccionadas ");
+                            state = false;
+                        }
+                    } else {
+                        System.out.println("El guia no se encuentra disponible en las fechas de seleccionadas ");
+                        LOGGER.log(Level.INFO, "El guia no se encuentra disponible en las fechas de seleccionadas ");
+                        state = false;
                     }
                 }
             }

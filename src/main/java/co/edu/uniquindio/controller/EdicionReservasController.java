@@ -52,19 +52,22 @@ public class EdicionReservasController implements Initializable, CambioIdiomaLis
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        agregarPersonas.setText("0");
-        quitarPersonas.setText("0");
         arrayGuias = agencia.enviarGuias();
         arrayPaquetes = agencia.enviarPaquetes();
-        cargarVariables();
         llenarListaPaquetes();
         llenarListaGuias();
         llenarListaEstados();
+        cargarVariables();
     }
 
     private void cargarVariables() {
-        fechaInicio = new DatePicker(agencia.enviarReservaEdicion().getFechaSolicitud());
-        fechaFin = new DatePicker(agencia.enviarReservaEdicion().getFechaPlanificada());
+        fechaInicio.setValue(agencia.enviarReservaEdicion().getFechaSolicitud());
+        fechaFin.setValue(agencia.enviarReservaEdicion().getFechaPlanificada());
+        paquetes.getSelectionModel().select(agencia.enviarReservaEdicion().getPaquete());
+        guias.getSelectionModel().select(agencia.enviarReservaEdicion().getGuia());
+        estado.getSelectionModel().select(agencia.enviarReservaEdicion().getEstado());
+        agregarPersonas.setText("0");
+        quitarPersonas.setText("0");
     }
 
     public void llenarListaPaquetes() {
@@ -77,7 +80,6 @@ public class EdicionReservasController implements Initializable, CambioIdiomaLis
             ObservableList<Paquetes> listaDestinos = FXCollections.observableArrayList(arrayPaquetes);
             System.out.print("Lista comboDestinos" + listaDestinos);
             paquetes.setItems(listaDestinos);
-            paquetes.getSelectionModel().select(agencia.enviarReservaEdicion().getPaquete());
             cargarAtributos();
         }
     }
@@ -122,7 +124,6 @@ public class EdicionReservasController implements Initializable, CambioIdiomaLis
             ObservableList<Guias> listaDestinos = FXCollections.observableArrayList(arrayGuias);
             System.out.print("Lista comboDestinos" + listaDestinos);
             guias.setItems(listaDestinos);
-            guias.getSelectionModel().select(agencia.enviarReservaEdicion().getGuia());
             cargarAtributosGuias();
         }
     }
@@ -168,7 +169,6 @@ public class EdicionReservasController implements Initializable, CambioIdiomaLis
     }
     public void llenarListaEstados() {
         estado.setItems(estadosDisponibles);
-        estado.getSelectionModel().select(agencia.enviarReservaEdicion().getEstado());
     }
     public void mostrarMensaje(Alert.AlertType tipo, String mensaje){
         Alert alert = new Alert(tipo);

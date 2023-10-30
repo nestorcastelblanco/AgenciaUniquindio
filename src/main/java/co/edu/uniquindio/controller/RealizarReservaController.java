@@ -99,6 +99,7 @@ public class RealizarReservaController implements Initializable, CambioIdiomaLis
         try
         {
             agencia.realizarReserva(paquete,cliente,inicio.getValue(),fin.getValue(),personas.getText(),comboGuia.getSelectionModel().getSelectedItem(),"PENDIENTE");
+            agencia.loadStage("/paginaClienteSeleccionDestino.fxml", actionEvent, "Se regresa al apartado de destinos");
         }
         catch (CampoRepetido| CampoObligatorioException| CampoVacioException e)
         {
