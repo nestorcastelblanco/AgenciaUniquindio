@@ -1,7 +1,12 @@
 package co.edu.uniquindio.controller;
 
+import co.edu.uniquindio.model.Agencia;
+import co.edu.uniquindio.model.Destinos;
+import co.edu.uniquindio.model.Guias;
+import co.edu.uniquindio.model.Paquetes;
 import co.edu.uniquindio.utils.CambioIdiomaEvent;
 import co.edu.uniquindio.utils.CambioIdiomaListener;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
@@ -10,9 +15,11 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class EstadisticasController implements Initializable, CambioIdiomaListener {
+    private final Agencia agencia = Agencia.getInstance();
     @FXML
     private BarChart<?,?> destinosReservados, destinosBuscados,mejoresGuias,paquetesReservados;
     @FXML
@@ -33,14 +40,42 @@ public class EstadisticasController implements Initializable, CambioIdiomaListen
 
     private void cargarDestinosReservados() {
         XYChart.Series setDestinosReservados = new XYChart.Series<>();
+        ArrayList<Destinos> destinos = agencia.enviarDestinos();
+        for (int i =0; i<destinos.size();i++)
+        {
+            setDestinosReservados.getData().add(new XYChart.Data<>(destinos.get(i).getNombre(),destinos.get(i).getContReservas()));
+        }
+        destinosReservados.getData().addAll(setDestinosReservados);
     }
     private void cargarDestinosBuscados() {
         XYChart.Series setDestinosBuscados = new XYChart.Series<>();
+        ArrayList<Destinos> destinos = agencia.enviarDestinos();
+        for (int i =0; i<destinos.size();i++)
+        {
+            setDestinosBuscados.getData().add(new XYChart.Data<>(destinos.get(i).getNombre(),destinos.get(i).getContReservas()));
+        }
+        destinosBuscados.getData().addAll(setDestinosBuscados);
     }
     private void cargarMejoresGuias() {
         XYChart.Series setMejoresGuias = new XYChart.Series<>();
+        ArrayList<Guias> guias = agencia.enviarGuias();
+        for (int i =0; i<guias.size();i++)
+        {
+            setMejoresGuias.getData().add(new XYChart.Data<>(guias.get(i).getNombre(),guias.get(i).getPromedioCalificacion()));
+        }
+        mejoresGuias.getData().addAll(setMejoresGuias);
     }
     private void cargarPaquetesReservados() {
         XYChart.Series setPaquetesReservados = new XYChart.Series<>();
+        ArrayList<Paquetes> paquetes = agencia.enviarPaquetes();
+        for (int i =0; i<paquetes.size();i++)
+        {
+            setPaquetesReservados.getData().add(new XYChart.Data<>(paquetes.get(i).getNombre(),paquetes.get(i).getCantReservas()));
+        }
+        paquetesReservados.getData().addAll(setPaquetesReservados);
+    }
+
+    public void volver(ActionEvent actionEvent) {
+        agencia.loadStage("/paginaAdministrativa.fxml", actionEvent, "Se vuelve a la pagina administrativa");
     }
 }
