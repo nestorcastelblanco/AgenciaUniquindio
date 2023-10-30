@@ -36,7 +36,6 @@ public class CaracteristicasPaqueteController implements Initializable, CambioId
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         Paquetes paqueteSeleccionado  = agencia.paqueteSeleccion();
-        //System.out.println(paqueteSeleccionado.getDestinos().get(0).getImagenes().get(0));
         nombre.setText(paqueteSeleccionado.getNombre());
         destinos.setText(agencia.obtenerNombresCiudades(paqueteSeleccionado.getDestinos()));
         duracion.setText(paqueteSeleccionado.getDuracion() + " dias");

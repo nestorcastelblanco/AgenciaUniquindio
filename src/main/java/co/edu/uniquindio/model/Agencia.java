@@ -190,11 +190,12 @@ public class Agencia {
         Matcher matcher = pattern.matcher(correo);
         return matcher.matches();
     }
-    public void enviarCorreo(Clientes cliente, Paquetes paqueteSeleccionado) {
+    public void enviarCorreo(Clientes cliente, Paquetes paqueteSeleccionado, LocalDate inicio, LocalDate fin, String personas, Guias selectedItem, String pendiente) {
         final String correoEmisor = "traveluniquindio@gmail.com"; // Cambia esto con tu dirección de correo electrónico
-        final String contraseñaEmisor = "sgfc sgay apnx qvxq"; // Cambia esto con tu contraseña de correo electrónico
+        final String contraseñaEmisor = "sgfc sgay apnx qvxq"; // Cambia esto con tu contra/seña de correo electrónico
+        String destinos = obtenerNombresDestinos(paqueteSeleccionado.getDestinos());
         String asunto = "RESERVACION DE PAQUETE TURISTICO EN TRAVEL UNIQUINDIO";
-        String mensaje = "Buen dia " + cliente.getNombreCompleto() +" la reservacion de su paquete " + paqueteSeleccionado.getNombre() + " fue realizado con exito, pronto se notificara el estado de su reserva";
+        String mensaje = "Buen dia " + cliente.getNombreCompleto() +" la reservacion de su paquete, " + paqueteSeleccionado.getNombre() + " fue realizado con exito, le recordamos las caracteristicas con las que cuenta este paquete: " + paqueteSeleccionado.getServicios() +", durante " + inicio.until(fin, ChronoUnit.DAYS) +" dias, Reservado para: " + personas + " personas, con los siguientes destinos: " + destinos + " con un valor de: " + (long) paqueteSeleccionado.getPrecio()+"COP por persona, es decir un total de: " + (long) paqueteSeleccionado.getPrecio() * Integer.parseInt(personas) +"COP con fecha de inicio el: " + inicio + " y fecha de finalizacion : " + fin + ", pronto se notificara el estado de su reserva";
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
@@ -577,10 +578,10 @@ public class Agencia {
                 .precio(Float.parseFloat(valor))
                 .inicio(inicio)
                 .fin(fin)
+                .duracion(inicio.until(fin, ChronoUnit.DAYS)+"")
                 .servicios(servicios)
                 .numeroPersonas(Integer.parseInt(personas))
         .build();
-        paquete.setDuracion(inicio.until(fin, ChronoUnit.DAYS)+"");
         paquetes.add(paquete);
         for (int i = 0 ; i<paquetes.size();i++)
         {
@@ -858,7 +859,7 @@ public class Agencia {
             selectedItem.setNombre("SIN GUIA");
         }
         int numeroPersonas = Integer.parseInt(personas);
-        agencia.enviarCorreo(cliente,paquete);
+        agencia.enviarCorreo(cliente,paquete,inicio,fin,personas, selectedItem,pendiente);
         Reservas reserva = Reservas.builder()
                 .paquete(paquete)
                 .cliente(cliente)
