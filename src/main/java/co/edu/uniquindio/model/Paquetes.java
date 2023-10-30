@@ -15,6 +15,6 @@ public class Paquetes implements Serializable {
     private ArrayList<Destinos> destinos;
     private LocalDate inicio, fin;
     private String duracion, servicios, nombre;
-    private int numeroPersonas;
+    private int numeroPersonas, cantReservas;
     private float precio;
 }

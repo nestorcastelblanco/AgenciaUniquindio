@@ -4,6 +4,7 @@ import co.edu.uniquindio.exceptions.CampoObligatorioException;
 import co.edu.uniquindio.exceptions.CampoRepetido;
 import co.edu.uniquindio.exceptions.CampoVacioException;
 import co.edu.uniquindio.utils.ArchivoUtils;
+import com.sun.javafx.scene.shape.ArcHelper;
 import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -234,6 +235,9 @@ public class Agencia {
         }
         return nombres.toString();
     }
+    public ArrayList<Destinos> obtenerDestinos(ArrayList<Destinos> destinos) {
+       return destinos;
+    }
     public String obtenerNombresCiudades(ArrayList<Destinos> destinos) {
         StringBuilder nombres = new StringBuilder();
         for (Destinos destino : destinos) {
@@ -327,6 +331,9 @@ public class Agencia {
                 nombre(nombre).
                 identificacion(id).
                 exp(exp)
+                .contViajes(0)
+                .promedioCalificacion(0)
+                .calificaciones(new ArrayList<>())
                 .build();
         guia.setLenguajes(llenarArrayIdioma(idiomas));
         guias.add(guia);
@@ -412,7 +419,7 @@ public class Agencia {
                 Scene scene = new Scene(root);
                 Stage newStage = new Stage();
                 newStage.setScene(scene);
-                newStage.setTitle("Borrador");
+                newStage.setTitle("Travel Uniquindio");
                 newStage.show();
             } catch (Exception ignored)
             {
@@ -541,6 +548,8 @@ public class Agencia {
                 ciudad(ciudad).
                 clima(clima).
                 descripcion(descripcion)
+                .contBusquedas(0)
+                .contBusquedas(0)
                 .build();
         ArrayList<String> imagenes1 = llenarArrayImagenes(imagenes);
         for(int i = 0; i<imagenes1.size();i++)
@@ -580,6 +589,7 @@ public class Agencia {
                 .fin(fin)
                 .duracion(inicio.until(fin, ChronoUnit.DAYS)+"")
                 .servicios(servicios)
+                .cantReservas(0)
                 .numeroPersonas(Integer.parseInt(personas))
         .build();
         paquetes.add(paquete);
@@ -884,7 +894,18 @@ public class Agencia {
                         .servicios(paqueteSeleccion().getServicios())
                         .numeroPersonas(paqueteSeleccion().getNumeroPersonas() - numeroPersonas)
                         .duracion(paqueteSeleccion().getDuracion())
+                        .cantReservas(paqueteSeleccion().getCantReservas()+1)
                         .build();
+                for(int x = 0 ; x<paqueteSeleccion().getDestinos().size();x++)
+                {
+                    for(int j = 0; j<destinos.size();j++)
+                    {
+                        if(destinos.get(j).getNombre().equals(paqueteSeleccion().getNombre()))
+                        {
+                            destinos.get(j).setContReservas(destinos.get(j).getContReservas()+1);
+                        }
+                    }
+                }
                 paquetes.set(i,paqueteN);;
                 LOGGER.log(Level.INFO, "Se realizo la reserva de un Paquete");
                 borrarDatosSerializados(RUTA_PAQUETES);
@@ -933,5 +954,22 @@ public class Agencia {
             state = false;
         }
         return state;
+    }
+
+    public void buscarDestino(ArrayList<Paquetes> paquetesFiltro) {
+        for(int i = 0 ; i<paquetesFiltro.size();i++)
+        {
+            for(int x = 0 ; x<paquetesFiltro.get(i).getDestinos().size();x++)
+            {
+                for(int j = 0 ; j<destinos.size();j++)
+                {
+                    if(paquetesFiltro.get(i).getDestinos().get(x).getNombre().equals(destinos.get(j).getNombre()))
+                    {
+                        destinos.get(j).setContBusquedas(destinos.get(j).getContBusquedas()+1);
+                        System.out.println("Contador de busquedas del destino: " + destinos.get(j).getNombre() +" es: " + destinos.get(j).getContBusquedas());
+                    }
+                }
+            }
+        }
     }
 }

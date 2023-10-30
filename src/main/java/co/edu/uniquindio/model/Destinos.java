@@ -15,6 +15,8 @@ import java.util.ArrayList;
 public class Destinos implements Serializable {
     private String nombre, ciudad, descripcion, clima;
     private ArrayList<String> imagenes = new ArrayList<>();
+    private int contReservas;
+    private int contBusquedas;
     public void addImagenes(String idioma) {
         this.imagenes.add(idioma);
     }

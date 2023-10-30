@@ -17,6 +17,7 @@ import javafx.scene.control.TextField;
 
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -106,8 +107,10 @@ public class SeleccionClientePaquetesController implements Initializable, Cambio
     }
 
     private ObservableList<Paquetes> filtrarPorDestino(String destino) {
-        return paquetes.filtered(paquete ->
-                agencia.obtenerNombresDestinos(paquete.getDestinos()).toLowerCase().contains(destino.toLowerCase()));
+        paquetes.filtered(paquete -> agencia.obtenerNombresDestinos(paquete.getDestinos()).toLowerCase().contains(destino.toLowerCase()));
+        ArrayList<Paquetes> paquetesFiltro = new ArrayList<>(paquetes);
+        agencia.buscarDestino(paquetesFiltro);
+        return paquetes.filtered(paquete -> agencia.obtenerNombresDestinos(paquete.getDestinos()).toLowerCase().contains(destino.toLowerCase()));
     }
     private ObservableList<Paquetes> filtrarPorPersonas(String personas) {
         return paquetes.filtered(paquete -> String.valueOf(paquete.getNumeroPersonas()).contains(personas));
