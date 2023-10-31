@@ -65,4 +65,17 @@ public class ReservasClienteController implements Initializable, CambioIdiomaLis
             agencia.loadStage("/paginaReservasCliente.fxml",actionEvent, "Se cargo la pagina actualizada");
         }
     }
+
+    public void calificar(ActionEvent actionEvent) {
+        if (tablaReservas.getSelectionModel().getSelectedIndex() == -1) {
+            LOGGER.log(Level.INFO, "Se intento calificar un paquete sin haberlo seleccionado");
+        } else {
+            if(agencia.recibirReservaCalificacion(tablaReservas.getSelectionModel().getSelectedItem()))
+            {
+                agencia.loadStage("/paginaCalificacion", actionEvent, "Se cargo la pagina de calificacion de Destinos");
+            }else {
+                LOGGER.log(Level.INFO, "Se trato de ingresar a calificar un paquete sin haber terminado");
+            }
+        }
+    }
 }

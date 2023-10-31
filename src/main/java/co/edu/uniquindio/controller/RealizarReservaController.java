@@ -51,8 +51,8 @@ public class RealizarReservaController implements Initializable, CambioIdiomaLis
         llenarListaGuias();
     }
     public void llenarListaGuias() {
-        guiasBase = agencia.enviarGuias();
-        if(agencia.enviarDestinos().isEmpty())
+        guiasBase = agencia.enviarGuiasPaquete(paquete);
+        if(guiasBase.isEmpty())
         {
             LOGGER.log(Level.INFO,"Se intento generar una lista de elementos vacios");
         }else

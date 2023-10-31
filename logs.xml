@@ -5249,3 +5249,807 @@
   <message>Se genero el ingreso de un cliente: Nestor Felipe Castelblanco</message>
 </record>
 </log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-10-31T01:40:14.433549100Z</date>
+  <millis>1698716414433</millis>
+  <nanos>549100</nanos>
+  <sequence>1</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>ingresarCliente</method>
+  <thread>17</thread>
+  <message>Se genero el ingreso de un cliente: Nestor Felipe Castelblanco</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-10-31T01:44:34.113499700Z</date>
+  <millis>1698716674113</millis>
+  <nanos>499700</nanos>
+  <sequence>1</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>ingresarCliente</method>
+  <thread>17</thread>
+  <message>Se genero el ingreso de un cliente: Nestor Felipe Castelblanco</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-10-31T01:52:08.232777700Z</date>
+  <millis>1698717128232</millis>
+  <nanos>777700</nanos>
+  <sequence>1</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>ingresarCliente</method>
+  <thread>17</thread>
+  <message>Se genero el ingreso de un cliente: Nestor Felipe Castelblanco</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-10-31T01:53:54.551779Z</date>
+  <millis>1698717234551</millis>
+  <nanos>779000</nanos>
+  <sequence>1</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>ingresarCliente</method>
+  <thread>17</thread>
+  <message>Se genero el ingreso de un cliente: Nestor Felipe Castelblanco</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-10-31T13:16:44.610752900Z</date>
+  <millis>1698758204610</millis>
+  <nanos>752900</nanos>
+  <sequence>2</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.controller.PrincipalController</class>
+  <method>admin</method>
+  <thread>17</thread>
+  <message>Se ingresa la pagina administrativa</message>
+</record>
+<record>
+  <date>2023-10-31T13:16:50.389951200Z</date>
+  <millis>1698758210389</millis>
+  <nanos>951200</nanos>
+  <sequence>3</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>ingresarAdmin</method>
+  <thread>17</thread>
+  <message>Se genero el ingreso de un cliente: null</message>
+</record>
+<record>
+  <date>2023-10-31T13:17:37.905447300Z</date>
+  <millis>1698758257905</millis>
+  <nanos>447300</nanos>
+  <sequence>6</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>registrarGuia</method>
+  <thread>17</thread>
+  <message>Se registro un nuevo guia</message>
+</record>
+<record>
+  <date>2023-10-31T13:17:37.907446700Z</date>
+  <millis>1698758257907</millis>
+  <nanos>446700</nanos>
+  <sequence>7</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.controller.RegistroGuiaController</class>
+  <method>registarGuia</method>
+  <thread>17</thread>
+  <message>Se registro un nuevo guia al sistema</message>
+</record>
+<record>
+  <date>2023-10-31T13:18:30.402955700Z</date>
+  <millis>1698758310402</millis>
+  <nanos>955700</nanos>
+  <sequence>10</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>registrarGuia</method>
+  <thread>17</thread>
+  <message>Se registro un nuevo guia</message>
+</record>
+<record>
+  <date>2023-10-31T13:18:30.404957300Z</date>
+  <millis>1698758310404</millis>
+  <nanos>957300</nanos>
+  <sequence>11</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.controller.RegistroGuiaController</class>
+  <method>registarGuia</method>
+  <thread>17</thread>
+  <message>Se registro un nuevo guia al sistema</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-10-31T13:25:30.966548200Z</date>
+  <millis>1698758730966</millis>
+  <nanos>548200</nanos>
+  <sequence>2</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.controller.PrincipalController</class>
+  <method>admin</method>
+  <thread>17</thread>
+  <message>Se ingresa la pagina administrativa</message>
+</record>
+<record>
+  <date>2023-10-31T13:25:34.574307400Z</date>
+  <millis>1698758734574</millis>
+  <nanos>307400</nanos>
+  <sequence>3</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>ingresarAdmin</method>
+  <thread>17</thread>
+  <message>Se genero el ingreso de un cliente: null</message>
+</record>
+<record>
+  <date>2023-10-31T13:25:52.508230Z</date>
+  <millis>1698758752508</millis>
+  <nanos>230000</nanos>
+  <sequence>6</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.controller.CreacionPaquetesController</class>
+  <method>agregarDestino</method>
+  <thread>17</thread>
+  <message>Se establecio un nuevo destino  Eje Cafetero Armenia, Quindio</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-10-31T13:28:04.113037300Z</date>
+  <millis>1698758884113</millis>
+  <nanos>37300</nanos>
+  <sequence>2</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.controller.PrincipalController</class>
+  <method>admin</method>
+  <thread>17</thread>
+  <message>Se ingresa la pagina administrativa</message>
+</record>
+<record>
+  <date>2023-10-31T13:28:07.824122500Z</date>
+  <millis>1698758887824</millis>
+  <nanos>122500</nanos>
+  <sequence>3</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>ingresarAdmin</method>
+  <thread>17</thread>
+  <message>Se genero el ingreso de un cliente: null</message>
+</record>
+<record>
+  <date>2023-10-31T13:28:18.786545900Z</date>
+  <millis>1698758898786</millis>
+  <nanos>545900</nanos>
+  <sequence>6</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.controller.CreacionPaquetesController</class>
+  <method>agregarDestino</method>
+  <thread>17</thread>
+  <message>Se establecio un nuevo destino  Eje Cafetero Armenia, Quindio</message>
+</record>
+<record>
+  <date>2023-10-31T13:29:04.609678600Z</date>
+  <millis>1698758944609</millis>
+  <nanos>678600</nanos>
+  <sequence>7</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>registrarPaquete</method>
+  <thread>17</thread>
+  <message>Se registro un nuevo Paquete</message>
+</record>
+<record>
+  <date>2023-10-31T13:29:04.610679Z</date>
+  <millis>1698758944610</millis>
+  <nanos>679000</nanos>
+  <sequence>8</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.controller.CreacionPaquetesController</class>
+  <method>registrarPaquete</method>
+  <thread>17</thread>
+  <message>Se registro un nuevo Destino al sistema</message>
+</record>
+<record>
+  <date>2023-10-31T13:29:33.994943800Z</date>
+  <millis>1698758973994</millis>
+  <nanos>943800</nanos>
+  <sequence>11</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>registrarGuia</method>
+  <thread>17</thread>
+  <message>Se registro un nuevo guia</message>
+</record>
+<record>
+  <date>2023-10-31T13:29:33.996946500Z</date>
+  <millis>1698758973996</millis>
+  <nanos>946500</nanos>
+  <sequence>12</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.controller.RegistroGuiaController</class>
+  <method>registarGuia</method>
+  <thread>17</thread>
+  <message>Se registro un nuevo guia al sistema</message>
+</record>
+<record>
+  <date>2023-10-31T13:32:29.298471500Z</date>
+  <millis>1698759149298</millis>
+  <nanos>471500</nanos>
+  <sequence>15</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>registrarDestino</method>
+  <thread>17</thread>
+  <message>Se registro un nuevo Destino</message>
+</record>
+<record>
+  <date>2023-10-31T13:32:29.300471200Z</date>
+  <millis>1698759149300</millis>
+  <nanos>471200</nanos>
+  <sequence>16</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.controller.RegistroDestinoController</class>
+  <method>registrarDestino</method>
+  <thread>17</thread>
+  <message>Se registro un nuevo Destino al sistema</message>
+</record>
+<record>
+  <date>2023-10-31T13:33:07.092336300Z</date>
+  <millis>1698759187092</millis>
+  <nanos>336300</nanos>
+  <sequence>21</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.controller.CreacionPaquetesController</class>
+  <method>agregarDestino</method>
+  <thread>17</thread>
+  <message>Se establecio un nuevo destino  Quindio Montenegro</message>
+</record>
+<record>
+  <date>2023-10-31T13:33:21.510822100Z</date>
+  <millis>1698759201510</millis>
+  <nanos>822100</nanos>
+  <sequence>22</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>registrarPaquete</method>
+  <thread>17</thread>
+  <message>Se registro un nuevo Paquete</message>
+</record>
+<record>
+  <date>2023-10-31T13:33:21.512181600Z</date>
+  <millis>1698759201512</millis>
+  <nanos>181600</nanos>
+  <sequence>23</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.controller.CreacionPaquetesController</class>
+  <method>registrarPaquete</method>
+  <thread>17</thread>
+  <message>Se registro un nuevo Destino al sistema</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-10-31T13:42:27.149381100Z</date>
+  <millis>1698759747149</millis>
+  <nanos>381100</nanos>
+  <sequence>2</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.controller.PrincipalController</class>
+  <method>admin</method>
+  <thread>17</thread>
+  <message>Se ingresa la pagina administrativa</message>
+</record>
+<record>
+  <date>2023-10-31T13:42:30.669000600Z</date>
+  <millis>1698759750669</millis>
+  <nanos>600</nanos>
+  <sequence>3</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>ingresarAdmin</method>
+  <thread>17</thread>
+  <message>Se genero el ingreso de un cliente: null</message>
+</record>
+<record>
+  <date>2023-10-31T13:43:53.362102200Z</date>
+  <millis>1698759833362</millis>
+  <nanos>102200</nanos>
+  <sequence>8</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.controller.RegistroGuiaController</class>
+  <method>registarGuia</method>
+  <thread>17</thread>
+  <message>No se han registrado los campos requeridos</message>
+</record>
+<record>
+  <date>2023-10-31T13:45:16.862052600Z</date>
+  <millis>1698759916862</millis>
+  <nanos>52600</nanos>
+  <sequence>15</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>ingresarCliente</method>
+  <thread>17</thread>
+  <message>Se genero el ingreso de un cliente: Nestor Felipe Castelblanco</message>
+</record>
+<record>
+  <date>2023-10-31T13:46:18.828347500Z</date>
+  <millis>1698759978828</millis>
+  <nanos>347500</nanos>
+  <sequence>18</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>realizarReserva</method>
+  <thread>17</thread>
+  <message>Se realizo la reserva de un Paquete</message>
+</record>
+<record>
+  <date>2023-10-31T13:46:25.532756800Z</date>
+  <millis>1698759985532</millis>
+  <nanos>756800</nanos>
+  <sequence>20</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>loadStage</method>
+  <thread>17</thread>
+  <message>Se ingreso a la visualizacion de reservas</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-10-31T13:50:12.056757Z</date>
+  <millis>1698760212056</millis>
+  <nanos>757000</nanos>
+  <sequence>1</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>ingresarCliente</method>
+  <thread>17</thread>
+  <message>Se genero el ingreso de un cliente: Nestor Felipe Castelblanco</message>
+</record>
+<record>
+  <date>2023-10-31T13:50:29.478238Z</date>
+  <millis>1698760229478</millis>
+  <nanos>238000</nanos>
+  <sequence>4</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>realizarReserva</method>
+  <thread>17</thread>
+  <message>Se realizo la reserva de un Paquete</message>
+</record>
+<record>
+  <date>2023-10-31T13:50:35.312188200Z</date>
+  <millis>1698760235312</millis>
+  <nanos>188200</nanos>
+  <sequence>6</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>loadStage</method>
+  <thread>17</thread>
+  <message>Se ingreso a la visualizacion de reservas</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-10-31T13:56:06.477341100Z</date>
+  <millis>1698760566477</millis>
+  <nanos>341100</nanos>
+  <sequence>1</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>ingresarCliente</method>
+  <thread>17</thread>
+  <message>Se genero el ingreso de un cliente: Nestor Felipe Castelblanco</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-10-31T13:57:23.148455200Z</date>
+  <millis>1698760643148</millis>
+  <nanos>455200</nanos>
+  <sequence>1</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>ingresarCliente</method>
+  <thread>17</thread>
+  <message>Se genero el ingreso de un cliente: Nestor Felipe Castelblanco</message>
+</record>
+<record>
+  <date>2023-10-31T13:57:29.619171100Z</date>
+  <millis>1698760649619</millis>
+  <nanos>171100</nanos>
+  <sequence>4</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.controller.RealizarReservaController</class>
+  <method>llenarListaGuias</method>
+  <thread>17</thread>
+  <message>Se intento generar una lista de elementos vacios</message>
+</record>
+<record>
+  <date>2023-10-31T13:57:42.401850300Z</date>
+  <millis>1698760662401</millis>
+  <nanos>850300</nanos>
+  <sequence>5</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>realizarReserva</method>
+  <thread>17</thread>
+  <message>Se realizo la reserva de un Paquete</message>
+</record>
+<record>
+  <date>2023-10-31T13:58:23.424352700Z</date>
+  <millis>1698760703424</millis>
+  <nanos>352700</nanos>
+  <sequence>7</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>loadStage</method>
+  <thread>17</thread>
+  <message>Se ingreso a la visualizacion de reservas</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-10-31T14:02:51.194585100Z</date>
+  <millis>1698760971194</millis>
+  <nanos>585100</nanos>
+  <sequence>1</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>ingresarCliente</method>
+  <thread>17</thread>
+  <message>Se genero el ingreso de un cliente: Nestor Felipe Castelblanco</message>
+</record>
+<record>
+  <date>2023-10-31T14:02:57.592078800Z</date>
+  <millis>1698760977592</millis>
+  <nanos>78800</nanos>
+  <sequence>4</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.controller.RealizarReservaController</class>
+  <method>llenarListaGuias</method>
+  <thread>17</thread>
+  <message>Se intento generar una lista de elementos vacios</message>
+</record>
+<record>
+  <date>2023-10-31T14:03:12.833857800Z</date>
+  <millis>1698760992833</millis>
+  <nanos>857800</nanos>
+  <sequence>5</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>realizarReserva</method>
+  <thread>17</thread>
+  <message>Se realizo la reserva de un Paquete</message>
+</record>
+<record>
+  <date>2023-10-31T14:03:46.093815500Z</date>
+  <millis>1698761026093</millis>
+  <nanos>815500</nanos>
+  <sequence>9</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.controller.PrincipalController</class>
+  <method>admin</method>
+  <thread>17</thread>
+  <message>Se ingresa la pagina administrativa</message>
+</record>
+<record>
+  <date>2023-10-31T14:03:50.951101100Z</date>
+  <millis>1698761030951</millis>
+  <nanos>101100</nanos>
+  <sequence>10</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>ingresarAdmin</method>
+  <thread>17</thread>
+  <message>Se genero el ingreso de un cliente: Nestor Felipe Castelblanco</message>
+</record>
+<record>
+  <date>2023-10-31T14:05:08.994516900Z</date>
+  <millis>1698761108994</millis>
+  <nanos>516900</nanos>
+  <sequence>16</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>editarReserva</method>
+  <thread>17</thread>
+  <message>Se realizo la edicion de una Reserva</message>
+</record>
+<record>
+  <date>2023-10-31T14:05:09.000519500Z</date>
+  <millis>1698761109000</millis>
+  <nanos>519500</nanos>
+  <sequence>17</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>editarReserva</method>
+  <thread>17</thread>
+  <message>Se realizo la edicion de un Paquete con base a la edicion de la reserva</message>
+</record>
+<record>
+  <date>2023-10-31T14:05:09.005519300Z</date>
+  <millis>1698761109005</millis>
+  <nanos>519300</nanos>
+  <sequence>18</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.controller.EdicionReservasController</class>
+  <method>registrarPaquete</method>
+  <thread>17</thread>
+  <message>Se edito un paquete</message>
+</record>
+<record>
+  <date>2023-10-31T14:05:32.891857100Z</date>
+  <millis>1698761132891</millis>
+  <nanos>857100</nanos>
+  <sequence>23</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>ingresarCliente</method>
+  <thread>17</thread>
+  <message>Se genero el ingreso de un cliente: Nestor Felipe Castelblanco</message>
+</record>
+<record>
+  <date>2023-10-31T14:05:41.207431800Z</date>
+  <millis>1698761141207</millis>
+  <nanos>431800</nanos>
+  <sequence>27</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.controller.PrincipalController</class>
+  <method>admin</method>
+  <thread>17</thread>
+  <message>Se ingresa la pagina administrativa</message>
+</record>
+<record>
+  <date>2023-10-31T14:05:46.603470800Z</date>
+  <millis>1698761146603</millis>
+  <nanos>470800</nanos>
+  <sequence>28</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>ingresarAdmin</method>
+  <thread>17</thread>
+  <message>Se genero el ingreso de un cliente: Nestor Felipe Castelblanco</message>
+</record>
+<record>
+  <date>2023-10-31T14:05:54.442547200Z</date>
+  <millis>1698761154442</millis>
+  <nanos>547200</nanos>
+  <sequence>32</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>editarReserva</method>
+  <thread>17</thread>
+  <message>Se realizo la edicion de una Reserva</message>
+</record>
+<record>
+  <date>2023-10-31T14:05:54.447571500Z</date>
+  <millis>1698761154447</millis>
+  <nanos>571500</nanos>
+  <sequence>33</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>editarReserva</method>
+  <thread>17</thread>
+  <message>Se realizo la edicion de un Paquete con base a la edicion de la reserva</message>
+</record>
+<record>
+  <date>2023-10-31T14:05:54.450572400Z</date>
+  <millis>1698761154450</millis>
+  <nanos>572400</nanos>
+  <sequence>34</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.controller.EdicionReservasController</class>
+  <method>registrarPaquete</method>
+  <thread>17</thread>
+  <message>Se edito un paquete</message>
+</record>
+<record>
+  <date>2023-10-31T14:06:11.442460400Z</date>
+  <millis>1698761171442</millis>
+  <nanos>460400</nanos>
+  <sequence>39</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>ingresarCliente</method>
+  <thread>17</thread>
+  <message>Se genero el ingreso de un cliente: Nestor Felipe Castelblanco</message>
+</record>
+<record>
+  <date>2023-10-31T14:06:25.006638300Z</date>
+  <millis>1698761185006</millis>
+  <nanos>638300</nanos>
+  <sequence>43</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.controller.PrincipalController</class>
+  <method>admin</method>
+  <thread>17</thread>
+  <message>Se ingresa la pagina administrativa</message>
+</record>
+<record>
+  <date>2023-10-31T14:06:33.221583Z</date>
+  <millis>1698761193221</millis>
+  <nanos>583000</nanos>
+  <sequence>44</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>ingresarAdmin</method>
+  <thread>17</thread>
+  <message>Se genero el ingreso de un cliente: Nestor Felipe Castelblanco</message>
+</record>
+<record>
+  <date>2023-10-31T14:08:29.647084900Z</date>
+  <millis>1698761309647</millis>
+  <nanos>84900</nanos>
+  <sequence>48</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.controller.EdicionPaquetesController</class>
+  <method>agregarDestino</method>
+  <thread>17</thread>
+  <message>Se establecio un nuevo destino  Eterna Primavera Medellin, Antioquia</message>
+</record>
+<record>
+  <date>2023-10-31T14:09:01.646715800Z</date>
+  <millis>1698761341646</millis>
+  <nanos>715800</nanos>
+  <sequence>49</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>editarPaquete</method>
+  <thread>17</thread>
+  <message>Se realizo la edicion de un Paquete</message>
+</record>
+<record>
+  <date>2023-10-31T14:09:01.651718300Z</date>
+  <millis>1698761341651</millis>
+  <nanos>718300</nanos>
+  <sequence>50</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.controller.EdicionPaquetesController</class>
+  <method>registrarPaquete</method>
+  <thread>17</thread>
+  <message>Se edito un paquete</message>
+</record>
+<record>
+  <date>2023-10-31T14:14:37.534328600Z</date>
+  <millis>1698761677534</millis>
+  <nanos>328600</nanos>
+  <sequence>57</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>ingresarCliente</method>
+  <thread>17</thread>
+  <message>Se genero el ingreso de un cliente: Nestor Felipe Castelblanco</message>
+</record>
+<record>
+  <date>2023-10-31T14:14:47.353651100Z</date>
+  <millis>1698761687353</millis>
+  <nanos>651100</nanos>
+  <sequence>60</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.controller.PrincipalController</class>
+  <method>admin</method>
+  <thread>17</thread>
+  <message>Se ingresa la pagina administrativa</message>
+</record>
+<record>
+  <date>2023-10-31T14:14:52.020962300Z</date>
+  <millis>1698761692020</millis>
+  <nanos>962300</nanos>
+  <sequence>61</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>ingresarAdmin</method>
+  <thread>17</thread>
+  <message>Se genero el ingreso de un cliente: Nestor Felipe Castelblanco</message>
+</record>
+</log>
