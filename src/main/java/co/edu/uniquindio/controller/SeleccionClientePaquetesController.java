@@ -107,9 +107,7 @@ public class SeleccionClientePaquetesController implements Initializable, Cambio
     }
 
     private ObservableList<Paquetes> filtrarPorDestino(String destino) {
-        paquetes.filtered(paquete -> agencia.obtenerNombresDestinos(paquete.getDestinos()).toLowerCase().contains(destino.toLowerCase()));
-        ArrayList<Paquetes> paquetesFiltro = new ArrayList<>(paquetes);
-        agencia.buscarDestino(paquetesFiltro);
+        agencia.buscarDestino(destino);
         return paquetes.filtered(paquete -> agencia.obtenerNombresDestinos(paquete.getDestinos()).toLowerCase().contains(destino.toLowerCase()));
     }
     private ObservableList<Paquetes> filtrarPorPersonas(String personas) {

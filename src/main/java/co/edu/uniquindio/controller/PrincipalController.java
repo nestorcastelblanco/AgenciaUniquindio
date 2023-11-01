@@ -57,7 +57,7 @@ public class PrincipalController implements Initializable {
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        agencia.inicializarDatos();
     }
 
     public void ingresar(ActionEvent actionEvent) {

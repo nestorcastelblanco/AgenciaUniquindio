@@ -6,6 +6,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Clientes implements Serializable {
     private String nombreCompleto, correo, direccion,identificacion,ciudad, telefono, usuario, contrasena;
 }

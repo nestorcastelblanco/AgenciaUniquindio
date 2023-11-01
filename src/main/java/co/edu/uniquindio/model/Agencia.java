@@ -7,6 +7,7 @@ import co.edu.uniquindio.utils.ArchivoUtils;
 import com.sun.javafx.scene.shape.ArcHelper;
 import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -21,6 +22,7 @@ import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.PasswordAuthentication;
+import javax.print.attribute.standard.RequestingUserName;
 import java.io.*;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -34,26 +36,26 @@ import java.util.regex.Pattern;
 @Log
 @Getter
 public class Agencia {
-    private static final String RUTA_CLIENTES = "src/main/resources/textos/clientes.txt";
-    private static final String RUTA_GUIAS = "src/main/resources/textos/guias.ser";
-    private static final String RUTA_DESTINOS = "src/main/resources/textos/destinos.ser";
-    private static final String RUTA_PAQUETES = "src/main/resources/textos/paquetes.ser";
-    private static final String RUTA_RESERVAS = "src/main/resources/textos/reservas.ser";
-    private static Reservas RESERVA_CALIFICACION = new Reservas();
-    private static Reservas RESERVA_CANCELACION = new Reservas();
-    private static Reservas RESERVA_EDICION = new Reservas();
-    private static Paquetes PAQUETE_SELECCIONADO = new Paquetes();
-    private static Paquetes PAQUETE_EDICION = new Paquetes();
-    private static Paquetes PAQUETE_RESERVA = new Paquetes();
-    private static Clientes CLIENTE_SESION = new Clientes();
-    private static ArrayList<Destinos> destinos = new ArrayList<>();
-    private static ArrayList<Paquetes> paquetes = new ArrayList<>();
-    private static ArrayList<Clientes> clientes = new ArrayList<>();
-    private static ArrayList<Reservas> reservas = new ArrayList<>();
-    private static ArrayList<Guias> guias = new ArrayList<>();
-    private static final Logger LOGGER=Logger.getLogger(Agencia.class.getName());
+    private final String RUTA_CLIENTES = "src/main/resources/textos/clientes.txt";
+    private final String RUTA_GUIAS = "src/main/resources/textos/guias.ser";
+    private final String RUTA_DESTINOS = "src/main/resources/textos/destinos.ser";
+    private final String RUTA_PAQUETES = "src/main/resources/textos/paquetes.ser";
+    private final String RUTA_RESERVAS = "src/main/resources/textos/reservas.ser";
+    private Reservas RESERVA_CALIFICACION = new Reservas();
+    private Reservas RESERVA_CANCELACION = new Reservas();
+    private Reservas RESERVA_EDICION = new Reservas();
+    private Paquetes PAQUETE_SELECCIONADO = new Paquetes();
+    private Paquetes PAQUETE_EDICION = new Paquetes();
+    private Paquetes PAQUETE_RESERVA = new Paquetes();
+    private Clientes CLIENTE_SESION = new Clientes();
+    private ArrayList<Destinos> destinos = new ArrayList<>();
+    private ArrayList<Paquetes> paquetes = new ArrayList<>();
+    private ArrayList<Clientes> clientes = new ArrayList<>();
+    private ArrayList<Reservas> reservas = new ArrayList<>();
+    private ArrayList<Guias> guias = new ArrayList<>();
+    private final Logger LOGGER=Logger.getLogger(Agencia.class.getName());
     private static Agencia agencia;
-    public static void inicializarDatos(){
+    public void inicializarDatos(){
         leerClientes();
         leerGuias();
         leerDestinos();
@@ -108,7 +110,7 @@ public class Agencia {
         }
         return agencia;
     }
-    private static void leerReservas() {
+    private  void leerReservas() {
         try (ObjectInputStream entrada = new ObjectInputStream(new FileInputStream(RUTA_RESERVAS))) {
             ArrayList<Reservas> paquetes1 = (ArrayList<Reservas>) entrada.readObject();
             System.out.println("Reservas deserializados correctamente.");
@@ -410,7 +412,7 @@ public class Agencia {
             LOGGER.severe(e.getMessage());
         }
     }
-    public static void borrarDatosSerializados(String archivo) {
+    public  void borrarDatosSerializados(String archivo) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(archivo))) {
             // No se escribe nada en el archivo, simplemente se cierra
         } catch (IOException e) {
@@ -432,7 +434,7 @@ public class Agencia {
                 LOGGER.log(Level.INFO,mensaje);
             }
     }
-    public static void leerGuias()
+    public  void leerGuias()
     {
         try (ObjectInputStream entrada = new ObjectInputStream(new FileInputStream(RUTA_GUIAS))) {
             ArrayList<Guias> guias1 = (ArrayList<Guias>) entrada.readObject();
@@ -444,7 +446,7 @@ public class Agencia {
             e.printStackTrace();
         }
     }
-    public static void leerDestinos()
+    public void leerDestinos()
     {
         try (ObjectInputStream entrada = new ObjectInputStream(new FileInputStream(RUTA_DESTINOS))) {
             ArrayList<Destinos> destinos1 = (ArrayList<Destinos>) entrada.readObject();
@@ -454,7 +456,7 @@ public class Agencia {
             e.printStackTrace();
         }
     }
-    public static void leerPaquetes()
+    public void leerPaquetes()
     {
         try (ObjectInputStream entrada = new ObjectInputStream(new FileInputStream(RUTA_PAQUETES))) {
             ArrayList<Paquetes> paquetes1 = (ArrayList<Paquetes>) entrada.readObject();
@@ -466,7 +468,7 @@ public class Agencia {
             e.printStackTrace();
         }
     }
-    private static void leerClientes() {
+    private void leerClientes() {
         try{
             ArrayList<String> lineas = ArchivoUtils.leerArchivoScanner(RUTA_CLIENTES);
             for(String linea : lineas){
@@ -518,17 +520,17 @@ public class Agencia {
         {
             if (CLIENTE_SESION.equals(clientes.get(i)))
             {
-                Clientes cliente = Clientes.builder()
-                        .nombreCompleto(nombre)
-                        .correo(correo)
-                        .direccion(direccion)
-                        .ciudad(ciudad)
-                        .identificacion(id)
-                        .telefono(telefono)
-                        .usuario(usuario)
-                        .contrasena(contrasena).build();
-                clientes.set(i,cliente);
-                CLIENTE_SESION = cliente;
+                clientes.get(i).setNombreCompleto(nombre);
+                clientes.get(i).setCorreo(correo);
+                clientes.get(i).setDireccion(direccion);
+                clientes.get(i).setCiudad(ciudad);
+                clientes.get(i).setIdentificacion(id);
+                clientes.get(i).setTelefono(telefono);
+                clientes.get(i).setUsuario(usuario);
+                clientes.get(i).setContrasena(contrasena);
+
+                clientes.set(i,clientes.get(i));
+                CLIENTE_SESION = clientes.get(i);
                 escribirClientes();
             }
         }
@@ -652,19 +654,17 @@ public class Agencia {
         {
             if (PAQUETE_EDICION.equals(paquetes.get(i)))
             {
-                Paquetes paquete = Paquetes.builder().
-                        nombre(nombre)
-                        .destinos(destinos)
-                        .precio(Float.valueOf(valor))
-                        .inicio(inicio)
-                        .fin(fin)
-                        .servicios(servicios)
-                        .numeroPersonas(PAQUETE_EDICION.getNumeroPersonas() + Integer.parseInt(personas))
-                        .build();
-                paquete.setDuracion(inicio.until(fin, ChronoUnit.DAYS)+"");
-                paquetes.set(i,paquete);;
+                paquetes.get(i).setNombre(nombre);
+                paquetes.get(i).setDestinos(destinos);
+                paquetes.get(i).setPrecio(Float.valueOf(valor));
+                paquetes.get(i).setInicio(inicio);
+                paquetes.get(i).setFin(fin);
+                paquetes.get(i).setServicios(servicios);
+                paquetes.get(i).setNumeroPersonas(PAQUETE_EDICION.getNumeroPersonas() + Integer.parseInt(personas));
+                paquetes.get(i).setDuracion(inicio.until(fin, ChronoUnit.DAYS)+"");
+                paquetes.set(i,paquetes.get(i));
                 LOGGER.log(Level.INFO, "Se realizo la edicion de un Paquete");
-                PAQUETE_EDICION = paquete;
+                PAQUETE_EDICION = paquetes.get(i);
                 borrarDatosSerializados(RUTA_PAQUETES);
                 ArchivoUtils.serializarArraylistPaquetes(RUTA_PAQUETES,paquetes);
             }
@@ -674,29 +674,22 @@ public class Agencia {
         if (paquete == null) {
             throw new CampoObligatorioException("No se cargo el paquete");
         }
-        if(!inicio.isEqual(RESERVA_EDICION.getFechaSolicitud()) || !fin.isEqual(RESERVA_EDICION.getFechaPlanificada()))
-        {
+        if (!inicio.isEqual(RESERVA_EDICION.getFechaSolicitud()) || !fin.isEqual(RESERVA_EDICION.getFechaPlanificada())) {
             if (!agencia.verificarFechasReserva(inicio, fin, paquete)) {
                 throw new CampoObligatorioException("Las fechas ingresadas son erroneas");
             }
         }
-        if (agregarPersonas == null || agregarPersonas.isEmpty() || Integer.parseInt(agregarPersonas) <0 || !verificarNumero(agregarPersonas)) {
+        if (agregarPersonas == null || agregarPersonas.isEmpty() || Integer.parseInt(agregarPersonas) < 0 || !verificarNumero(agregarPersonas)) {
             throw new CampoObligatorioException("El numero de personas sobrepasa el cupo");
         }
-        if (!agencia.verificarPersonasPaquete(paquete,agregarPersonas)) {
+        if (!agencia.verificarPersonasPaquete(paquete, agregarPersonas)) {
             throw new CampoObligatorioException("El numero de personas no es valido");
         }
-        if (quitarPersonas == null || quitarPersonas.isEmpty() || Integer.parseInt(quitarPersonas) <0 || !verificarNumero(quitarPersonas)) {
+        if (quitarPersonas == null || quitarPersonas.isEmpty() || Integer.parseInt(quitarPersonas) < 0 || !verificarNumero(quitarPersonas)) {
             throw new CampoObligatorioException("El numero de personas sobrepasa el cupo");
         }
         if ((RESERVA_EDICION.getNumeroPersonas() - Integer.parseInt(quitarPersonas)) <= 0) {
             throw new CampoObligatorioException("Se trato de dejar la cantidad de personas menor o igual a 0");
-        }
-        if(!inicio.isEqual(RESERVA_EDICION.getFechaSolicitud()) || !fin.isEqual(RESERVA_EDICION.getFechaPlanificada()))
-        {
-            if (!agencia.verificarGuiaDisponible(selectedItem,inicio,fin)) {
-                throw new CampoObligatorioException("El guia no se encuentra disponible en ese rango de fechas");
-            }
         }
         if(selectedItem == null || selectedItem.getNombre().equals("SIN GUIA") || selectedItem.getIdentificacion() == null)
         {
@@ -710,18 +703,15 @@ public class Agencia {
         {
             if (RESERVA_EDICION.equals(reservas.get(i)))
             {
-                Reservas reserva = Reservas.builder()
-                        .paquete(paquete)
-                        .cliente(RESERVA_EDICION.getCliente())
-                        .fechaSolicitud(inicio)
-                        .fechaPlanificada(fin)
-                        .numeroPersonas(RESERVA_EDICION.getNumeroPersonas() + numeroPersonas - numeroPersonas1)
-                        .estado(pendiente)
-                        .guia(selectedItem)
-                        .build();
-                reservas.set(i,reserva);
+                reservas.get(i).setPaquete(paquete);
+                reservas.get(i).setCliente(RESERVA_EDICION.getCliente());
+                reservas.get(i).setFechaSolicitud(inicio);
+                reservas.get(i).setFechaPlanificada(fin);
+                reservas.get(i).setNumeroPersonas(RESERVA_EDICION.getNumeroPersonas() + numeroPersonas - numeroPersonas1);
+                reservas.get(i).setEstado(pendiente);
+                reservas.get(i).setGuia(selectedItem);
+                reservas.set(i,reservas.get(i));
                 LOGGER.log(Level.INFO, "Se realizo la edicion de una Reserva");
-                RESERVA_EDICION = reserva;
                 borrarDatosSerializados(RUTA_RESERVAS);
                 ArchivoUtils.serializarArraylistReservas(RUTA_RESERVAS,reservas);
             }
@@ -732,17 +722,15 @@ public class Agencia {
             System.out.print("Paquete array :" + paquetes.get(i).getNombre() + " "+ paquetes.get(i).getDestinos());
             if (paquete.getNombre().equals(paquetes.get(i).getNombre())) {
                 System.out.print("Paquete encontrado :" + paquetes.get(i).getNombre() + " "+ paquetes.get(i).getDestinos());
-                Paquetes paquete1 = Paquetes.builder().
-                        nombre(paquete.getNombre())
-                        .destinos(paquete.getDestinos())
-                        .precio(Float.valueOf(paquete.getPrecio()))
-                        .inicio(paquete.getInicio())
-                        .fin(paquete.getFin())
-                        .servicios(paquete.getServicios())
-                        .numeroPersonas(paquete.getNumeroPersonas() + numeroPersonas1 - numeroPersonas)
-                        .build();
-                paquete1.setDuracion(paquete1.getDuracion());
-                paquetes.set(i,paquete1);;
+                paquetes.get(i).setNombre(paquete.getNombre());
+                paquetes.get(i).setDestinos(paquete.getDestinos());
+                paquetes.get(i).setPrecio(Float.valueOf(paquete.getPrecio()));
+                paquetes.get(i).setInicio(paquete.getInicio());
+                paquetes.get(i).setFin(paquete.getFin());
+                paquetes.get(i).setServicios(paquete.getServicios());
+                paquetes.get(i).setNumeroPersonas(paquete.getNumeroPersonas() + numeroPersonas1 - numeroPersonas);
+                paquetes.get(i).setDuracion(paquete.getDuracion());
+                paquetes.set(i,paquetes.get(i));;
                 LOGGER.log(Level.INFO, "Se realizo la edicion de un Paquete con base a la edicion de la reserva");
                 borrarDatosSerializados(RUTA_PAQUETES);
                 ArchivoUtils.serializarArraylistPaquetes(RUTA_PAQUETES,paquetes);
@@ -751,7 +739,7 @@ public class Agencia {
     }
     private boolean verificarFechas(LocalDate inicio, LocalDate fin) {
         boolean state = true;
-        if (inicio.isAfter(fin) || inicio.isEqual(LocalDate.now()))
+        if (inicio.isAfter(fin))
         {
             state = false;
         }
@@ -759,7 +747,7 @@ public class Agencia {
     }
     private boolean verificarFechasReserva(LocalDate inicio, LocalDate fin, Paquetes paquete) {
         boolean state = true;
-        if (inicio.isAfter(fin) || inicio.isEqual(LocalDate.now()))
+        if (inicio.isAfter(fin))
         {
             state = false;
         }else {
@@ -825,7 +813,7 @@ public class Agencia {
         {
             if (reservas.get(i).equals(RESERVA_CALIFICACION))
             {
-                if(reservas.get(i).getFechaPlanificada().isAfter(LocalDate.now()))
+                if(reservas.get(i).getFechaPlanificada().isBefore(LocalDate.now()))
                 {
                     RESERVA_CALIFICACION= selectedItem;
                     state = true;
@@ -911,7 +899,14 @@ public class Agencia {
             reserva.setGuia(selectedItem);
         }
         int numeroPersonas = Integer.parseInt(personas);
-        agencia.enviarCorreo(cliente,paquete,inicio,fin,personas, selectedItem,pendiente);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                agencia.enviarCorreo(cliente,paquete,inicio,fin,personas, selectedItem,pendiente);
+            }
+        }){
+        }.start();
+
         reserva.setPaquete(paquete);
         reserva.setCliente(cliente);
         reserva.setFechaSolicitud(inicio);
@@ -924,35 +919,30 @@ public class Agencia {
         {
             if (paqueteSeleccion().equals(paquetes.get(i)))
             {
-                Paquetes paqueteN = Paquetes.builder().
-                        nombre(paqueteSeleccion().getNombre())
-                        .destinos(paqueteSeleccion().getDestinos())
-                        .precio(Float.valueOf(paqueteSeleccion().getPrecio()))
-                        .inicio(paqueteSeleccion().getInicio())
-                        .fin(paqueteSeleccion().getFin())
-                        .servicios(paqueteSeleccion().getServicios())
-                        .numeroPersonas(paqueteSeleccion().getNumeroPersonas() - numeroPersonas)
-                        .duracion(paqueteSeleccion().getDuracion())
-                        .cantReservas(paqueteSeleccion().getCantReservas()+1)
-                        .build();
+                paquetes.get(i).setNumeroPersonas(paquetes.get(i).getNumeroPersonas()-numeroPersonas);
+                paquetes.get(i).setCantReservas(paquetes.get(i).getCantReservas()+1);
+                paquetes.set(i,paquetes.get(i));
                 for(int x = 0 ; x<paqueteSeleccion().getDestinos().size();x++)
                 {
                     for(int j = 0; j<destinos.size();j++)
                     {
                         if(destinos.get(j).getNombre().equals(paqueteSeleccion().getDestinos().get(x).getNombre()))
                         {
+                            System.out.println("Se actualiza ");
                             destinos.get(j).setContReservas(destinos.get(j).getContReservas()+1);
+                            destinos.set(j, destinos.get(j));
                         }
                     }
                 }
-                paquetes.set(i,paqueteN);;
+
+                //paquetes.set(i,paqueteN);;
                 LOGGER.log(Level.INFO, "Se realizo la reserva de un Paquete");
                 borrarDatosSerializados(RUTA_PAQUETES);
                 ArchivoUtils.serializarArraylistPaquetes(RUTA_PAQUETES,paquetes);
             }
         }
     }
-
+/*
     private boolean verificarGuiaDisponible(Guias guia,LocalDate inicio, LocalDate fin) {
         boolean state = false;
         if (guia == null || guia.getIdentificacion() == null || guia.getIdentificacion().isEmpty()) {
@@ -982,7 +972,7 @@ public class Agencia {
         }
         return state;
     }
-
+*/
     private boolean verificarPersonasPaquete(Paquetes paquete, String personas) {
         boolean state = true;
         int numPersonas = Integer.parseInt(personas);
@@ -993,21 +983,33 @@ public class Agencia {
         }
         return state;
     }
-
-    public void buscarDestino(ArrayList<Paquetes> paquetesFiltro) {
-        for(int i = 0 ; i<paquetesFiltro.size();i++)
+    public void buscarDestino(String destino) {
+        for(int j = 0 ; j<destinos.size();j++)
         {
-            for(int x = 0 ; x<paquetesFiltro.get(i).getDestinos().size();x++)
+            System.out.println("Buscando");
+            if(destinos.get(j).getNombre().equals(destino))
             {
-                for(int j = 0 ; j<destinos.size();j++)
-                {
-                    if(paquetesFiltro.get(i).getDestinos().get(x).getNombre().equals(destinos.get(j).getNombre()))
-                    {
-                        destinos.get(j).setContBusquedas(destinos.get(j).getContBusquedas()+1);
-                        System.out.println("Contador de busquedas del destino: " + destinos.get(j).getNombre() +" es: " + destinos.get(j).getContBusquedas());
-                    }
-                }
+                destinos.get(j).setContBusquedas(destinos.get(j).getContBusquedas()+1);
+                System.out.println("Contador de busquedas del destino: " + destinos.get(j).getNombre() +" es: " + destinos.get(j).getContBusquedas());
             }
         }
+    }
+
+    public void datos() {
+        agencia.borrarDatosSerializados(RUTA_DESTINOS);
+        agencia.borrarDatosSerializados(RUTA_PAQUETES);
+        agencia.borrarDatosSerializados(RUTA_RESERVAS);
+        agencia.borrarDatosSerializados(RUTA_GUIAS);
+        agencia.borrarDatosSerializados(RUTA_CLIENTES);
+        ArchivoUtils.serializarArraylistDestinos(RUTA_DESTINOS,destinos);
+        ArchivoUtils.serializarArraylistPaquetes(RUTA_PAQUETES, paquetes);
+        ArchivoUtils.serializarArraylistReservas(RUTA_RESERVAS, reservas);
+        ArchivoUtils.serializarArraylist(RUTA_GUIAS, guias);
+        agencia.escribirClientes();
+        leerPaquetes();
+        leerDestinos();
+        leerReservas();
+        leerGuias();
+        leerClientes();
     }
 }

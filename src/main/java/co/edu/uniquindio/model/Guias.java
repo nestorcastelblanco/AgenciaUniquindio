@@ -7,6 +7,7 @@ import java.util.ArrayList;
 @Getter
 @Setter
 @AllArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Guias implements Serializable {
     private String nombre, identificacion, exp;
     private float promedioCalificacion;

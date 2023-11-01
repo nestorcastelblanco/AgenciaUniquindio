@@ -45,12 +45,9 @@ public class FiltrarPaquetesController implements Initializable, CambioIdiomaLis
     @FXML
     private TableColumn<Paquetes, String> fechaFin;
     private ObservableList<Paquetes> paquetes = FXCollections.observableArrayList(agencia.enviarPaquetes());
-    public FiltrarPaquetesController() {
-    }
     @Override
     public void onCambioIdioma(CambioIdiomaEvent evento) {
     }
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         paquete.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombre()));
@@ -106,8 +103,7 @@ public class FiltrarPaquetesController implements Initializable, CambioIdiomaLis
     }
 
     private ObservableList<Paquetes> filtrarPorDestino(String destino) {
-        return paquetes.filtered(paquete ->
-                agencia.obtenerNombresDestinos(paquete.getDestinos()).toLowerCase().contains(destino.toLowerCase()));
+        return paquetes.filtered(paquete -> agencia.obtenerNombresDestinos(paquete.getDestinos()).toLowerCase().contains(destino.toLowerCase()));
     }
     private ObservableList<Paquetes> filtrarPorPersonas(String personas) {
         return paquetes.filtered(paquete -> String.valueOf(paquete.getNumeroPersonas()).contains(personas));

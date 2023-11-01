@@ -11,7 +11,7 @@ import java.util.ArrayList;
 @Getter
 @Setter
 @AllArgsConstructor
-
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Destinos implements Serializable {
     private String nombre, ciudad, descripcion, clima;
     private ArrayList<String> imagenes = new ArrayList<>();

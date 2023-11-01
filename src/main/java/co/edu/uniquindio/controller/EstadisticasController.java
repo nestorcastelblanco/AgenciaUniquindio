@@ -36,30 +36,33 @@ public class EstadisticasController implements Initializable, CambioIdiomaListen
         cargarDestinosBuscados();
         cargarMejoresGuias();
         cargarPaquetesReservados();
+        agencia.datos();
     }
 
     private void cargarDestinosReservados() {
         XYChart.Series setDestinosReservados = new XYChart.Series<>();
         ArrayList<Destinos> destinos = agencia.enviarDestinos();
-        for (int i =0; i<destinos.size();i++)
+        for (int i =0; i<destinos.size()-1;i++)
         {
+            System.out.println(destinos.get(i).getNombre()+", "+destinos.get(i).getContReservas());
             setDestinosReservados.getData().add(new XYChart.Data<>(destinos.get(i).getNombre(),destinos.get(i).getContReservas()));
         }
         destinosReservados.getData().addAll(setDestinosReservados);
     }
     private void cargarDestinosBuscados() {
         XYChart.Series setDestinosBuscados = new XYChart.Series<>();
-        ArrayList<Destinos> destinos = agencia.enviarDestinos();
-        for (int i =0; i<destinos.size();i++)
+
+        for (int i =0; i<agencia.enviarDestinos().size()-1;i++)
         {
-            setDestinosBuscados.getData().add(new XYChart.Data<>(destinos.get(i).getNombre(),destinos.get(i).getContReservas()));
+            System.out.println("Buscados" + agencia.enviarDestinos().get(i).getNombre() + " cont: " + agencia.enviarDestinos().get(i).getContBusquedas());
+            setDestinosBuscados.getData().add(new XYChart.Data<>(agencia.enviarDestinos().get(i).getNombre(),agencia.enviarDestinos().get(i).getContBusquedas()));
         }
         destinosBuscados.getData().addAll(setDestinosBuscados);
     }
     private void cargarMejoresGuias() {
         XYChart.Series setMejoresGuias = new XYChart.Series<>();
         ArrayList<Guias> guias = agencia.enviarGuias();
-        for (int i =0; i<guias.size();i++)
+        for (int i =0; i<guias.size()-1;i++)
         {
             setMejoresGuias.getData().add(new XYChart.Data<>(guias.get(i).getNombre(),guias.get(i).getPromedioCalificacion()));
         }

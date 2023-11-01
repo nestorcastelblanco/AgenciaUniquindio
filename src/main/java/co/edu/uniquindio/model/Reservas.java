@@ -10,6 +10,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Reservas implements Serializable {
     private LocalDate fechaSolicitud, fechaPlanificada;
     private Clientes cliente;
