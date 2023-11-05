@@ -29,9 +29,8 @@
          <columns>
             <TableColumn fx:id="colNombre" prefWidth="105.0" text="Nombre" />
             <TableColumn fx:id="colCiudad" prefWidth="144.0" text="Ciudad" />
-            <TableColumn fx:id="colDescripcion" prefWidth="219.0" text="Descripcion" />
-            <TableColumn fx:id="colClima" prefWidth="154.0" text="Clima" />
-            <TableColumn fx:id="colDescripcion1" prefWidth="219.0" text="Descripcion" />
+            <TableColumn fx:id="colDescripcion" prefWidth="229.0" text="Descripcion" />
+            <TableColumn fx:id="colClima" prefWidth="143.0" text="Clima" />
          </columns>
       </TableView>
       <Label alignment="CENTER" layoutX="46.0" layoutY="237.0" prefHeight="56.0" prefWidth="609.0" text=" DESTINOS TRAVEL UNIQUINDIO">
