@@ -11,11 +11,11 @@ public class Principal extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader loader = new FXMLLoader( Principal.class.getResource("/paginaPrincipal.fxml"));
+        FXMLLoader loader = new FXMLLoader( Principal.class.getResource("/paginaVistaInicio.fxml"));
         Parent parent = loader.load();
         Scene scene = new Scene(parent);
         stage.setScene(scene);
-        stage.setTitle("");
+        stage.setTitle("TRAVEL UNIQUINDIO");
         stage.show();
     }
 

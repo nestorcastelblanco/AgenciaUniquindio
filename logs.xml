@@ -15363,3 +15363,88 @@
   <thread>17</thread>
   <message>Se genero el ingreso de un cliente: Nestor Felipe Castelblanco</message>
 </record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-11-05T01:04:49.925592700Z</date>
+  <millis>1699146289925</millis>
+  <nanos>592700</nanos>
+  <sequence>1</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>ingresarCliente</method>
+  <thread>17</thread>
+  <message>Se genero el ingreso de un cliente: Nestor Felipe Castelblanco</message>
+</record>
+<record>
+  <date>2023-11-05T01:04:59.980969100Z</date>
+  <millis>1699146299980</millis>
+  <nanos>969100</nanos>
+  <sequence>3</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.controller.EdicionPerfilController</class>
+  <method>editar</method>
+  <thread>17</thread>
+  <message>Se realizo la edicion del perfil correctamente</message>
+</record>
+<record>
+  <date>2023-11-05T01:05:10.469623800Z</date>
+  <millis>1699146310469</millis>
+  <nanos>623800</nanos>
+  <sequence>6</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.controller.PrincipalController</class>
+  <method>ingresar</method>
+  <thread>17</thread>
+  <message>Se ingresaron credenciales no validas</message>
+</record>
+<record>
+  <date>2023-11-05T01:05:21.157338600Z</date>
+  <millis>1699146321157</millis>
+  <nanos>338600</nanos>
+  <sequence>7</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>ingresarCliente</method>
+  <thread>17</thread>
+  <message>Se genero el ingreso de un cliente: Nestor Felipe Castelblanco</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-11-05T01:23:40.739234800Z</date>
+  <millis>1699147420739</millis>
+  <nanos>234800</nanos>
+  <sequence>2</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.controller.RegistroController</class>
+  <method>cargarTextos</method>
+  <thread>17</thread>
+  <message>Se cargaron los textos de la ventana de registro</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
