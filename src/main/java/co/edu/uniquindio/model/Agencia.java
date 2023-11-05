@@ -66,39 +66,6 @@ public class Agencia {
         leerDestinos();
         leerPaquetes();
         leerReservas();
-        System.out.println("Clientes: ");
-        for(int i = 0 ; i<clientes.size();i++)
-        {
-            System.out.println(clientes.get(i).getNombreCompleto() + " Usuario: " + clientes.get(i).getUsuario() + " Clave: " + clientes.get(i).getContrasena());
-        }
-        System.out.println("Guias: ");
-        for(int i = 0 ; i<guias.size();i++)
-        {
-            System.out.println(guias.get(i).getNombre());
-        }
-        System.out.println("Destinos: ");
-        for(int i = 0 ; i<destinos.size();i++)
-        {
-            System.out.println(destinos.get(i).getNombre());
-            for(int j=0 ; j<destinos.get(i).getImagenes().size();j++)
-            {
-                System.out.println(destinos.get(i).getImagenes().get(j));
-                System.out.print("entro");
-            }
-            System.out.print("ya");
-        }
-        System.out.println("Paquetes: ");
-        for(int i = 0 ; i<paquetes.size();i++)
-        {
-            System.out.println(paquetes.get(i).getNombre());
-            for(int X = 0 ; X<paquetes.get(i).getDestinos().size();X++) {
-                System.out.println(paquetes.get(i).getDestinos().get(X).getNombre());
-            }
-        }
-        for(int i = 0 ; i<reservas.size();i++)
-        {
-            System.out.println(reservas.get(i).getCliente().getNombreCompleto());
-        }
     }
     private Agencia()
     {
@@ -125,6 +92,55 @@ public class Agencia {
             System.out.println("Reservas deserializados correctamente.");
             for (Reservas paquete : paquetes1) {
                 reservas.add(paquete);
+            }
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+    public  void leerGuias()
+    {
+        guias = new ArrayList<>();
+        try (ObjectInputStream entrada = new ObjectInputStream(new FileInputStream(RUTA_GUIAS))) {
+            ArrayList<Guias> guias1 = (ArrayList<Guias>) entrada.readObject();
+            System.out.println("Guias deserializados correctamente.");
+            for (Guias guia : guias1) {
+                guias.add(guia);
+            }
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+    public void leerDestinos()
+    {
+        destinos = new ArrayList<>();
+        try (ObjectInputStream entrada = new ObjectInputStream(new FileInputStream(RUTA_DESTINOS))) {
+            ArrayList<Destinos> destinos1 = (ArrayList<Destinos>) entrada.readObject();
+            System.out.println("Destinos deserializados correctamente.");
+            destinos.addAll(destinos1);
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+    public void leerPaquetes()
+    {
+        paquetes = new ArrayList<>();
+        try (ObjectInputStream entrada = new ObjectInputStream(new FileInputStream(RUTA_PAQUETES))) {
+            ArrayList<Paquetes> paquetes1 = (ArrayList<Paquetes>) entrada.readObject();
+            System.out.println("Paquetes deserializados correctamente.");
+            for (Paquetes paquete : paquetes1) {
+                paquetes.add(paquete);
+            }
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+    private void leerClientes() {
+        clientes = new ArrayList<>();
+        try (ObjectInputStream entrada = new ObjectInputStream(new FileInputStream(RUTA_CLIENTES))) {
+            ArrayList<Clientes> cliente = (ArrayList<Clientes>) entrada.readObject();
+            System.out.println("Clientes deserializados correctamente.");
+            for (Clientes paquete : cliente) {
+                clientes.add(paquete);
             }
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -496,55 +512,6 @@ public class Agencia {
             {
                 LOGGER.log(Level.INFO,mensaje);
             }
-    }
-    public  void leerGuias()
-    {
-        guias = new ArrayList<>();
-        try (ObjectInputStream entrada = new ObjectInputStream(new FileInputStream(RUTA_GUIAS))) {
-            ArrayList<Guias> guias1 = (ArrayList<Guias>) entrada.readObject();
-            System.out.println("Guias deserializados correctamente.");
-            for (Guias guia : guias1) {
-                guias.add(guia);
-            }
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-    public void leerDestinos()
-    {
-        destinos = new ArrayList<>();
-        try (ObjectInputStream entrada = new ObjectInputStream(new FileInputStream(RUTA_DESTINOS))) {
-            ArrayList<Destinos> destinos1 = (ArrayList<Destinos>) entrada.readObject();
-            System.out.println("Destinos deserializados correctamente.");
-            destinos.addAll(destinos1);
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-    public void leerPaquetes()
-    {
-        paquetes = new ArrayList<>();
-        try (ObjectInputStream entrada = new ObjectInputStream(new FileInputStream(RUTA_PAQUETES))) {
-            ArrayList<Paquetes> paquetes1 = (ArrayList<Paquetes>) entrada.readObject();
-            System.out.println("Paquetes deserializados correctamente.");
-            for (Paquetes paquete : paquetes1) {
-                paquetes.add(paquete);
-            }
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-    private void leerClientes() {
-        clientes = new ArrayList<>();
-        try (ObjectInputStream entrada = new ObjectInputStream(new FileInputStream(RUTA_CLIENTES))) {
-            ArrayList<Clientes> cliente = (ArrayList<Clientes>) entrada.readObject();
-            System.out.println("Clientes deserializados correctamente.");
-            for (Clientes paquete : cliente) {
-                clientes.add(paquete);
-            }
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
     }
     public Clientes clienteSesion() {
         return CLIENTE_SESION;
