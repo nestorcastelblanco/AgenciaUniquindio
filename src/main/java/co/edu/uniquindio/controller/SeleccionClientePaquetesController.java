@@ -2,6 +2,7 @@ package co.edu.uniquindio.controller;
 
 import co.edu.uniquindio.model.Agencia;
 import co.edu.uniquindio.model.Paquetes;
+import co.edu.uniquindio.utils.ArchivoUtils;
 import co.edu.uniquindio.utils.CambioIdiomaEvent;
 import co.edu.uniquindio.utils.CambioIdiomaListener;
 import javafx.beans.property.SimpleStringProperty;
@@ -107,7 +108,7 @@ public class SeleccionClientePaquetesController implements Initializable, Cambio
     }
 
     private ObservableList<Paquetes> filtrarPorDestino(String destino) {
-        agencia.buscarDestino(destino);
+        agencia.buscarDestino(destino, agencia.getCLIENTE_SESION());
         return paquetes.filtered(paquete -> agencia.obtenerNombresDestinos(paquete.getDestinos()).toLowerCase().contains(destino.toLowerCase()));
     }
     private ObservableList<Paquetes> filtrarPorPersonas(String personas) {

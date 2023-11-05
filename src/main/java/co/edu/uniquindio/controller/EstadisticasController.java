@@ -36,7 +36,6 @@ public class EstadisticasController implements Initializable, CambioIdiomaListen
         cargarDestinosBuscados();
         cargarMejoresGuias();
         cargarPaquetesReservados();
-        agencia.datos();
     }
 
     private void cargarDestinosReservados() {
@@ -64,7 +63,7 @@ public class EstadisticasController implements Initializable, CambioIdiomaListen
         ArrayList<Guias> guias = agencia.enviarGuias();
         for (int i =0; i<guias.size()-1;i++)
         {
-            setMejoresGuias.getData().add(new XYChart.Data<>(guias.get(i).getNombre(),guias.get(i).getPromedioCalificacion()));
+            setMejoresGuias.getData().add(new XYChart.Data<>(guias.get(i).getNombre(),guias.get(i).promedio()));
         }
         mejoresGuias.getData().addAll(setMejoresGuias);
     }

@@ -1,22 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="477.0" prefWidth="763.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.controller.PortalAgenciaController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="477.0" prefWidth="763.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.controller.PortalAgenciaController">
    <children>
       <ToolBar layoutY="-3.0" prefHeight="35.0" prefWidth="763.0" />
       <Pane layoutX="27.0" layoutY="57.0" prefHeight="402.0" prefWidth="372.0">
          <children>
             <Button fx:id="editar" layoutX="63.0" layoutY="30.0" mnemonicParsing="false" onAction="#editarPerfil" prefHeight="35.0" prefWidth="247.0" text="Editar Perfil" />
-            <Button layoutX="63.0" layoutY="120.0" mnemonicParsing="false" onAction="#seleccionPaquetes" prefHeight="35.0" prefWidth="247.0" text="Paquetes" />
-            <Button layoutX="63.0" layoutY="195.0" mnemonicParsing="false" onAction="#reservas" prefHeight="35.0" prefWidth="247.0" text="Visualizar Reservas" />
-            <Button layoutX="63.0" layoutY="262.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="247.0" text="Calificar Servicios" />
-            <Button layoutX="65.0" layoutY="329.0" mnemonicParsing="false" onAction="#regresar" prefHeight="35.0" prefWidth="239.0" text="Regresar" />
+            <Button layoutX="63.0" layoutY="99.0" mnemonicParsing="false" onAction="#seleccionPaquetes" prefHeight="35.0" prefWidth="247.0" text="Paquetes" />
+            <Button layoutX="63.0" layoutY="166.0" mnemonicParsing="false" onAction="#reservas" prefHeight="35.0" prefWidth="247.0" text="Visualizar Reservas" />
+            <Button layoutX="63.0" layoutY="230.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="247.0" text="Calificar Servicios" />
+            <Button layoutX="67.0" layoutY="336.0" mnemonicParsing="false" onAction="#regresar" prefHeight="35.0" prefWidth="239.0" text="Regresar" />
          </children>
       </Pane>
-      <ImageView fitHeight="364.0" fitWidth="363.0" layoutX="361.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true">
+      <TableView fx:id="tablaDestinos" layoutX="468.0" layoutY="304.0" prefHeight="135.0" prefWidth="176.0">
+        <columns>
+          <TableColumn fx:id="colDestinos" prefWidth="174.0" text="DESTINOS RECOMENDADOS" />
+        </columns>
+      </TableView>
+      <ImageView fitHeight="230.0" fitWidth="247.0" layoutX="441.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Imagenes/Logo.jpg" />
          </image>

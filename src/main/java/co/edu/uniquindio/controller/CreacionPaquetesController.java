@@ -7,6 +7,7 @@ import co.edu.uniquindio.model.Agencia;
 import co.edu.uniquindio.model.Destinos;
 import co.edu.uniquindio.utils.CambioIdiomaEvent;
 import co.edu.uniquindio.utils.CambioIdiomaListener;
+import com.sun.javafx.scene.shape.ArcHelper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -21,8 +22,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class CreacionPaquetesController implements Initializable, CambioIdiomaListener {
-    private final Agencia agencia = Agencia.getInstance();
-    private static ArrayList<Destinos> destinosCombo = new ArrayList<>();
+    private static final Agencia agencia = Agencia.getInstance();
+    private static ArrayList<Destinos> destinosCombo =   new ArrayList<>(agencia.enviarDestinos());
     private static ArrayList<Destinos> destinosSeleccionados = new ArrayList<>();
     private static final Logger LOGGER = Logger.getLogger(Agencia.class.getName());
     @FXML
@@ -44,7 +45,10 @@ public class CreacionPaquetesController implements Initializable, CambioIdiomaLi
         llenarListaDestinos();
     }
     public void llenarListaDestinos() {
-        destinosCombo = agencia.enviarDestinos();
+        for(int i = 0 ; i<destinosCombo.size();i++)
+        {
+            System.out.println("Destinos cargados :" + destinosCombo.get(i).getNombre());
+        }
         if(agencia.enviarDestinos().isEmpty())
         {
             LOGGER.log(Level.INFO,"Se intento generar una lista de elementos vacios");
@@ -53,6 +57,11 @@ public class CreacionPaquetesController implements Initializable, CambioIdiomaLi
             destinosCombo.stream().toList();
             ObservableList<Destinos> listaDestinos = FXCollections.observableArrayList(destinosCombo);
             System.out.print("Lista combo" + listaDestinos);
+            ArrayList<Destinos> dest = new ArrayList<>(listaDestinos);
+            for(int j = 0 ; j<dest.size();j++)
+            {
+                System.out.println("Destinos cargados despues del Observable :" + dest.get(j).getNombre());
+            }
             destinos.setItems(listaDestinos);
             cargarAtributos();
         }

@@ -11,17 +11,18 @@
    <children>
       <Pane layoutX="27.0" layoutY="57.0" prefHeight="402.0" prefWidth="372.0">
          <children>
-            <Button fx:id="registrarGuia" layoutX="63.0" layoutY="14.0" mnemonicParsing="false" onAction="#registrarGuia" prefHeight="35.0" prefWidth="247.0" text="Registrar Guia" />
-            <Button layoutX="63.0" layoutY="62.0" mnemonicParsing="false" onAction="#registrarDestino" prefHeight="35.0" prefWidth="247.0" text="Registrar Destino" />
-            <Button layoutX="63.0" layoutY="110.0" mnemonicParsing="false" onAction="#creacionPaquetes" prefHeight="35.0" prefWidth="247.0" text="Crear Paquetes" />
-            <Button layoutX="63.0" layoutY="160.0" mnemonicParsing="false" onAction="#mostrarPaquetes" prefHeight="35.0" prefWidth="247.0" text="Mostrar Paquetes" />
-            <Button layoutX="63.0" layoutY="207.0" mnemonicParsing="false" onAction="#reservas" prefHeight="35.0" prefWidth="247.0" text="Mostrar Reservas" />
+            <Button fx:id="registrarGuia" layoutX="63.0" layoutY="-9.0" mnemonicParsing="false" onAction="#registrarGuia" prefHeight="35.0" prefWidth="247.0" text="Registrar Guia" />
+            <Button layoutX="63.0" layoutY="39.0" mnemonicParsing="false" onAction="#registrarDestino" prefHeight="35.0" prefWidth="247.0" text="Registrar Destino" />
+            <Button layoutX="63.0" layoutY="90.0" mnemonicParsing="false" onAction="#creacionPaquetes" prefHeight="35.0" prefWidth="247.0" text="Crear Paquetes" />
+            <Button layoutX="63.0" layoutY="137.0" mnemonicParsing="false" onAction="#mostrarPaquetes" prefHeight="35.0" prefWidth="247.0" text="Mostrar Paquetes" />
+            <Button layoutX="63.0" layoutY="184.0" mnemonicParsing="false" onAction="#reservas" prefHeight="35.0" prefWidth="247.0" text="Mostrar Reservas" />
             <Button fx:id="botonRegreso" layoutX="142.0" layoutY="343.0" mnemonicParsing="false" onAction="#regresar" prefHeight="38.0" prefWidth="103.0" text="Regresar">
                <font>
                   <Font name="Franklin Gothic Medium Cond" size="12.0" />
                </font>
             </Button>
-            <Button layoutX="63.0" layoutY="253.0" mnemonicParsing="false" onAction="#estadisticas" prefHeight="35.0" prefWidth="247.0" text="Mostrar Estadisticas" />
+            <Button layoutX="63.0" layoutY="234.0" mnemonicParsing="false" onAction="#estadisticas" prefHeight="35.0" prefWidth="247.0" text="Mostrar Estadisticas" />
+            <Button layoutX="63.0" layoutY="286.0" mnemonicParsing="false" onAction="#mostrarGuias" prefHeight="35.0" prefWidth="247.0" text="Mostrar Guias" />
          </children>
       </Pane>
       <ImageView fitHeight="292.0" fitWidth="346.0" layoutX="363.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">

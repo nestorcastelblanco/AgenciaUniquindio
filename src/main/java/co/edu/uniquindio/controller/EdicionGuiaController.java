@@ -22,7 +22,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class RegistroGuiaController implements Initializable, CambioIdiomaListener {
+public class EdicionGuiaController implements Initializable, CambioIdiomaListener {
     private final Agencia agencia = Agencia.getInstance();
     private static final Logger LOGGER = Logger.getLogger(Agencia.class.getName());
     @FXML
@@ -42,6 +42,10 @@ public class RegistroGuiaController implements Initializable, CambioIdiomaListen
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        nombre.setText(agencia.recibirGuiaEdicion().getNombre());
+        cedula.setText(agencia.recibirGuiaEdicion().getIdentificacion());
+        idiomas.setText(agencia.obtenerIdiomas(agencia.recibirGuiaEdicion().getLenguajes()));
+        experiencia.setText(agencia.recibirGuiaEdicion().getExp());
         llenarCombo();
     }
 
@@ -92,13 +96,13 @@ public class RegistroGuiaController implements Initializable, CambioIdiomaListen
             }
         });
     }
-    public void registarGuia(ActionEvent actionEvent) {
+    public void editar(ActionEvent actionEvent) {
         try
         {
             System.out.println(comboPaquete.getSelectionModel().getSelectedIndex());
             if(comboPaquete.getSelectionModel().getSelectedIndex() != -1)
             {
-                agencia.registrarGuia(nombre.getText(),experiencia.getText(),cedula.getText(),idiomas.getText(), comboPaquete.getSelectionModel().getSelectedItem());
+                agencia.editarGuia(nombre.getText(),experiencia.getText(),cedula.getText(),idiomas.getText(), comboPaquete.getSelectionModel().getSelectedItem());
                 LOGGER.log(Level.INFO,"Se registro un nuevo guia al sistema");
             }else {
                 LOGGER.log(Level.INFO, "No se ha seleccionado un paquete");

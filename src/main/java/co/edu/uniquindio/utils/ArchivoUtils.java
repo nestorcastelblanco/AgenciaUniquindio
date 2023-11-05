@@ -92,6 +92,15 @@ public class ArchivoUtils {
             e.printStackTrace();
         }
     }
+    public static void serializarArraylistClientes (String ruta, ArrayList<Clientes> guias)
+    {
+        try (ObjectOutputStream salida = new ObjectOutputStream(new FileOutputStream(ruta))) {
+            salida.writeObject(guias);
+            System.out.println("Clientes serializados correctamente.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     public static void serializarArraylistDestinos (String ruta, ArrayList<Destinos> guias)
     {
         try (ObjectOutputStream salida = new ObjectOutputStream(new FileOutputStream(ruta))) {

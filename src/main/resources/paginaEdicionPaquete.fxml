@@ -20,8 +20,8 @@
             <Font name="Franklin Gothic Book" size="34.0" />
          </font>
       </Label>
-      <Button fx:id="botonCrear" layoutX="203.0" layoutY="481.0" mnemonicParsing="false" onAction="#registrarPaquete" prefHeight="38.0" prefWidth="98.0" text="Editar" textOverrun="LEADING_ELLIPSIS" />
-   <TextField fx:id="nombre" layoutX="32.0" layoutY="83.0" prefHeight="29.0" prefWidth="267.0">
+      <Button fx:id="botonCrear" layoutX="203.0" layoutY="481.0" mnemonicParsing="false" onAction="#editarPaquete" prefHeight="38.0" prefWidth="98.0" text="Editar" textOverrun="LEADING_ELLIPSIS" />
+   <TextField fx:id="nombrePaquete" layoutX="32.0" layoutY="83.0" prefHeight="29.0" prefWidth="267.0">
       <font>
          <Font name="Franklin Gothic Medium Cond" size="16.0" />
       </font>
@@ -37,21 +37,21 @@
          <Font name="Franklin Gothic Book" size="15.0" />
       </font>
    </Label>
-   <TextField fx:id="personas" layoutX="35.0" layoutY="441.0" prefHeight="29.0" prefWidth="118.0" />
+   <TextField fx:id="cupos" layoutX="35.0" layoutY="441.0" prefHeight="29.0" prefWidth="118.0" />
    <Label layoutX="32.0" layoutY="112.0" prefHeight="25.0" prefWidth="81.0" text="Destino">
       <font>
          <Font name="Franklin Gothic Book" size="15.0" />
       </font>
    </Label>
-   <ComboBox fx:id="destinos" layoutX="32.0" layoutY="137.0" prefHeight="29.0" prefWidth="267.0" />
+   <ComboBox fx:id="destinosSistema" layoutX="32.0" layoutY="137.0" prefHeight="29.0" prefWidth="267.0" />
    <Button fx:id="botonDestino" layoutX="33.0" layoutY="180.0" mnemonicParsing="false" onAction="#agregarDestino" prefHeight="25.0" prefWidth="124.0" text="Agregar Destino" textOverrun="LEADING_ELLIPSIS" />
    <Label layoutX="180.0" layoutY="416.0" prefHeight="25.0" prefWidth="118.0" text="Valor">
       <font>
          <Font name="Franklin Gothic Book" size="15.0" />
       </font>
    </Label>
-   <DatePicker fx:id="fechaInicio" layoutX="35.0" layoutY="337.0" prefHeight="25.0" prefWidth="118.0" />
-   <DatePicker fx:id="fechaFin" layoutX="176.0" layoutY="337.0" prefHeight="25.0" prefWidth="118.0" />
+   <DatePicker fx:id="inicio" layoutX="35.0" layoutY="337.0" prefHeight="25.0" prefWidth="118.0" />
+   <DatePicker fx:id="fin" layoutX="176.0" layoutY="337.0" prefHeight="25.0" prefWidth="118.0" />
    <Label layoutX="35.0" layoutY="310.0" prefHeight="25.0" prefWidth="110.0" text="Fecha Inicio">
       <font>
          <Font name="Franklin Gothic Book" size="15.0" />
@@ -68,6 +68,6 @@
          <Font name="Franklin Gothic Book" size="15.0" />
       </font>
    </Label>
-   <ComboBox fx:id="destinosActuales" layoutX="32.0" layoutY="236.0" prefHeight="29.0" prefWidth="267.0" />
+   <ComboBox fx:id="destinosPaquete" layoutX="32.0" layoutY="236.0" prefHeight="29.0" prefWidth="267.0" />
    <Button fx:id="eliminarDestino" layoutX="33.0" layoutY="279.0" mnemonicParsing="false" onAction="#eliminarDestino" prefHeight="25.0" prefWidth="124.0" text="Eliminar" textOverrun="LEADING_ELLIPSIS" />
 </AnchorPane>

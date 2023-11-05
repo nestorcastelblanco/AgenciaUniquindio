@@ -65,4 +65,12 @@ public class VistaPaquetesController implements Initializable, CambioIdiomaListe
             agencia.loadStage("/paginaEdicionPaquete.fxml",actionEvent,"Se va a editar un paquete");
         }
     }
+    public void eliminar(ActionEvent actionEvent) {
+        if (tablaPaquetes.getSelectionModel().getSelectedIndex() == -1) {
+            LOGGER.log(Level.INFO, "Se intento cancelar un paquete sin haberlo seleccionado");
+        } else {
+            agencia.recibirPaqueteCancelacion(tablaPaquetes.getSelectionModel().getSelectedItem());
+            agencia.loadStage("/paginaVistaPaquetes.fxml",actionEvent, "Se cargo la pagina actualizada");
+        }
+    }
 }

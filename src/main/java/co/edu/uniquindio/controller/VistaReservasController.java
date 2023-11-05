@@ -66,4 +66,13 @@ public class VistaReservasController implements Initializable, CambioIdiomaListe
             agencia.loadStage("/paginaEdicionReserva.fxml",actionEvent,"Se va a editar una reserva");
         }
     }
+
+    public void eliminar(ActionEvent actionEvent) {
+        if (tablaReservas.getSelectionModel().getSelectedIndex() == -1) {
+            LOGGER.log(Level.INFO, "Se intento cancelar una reserva sin haberlo seleccionado");
+        } else {
+            agencia.recibirReservaCancelacion(tablaReservas.getSelectionModel().getSelectedItem());
+            agencia.loadStage("/paginaAdministrativa.fxml",actionEvent, "Se cargo la pagina actualizada");
+        }
+    }
 }

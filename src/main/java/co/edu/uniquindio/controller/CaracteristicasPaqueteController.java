@@ -35,6 +35,7 @@ public class CaracteristicasPaqueteController implements Initializable, CambioId
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        System.out.println("Se inicio el controlador");
         Paquetes paqueteSeleccionado  = agencia.paqueteSeleccion();
         nombre.setText(paqueteSeleccionado.getNombre());
         destinos.setText(agencia.obtenerNombresCiudades(paqueteSeleccionado.getDestinos()));
@@ -51,6 +52,10 @@ public class CaracteristicasPaqueteController implements Initializable, CambioId
         System.out.println(arrayListImagenes.toString());
         numeroImagenes = arrayListImagenes.size();
         cont = 0;
+        for(int i = 0 ; i<arrayListImagenes.size();i++)
+        {
+            System.out.println("Imaganes: " + i + " " + arrayListImagenes.get(i));
+        }
         Image imagen = new Image(arrayListImagenes.get(cont));
         imageView.setImage(imagen);
     }
