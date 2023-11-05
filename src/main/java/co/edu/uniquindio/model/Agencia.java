@@ -837,7 +837,7 @@ public class Agencia {
     public void recibirReservaCancelacion(Reservas selectedItem) {
         RESERVA_CANCELACION = selectedItem;
         for (int i = 0; i < reservas.size(); i++) {
-            if (reservas.get(i).equals(RESERVA_CANCELACION)) {
+            if (reservas.get(i).getCodigo() == RESERVA_CANCELACION.getCodigo()) {
                 for (int j = 0; j < paquetes.size(); j++) {
                     if (paquetes.get(j).getNombre().equals(RESERVA_CANCELACION.getPaquete().getNombre())) {
                         paquetes.get(j).setNumeroPersonas(paquetes.get(j).getNumeroPersonas() + RESERVA_CANCELACION.getNumeroPersonas());
@@ -862,12 +862,13 @@ public class Agencia {
         ArchivoUtils.serializarArraylistReservas(RUTA_RESERVAS,reservas);
     }
     public boolean recibirReservaCalificacion(Reservas selectedItem) {
+        RESERVA_CALIFICACION = selectedItem;
         boolean state =false;
         for (int i = 0 ; i<reservas.size();i++)
         {
-            if (reservas.get(i).equals(RESERVA_CALIFICACION))
+            if (reservas.get(i).getCodigo() == RESERVA_CALIFICACION.getCodigo())
             {
-                if(reservas.get(i).getFechaPlanificada().isBefore(LocalDate.now()) && !reservas.get(i).calificacion)
+                if(reservas.get(i).getFechaPlanificada().isBefore(LocalDate.now()) && !reservas.get(i).isCalificacion())
                 {
                     RESERVA_CALIFICACION= selectedItem;
                     state = true;
@@ -1078,6 +1079,8 @@ public class Agencia {
         }
         borrarDatosSerializados(RUTA_RESERVAS);
         ArchivoUtils.serializarArraylistReservas(RUTA_RESERVAS,reservas);
+        borrarDatosSerializados(RUTA_GUIAS);
+        ArchivoUtils.serializarArraylist(RUTA_GUIAS,guias);
     }
     public void cargarCalificaciones(ArrayList<Destinos> destinosCombo, ArrayList<Integer> calificacionDestinos) {
         for(int i = 0 ; i<destinos.size();i++){
@@ -1111,6 +1114,8 @@ public class Agencia {
         LOGGER.log(Level.INFO, "Se realizo la edicion de una Reserva");
         borrarDatosSerializados(RUTA_RESERVAS);
         ArchivoUtils.serializarArraylistReservas(RUTA_RESERVAS,reservas);
+        borrarDatosSerializados(RUTA_GUIAS);
+        ArchivoUtils.serializarArraylist(RUTA_GUIAS,guias);
     }
     public Reservas getReservaCalificacion() {
         return RESERVA_CALIFICACION;

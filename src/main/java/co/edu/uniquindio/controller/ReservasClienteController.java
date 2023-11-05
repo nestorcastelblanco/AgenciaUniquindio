@@ -44,6 +44,9 @@ public class ReservasClienteController implements Initializable, CambioIdiomaLis
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        for(int i = 0 ; i<agencia.enviarReservasCliente().size();i++) {
+            System.out.println(agencia.enviarReservasCliente().get(i).getCliente().getNombreCompleto() + " Codigo: " + agencia.enviarReservasCliente().get(i).getCodigo() + " Estado Calificacion: " + agencia.enviarReservasCliente().get(i).isCalificacion());
+        }
         reservaciones = FXCollections.observableArrayList(agencia.enviarReservasCliente());
         paquete.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPaquete().getNombre()));
         guia.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getGuia().getNombre()));

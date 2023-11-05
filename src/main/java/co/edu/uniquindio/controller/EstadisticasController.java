@@ -61,8 +61,9 @@ public class EstadisticasController implements Initializable, CambioIdiomaListen
     private void cargarMejoresGuias() {
         XYChart.Series setMejoresGuias = new XYChart.Series<>();
         ArrayList<Guias> guias = agencia.enviarGuias();
-        for (int i =0; i<guias.size()-1;i++)
+        for (int i =0; i<guias.size();i++)
         {
+
             setMejoresGuias.getData().add(new XYChart.Data<>(guias.get(i).getNombre(),guias.get(i).promedio()));
         }
         mejoresGuias.getData().addAll(setMejoresGuias);
