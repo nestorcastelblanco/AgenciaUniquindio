@@ -20,4 +20,5 @@ public class Clientes implements Serializable {
     public ArrayList<String> getBusquedas(){
         return busquedas;
     }
+
 }

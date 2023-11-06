@@ -615,8 +615,6 @@ public class Agencia {
             actualizarPaquetesRecursivo(i+1, nombre, destinos, inicio, fin, servicios, valor, personas);
         }
     }
-
-
     //QUEDO HASTA AQUI
     //QUEDO HASTA AQUI
     //QUEDO HASTA AQUI
@@ -652,8 +650,9 @@ public class Agencia {
         }
         int numeroPersonas = Integer.parseInt(agregarPersonas);
         int numeroPersonas1 = Integer.parseInt(quitarPersonas);
+        /*
         for (Reservas reserva : reservas) {
-            if (RESERVA_EDICION.equals(reserva)) {
+            if (RESERVA_EDICION.getCodigo() == reserva.getCodigo()) {
                 reserva.setPaquete(paquete);
                 reserva.setCliente(RESERVA_EDICION.getCliente());
                 reserva.setFechaSolicitud(inicio);
@@ -664,9 +663,16 @@ public class Agencia {
                 reserva.setCalificacion(RESERVA_EDICION.calificacion);
             }
         }
+         */
+        actualizarReservaRecursivo(0,paquete, inicio,fin,numeroPersonas,numeroPersonas1,selectedItem, pendiente);
         LOGGER.log(Level.INFO, "Se realizo la edicion de una Reserva");
         borrarDatosSerializados(RUTA_RESERVAS);
         ArchivoUtils.serializarArraylistReservas(RUTA_RESERVAS,reservas);
+        actualizarPaquetesRecursivoReserva(0,paquete,numeroPersonas1,numeroPersonas);
+        LOGGER.log(Level.INFO, "Se realizo la edicion de un Paquete con base a la edicion de la reserva");
+        borrarDatosSerializados(RUTA_PAQUETES);
+        ArchivoUtils.serializarArraylistPaquetes(RUTA_PAQUETES,paquetes);
+        /*
         for (int i = 0 ; i< paquetes.size() ; i++)
         {
             System.out.print("Paquete seleccionado :" + paquete.getNombre() + " "+ paquete.getDestinos());
@@ -687,18 +693,60 @@ public class Agencia {
                 ArchivoUtils.serializarArraylistPaquetes(RUTA_PAQUETES,paquetes);
             }
         }
+         */
+    }
+    public void actualizarReservaRecursivo(int i ,Paquetes paquete, LocalDate inicio, LocalDate fin, int numeroPersonas, int numeroPersonas1, Guias selectedItem, String pendiente) {
+        if (i<reservas.size()) {
+            if (RESERVA_EDICION.getCodigo() == reservas.get(i).getCodigo()) {
+                reservas.get(i).setPaquete(paquete);
+                reservas.get(i).setCliente(RESERVA_EDICION.getCliente());
+                reservas.get(i).setFechaSolicitud(inicio);
+                reservas.get(i).setFechaPlanificada(fin);
+                reservas.get(i).setNumeroPersonas(RESERVA_EDICION.getNumeroPersonas() + numeroPersonas - numeroPersonas1);
+                reservas.get(i).setEstado(pendiente);
+                reservas.get(i).setGuia(selectedItem);
+                reservas.get(i).setCalificacion(RESERVA_EDICION.calificacion);
+            }
+            actualizarReservaRecursivo(i+1,paquete,inicio,fin,numeroPersonas,numeroPersonas1,selectedItem,pendiente);
+        }
+    }
+    public void actualizarPaquetesRecursivoReserva(int i,Paquetes paquete,int numeroPersonas1, int numeroPersonas) {
+        if (i<paquetes.size()) {
+            if (paquete.getNombre().equals(paquetes.get(i).getNombre())) {
+                System.out.print("Paquete encontrado :" + paquetes.get(i).getNombre() + " "+ paquetes.get(i).getDestinos());
+                paquetes.get(i).setNumeroPersonas(paquete.getNumeroPersonas() + numeroPersonas1 - numeroPersonas);
+                paquetes.set(i,paquetes.get(i));;
+                LOGGER.log(Level.INFO, "Se realizo la edicion de un Paquete con base a la edicion de la reserva");
+                borrarDatosSerializados(RUTA_PAQUETES);
+                ArchivoUtils.serializarArraylistPaquetes(RUTA_PAQUETES,paquetes);
+            }
+            actualizarPaquetesRecursivoReserva(i+1, paquete,numeroPersonas1,numeroPersonas);
+        }
     }
     public Clientes obtenerCliente(String id)
     {
+        return obtenerClienteRecursivo(id,0);
+        /*
         Clientes cliente = null;
         for ( int i = 0 ; i<clientes.size();i++)
         {
-            if(clientes.get(i).getContrasena().equals(id))
+            if(clientes.get(i).getIdentificacion().equals(id))
             {
                 cliente =  clientes.get(i);
             }
         }
         return cliente;
+         */
+    }
+    public Clientes obtenerClienteRecursivo(String id, int index) {
+        if (index == clientes.size()) {
+            return null;
+        }
+        if (clientes.get(index).getIdentificacion().equals(id)) {
+            return clientes.get(index);
+        } else {
+            return obtenerClienteRecursivo(id, index + 1);
+        }
     }
     public Clientes clienteSesion() {
         return CLIENTE_SESION;
@@ -734,19 +782,33 @@ public class Agencia {
         return PAQUETE_SELECCIONADO;
     }
     public ArrayList<Guias> enviarGuiasPaquete(Paquetes paquete) {
-        ArrayList<Guias> guiasCorrespondientes = new ArrayList<>();
+        /*
         for (int i = 0 ; i<guias.size();i++){
             if(guias.get(i).getPaquete().getNombre().equals(paquete.getNombre()))
             {
                 guiasCorrespondientes.add(guias.get(i));
             }
         }
+
+         */
+        return enviarGuiasPaqueteRecursivo(paquete,0);
+    }
+    public ArrayList<Guias> enviarGuiasPaqueteRecursivo(Paquetes paquete, int index) {
+        if (index == guias.size()) {
+            return new ArrayList<>();
+        }
+        ArrayList<Guias> guiasCorrespondientes = new ArrayList<>();
+        if (guias.get(index).getPaquete().getNombre().equals(paquete.getNombre())) {
+            guiasCorrespondientes.add(guias.get(index));
+        }
+        guiasCorrespondientes.addAll(enviarGuiasPaqueteRecursivo( paquete, index + 1));
         return guiasCorrespondientes;
     }
     public ArrayList<Reservas> enviarReservasCliente() {
         ArrayList<Reservas> reservasCliente = new ArrayList<>();
         reservas.removeAll(reservas);
         leerReservas();
+        /*
         for (int i = 0 ; i<reservas.size();i++)
         {
             if (reservas.get(i).getCliente().getIdentificacion().equals(CLIENTE_SESION.getIdentificacion()))
@@ -754,7 +816,18 @@ public class Agencia {
                 reservasCliente.add(reservas.get(i));
             }
         }
-        return reservasCliente;
+         */
+        return enviarReservasClienteRecursivo(0,reservasCliente);
+    }
+    public ArrayList<Reservas> enviarReservasClienteRecursivo(int index, ArrayList<Reservas> reservasCliente) {
+        if (index == reservas.size()) {
+            return reservasCliente;
+        }
+        if (reservas.get(index).getCliente().getIdentificacion().equals(CLIENTE_SESION.getIdentificacion())) {
+            // Si es igual, agrega la reserva actual a la lista de reservas del cliente
+            reservasCliente.add(reservas.get(index));
+        }
+        return enviarReservasClienteRecursivo(index + 1, reservasCliente);
     }
     public void recibirPaqueteEdicion(Paquetes selectedItem) {
         PAQUETE_EDICION= selectedItem;
@@ -767,22 +840,40 @@ public class Agencia {
     }
     public void recibirPaqueteCancelacion(Paquetes selectedItem) {
         PAQUETE_CANCELACION= selectedItem;
-        for (int i = 0 ; i<paquetes.size();i++)
+        /*for (int i = 0 ; i<paquetes.size();i++)
         {
             if (paquetes.get(i).getNombre().equals(PAQUETE_CANCELACION.getNombre()))
             {
                 paquetes.remove(i);
             }
         }
+         */
+        cancelarPaqueteRecursivo(0);
         borrarDatosSerializados(RUTA_PAQUETES);
         ArchivoUtils.serializarArraylistPaquetes(RUTA_PAQUETES,paquetes);
     }
+    public void cancelarPaqueteRecursivo(int index) {
+        if (index == paquetes.size()) {
+            return;
+        }
+        if (paquetes.get(index).getNombre().equals(PAQUETE_CANCELACION.getNombre())) {
+            paquetes.remove(index);
+            cancelarPaqueteRecursivo(index);
+        } else {
+            cancelarPaqueteRecursivo(index + 1);
+        }
+    }
     public void recibirReservaCancelacion(Reservas selectedItem) {
         RESERVA_CANCELACION = selectedItem;
-        for (int i = 0; i < reservas.size(); i++) {
+        cancelarReservaRecursivo(0,0);
+        /*for (int i = 0; i < reservas.size(); i++) {
+
             if (reservas.get(i).getCodigo() == RESERVA_CANCELACION.getCodigo()) {
+
                 for (int j = 0; j < paquetes.size(); j++) {
+
                     if (paquetes.get(j).getNombre().equals(RESERVA_CANCELACION.getPaquete().getNombre())) {
+
                         paquetes.get(j).setNumeroPersonas(paquetes.get(j).getNumeroPersonas() + RESERVA_CANCELACION.getNumeroPersonas());
                         ArchivoUtils.serializarArraylistPaquetes(RUTA_PAQUETES, paquetes);
                     }
@@ -792,8 +883,30 @@ public class Agencia {
                 leerReservas();
             }
         }
+         */
+    }
+    public void cancelarReservaRecursivo(int reservaIndex, int paqueteIndex) {
+        if (reservaIndex == reservas.size()) {
+            return;
+        }
+        if (reservas.get(reservaIndex).getCodigo() == RESERVA_CANCELACION.getCodigo()) {
+            while (paqueteIndex < paquetes.size() &&
+                    !paquetes.get(paqueteIndex).getNombre().equals(RESERVA_CANCELACION.getPaquete().getNombre())) {
+                paqueteIndex++;
+            }
+            if (paqueteIndex < paquetes.size()) {
+                paquetes.get(paqueteIndex).setNumeroPersonas(paquetes.get(paqueteIndex).getNumeroPersonas() + RESERVA_CANCELACION.getNumeroPersonas());
+                ArchivoUtils.serializarArraylistPaquetes(RUTA_PAQUETES, paquetes);
+            }
+            reservas.remove(reservaIndex);
+            ArchivoUtils.serializarArraylistReservas(RUTA_RESERVAS, reservas);
+            leerReservas();
+        } else {
+            cancelarReservaRecursivo(reservaIndex + 1, paqueteIndex);
+        }
     }
     public void recibirGuiaEliminado(Guias selectedItem) {
+        /*
         for (int i = 0 ; i<guias.size();i++)
         {
             if (guias.get(i).getIdentificacion().equals(selectedItem.getIdentificacion()))
@@ -801,11 +914,25 @@ public class Agencia {
                 guias.remove(i);
             }
         }
+         */
+        eliminarGuiaRecursivo(selectedItem,0);
         borrarDatosSerializados(RUTA_GUIAS);
-        ArchivoUtils.serializarArraylistReservas(RUTA_RESERVAS,reservas);
+        ArchivoUtils.serializarArraylist(RUTA_GUIAS,guias);
+    }
+    public void eliminarGuiaRecursivo(Guias guiaEliminar, int index) {
+        if (index == guias.size()) {
+            return;
+        }
+        if (guias.get(index).getIdentificacion().equals(guiaEliminar.getIdentificacion())) {
+            guias.remove(index);
+            eliminarGuiaRecursivo(guiaEliminar, index);
+        } else {
+            eliminarGuiaRecursivo(guiaEliminar, index + 1);
+        }
     }
     public boolean recibirReservaCalificacion(Reservas selectedItem) {
         RESERVA_CALIFICACION = selectedItem;
+        /*
         boolean state =false;
         for (int i = 0 ; i<reservas.size();i++)
         {
@@ -822,7 +949,23 @@ public class Agencia {
                 }
             }
         }
-        return state;
+         */
+        return verificarCalificacionRecursivo(selectedItem,0);
+    }
+    public boolean verificarCalificacionRecursivo(Reservas reservaCalificacion, int index) {
+        if (index == reservas.size()) {
+            return false;
+        }
+        if (reservas.get(index).getCodigo() == reservaCalificacion.getCodigo()) {
+            if (reservas.get(index).getFechaPlanificada().isBefore(LocalDate.now()) && !reservas.get(index).isCalificacion()) {
+                LOGGER.log(Level.INFO, "El paquete puede ser calificado");
+                return true;
+            } else {
+                LOGGER.log(Level.INFO, "El paquete no puede ser calificado");
+                return false;
+            }
+        }
+        return verificarCalificacionRecursivo(reservaCalificacion, index + 1);
     }
     public void recibirPaqueteSeleccionado(Paquetes selectedItem) {
         PAQUETE_SELECCIONADO = selectedItem;
@@ -849,6 +992,7 @@ public class Agencia {
     }
     public boolean buscarCliente (String usuario, String contrasena)
     {
+        /*
         boolean state = false;
         for (Clientes c : clientes)
         {
@@ -858,9 +1002,21 @@ public class Agencia {
                 CLIENTE_SESION = c;
             }
         }
-        System.out.println("Cliente encontrado " + CLIENTE_SESION.getNombreCompleto());
-        return state;
+         */
+        return buscarClienteRecursivo(usuario,contrasena,0);
     }
+    public boolean buscarClienteRecursivo(String usuario, String contrasena, int index) {
+        if (index == clientes.size()) {
+            return false;
+        }
+        if (clientes.get(index).getUsuario().equals(usuario) && clientes.get(index).getContrasena().equals(contrasena)) {
+            CLIENTE_SESION = clientes.get(index);
+            System.out.println("Cliente encontrado " + CLIENTE_SESION.getNombreCompleto());
+            return true;
+        }
+        return buscarClienteRecursivo(usuario, contrasena, index + 1);
+    }
+
     public boolean buscarAdmin (String usuario, String contrasena) {
         boolean state = false;
         if (usuario.equals("admin") && contrasena.equals("admin")) {
@@ -869,7 +1025,8 @@ public class Agencia {
         return state;
     }
     public void buscarDestino(String destino, Clientes clienteSesion) {
-        for(int j = 0 ; j<destinos.size();j++)
+        buscarDestinoRecursivo(destino,clienteSesion,0);
+        /*for(int j = 0 ; j<destinos.size();j++)
         {
             System.out.println("Buscando");
             if(destinos.get(j).getNombre().equals(destino))
@@ -887,6 +1044,32 @@ public class Agencia {
                 System.out.println("Contador de busquedas del destino: " + destinos.get(j).getNombre() +" es: " + destinos.get(j).getContBusquedas());
             }
         }
+         */
+    }
+    public void buscarDestinoRecursivo(String destino, Clientes clienteSesion, int destinoIndex) {
+        if (destinoIndex == destinos.size()) {
+            return;
+        }
+        if (destinos.get(destinoIndex).getNombre().equals(destino)) {
+            destinos.get(destinoIndex).setContBusquedas(destinos.get(destinoIndex).getContBusquedas() + 1);
+            actualizarBusquedaClienteRecursivo(clienteSesion, destino,0);
+            System.out.println("Contador de busquedas del destino " + destino + " es: " + destinos.get(destinoIndex).getContBusquedas());
+        }
+        buscarDestinoRecursivo(destino, clienteSesion, destinoIndex + 1);
+        borrarDatosSerializados(RUTA_DESTINOS);
+        borrarDatosSerializados(RUTA_CLIENTES);
+        ArchivoUtils.serializarArraylistDestinos(RUTA_DESTINOS,destinos);
+        ArchivoUtils.serializarArraylistClientes(RUTA_CLIENTES,clientes);
+    }
+    public void actualizarBusquedaClienteRecursivo(Clientes clienteSesion, String destino, int clienteIndex) {
+        if (clienteIndex == clientes.size()) {
+            return;
+        }
+        if (clienteSesion.getIdentificacion().equals(clientes.get(clienteIndex).getIdentificacion())) {
+            clientes.get(clienteIndex).añadirBusqueda(destino);
+            System.out.println("Cliente Sesion: " + clienteSesion + " busqueda " + destino);
+        }
+        actualizarBusquedaClienteRecursivo(clienteSesion, destino, clienteIndex + 1);
     }
     public String obtenerNombresDestinos(ArrayList<Destinos> destinos) {
         StringBuilder nombres = new StringBuilder();
@@ -921,6 +1104,7 @@ public class Agencia {
     }
     public boolean verificarCredenciales(String usuario, String contrasena)
     {
+        /*
         boolean state = false;
         for (Clientes c : clientes)
         {
@@ -929,10 +1113,21 @@ public class Agencia {
                 state = true;
             }
         }
-        return state;
+         */
+        return verificarCredencialesRecursivo(usuario,contrasena,0);
+    }
+    public boolean verificarCredencialesRecursivo(String usuario, String contrasena, int index) {
+        if (index == clientes.size()) {
+            return false;
+        }
+        if (clientes.get(index).getUsuario().equals(usuario) && clientes.get(index).getContrasena().equals(contrasena)) {
+            return true;
+        }
+        return verificarCredencialesRecursivo(usuario, contrasena, index + 1);
     }
     public boolean verificarIdentificacion(String id)
     {
+        /*
         boolean state = false;
         for (Guias c : guias)
         {
@@ -941,7 +1136,18 @@ public class Agencia {
                 state = true;
             }
         }
-        return state;
+        */
+
+        return verificarIdentificacionRecursivo(id,0);
+    }
+    public boolean verificarIdentificacionRecursivo(String id, int index) {
+        if (index == guias.size()) {
+            return false;
+        }
+        if (guias.get(index).getIdentificacion().equals(id)) {
+            return true;
+        }
+        return verificarIdentificacionRecursivo( id, index + 1);
     }
     public boolean esCorreoValido(String correo) {
         String expresionRegular = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(gmail\\.com|hotmail\\.com|uqvirtual\\.edu\\.co|yahoo\\.es)$";
@@ -950,8 +1156,8 @@ public class Agencia {
         return matcher.matches();
     }
     public void enviarCorreo(Clientes cliente, Paquetes paqueteSeleccionado, LocalDate inicio, LocalDate fin, String personas, Guias selectedItem, String pendiente) {
-        final String correoEmisor = "traveluniquindio@gmail.com"; // Cambia esto con tu dirección de correo electrónico
-        final String contraseñaEmisor = "sgfc sgay apnx qvxq"; // Cambia esto con tu contra/seña de correo electrónico
+        String correoEmisor = "traveluniquindio@gmail.com"; // Cambia esto con tu dirección de correo electrónico
+        String contraseñaEmisor = "sgfc sgay apnx qvxq"; // Cambia esto con tu contra/seña de correo electrónico
         String destinos = obtenerNombresDestinos(paqueteSeleccionado.getDestinos());
         String asunto = "RESERVACION DE PAQUETE TURISTICO EN TRAVEL UNIQUINDIO";
         String mensaje = "Buen dia " + cliente.getNombreCompleto() +" la reservacion de su paquete, " + paqueteSeleccionado.getNombre() + " fue realizado con exito, le recordamos las caracteristicas con las que cuenta este paquete: " + paqueteSeleccionado.getServicios() +", durante " + inicio.until(fin, ChronoUnit.DAYS) +" dias, Reservado para: " + personas + " personas, con los siguientes destinos: " + destinos + " con un valor de: " + (long) paqueteSeleccionado.getPrecio()+"COP por persona, es decir un total de: " + (long) paqueteSeleccionado.getPrecio() * Integer.parseInt(personas) +"COP con fecha de inicio el: " + inicio + " y fecha de finalizacion : " + fin + ", pronto se notificara el estado de su reserva";
@@ -983,6 +1189,7 @@ public class Agencia {
             e.printStackTrace();
         }
     }
+
     private ArrayList<String> llenarArrayIdioma(String idiomas) {
         String[] leng = idiomas.split(",");
         ArrayList<String> jpgs = new ArrayList<>();
@@ -1068,7 +1275,7 @@ public class Agencia {
         return state;
     }
     private boolean verificarFechasReserva(LocalDate inicio, LocalDate fin, Paquetes paquete) {
-        boolean state = true;
+        /*boolean state = true;
         if (inicio.isAfter(fin))
         {
             state = false;
@@ -1089,8 +1296,21 @@ public class Agencia {
                 }
             }
         }
-        return state;
+         */
+        return verificarFechasReservaRecursivo(inicio,fin,paquete,0);
     }
+    public boolean verificarFechasReservaRecursivo(LocalDate inicio, LocalDate fin, Paquetes paquete, int paqueteIndex) {
+        if (paqueteIndex == paquetes.size()) {
+            return false;
+        }
+        if ((inicio.isAfter(paquete.getInicio()) || inicio.isEqual(paquete.getInicio())) &&
+                (fin.isBefore(paquete.getFin()) || fin.isEqual(paquete.getFin()))) {
+            System.out.println("Las fechas de reserva están dentro del rango del paquete.");
+            return true;
+        }
+        return verificarFechasReservaRecursivo(inicio, fin, paquete, paqueteIndex + 1);
+    }
+
     private boolean verificarNumero(String numero)
     {
         boolean isNumeric = (numero != null && numero.matches("[0-9]+"));
@@ -1125,7 +1345,7 @@ public class Agencia {
         }
         for(int j=0; j<guias.size();j++)
         {
-            if (guias.get(j).equals(guia))
+            if (guias.get(j).getIdentificacion().equals(guia.getIdentificacion()))
             {
                 guias.get(j).addCalificacion(calificacionGuia);
                 guias.set(j,guias.get(j));
@@ -1146,15 +1366,13 @@ public class Agencia {
                 reserva.setCalificacion(true);
             }
         }
-        for(int i = 0 ; i<reservas.size();i++)
-        {
-            System.out.println(reservas.get(i).getCliente().getNombreCompleto() + " Codigo: " + reservas.get(i).getCodigo() + " Estado Calificacion: "+ reservas.get(i).isCalificacion());
-        }
         borrarDatosSerializados(RUTA_RESERVAS);
         ArchivoUtils.serializarArraylistReservas(RUTA_RESERVAS,reservas);
         borrarDatosSerializados(RUTA_GUIAS);
         ArchivoUtils.serializarArraylist(RUTA_GUIAS,guias);
     }
+
+    //CALIFICACIONES DE RESERVAS QUE NO CUENTAN CON UN GUIA
     public void cargarCalificaciones(ArrayList<Destinos> destinosCombo, ArrayList<Integer> calificacionDestinos) {
         for(int i = 0 ; i<destinos.size();i++){
             for( int x = 0 ; x<destinosCombo.size();x++)
@@ -1167,7 +1385,6 @@ public class Agencia {
                 }
             }
         }
-        LOGGER.log(Level.INFO,"Se ha generado la calificacion correctamente");
         for (Reservas reserva : reservas) {
             if (RESERVA_CALIFICACION.getCodigo() == reserva.getCodigo()) {
                 reserva.setPaquete(RESERVA_CALIFICACION.getPaquete());
@@ -1184,6 +1401,7 @@ public class Agencia {
         for(int i = 0 ; i<reservas.size();i++) {
             System.out.println(reservas.get(i).getCliente().getNombreCompleto() + " Codigo: " + reservas.get(i).getCodigo() + " Estado Calificacion: " + reservas.get(i).isCalificacion());
         }
+        LOGGER.log(Level.INFO,"Se ha generado la calificacion correctamente");
         LOGGER.log(Level.INFO, "Se realizo la edicion de una Reserva");
         borrarDatosSerializados(RUTA_RESERVAS);
         ArchivoUtils.serializarArraylistReservas(RUTA_RESERVAS,reservas);
