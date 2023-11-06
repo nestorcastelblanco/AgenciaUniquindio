@@ -107,6 +107,7 @@ public class CreacionPaquetesController implements Initializable, CambioIdiomaLi
             agencia.registrarPaquete(nombre.getText(),destinosSeleccionados,fechaInicio.getValue(),fechaFin.getValue(),servicios.getText(),personas.getText(),valor.getText());
             nombre.setText("");destinosSeleccionados.clear();servicios.setText("");personas.setText("");valor.setText("");
             LOGGER.log(Level.INFO,"Se registro un nuevo Destino al sistema");
+
         } catch (CampoRepetido | CampoObligatorioException | CampoVacioException e) {
             mostrarMensaje(Alert.AlertType.ERROR, e.getMessage());
         }

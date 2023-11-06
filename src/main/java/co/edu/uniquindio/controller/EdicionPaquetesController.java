@@ -27,7 +27,7 @@ public class EdicionPaquetesController implements Initializable, CambioIdiomaLis
     private final Agencia agencia = Agencia.getInstance();
     private final Logger LOGGER = Logger.getLogger(Agencia.class.getName());
     private ArrayList<Destinos> destinosCargados = agencia.getDestinos();
-    private ArrayList<Destinos> destinosActuales = agencia.enviarPaqueteEdicion().getDestinos();
+    private ArrayList<Destinos> destinosActuales = new ArrayList<>();
     @FXML
     private ComboBox<Destinos> destinosSistema, destinosPaquete;
     @FXML
@@ -39,9 +39,9 @@ public class EdicionPaquetesController implements Initializable, CambioIdiomaLis
     public void onCambioIdioma(CambioIdiomaEvent evento) {
 
     }
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        destinosActuales = agencia.enviarPaqueteEdicion().getDestinos();
         nombrePaquete.setText(agencia.enviarPaqueteEdicion().getNombre());
         servicios.setText(agencia.enviarPaqueteEdicion().getServicios());
         cupos.setText(agencia.enviarPaqueteEdicion().getNumeroPersonas()+"");
@@ -161,21 +161,26 @@ public class EdicionPaquetesController implements Initializable, CambioIdiomaLis
         alert.show();
     }
     public void agregarDestino(ActionEvent actionEvent) {
+        boolean state = true;
         if (destinosSistema.getSelectionModel().getSelectedIndex() == -1)
         {
             LOGGER.log(Level.INFO, "Se intento añadir un Destino sin seleccionarlo");
         }else {
             for(int i = 0; i< destinosActuales.size();i++)
             {
+                System.out.println("Destinos Actuales: " + destinosActuales.get(i).getNombre());
+                System.out.println("Destinos Seleccionado: " + destinosActuales.get(i).getNombre());
                 if(destinosActuales.get(i).getNombre().equals(destinosSistema.getSelectionModel().getSelectedItem().getNombre()))
                 {
+                    state = false;
                     System.out.println("El paquete Actual ya cuenta con ese destino");
-                }else {
-                    destinosActuales.add(destinosSistema.getSelectionModel().getSelectedItem());
-                    System.out.println("Se añadio el destino: " + destinosSistema.getSelectionModel().getSelectedItem().getNombre() + " a los destinos del paquete");
-                    llenarListaDestinosPaquete();
-                    llenarListaDestinosSistema();
                 }
+            }
+            if(state)
+            {
+                destinosActuales.add(destinosSistema.getSelectionModel().getSelectedItem());
+                System.out.println("Se añadio el destino: " + destinosSistema.getSelectionModel().getSelectedItem().getNombre() + " a los destinos del paquete");
+                llenarListaDestinosPaquete();
             }
         }
     }

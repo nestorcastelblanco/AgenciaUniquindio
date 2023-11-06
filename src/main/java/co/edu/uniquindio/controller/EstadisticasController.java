@@ -41,7 +41,7 @@ public class EstadisticasController implements Initializable, CambioIdiomaListen
     private void cargarDestinosReservados() {
         XYChart.Series setDestinosReservados = new XYChart.Series<>();
         ArrayList<Destinos> destinos = agencia.enviarDestinos();
-        for (int i =0; i<destinos.size()-1;i++)
+        for (int i =0; i<destinos.size();i++)
         {
             System.out.println(destinos.get(i).getNombre()+", "+destinos.get(i).getContReservas());
             setDestinosReservados.getData().add(new XYChart.Data<>(destinos.get(i).getNombre(),destinos.get(i).getContReservas()));
@@ -51,7 +51,7 @@ public class EstadisticasController implements Initializable, CambioIdiomaListen
     private void cargarDestinosBuscados() {
         XYChart.Series setDestinosBuscados = new XYChart.Series<>();
 
-        for (int i =0; i<agencia.enviarDestinos().size()-1;i++)
+        for (int i =0; i<agencia.enviarDestinos().size();i++)
         {
             System.out.println("Buscados" + agencia.enviarDestinos().get(i).getNombre() + " cont: " + agencia.enviarDestinos().get(i).getContBusquedas());
             setDestinosBuscados.getData().add(new XYChart.Data<>(agencia.enviarDestinos().get(i).getNombre(),agencia.enviarDestinos().get(i).getContBusquedas()));

@@ -297,7 +297,9 @@ public class Agencia {
                 System.out.println("Nombre: " + paquetes.get(i).getNombre() + " Destinos: " + paquetes.get(i).getDestinos().get(j));
             }
         }
+        borrarDatosSerializados(RUTA_PAQUETES);
         ArchivoUtils.serializarArraylistPaquetes(RUTA_PAQUETES,paquetes);
+        leerPaquetes();
         LOGGER.log(Level.INFO, "Se registro un nuevo Paquete");
     }
     public void realizarReserva(Paquetes paquete, Clientes cliente, LocalDate inicio, LocalDate fin, String personas, Guias selectedItem, String pendiente) throws CampoRepetido,CampoObligatorioException,CampoVacioException {
@@ -612,7 +614,7 @@ public class Agencia {
             throw new CampoObligatorioException("Se crearon valores en el precio erroneos");
         }
         for (Paquetes paquete : paquetes) {
-            if (nombre.equals(paquete.getNombre())) {
+            if (paqueteE.getNombre().equals(paquete.getNombre())) {
                 paquete.setNombre(nombre);
                 paquete.setDestinos(destinos);
                 paquete.setDuracion(inicio.until(fin, ChronoUnit.DAYS) + "");
