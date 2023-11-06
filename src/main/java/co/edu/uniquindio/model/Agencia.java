@@ -350,7 +350,7 @@ public class Agencia {
         reserva.setCodigo(random.nextInt(10000));
         reservas.add(reserva);
         ArchivoUtils.serializarArraylistReservas(RUTA_RESERVAS,reservas);
-        for (int i = 0 ; i< paquetes.size() ; i++)
+        /*for (int i = 0 ; i< paquetes.size() ; i++)
         {
             if (paqueteSeleccion().equals(paquetes.get(i)))
             {
@@ -374,10 +374,44 @@ public class Agencia {
         LOGGER.log(Level.INFO, "Se realizo la reserva de un Paquete");
         borrarDatosSerializados(RUTA_PAQUETES);
         ArchivoUtils.serializarArraylistPaquetes(RUTA_PAQUETES,paquetes);
+         */
+        actualizarPaquetesRecursivo(0,0,0,numeroPersonas);
         for(int i = 0 ; i<reservas.size();i++)
         {
             System.out.println(reservas.get(i).getCliente().getNombreCompleto() + " Codigo: " + reservas.get(i).getCodigo());
         }
+    }
+    public void actualizarPaquetesRecursivo(int i, int x, int j, int numeroPersonas) {
+        if (i < paquetes.size()) {
+            if (paqueteSeleccion().equals(paquetes.get(i))) {
+                paquetes.get(i).setNumeroPersonas(paquetes.get(i).getNumeroPersonas() - numeroPersonas);
+                paquetes.get(i).setCantReservas(paquetes.get(i).getCantReservas() + 1);
+                paquetes.set(i, paquetes.get(i));
+
+                actualizarDestinosRecursivo(x, j);
+            }
+            actualizarPaquetesRecursivo(i + 1, 0, 0, numeroPersonas); // Llamada recursiva con i incrementado y x y j reiniciados a 0
+        } else {
+            LOGGER.log(Level.INFO, "Se realizó la reserva de un Paquete");
+            borrarDatosSerializados(RUTA_PAQUETES);
+            ArchivoUtils.serializarArraylistPaquetes(RUTA_PAQUETES, paquetes);
+        }
+    }
+
+    private void actualizarDestinosRecursivo(int x, int j) {
+        if (x < paqueteSeleccion().getDestinos().size()) {
+            if (j < destinos.size()) {
+                if (destinos.get(j).getNombre().equals(paqueteSeleccion().getDestinos().get(x).getNombre())) {
+                    System.out.println("Se actualiza ");
+                    destinos.get(j).setContReservas(destinos.get(j).getContReservas() + 1);
+                    destinos.set(j, destinos.get(j));
+                }
+                actualizarDestinosRecursivo(x, j + 1); // Llamada recursiva con j incrementado
+            }
+            actualizarDestinosRecursivo(x + 1, 0); // Llamada recursiva con x incrementado y j reiniciado a 0
+        }
+        borrarDatosSerializados(RUTA_DESTINOS);
+        ArchivoUtils.serializarArraylistDestinos(RUTA_DESTINOS, destinos);
     }
     public void realizarEdicion(String nombre, String correo, String direccion, String id, String ciudad, String telefono, String usuario, String contrasena) throws CampoRepetido,CampoObligatorioException,CampoVacioException {
         if (nombre == null || nombre.isEmpty()) {
@@ -404,6 +438,7 @@ public class Agencia {
                 throw new CampoRepetido("Las credenciales proporcionadas no estan disponibles");
             }
         }
+        /*
         for (int i = 0 ; i< clientes.size() ; i++)
         {
             if (CLIENTE_SESION.equals(clientes.get(i))) {
@@ -419,9 +454,34 @@ public class Agencia {
                 CLIENTE_SESION = clientes.get(i);
             }
         }
+         */
+        actualizarClientesRecursivo(0,nombre,correo,direccion,ciudad,id,telefono,usuario,contrasena);
         borrarDatosSerializados(RUTA_CLIENTES);
         ArchivoUtils.serializarArraylistClientes(RUTA_CLIENTES, clientes);
-        leerClientes();
+        for(int i = 0; i<clientes.size();i++)
+        {
+            System.out.println(clientes.get(i).getNombreCompleto() + " " + clientes.get(i).getCorreo() + " " );
+            System.out.println(clientes.get(i).getDireccion() + " " + clientes.get(i).getCiudad() + " " );
+            System.out.println(clientes.get(i).getIdentificacion() + " " + clientes.get(i).getTelefono() + " " );
+            System.out.println(clientes.get(i).getUsuario() + " " + clientes.get(i).getContrasena() + " " );
+        }
+    }
+    public void actualizarClientesRecursivo(int i, String nombre, String correo, String direccion, String ciudad, String id, String telefono, String usuario, String contrasena) {
+        if (i < clientes.size()) {
+            if (CLIENTE_SESION.equals(clientes.get(i))) {
+                clientes.get(i).setNombreCompleto(nombre);
+                clientes.get(i).setCorreo(correo);
+                clientes.get(i).setDireccion(direccion);
+                clientes.get(i).setCiudad(ciudad);
+                clientes.get(i).setIdentificacion(id);
+                clientes.get(i).setTelefono(telefono);
+                clientes.get(i).setUsuario(usuario);
+                clientes.get(i).setContrasena(contrasena);
+                clientes.set(i, clientes.get(i));
+                CLIENTE_SESION = clientes.get(i);
+            }
+            actualizarClientesRecursivo(i + 1, nombre, correo, direccion, ciudad, id, telefono, usuario, contrasena);
+        }
     }
     public void editarGuia(String nombre, String exp, String id, String idiomas, Paquetes paqueteGuia) throws CampoRepetido,CampoObligatorioException,CampoVacioException {
         if(!GUIA_EDICION.getNombre().equals(nombre))
@@ -449,6 +509,7 @@ public class Agencia {
         {
             throw new CampoObligatorioException("Es necesario ingresar el paquete");
         }
+        /*
         for (int i = 0; i<guias.size();i++)
         {
             if(guias.get(i).getIdentificacion().equals(GUIA_EDICION.getIdentificacion()))
@@ -466,9 +527,35 @@ public class Agencia {
                 guias.set(i,guia);
             }
         }
+        */
+        actualizarGuiasRecursivo(0,nombre,id,exp,paqueteGuia,idiomas);
         borrarDatosSerializados(RUTA_GUIAS);
         ArchivoUtils.serializarArraylist(RUTA_GUIAS,guias);
         LOGGER.log(Level.INFO, "Se edito un guia");
+        for(int i = 0; i<guias.size();i++)
+        {
+            System.out.println(guias.get(i).getNombre() + " " + guias.get(i).getIdentificacion() + " " );
+            System.out.println(guias.get(i).getExp() + " " + guias.get(i).getPaquete().getNombre() + " " );
+            System.out.println(obtenerIdiomas(guias.get(i).getLenguajes()));
+        }
+    }
+    public void actualizarGuiasRecursivo(int i, String nombre, String id, String exp, Paquetes paqueteGuia, String idiomas) {
+        if (i < guias.size()) {
+            if (guias.get(i).getIdentificacion().equals(GUIA_EDICION.getIdentificacion())) {
+                Guias guia = Guias.builder()
+                        .nombre(nombre)
+                        .identificacion(id)
+                        .exp(exp)
+                        .contViajes(GUIA_EDICION.getContViajes())
+                        .promedioCalificacion(GUIA_EDICION.getPromedioCalificacion())
+                        .paquete(paqueteGuia)
+                        .calificaciones(GUIA_EDICION.getCalificaciones())
+                        .build();
+                guia.setLenguajes(llenarArrayIdioma(idiomas));
+                guias.set(i, guia);
+            }
+            actualizarGuiasRecursivo(i + 1, nombre, id, exp, paqueteGuia, idiomas);
+        }
     }
     public void editarPaquetes(Paquetes paqueteE, String nombre, ArrayList<Destinos> destinos, LocalDate inicio, LocalDate fin, String servicios,String personas, String valor) throws CampoRepetido,CampoVacioException,CampoObligatorioException {
         ArrayList<Paquetes> paquetesAgencia = agencia.enviarPaquetes();
@@ -490,22 +577,52 @@ public class Agencia {
         if (valor == null || Float.valueOf(valor) <= 0 || valor.isEmpty() || !verificarNumero(valor)) {
             throw new CampoObligatorioException("Se crearon valores en el precio erroneos");
         }
+        /*
         for (Paquetes paquete : paquetes) {
-            if (nombre.equals(paquete.getNombre())) {
+            if (PAQUETE_EDICION.getNombre().equals(paquete.getNombre())) {
                 paquete.setNombre(nombre);
                 paquete.setDestinos(destinos);
-                paquete.setDuracion(inicio.until(fin,ChronoUnit.DAYS)+"");
+                paquete.setDuracion(inicio.until(fin, ChronoUnit.DAYS) + "");
                 paquete.setServicios(servicios);
                 paquete.setPrecio(Float.parseFloat(valor));
                 paquete.setNumeroPersonas(paquete.getNumeroPersonas() + Integer.parseInt(personas));
                 paquete.setInicio(inicio);
                 paquete.setFin(fin);
-                borrarDatosSerializados(RUTA_PAQUETES);
-                ArchivoUtils.serializarArraylistPaquetes(RUTA_PAQUETES,paquetes);
-                LOGGER.info("Se ha actualizado al paquete con nombre: " + nombre);
             }
         }
+
+         */
+        actualizarPaquetesRecursivo(0,nombre,destinos,inicio,fin,servicios,valor,personas);
+        borrarDatosSerializados(RUTA_PAQUETES);
+        ArchivoUtils.serializarArraylistPaquetes(RUTA_PAQUETES, paquetes);
+        LOGGER.info("Se ha actualizado al paquete con nombre: " + nombre);
     }
+    public void actualizarPaquetesRecursivo(int i,String nombre,ArrayList<Destinos> destinos, LocalDate inicio, LocalDate fin, String servicios, String valor, String personas) {
+        if (i<paquetes.size()) {
+            if (PAQUETE_EDICION.getNombre().equals(paquetes.get(i).getNombre())) {
+                paquetes.get(i).setNombre(nombre);
+                paquetes.get(i).setDestinos(destinos);
+                paquetes.get(i).setDuracion(inicio.until(fin, ChronoUnit.DAYS) + "");
+                paquetes.get(i).setServicios(servicios);
+                paquetes.get(i).setPrecio(Float.parseFloat(valor));
+                paquetes.get(i).setNumeroPersonas(paquetes.get(i).getNumeroPersonas() + Integer.parseInt(personas));
+                paquetes.get(i).setInicio(inicio);
+                paquetes.get(i).setFin(fin);
+                borrarDatosSerializados(RUTA_PAQUETES);
+                ArchivoUtils.serializarArraylistPaquetes(RUTA_PAQUETES, paquetes);
+                LOGGER.info("Se ha actualizado al paquete con nombre: " + nombre);
+            }
+            actualizarPaquetesRecursivo(i+1, nombre, destinos, inicio, fin, servicios, valor, personas);
+        }
+    }
+
+
+    //QUEDO HASTA AQUI
+    //QUEDO HASTA AQUI
+    //QUEDO HASTA AQUI
+    //QUEDO HASTA AQUI
+    //QUEDO HASTA AQUI
+
     public void editarReserva(Paquetes paquete, LocalDate inicio, LocalDate fin, String agregarPersonas, String quitarPersonas, Guias selectedItem, String pendiente) throws CampoRepetido,CampoObligatorioException,CampoVacioException {
         if (paquete == null) {
             throw new CampoObligatorioException("No se cargo el paquete");
