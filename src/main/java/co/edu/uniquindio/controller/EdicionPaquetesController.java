@@ -174,6 +174,7 @@ public class EdicionPaquetesController implements Initializable, CambioIdiomaLis
                     destinosActuales.add(destinosSistema.getSelectionModel().getSelectedItem());
                     System.out.println("Se añadio el destino: " + destinosSistema.getSelectionModel().getSelectedItem().getNombre() + " a los destinos del paquete");
                     llenarListaDestinosPaquete();
+                    llenarListaDestinosSistema();
                 }
             }
         }

@@ -23,7 +23,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class RegistroDestinoController implements Initializable, CambioIdiomaListener {
+public class EdicionDestinoController implements Initializable, CambioIdiomaListener {
     private final Agencia agencia = Agencia.getInstance();
     private static final Logger LOGGER = Logger.getLogger(Agencia.class.getName());
     @FXML
@@ -42,13 +42,18 @@ public class RegistroDestinoController implements Initializable, CambioIdiomaLis
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        nombre.setText(agencia.enviarDestinoEdicion().getNombre());
+        ciudad.setText(agencia.enviarDestinoEdicion().getCiudad());
+        descripcion.setText(agencia.enviarDestinoEdicion().getDescripcion());
+        clima.setText(agencia.enviarDestinoEdicion().getClima());
+        imagePaths = agencia.enviarDestinoEdicion().getImagenes();
     }
     public void registrarDestino(ActionEvent actionEvent) {
         try
         {
-            agencia.registrarDestino(nombre.getText(),ciudad.getText(),descripcion.getText(),imagePaths, clima.getText());
-            LOGGER.log(Level.INFO,"Se registro un nuevo Destino al sistema");
-            nombre.setText("");ciudad.setText("");descripcion.setText("");imagePaths.removeAll(imagePaths);clima.setText("");
+            agencia.editarDestino(nombre.getText(),ciudad.getText(),descripcion.getText(),imagePaths, clima.getText());
+            LOGGER.log(Level.INFO,"Se edito un  Destino en el sistema");
+            imagePaths.removeAll(imagePaths);
         } catch (CampoRepetido | CampoObligatorioException | CampoVacioException e) {
             mostrarMensaje(Alert.AlertType.ERROR, e.getMessage());
         }

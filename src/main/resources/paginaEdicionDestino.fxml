@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="396.0" prefWidth="326.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.controller.RegistroDestinoController">
+<AnchorPane prefHeight="396.0" prefWidth="326.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.controller.EdicionDestinoController">
       <TextField fx:id="descripcion" layoutX="32.0" layoutY="197.0" prefHeight="29.0" prefWidth="267.0">
          <font>
             <Font name="Franklin Gothic Medium Cond" size="16.0" />
@@ -26,7 +26,7 @@
             <Font name="Franklin Gothic Book" size="34.0" />
          </font>
       </Label>
-      <Button fx:id="botonRegistro" layoutX="195.0" layoutY="348.0" mnemonicParsing="false" onAction="#registrarDestino" prefHeight="38.0" prefWidth="98.0" text="Registrarse" textOverrun="LEADING_ELLIPSIS" />
+      <Button fx:id="botonRegistro" layoutX="195.0" layoutY="348.0" mnemonicParsing="false" onAction="#registrarDestino" prefHeight="38.0" prefWidth="98.0" text="Editar" textOverrun="LEADING_ELLIPSIS" />
    <TextField fx:id="nombre" layoutX="32.0" layoutY="83.0" prefHeight="29.0" prefWidth="267.0">
       <font>
          <Font name="Franklin Gothic Medium Cond" size="16.0" />

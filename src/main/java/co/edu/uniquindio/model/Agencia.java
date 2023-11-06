@@ -37,8 +37,6 @@ import java.util.regex.Pattern;
 @Log
 @Getter
 public class Agencia {
-
-
     private final String RUTA_CLIENTES = "src/main/resources/textos/clientes.ser";
     private final String RUTA_GUIAS = "src/main/resources/textos/guias.ser";
     private final String RUTA_DESTINOS = "src/main/resources/textos/destinos.ser";
@@ -51,6 +49,8 @@ public class Agencia {
     private Paquetes PAQUETE_EDICION = new Paquetes();
     private Paquetes PAQUETE_RESERVA = new Paquetes();
     private Paquetes PAQUETE_CANCELACION = new Paquetes();
+    private Destinos DESTINO_CANCELACION = new Destinos();
+    private Destinos DESTINO_EDICION = new Destinos();
     private Clientes CLIENTE_SESION = new Clientes();
     private Guias GUIA_EDICION = new Guias() ;
     private ArrayList<Destinos> destinos = new ArrayList<>();
@@ -220,7 +220,7 @@ public class Agencia {
         ArchivoUtils.serializarArraylist(RUTA_GUIAS,guias);
         LOGGER.log(Level.INFO, "Se registro un nuevo guia");
     }
-    public void registrarDestino(String nombre, String ciudad, String descripcion, String imagenes, String clima) throws CampoRepetido,CampoObligatorioException,CampoVacioException{
+    public void registrarDestino(String nombre, String ciudad, String descripcion, ArrayList<String> imagenes, String clima) throws CampoRepetido,CampoObligatorioException,CampoVacioException{
         if (ciudad == null || ciudad.isEmpty()) {
             throw new CampoObligatorioException("Es necesario ingresar el nombre");
         }
@@ -230,12 +230,13 @@ public class Agencia {
         if (descripcion == null || descripcion.isEmpty()) {
             throw new CampoObligatorioException("Es necesario ingresar la descripcion");
         }
-        if (imagenes == null || imagenes.isEmpty() || !agencia.isImageValid(imagenes)) {
+        if (imagenes == null || imagenes.isEmpty()) {
             throw new CampoObligatorioException("Es necesario ingresar imagenes del Destino");
         }
         if (clima == null || clima.isEmpty()) {
             throw new CampoObligatorioException("Es necesario ingresar el clima del Destino");
         }
+        Random random = new Random();
         Destinos destino = Destinos.builder()
                 .nombre(nombre)
                 .ciudad(ciudad)
@@ -243,14 +244,10 @@ public class Agencia {
                 .descripcion(descripcion)
                 .contBusquedas(0)
                 .contBusquedas(0)
+                .numero(random.nextInt(10000))
                 .calificaciones(new ArrayList<>())
                 .build();
-        ArrayList<String> imagenes1 = llenarArrayImagenes(imagenes);
-        for(int i = 0; i<imagenes1.size();i++)
-        {
-            System.out.print(imagenes1.get(i));
-        }
-        destino.setImagenes(imagenes1);
+        destino.setImagenes(imagenes);
         destinos.add(destino);
         ArchivoUtils.serializarArraylistDestinos(RUTA_DESTINOS,destinos);
         LOGGER.log(Level.INFO, "Se registro un nuevo Destino");
@@ -375,22 +372,21 @@ public class Agencia {
         borrarDatosSerializados(RUTA_PAQUETES);
         ArchivoUtils.serializarArraylistPaquetes(RUTA_PAQUETES,paquetes);
          */
-        actualizarPaquetesRecursivo(0,0,0,numeroPersonas);
+        actualizarPaquetesRecursivo(0,0,numeroPersonas);
         for(int i = 0 ; i<reservas.size();i++)
         {
             System.out.println(reservas.get(i).getCliente().getNombreCompleto() + " Codigo: " + reservas.get(i).getCodigo());
         }
     }
-    public void actualizarPaquetesRecursivo(int i, int x, int j, int numeroPersonas) {
+    public void actualizarPaquetesRecursivo(int i, int x, int numeroPersonas) {
         if (i < paquetes.size()) {
-            if (paqueteSeleccion().equals(paquetes.get(i))) {
+            if (paqueteSeleccion().getNombre().equals(paquetes.get(i).getNombre())) {
                 paquetes.get(i).setNumeroPersonas(paquetes.get(i).getNumeroPersonas() - numeroPersonas);
                 paquetes.get(i).setCantReservas(paquetes.get(i).getCantReservas() + 1);
                 paquetes.set(i, paquetes.get(i));
-
-                actualizarDestinosRecursivo(x, j);
+                actualizarDestinosRecursivo(x);
             }
-            actualizarPaquetesRecursivo(i + 1, 0, 0, numeroPersonas); // Llamada recursiva con i incrementado y x y j reiniciados a 0
+            actualizarPaquetesRecursivo(i + 1, 0, numeroPersonas); // Llamada recursiva con i incrementado y x y j reiniciados a 0
         } else {
             LOGGER.log(Level.INFO, "Se realizó la reserva de un Paquete");
             borrarDatosSerializados(RUTA_PAQUETES);
@@ -398,20 +394,20 @@ public class Agencia {
         }
     }
 
-    private void actualizarDestinosRecursivo(int x, int j) {
+    private void actualizarDestinosRecursivo(int x) {
         if (x < paqueteSeleccion().getDestinos().size()) {
-            if (j < destinos.size()) {
-                if (destinos.get(j).getNombre().equals(paqueteSeleccion().getDestinos().get(x).getNombre())) {
+            String nombreDestinoPaquete = paqueteSeleccion().getDestinos().get(x).getNombre();
+            for (int j = 0; j < destinos.size(); j++) {
+                if (destinos.get(j).getNombre().equals(nombreDestinoPaquete)) {
                     System.out.println("Se actualiza ");
                     destinos.get(j).setContReservas(destinos.get(j).getContReservas() + 1);
-                    destinos.set(j, destinos.get(j));
                 }
-                actualizarDestinosRecursivo(x, j + 1); // Llamada recursiva con j incrementado
             }
-            actualizarDestinosRecursivo(x + 1, 0); // Llamada recursiva con x incrementado y j reiniciado a 0
+            actualizarDestinosRecursivo(x + 1);
+        } else {
+            borrarDatosSerializados(RUTA_DESTINOS);
+            ArchivoUtils.serializarArraylistDestinos(RUTA_DESTINOS, destinos);
         }
-        borrarDatosSerializados(RUTA_DESTINOS);
-        ArchivoUtils.serializarArraylistDestinos(RUTA_DESTINOS, destinos);
     }
     public void realizarEdicion(String nombre, String correo, String direccion, String id, String ciudad, String telefono, String usuario, String contrasena) throws CampoRepetido,CampoObligatorioException,CampoVacioException {
         if (nombre == null || nombre.isEmpty()) {
@@ -557,8 +553,46 @@ public class Agencia {
             actualizarGuiasRecursivo(i + 1, nombre, id, exp, paqueteGuia, idiomas);
         }
     }
+    public void editarDestino(String nombre, String ciudad, String descripcion, ArrayList<String> imagenes, String clima) throws CampoRepetido,CampoObligatorioException,CampoVacioException{
+        if (ciudad == null || ciudad.isEmpty()) {
+            throw new CampoObligatorioException("Es necesario ingresar el nombre");
+        }
+        if (nombre == null || nombre.isEmpty()) {
+            throw new CampoRepetido("Ya se encuentra un Destino registrado con este nombre");
+        }
+        if (descripcion == null || descripcion.isEmpty()) {
+            throw new CampoObligatorioException("Es necesario ingresar la descripcion");
+        }
+        if (imagenes == null || imagenes.isEmpty()) {
+            throw new CampoObligatorioException("Es necesario ingresar imagenes del Destino");
+        }
+        if (clima == null || clima.isEmpty()) {
+            throw new CampoObligatorioException("Es necesario ingresar el clima del Destino");
+        }
+        actualizarDestinoRecursivo(0,nombre,ciudad,descripcion,imagenes,clima);
+        borrarDatosSerializados(RUTA_DESTINOS);
+        ArchivoUtils.serializarArraylistDestinos(RUTA_DESTINOS,destinos);
+        LOGGER.log(Level.INFO, "Se edito un Destino");
+    }
+    public void actualizarDestinoRecursivo(int i,String nombre, String ciudad, String descripcion, ArrayList<String> imagenes, String clima) {
+        if (i < destinos.size()) {
+            if (destinos.get(i).getNumero() == DESTINO_EDICION.getNumero()) {
+                Destinos destino = Destinos.builder()
+                        .nombre(nombre)
+                        .ciudad(ciudad)
+                        .descripcion(descripcion)
+                        .imagenes(imagenes)
+                        .clima(clima)
+                        .numero(DESTINO_EDICION.getNumero())
+                        .calificaciones(DESTINO_EDICION.getCalificaciones())
+                        .contBusquedas(DESTINO_EDICION.getContBusquedas())
+                        .build();
+                destinos.set(i,destino);
+            }
+            actualizarDestinoRecursivo(i + 1, nombre, ciudad, descripcion,imagenes,clima);
+        }
+    }
     public void editarPaquetes(Paquetes paqueteE, String nombre, ArrayList<Destinos> destinos, LocalDate inicio, LocalDate fin, String servicios,String personas, String valor) throws CampoRepetido,CampoVacioException,CampoObligatorioException {
-        ArrayList<Paquetes> paquetesAgencia = agencia.enviarPaquetes();
         if (nombre == null || nombre.isEmpty()) {
             throw new CampoObligatorioException("Es necesario ingresar el nombre");
         }
@@ -577,9 +611,8 @@ public class Agencia {
         if (valor == null || Float.valueOf(valor) <= 0 || valor.isEmpty() || !verificarNumero(valor)) {
             throw new CampoObligatorioException("Se crearon valores en el precio erroneos");
         }
-        /*
         for (Paquetes paquete : paquetes) {
-            if (PAQUETE_EDICION.getNombre().equals(paquete.getNombre())) {
+            if (nombre.equals(paquete.getNombre())) {
                 paquete.setNombre(nombre);
                 paquete.setDestinos(destinos);
                 paquete.setDuracion(inicio.until(fin, ChronoUnit.DAYS) + "");
@@ -590,9 +623,6 @@ public class Agencia {
                 paquete.setFin(fin);
             }
         }
-
-         */
-        actualizarPaquetesRecursivo(0,nombre,destinos,inicio,fin,servicios,valor,personas);
         borrarDatosSerializados(RUTA_PAQUETES);
         ArchivoUtils.serializarArraylistPaquetes(RUTA_PAQUETES, paquetes);
         LOGGER.info("Se ha actualizado al paquete con nombre: " + nombre);
@@ -600,14 +630,16 @@ public class Agencia {
     public void actualizarPaquetesRecursivo(int i,String nombre,ArrayList<Destinos> destinos, LocalDate inicio, LocalDate fin, String servicios, String valor, String personas) {
         if (i<paquetes.size()) {
             if (PAQUETE_EDICION.getNombre().equals(paquetes.get(i).getNombre())) {
-                paquetes.get(i).setNombre(nombre);
-                paquetes.get(i).setDestinos(destinos);
-                paquetes.get(i).setDuracion(inicio.until(fin, ChronoUnit.DAYS) + "");
-                paquetes.get(i).setServicios(servicios);
-                paquetes.get(i).setPrecio(Float.parseFloat(valor));
-                paquetes.get(i).setNumeroPersonas(paquetes.get(i).getNumeroPersonas() + Integer.parseInt(personas));
-                paquetes.get(i).setInicio(inicio);
-                paquetes.get(i).setFin(fin);
+                Paquetes paquete = new Paquetes();
+                paquete.setNombre(nombre);
+                paquete.setDestinos(destinos);
+                paquete.setDuracion(inicio.until(fin, ChronoUnit.DAYS) + "");
+                paquete.setServicios(servicios);
+                paquete.setPrecio(Float.parseFloat(valor));
+                paquete.setNumeroPersonas(paquetes.get(i).getNumeroPersonas() + Integer.parseInt(personas));
+                paquete.setInicio(inicio);
+                paquete.setFin(fin);
+                paquetes.set(i,paquete);
                 borrarDatosSerializados(RUTA_PAQUETES);
                 ArchivoUtils.serializarArraylistPaquetes(RUTA_PAQUETES, paquetes);
                 LOGGER.info("Se ha actualizado al paquete con nombre: " + nombre);
@@ -615,12 +647,6 @@ public class Agencia {
             actualizarPaquetesRecursivo(i+1, nombre, destinos, inicio, fin, servicios, valor, personas);
         }
     }
-    //QUEDO HASTA AQUI
-    //QUEDO HASTA AQUI
-    //QUEDO HASTA AQUI
-    //QUEDO HASTA AQUI
-    //QUEDO HASTA AQUI
-
     public void editarReserva(Paquetes paquete, LocalDate inicio, LocalDate fin, String agregarPersonas, String quitarPersonas, Guias selectedItem, String pendiente) throws CampoRepetido,CampoObligatorioException,CampoVacioException {
         if (paquete == null) {
             throw new CampoObligatorioException("No se cargo el paquete");
@@ -835,6 +861,10 @@ public class Agencia {
     public Guias recibirGuiaEdicion() {
         return GUIA_EDICION;
     }
+    public Destinos recibirDestinoEdicion(Destinos destinos)
+    {
+        return DESTINO_EDICION = destinos;
+    }
     public void recibirReservaEdicion(Reservas selectedItem) {
         RESERVA_EDICION = selectedItem;
     }
@@ -861,6 +891,31 @@ public class Agencia {
             cancelarPaqueteRecursivo(index);
         } else {
             cancelarPaqueteRecursivo(index + 1);
+        }
+    }
+    public void recibirDestinoCancelacion(Destinos selectedItem) {
+        DESTINO_CANCELACION = selectedItem;
+        /*for (int i = 0 ; i<paquetes.size();i++)
+        {
+            if (paquetes.get(i).getNombre().equals(PAQUETE_CANCELACION.getNombre()))
+            {
+                paquetes.remove(i);
+            }
+        }
+         */
+        cancelarDestinoRecursivo(0);
+        borrarDatosSerializados(RUTA_DESTINOS);
+        ArchivoUtils.serializarArraylistDestinos(RUTA_DESTINOS,destinos);
+    }
+    public void cancelarDestinoRecursivo(int index) {
+        if (index == destinos.size()) {
+            return;
+        }
+        if (destinos.get(index).getNombre().equals(DESTINO_CANCELACION.getNombre())) {
+            destinos.remove(index);
+            cancelarDestinoRecursivo(index);
+        } else {
+            cancelarDestinoRecursivo(index + 1);
         }
     }
     public void recibirReservaCancelacion(Reservas selectedItem) {
@@ -1316,21 +1371,6 @@ public class Agencia {
         boolean isNumeric = (numero != null && numero.matches("[0-9]+"));
         return isNumeric;
     }
-    public boolean isImageValid(String imageUrl) {
-        boolean state = false;
-        String[] leng = imageUrl.split(",");
-        for (String ruta : leng) {
-            File archivo = new File(ruta);
-            if (!archivo.exists()) {
-                // La imagen en la ruta especificada no existe
-                System.out.println("La imagen en la ruta '" + ruta + "' no existe.");
-                return false;
-            }
-        }
-        // Todas las imágenes existen
-        System.out.println("Todas las imágenes existen.");
-        return true;
-    }
     public void cargarCalificacionesCompleta(ArrayList<Destinos> destinosCombo, ArrayList<Integer> calificacionDestinos, int calificacionGuia, Guias guia) {
         for(int i = 0 ; i<destinos.size();i++){
             for( int x = 0 ; x<destinosCombo.size();x++)
@@ -1423,5 +1463,9 @@ public class Agencia {
             }
         }
         return destinosBusquedas;
+    }
+
+    public Destinos enviarDestinoEdicion() {
+        return DESTINO_EDICION;
     }
 }

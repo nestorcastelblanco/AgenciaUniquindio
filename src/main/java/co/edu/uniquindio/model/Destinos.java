@@ -16,6 +16,7 @@ public class Destinos implements Serializable {
     private ArrayList<Integer> calificaciones = new ArrayList<>();
     private int contReservas;
     private int contBusquedas;
+    private int numero;
 
     public void addImagenes(String idioma) {
         this.imagenes.add(idioma);

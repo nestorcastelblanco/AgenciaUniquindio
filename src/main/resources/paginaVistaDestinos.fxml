@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="413.0" prefWidth="701.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.controller.VistaDestinosController">
+   <children>
+      <TableView fx:id="tablaDestinos" layoutX="40.0" layoutY="105.0" prefHeight="216.0" prefWidth="623.0">
+         <columns>
+            <TableColumn fx:id="colNombre" prefWidth="105.0" text="Nombre" />
+            <TableColumn fx:id="colCiudad" prefWidth="144.0" text="Ciudad" />
+            <TableColumn fx:id="colDescripcion" prefWidth="219.0" text="Descripcion" />
+            <TableColumn fx:id="colClima" prefWidth="154.0" text="Clima" />
+         </columns>
+      </TableView>
+      <Label alignment="CENTER" layoutX="46.0" layoutY="26.0" prefHeight="56.0" prefWidth="609.0" text=" DESTINOS TRAVEL UNIQUINDIO">
+         <font>
+            <Font name="Franklin Gothic Medium Cond" size="40.0" />
+         </font>
+      </Label>
+      <Button layoutX="40.0" layoutY="355.0" mnemonicParsing="false" onAction="#regresar" prefHeight="25.0" prefWidth="92.0" text="Regresar" />
+      <Button layoutX="306.0" layoutY="355.0" mnemonicParsing="false" onAction="#eliminar" prefHeight="25.0" prefWidth="92.0" text="Eliminar" />
+      <Button layoutX="571.0" layoutY="355.0" mnemonicParsing="false" onAction="#editar" prefHeight="25.0" prefWidth="92.0" text="Editar" />
+   </children>
+</AnchorPane>

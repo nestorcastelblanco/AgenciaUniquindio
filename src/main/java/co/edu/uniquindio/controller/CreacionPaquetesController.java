@@ -23,8 +23,8 @@ import java.util.logging.Logger;
 
 public class CreacionPaquetesController implements Initializable, CambioIdiomaListener {
     private static final Agencia agencia = Agencia.getInstance();
-    private static ArrayList<Destinos> destinosCombo =   new ArrayList<>(agencia.enviarDestinos());
-    private static ArrayList<Destinos> destinosSeleccionados = new ArrayList<>();
+    ArrayList<Destinos> destinosCombo =   new ArrayList<>(agencia.enviarDestinos());
+     ArrayList<Destinos> destinosSeleccionados = new ArrayList<>();
     private static final Logger LOGGER = Logger.getLogger(Agencia.class.getName());
     @FXML
     private Button botonRegreso,botonRegistro, botonCrear, botonCrearDestino, botonDestino;
@@ -42,6 +42,7 @@ public class CreacionPaquetesController implements Initializable, CambioIdiomaLi
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        destinosCombo = agencia.enviarDestinos();
         llenarListaDestinos();
     }
     public void llenarListaDestinos() {
@@ -104,8 +105,8 @@ public class CreacionPaquetesController implements Initializable, CambioIdiomaLi
         try
         {
             agencia.registrarPaquete(nombre.getText(),destinosSeleccionados,fechaInicio.getValue(),fechaFin.getValue(),servicios.getText(),personas.getText(),valor.getText());
-            LOGGER.log(Level.INFO,"Se registro un nuevo Destino al sistema");
             nombre.setText("");destinosSeleccionados.clear();servicios.setText("");personas.setText("");valor.setText("");
+            LOGGER.log(Level.INFO,"Se registro un nuevo Destino al sistema");
         } catch (CampoRepetido | CampoObligatorioException | CampoVacioException e) {
             mostrarMensaje(Alert.AlertType.ERROR, e.getMessage());
         }
