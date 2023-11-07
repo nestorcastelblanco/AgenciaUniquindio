@@ -4,7 +4,7 @@ import co.edu.uniquindio.exceptions.CampoObligatorioException;
 import co.edu.uniquindio.exceptions.CampoRepetido;
 import co.edu.uniquindio.exceptions.CampoVacioException;
 import co.edu.uniquindio.model.Agencia;
-import co.edu.uniquindio.model.Propiedades;
+import co.edu.uniquindio.utils.Propiedades;
 import co.edu.uniquindio.utils.CambioIdiomaEvent;
 import co.edu.uniquindio.utils.CambioIdiomaListener;
 import javafx.event.ActionEvent;
@@ -56,6 +56,7 @@ public class RegistroController implements Initializable, CambioIdiomaListener {
         try {
             agencia.registrarCliente(nombreUsuario.getText(), correoUsuario.getText(), direccionUsuario.getText(), ciudadUsuario.getText(), telefonoUsuario.getText(), usuarioIngresado.getText(), contrasenaIngresada.getText(), id.getText());
             LOGGER.log(Level.INFO, "Se registro un nuevo usuario");
+            mostrarMensaje(Alert.AlertType.INFORMATION, "Se registro un nuevo usuario");
         } catch (CampoVacioException | CampoRepetido | CampoObligatorioException e) {
             mostrarMensaje(Alert.AlertType.ERROR, e.getMessage());
         }

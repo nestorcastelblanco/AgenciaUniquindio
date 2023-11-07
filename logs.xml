@@ -22412,3 +22412,206 @@
   <message>Se genero el ingreso de un cliente: Nestor Felipe Castelblanco</message>
 </record>
 </log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-11-07T12:31:42.410764600Z</date>
+  <millis>1699360302410</millis>
+  <nanos>764600</nanos>
+  <sequence>2</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.controller.PrincipalController</class>
+  <method>admin</method>
+  <thread>17</thread>
+  <message>Se ingresa la pagina administrativa</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-11-07T12:33:15.191066900Z</date>
+  <millis>1699360395191</millis>
+  <nanos>66900</nanos>
+  <sequence>2</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>loadStage</method>
+  <thread>17</thread>
+  <message>Se ingreso a la pagina de ingreso administrativo</message>
+</record>
+<record>
+  <date>2023-11-07T12:33:15.198069Z</date>
+  <millis>1699360395198</millis>
+  <nanos>69000</nanos>
+  <sequence>3</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.controller.PrincipalController</class>
+  <method>admin</method>
+  <thread>17</thread>
+  <message>Se ingresa la pagina administrativa</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-11-07T12:33:37.297018300Z</date>
+  <millis>1699360417297</millis>
+  <nanos>18300</nanos>
+  <sequence>2</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>loadStage</method>
+  <thread>17</thread>
+  <message>Se ingreso a la pagina de ingreso administrativo</message>
+</record>
+<record>
+  <date>2023-11-07T12:33:37.302019500Z</date>
+  <millis>1699360417302</millis>
+  <nanos>19500</nanos>
+  <sequence>3</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.controller.PrincipalController</class>
+  <method>admin</method>
+  <thread>17</thread>
+  <message>Se ingresa la pagina administrativa</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-11-07T12:34:05.790015300Z</date>
+  <millis>1699360445790</millis>
+  <nanos>15300</nanos>
+  <sequence>2</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.controller.PrincipalController</class>
+  <method>admin</method>
+  <thread>17</thread>
+  <message>Se ingresa la pagina administrativa</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-11-07T12:40:46.915760500Z</date>
+  <millis>1699360846915</millis>
+  <nanos>760500</nanos>
+  <sequence>2</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>loadStage</method>
+  <thread>17</thread>
+  <message>Se ingreso a la pagina de ingreso administrativo</message>
+</record>
+<record>
+  <date>2023-11-07T12:40:46.919760700Z</date>
+  <millis>1699360846919</millis>
+  <nanos>760700</nanos>
+  <sequence>3</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.controller.PrincipalController</class>
+  <method>admin</method>
+  <thread>17</thread>
+  <message>Se ingresa la pagina administrativa</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-11-07T12:44:48.067587500Z</date>
+  <millis>1699361088067</millis>
+  <nanos>587500</nanos>
+  <sequence>2</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>loadStage</method>
+  <thread>17</thread>
+  <message>Se ingreso a la pagina de ingreso administrativo</message>
+</record>
+<record>
+  <date>2023-11-07T12:44:48.077586400Z</date>
+  <millis>1699361088077</millis>
+  <nanos>586400</nanos>
+  <sequence>3</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.controller.PrincipalController</class>
+  <method>admin</method>
+  <thread>17</thread>
+  <message>Se ingresa la pagina administrativa</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-11-07T12:52:57.331502300Z</date>
+  <millis>1699361577331</millis>
+  <nanos>502300</nanos>
+  <sequence>2</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.controller.RegistroController</class>
+  <method>cargarTextos</method>
+  <thread>17</thread>
+  <message>Se cargaron los textos de la ventana de registro</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-11-07T12:59:20.415404600Z</date>
+  <millis>1699361960415</millis>
+  <nanos>404600</nanos>
+  <sequence>2</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.model.Agencia</class>
+  <method>loadStage</method>
+  <thread>17</thread>
+  <message>Se ingreso a la pagina de ingreso administrativo</message>
+</record>
+<record>
+  <date>2023-11-07T12:59:20.419403200Z</date>
+  <millis>1699361960419</millis>
+  <nanos>403200</nanos>
+  <sequence>3</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.controller.PrincipalController</class>
+  <method>admin</method>
+  <thread>17</thread>
+  <message>Se ingresa la pagina administrativa</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-11-07T12:59:49.572284100Z</date>
+  <millis>1699361989572</millis>
+  <nanos>284100</nanos>
+  <sequence>2</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.controller.PrincipalController</class>
+  <method>admin</method>
+  <thread>17</thread>
+  <message>Se ingresa la pagina administrativa</message>
+</record>

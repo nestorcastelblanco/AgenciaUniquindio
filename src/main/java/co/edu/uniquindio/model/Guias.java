@@ -15,6 +15,7 @@ public class Guias implements Serializable {
     private Paquetes paquete;
     private ArrayList<String> lenguajes = new ArrayList<>();
     private ArrayList<Integer> calificaciones = new ArrayList<>();
+
     public void addLenguajes(String idioma) {
         lenguajes.add(idioma);
     }

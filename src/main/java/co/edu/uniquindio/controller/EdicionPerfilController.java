@@ -48,6 +48,7 @@ public class EdicionPerfilController implements Initializable, CambioIdiomaListe
         try{
             agencia.realizarEdicion(nombreUsuario.getText(),correoUsuario.getText(),direccionUsuario.getText(),id.getText(),ciudadUsuario.getText(),telefonoUsuario.getText(),usuarioIngresado.getText(),contrasenaIngresada.getText());
             LOGGER.log(Level.INFO, "Se realizo la edicion del perfil correctamente");
+            mostrarMensaje(Alert.AlertType.INFORMATION,"Se realizo la edicion del perfil correctamente" );
         } catch (CampoRepetido | CampoVacioException | CampoObligatorioException e) {
             mostrarMensaje(Alert.AlertType.ERROR, e.getMessage());
         }

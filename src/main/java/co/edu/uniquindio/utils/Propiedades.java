@@ -1,7 +1,5 @@
-package co.edu.uniquindio.model;
+package co.edu.uniquindio.utils;
 
-import co.edu.uniquindio.utils.CambioIdiomaEvent;
-import co.edu.uniquindio.utils.CambioIdiomaListener;
 import lombok.Getter;
 
 import java.util.ArrayList;

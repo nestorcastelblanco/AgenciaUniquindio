@@ -1,10 +1,7 @@
 package co.edu.uniquindio.controller;
 
-import co.edu.uniquindio.exceptions.CampoObligatorioException;
-import co.edu.uniquindio.exceptions.CampoRepetido;
-import co.edu.uniquindio.exceptions.CampoVacioException;
 import co.edu.uniquindio.model.Agencia;
-import co.edu.uniquindio.model.Propiedades;
+import co.edu.uniquindio.utils.Propiedades;
 import co.edu.uniquindio.utils.CambioIdiomaEvent;
 import co.edu.uniquindio.utils.CambioIdiomaListener;
 import javafx.event.ActionEvent;
@@ -15,7 +12,6 @@ import javafx.scene.control.Alert;
 import java.awt.*;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class MenuAdminController implements Initializable, CambioIdiomaListener {

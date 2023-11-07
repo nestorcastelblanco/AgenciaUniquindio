@@ -1212,6 +1212,7 @@ public class Agencia {
         Matcher matcher = pattern.matcher(correo);
         return matcher.matches();
     }
+
     public void enviarCorreo(Clientes cliente, Paquetes paqueteSeleccionado, LocalDate inicio, LocalDate fin, String personas, Guias selectedItem, String pendiente) {
         String correoEmisor = "traveluniquindio@gmail.com"; // Cambia esto con tu dirección de correo electrónico
         String contraseñaEmisor = "sgfc sgay apnx qvxq"; // Cambia esto con tu contra/seña de correo electrónico

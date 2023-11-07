@@ -13,6 +13,7 @@ import java.util.ArrayList;
 public class Clientes implements Serializable {
     private ArrayList<String> busquedas = new ArrayList<>();
     private String nombreCompleto, correo, direccion,identificacion,ciudad, telefono, usuario, contrasena;
+
     public void añadirBusqueda(String busqueda)
     {
         busquedas.add(busqueda);

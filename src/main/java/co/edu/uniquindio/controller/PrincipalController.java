@@ -1,9 +1,7 @@
 package co.edu.uniquindio.controller;
-import co.edu.uniquindio.exceptions.CampoObligatorioException;
 import co.edu.uniquindio.exceptions.CampoRepetido;
-import co.edu.uniquindio.exceptions.CampoVacioException;
 import co.edu.uniquindio.model.Agencia;
-import co.edu.uniquindio.model.Propiedades;
+import co.edu.uniquindio.utils.Propiedades;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -28,7 +26,6 @@ public class PrincipalController implements Initializable {
     private boolean esIngles = false;
     @FXML
     private void cambiarIdioma(ActionEvent event) {
-        // Cambia el idioma
         if (esIngles) {
             Propiedades.getInstance().setLocale(new Locale("es", "ES"));
         } else {
@@ -36,17 +33,6 @@ public class PrincipalController implements Initializable {
         }
         // Invierte el valor de esIngles para la próxima vez
         esIngles = !esIngles;
-        // Actualiza la interfaz de usuario
-        cargarTextos();
-    }
-    public void admin(ActionEvent actionEvent) {
-        agencia.loadStage("/paginaIngresoAdmin.fxml",actionEvent,"Se ingreso a la pagina de ingreso administrativo");
-        LOGGER.log(Level.INFO, "Se ingresa la pagina administrativa");
-    }
-    public void registrar(ActionEvent actionEvent) {
-        agencia.loadStage("/paginaRegistro.fxml", actionEvent ,"Se ingresa a la pestaña de registro");
-    }
-    public void cargarTextos(){
         ingreso.setText(propiedades.getResourceBundle().getString("ingreso"));
         usuario.setText(propiedades.getResourceBundle().getString("usuarioIngreso"));
         contrasena.setText(propiedades.getResourceBundle().getString("contrasenaIngreso"));
@@ -55,11 +41,17 @@ public class PrincipalController implements Initializable {
         botonIngreso.setText(propiedades.getResourceBundle().getString("bttIngreso"));
         botonRegistro.setText(propiedades.getResourceBundle().getString("bttRegistro"));
     }
+    public void admin(ActionEvent actionEvent) {
+        agencia.loadStage("/paginaIngresoAdmin.fxml",actionEvent,"Se ingreso a la pagina de ingreso administrativo");
+        LOGGER.log(Level.INFO, "Se ingresa la pagina administrativa");
+    }
+    public void registrar(ActionEvent actionEvent) {
+        agencia.loadStage("/paginaRegistro.fxml", actionEvent ,"Se ingresa a la pestaña de registro");
+    }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         agencia.inicializarDatos();
     }
-
     public void ingresar(ActionEvent actionEvent) {
         try{
             agencia.ingresarCliente(usuarioIngresado.getText(),contrasenaIngresada.getText());
