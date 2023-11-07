@@ -4,6 +4,7 @@ import co.edu.uniquindio.model.Agencia;
 import co.edu.uniquindio.model.Destinos;
 import co.edu.uniquindio.utils.CambioIdiomaEvent;
 import co.edu.uniquindio.utils.CambioIdiomaListener;
+import co.edu.uniquindio.utils.Propiedades;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,6 +18,7 @@ import javafx.util.Callback;
 import java.net.URL;
 import java.time.format.DecimalStyle;
 import java.util.ArrayList;
+import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,23 +32,37 @@ public class CalificacionesController implements Initializable, CambioIdiomaList
     @FXML
     private ImageView estrellaGuia1,estrellaGuia2,estrellaGuia3,estrellaGuia4,estrellaGuia5;
     @FXML
-    private Button  bttDestino,bttDestino1,bttDestino2,bttDestino3,bttDestino4,bttDestino5;
+    private Button  bttDestino,bttDestino1,bttDestino2,bttDestino3,bttDestino4,bttDestino5, regresar, enviar;
     @FXML
     private Button bttGuia,bttGuia1,bttGuia2,bttGuia3,bttGuia4,bttGuia5;
     @FXML
     private ComboBox<Destinos> destinosCombo;
     @FXML
-    private Label guiaLabel;
+    private Label guiaLabel, txtDestinos, txtComentarios;
     @FXML
     private TextField comentario;
     private ArrayList<Integer> calificacionDestinos = new ArrayList<>();
     private int calificacionGuia;
     private boolean stateDestinos = false, stateGuia = false;
+    private final Propiedades propiedades = Propiedades.getInstance();
     @Override
     public void onCambioIdioma(CambioIdiomaEvent evento) {
+        cargarTextos();
+    }
+    public void cargarTextos()
+    {
+        regresar.setText(propiedades.getResourceBundle().getString("bttVolver"));
+        enviar.setText(propiedades.getResourceBundle().getString("enviar"));
+        bttDestino.setText(propiedades.getResourceBundle().getString("calificarDestino"));
+        bttGuia.setText(propiedades.getResourceBundle().getString("calificar"));
+        regresar.setText(propiedades.getResourceBundle().getString("bttVolver"));
+        txtDestinos.setText(propiedades.getResourceBundle().getString("txtDestinos"));
+        txtComentarios.setText(propiedades.getResourceBundle().getString("txtComentarios"));
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        Propiedades.getInstance().addCambioIdiomaListener(this);
+        cargarTextos();
         if(agencia.getReservaCalificacion().getGuia().getNombre().equals("SIN GUIA") || agencia.getReservaCalificacion().getGuia() == null)
         {
             guiaLabel.setVisible(false);

@@ -7,6 +7,7 @@ import co.edu.uniquindio.model.Agencia;
 import co.edu.uniquindio.model.Destinos;
 import co.edu.uniquindio.utils.CambioIdiomaEvent;
 import co.edu.uniquindio.utils.CambioIdiomaListener;
+import co.edu.uniquindio.utils.Propiedades;
 import com.sun.javafx.scene.shape.ArcHelper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -37,11 +38,32 @@ public class CreacionPaquetesController implements Initializable, CambioIdiomaLi
     public void regresar (ActionEvent e) {
         agencia.loadStage("/paginaAdministrativa.fxml", e, "Se regresa a la pagina administrativa");
     }
+    private final Propiedades propiedades = Propiedades.getInstance();
     @Override
     public void onCambioIdioma(CambioIdiomaEvent evento) {
+        cargarTextos();
+    }
+    @FXML
+    private Label txtEstablecerPaquete, txtNombre,txtDestino,txtInicio, txtFinal, txtServicios,txtPersonas,txtValor;
+    public void cargarTextos()
+    {
+        txtEstablecerPaquete.setText(propiedades.getResourceBundle().getString("establecerPaquete"));
+        txtNombre.setText(propiedades.getResourceBundle().getString("nombre"));
+        txtDestino.setText(propiedades.getResourceBundle().getString("txtDestinos"));
+        txtValor.setText(propiedades.getResourceBundle().getString("precioPersona"));
+        txtInicio.setText(propiedades.getResourceBundle().getString("fechaI"));
+        txtFinal.setText(propiedades.getResourceBundle().getString("fechaF"));
+        txtPersonas.setText(propiedades.getResourceBundle().getString("cupos"));
+        txtServicios.setText(propiedades.getResourceBundle().getString("servi"));
+        botonRegreso.setText(propiedades.getResourceBundle().getString("bttVolver"));
+        botonCrear.setText(propiedades.getResourceBundle().getString("crear"));
+        botonCrearDestino.setText(propiedades.getResourceBundle().getString("creaDestino"));
+        botonDestino.setText(propiedades.getResourceBundle().getString("agregaDestino"));
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        Propiedades.getInstance().addCambioIdiomaListener(this);
+        cargarTextos();
         destinosCombo = agencia.enviarDestinos();
         llenarListaDestinos();
     }

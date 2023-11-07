@@ -4,6 +4,7 @@ import co.edu.uniquindio.model.Agencia;
 import co.edu.uniquindio.model.Paquetes;
 import co.edu.uniquindio.utils.CambioIdiomaEvent;
 import co.edu.uniquindio.utils.CambioIdiomaListener;
+import co.edu.uniquindio.utils.Propiedades;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -24,17 +25,34 @@ public class CaracteristicasPaqueteController implements Initializable, CambioId
     @FXML
     private Button btnAnterior;
     @FXML
-    private Button btnSiguiente;
+    private Button btnSiguiente, seleccionar, regresar;
     @FXML
     private Label nombre, destinos, duracion, precioPersona, fechaInicio, fechaFin, cupos,servicios;
-
+    @FXML
+    private Label txtSeleccionPaquete, txtNombre, txtDestinos, txtDisponible, txtPrecio, txtInicio, txtFin,txtCupos,txtServicios;
+    private final Propiedades propiedades = Propiedades.getInstance();
     @Override
     public void onCambioIdioma(CambioIdiomaEvent evento) {
-
+        cargarTextos();
     }
-
+    public void cargarTextos()
+    {
+        txtSeleccionPaquete.setText(propiedades.getResourceBundle().getString("seleccionPaquete"));
+        txtNombre.setText(propiedades.getResourceBundle().getString("nombrePaquete"));
+        txtDisponible.setText(propiedades.getResourceBundle().getString("disponible"));
+        txtPrecio.setText(propiedades.getResourceBundle().getString("precioPersona"));
+        txtInicio.setText(propiedades.getResourceBundle().getString("fechaI"));
+        txtFin.setText(propiedades.getResourceBundle().getString("fechaF"));
+        txtCupos.setText(propiedades.getResourceBundle().getString("cupos"));
+        txtServicios.setText(propiedades.getResourceBundle().getString("servi"));
+        regresar.setText(propiedades.getResourceBundle().getString("bttVolver"));
+        seleccionar.setText(propiedades.getResourceBundle().getString("seleccionar"));
+        txtDestinos.setText(propiedades.getResourceBundle().getString("nombreDestinos"));
+    }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        Propiedades.getInstance().addCambioIdiomaListener(this);
+        cargarTextos();
         System.out.println("Se inicio el controlador");
         Paquetes paqueteSeleccionado  = agencia.paqueteSeleccion();
         nombre.setText(paqueteSeleccionado.getNombre());
