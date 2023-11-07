@@ -8,6 +8,7 @@ import co.edu.uniquindio.model.Paquetes;
 import co.edu.uniquindio.model.Paquetes;
 import co.edu.uniquindio.utils.CambioIdiomaEvent;
 import co.edu.uniquindio.utils.CambioIdiomaListener;
+import co.edu.uniquindio.utils.Propiedades;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -26,7 +27,7 @@ public class EdicionGuiaController implements Initializable, CambioIdiomaListene
     private final Agencia agencia = Agencia.getInstance();
     private static final Logger LOGGER = Logger.getLogger(Agencia.class.getName());
     @FXML
-    private Button botonRegreso,botonRegistro;
+    private Button botonRegreso,botonEditar;
     @FXML
     private TextField nombre,cedula,idiomas, experiencia;
     @FXML
@@ -34,14 +35,28 @@ public class EdicionGuiaController implements Initializable, CambioIdiomaListene
     public void regresar (ActionEvent e) {
         agencia.loadStage("/paginaAdministrativa.fxml", e, "Se regresa a la pagina administrativa");
     }
-
+    private final Propiedades propiedades = Propiedades.getInstance();
     @Override
     public void onCambioIdioma(CambioIdiomaEvent evento) {
-
+        cargarTextos();
     }
-
+    @FXML
+    private Label txtGuia, txtNombre,txtCedula,txtIdiomas,txtExperiencia,txtPaqueteCubrir;
+    public void cargarTextos()
+    {
+        txtGuia.setText(propiedades.getResourceBundle().getString("edicionGuia"));
+        txtNombre.setText(propiedades.getResourceBundle().getString("nombre"));
+        txtCedula.setText(propiedades.getResourceBundle().getString("identificacion"));
+        txtIdiomas.setText(propiedades.getResourceBundle().getString("idioma"));
+        txtExperiencia.setText(propiedades.getResourceBundle().getString("experiencia"));
+        txtPaqueteCubrir.setText(propiedades.getResourceBundle().getString("paqueteCubrir"));
+        botonRegreso.setText(propiedades.getResourceBundle().getString("bttVolver"));
+        botonEditar.setText(propiedades.getResourceBundle().getString("bttEditar"));
+    }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        Propiedades.getInstance().addCambioIdiomaListener(this);
+        cargarTextos();
         nombre.setText(agencia.recibirGuiaEdicion().getNombre());
         cedula.setText(agencia.recibirGuiaEdicion().getIdentificacion());
         idiomas.setText(agencia.obtenerIdiomas(agencia.recibirGuiaEdicion().getLenguajes()));

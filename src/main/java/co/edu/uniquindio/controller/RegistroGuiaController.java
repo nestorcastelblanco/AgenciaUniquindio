@@ -8,6 +8,7 @@ import co.edu.uniquindio.model.Paquetes;
 import co.edu.uniquindio.model.Paquetes;
 import co.edu.uniquindio.utils.CambioIdiomaEvent;
 import co.edu.uniquindio.utils.CambioIdiomaListener;
+import co.edu.uniquindio.utils.Propiedades;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -34,17 +35,30 @@ public class RegistroGuiaController implements Initializable, CambioIdiomaListen
     public void regresar (ActionEvent e) {
         agencia.loadStage("/paginaAdministrativa.fxml", e, "Se regresa a la pagina administrativa");
     }
-
+    private final Propiedades propiedades = Propiedades.getInstance();
     @Override
     public void onCambioIdioma(CambioIdiomaEvent evento) {
-
+        cargarTextos();
     }
-
+    @FXML
+    private Label txtGuia, txtNombre,txtCedula,txtIdiomas,txtExperiencia,txtPaqueteCubrir;
+    public void cargarTextos()
+    {
+        txtGuia.setText(propiedades.getResourceBundle().getString("edicionGuia"));
+        txtNombre.setText(propiedades.getResourceBundle().getString("nombre"));
+        txtCedula.setText(propiedades.getResourceBundle().getString("identificacion"));
+        txtIdiomas.setText(propiedades.getResourceBundle().getString("idioma"));
+        txtExperiencia.setText(propiedades.getResourceBundle().getString("experiencia"));
+        txtPaqueteCubrir.setText(propiedades.getResourceBundle().getString("paqueteCubrir"));
+        botonRegreso.setText(propiedades.getResourceBundle().getString("bttVolver"));
+        botonRegistro.setText(propiedades.getResourceBundle().getString("bttRegistro"));
+    }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        Propiedades.getInstance().addCambioIdiomaListener(this);
+        cargarTextos();
         llenarCombo();
     }
-
     private void llenarCombo() {
         ArrayList<Paquetes> PaquetesCombo = agencia.enviarPaquetes();
         System.out.println(PaquetesCombo.toString());

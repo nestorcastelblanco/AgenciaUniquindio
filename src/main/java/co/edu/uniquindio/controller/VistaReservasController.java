@@ -5,12 +5,15 @@ import co.edu.uniquindio.model.Paquetes;
 import co.edu.uniquindio.model.Reservas;
 import co.edu.uniquindio.utils.CambioIdiomaEvent;
 import co.edu.uniquindio.utils.CambioIdiomaListener;
+import co.edu.uniquindio.utils.Propiedades;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
@@ -39,10 +42,22 @@ public class VistaReservasController implements Initializable, CambioIdiomaListe
     @FXML
     private TableColumn<Reservas, String> fechaFin;
     private ObservableList<Reservas> reservaciones = FXCollections.observableArrayList();
+    private final Propiedades propiedades = Propiedades.getInstance();
     @Override
     public void onCambioIdioma(CambioIdiomaEvent evento) {
+        cargarTextos();
     }
-
+    @FXML
+    private Label txtReservasSistema;
+    @FXML
+    private Button regresar, eliminar, editar;
+    public void cargarTextos()
+    {
+        txtReservasSistema.setText(propiedades.getResourceBundle().getString("txtReservasSistema"));
+        regresar.setText(propiedades.getResourceBundle().getString("bttVolver"));
+        eliminar.setText(propiedades.getResourceBundle().getString("eliminarDestino"));
+        editar.setText(propiedades.getResourceBundle().getString("bttEditar"));
+    }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         reservaciones = FXCollections.observableArrayList(agencia.enviarReservas());
@@ -66,7 +81,6 @@ public class VistaReservasController implements Initializable, CambioIdiomaListe
             agencia.loadStage("/paginaEdicionReserva.fxml",actionEvent,"Se va a editar una reserva");
         }
     }
-
     public void eliminar(ActionEvent actionEvent) {
         if (tablaReservas.getSelectionModel().getSelectedIndex() == -1) {
             LOGGER.log(Level.INFO, "Se intento cancelar una reserva sin haberlo seleccionado");

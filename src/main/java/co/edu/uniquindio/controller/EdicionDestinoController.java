@@ -6,12 +6,14 @@ import co.edu.uniquindio.exceptions.CampoVacioException;
 import co.edu.uniquindio.model.Agencia;
 import co.edu.uniquindio.utils.CambioIdiomaEvent;
 import co.edu.uniquindio.utils.CambioIdiomaListener;
+import co.edu.uniquindio.utils.Propiedades;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -27,21 +29,38 @@ public class EdicionDestinoController implements Initializable, CambioIdiomaList
     private final Agencia agencia = Agencia.getInstance();
     private static final Logger LOGGER = Logger.getLogger(Agencia.class.getName());
     @FXML
-    private Button botonRegreso,botonRegistro;
+    private Button botonRegreso,botonEditar;
     @FXML
-    private TextField nombre,ciudad,descripcion, imagenes,clima;
+    private TextField nombre,ciudad,descripcion,clima;
     @FXML
     private Button botonImagenes;
     ArrayList<String> imagePaths = new ArrayList<>();
     public void regresar (ActionEvent e) {
         agencia.loadStage("/paginaAdministrativa.fxml", e, "Se regresa a la pagina administrativa");
     }
+    private final Propiedades propiedades = Propiedades.getInstance();
     @Override
     public void onCambioIdioma(CambioIdiomaEvent evento) {
-
+        cargarTextos();
+    }
+    @FXML
+    private Label txtNombre,txtDestino,txtCiudad,txtDescripcion,txtClima,txtImagenes;
+    public void cargarTextos()
+    {
+        txtNombre.setText(propiedades.getResourceBundle().getString("nombre"));
+        txtDestino.setText(propiedades.getResourceBundle().getString("establecerDestino"));
+        txtCiudad.setText(propiedades.getResourceBundle().getString("ciudad"));
+        txtDescripcion.setText(propiedades.getResourceBundle().getString("descripcion"));
+        txtClima.setText(propiedades.getResourceBundle().getString("clima"));
+        txtImagenes.setText(propiedades.getResourceBundle().getString("imagenes"));
+        botonRegreso.setText(propiedades.getResourceBundle().getString("bttVolver"));
+        botonEditar.setText(propiedades.getResourceBundle().getString("bttEditar"));
+        botonImagenes.setText(propiedades.getResourceBundle().getString("cargarImagen"));
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        Propiedades.getInstance().addCambioIdiomaListener(this);
+        cargarTextos();
         nombre.setText(agencia.enviarDestinoEdicion().getNombre());
         ciudad.setText(agencia.enviarDestinoEdicion().getCiudad());
         descripcion.setText(agencia.enviarDestinoEdicion().getDescripcion());

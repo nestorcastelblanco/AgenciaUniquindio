@@ -5,12 +5,15 @@ import co.edu.uniquindio.model.Guias;
 import co.edu.uniquindio.model.Reservas;
 import co.edu.uniquindio.utils.CambioIdiomaEvent;
 import co.edu.uniquindio.utils.CambioIdiomaListener;
+import co.edu.uniquindio.utils.Propiedades;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
@@ -35,12 +38,26 @@ public class GuiasSistemaController implements Initializable, CambioIdiomaListen
     @FXML
     private TableColumn<Guias, String> idiomas;
     private ObservableList<Guias> guias = FXCollections.observableArrayList();
+    private final Propiedades propiedades = Propiedades.getInstance();
     @Override
     public void onCambioIdioma(CambioIdiomaEvent evento) {
+        cargarTextos();
     }
-
+    @FXML
+    private Label txtGuiaSistema;
+    @FXML
+    private Button botonRegreso,botonEditar,botonEliminar;
+    public void cargarTextos()
+    {
+        txtGuiaSistema.setText(propiedades.getResourceBundle().getString("tituloVistaGuias"));
+        botonRegreso.setText(propiedades.getResourceBundle().getString("bttVolver"));
+        botonEditar.setText(propiedades.getResourceBundle().getString("bttEditar"));
+        botonEliminar.setText(propiedades.getResourceBundle().getString("bttEliminar"));
+    }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        Propiedades.getInstance().addCambioIdiomaListener(this);
+        cargarTextos();
         guias = FXCollections.observableArrayList(agencia.enviarGuias());
         paquete.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPaquete().getNombre()));
         nombres.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombre()));

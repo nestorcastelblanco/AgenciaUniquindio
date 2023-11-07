@@ -5,16 +5,14 @@ import co.edu.uniquindio.model.Paquetes;
 import co.edu.uniquindio.utils.ArchivoUtils;
 import co.edu.uniquindio.utils.CambioIdiomaEvent;
 import co.edu.uniquindio.utils.CambioIdiomaListener;
+import co.edu.uniquindio.utils.Propiedades;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -47,14 +45,30 @@ public class SeleccionClientePaquetesController implements Initializable, Cambio
     @FXML
     private TableColumn<Paquetes, String> fechaFin;
     private ObservableList<Paquetes> paquetes = FXCollections.observableArrayList(agencia.enviarPaquetes());
-    public SeleccionClientePaquetesController() {
-    }
+    private final Propiedades propiedades = Propiedades.getInstance();
     @Override
     public void onCambioIdioma(CambioIdiomaEvent evento) {
+        cargarTextos();
     }
-
+    @FXML
+    private Label txtPaquete, txtDestinos, txtPersonas, txtServicios, txtValor, txtInicio, txtFin;
+    @FXML
+    private Button regresar, ver;
+    public void cargarTextos() {
+        txtPaquete.setText(propiedades.getResourceBundle().getString("paquete"));
+        txtDestinos.setText(propiedades.getResourceBundle().getString("txtDestinos"));
+        txtPersonas.setText(propiedades.getResourceBundle().getString("personas"));
+        txtServicios.setText(propiedades.getResourceBundle().getString("servi"));
+        txtValor.setText(propiedades.getResourceBundle().getString("precioPersona"));
+        txtInicio.setText(propiedades.getResourceBundle().getString("fechaI"));
+        txtFin.setText(propiedades.getResourceBundle().getString("fechaF"));
+        regresar.setText(propiedades.getResourceBundle().getString("bttVolver"));
+        ver.setText(propiedades.getResourceBundle().getString("ver"));
+    }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        Propiedades.getInstance().addCambioIdiomaListener(this);
+        cargarTextos();
         paquete.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombre()));
         destinos.setCellValueFactory(cellData -> new SimpleStringProperty(agencia.obtenerNombresDestinos(cellData.getValue().getDestinos())));
         personas.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNumeroPersonas() + ""));

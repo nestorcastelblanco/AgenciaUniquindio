@@ -26,12 +26,24 @@ public class MenuAdminController implements Initializable, CambioIdiomaListener 
     public void onCambioIdioma(CambioIdiomaEvent evento) {
         cargarTextos();
     }
+    @FXML
+    private javafx.scene.control.Button botonRegreso,registrarGuia ,registrarDestinos, registrarPaquetes, mostrarGuias,mostrarDestinos,mostrarPaquetes,mostrarReservas,mostrarEstadisticas;
+    public void cargarTextos()
+    {
+        botonRegreso.setText(propiedades.getResourceBundle().getString("bttVolver"));
+        registrarGuia.setText(propiedades.getResourceBundle().getString("registrarGuia"));
+        registrarDestinos.setText(propiedades.getResourceBundle().getString("registrarDestino"));
+        registrarPaquetes.setText(propiedades.getResourceBundle().getString("registrarPaquetes"));
+        mostrarGuias.setText(propiedades.getResourceBundle().getString("mostrarGuias"));
+        mostrarDestinos.setText(propiedades.getResourceBundle().getString("mostrarDestinos"));
+        mostrarPaquetes.setText(propiedades.getResourceBundle().getString("mostrarPaquetes"));
+        mostrarReservas.setText(propiedades.getResourceBundle().getString("mostrarReservas"));
+        mostrarEstadisticas.setText(propiedades.getResourceBundle().getString("mostrarEstadisticas"));
+    }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         Propiedades.getInstance().addCambioIdiomaListener(this);
         cargarTextos();
-    }
-    private void cargarTextos() {
     }
     public void mostrarMensaje(Alert.AlertType tipo, String mensaje){
         Alert alert = new Alert(tipo);

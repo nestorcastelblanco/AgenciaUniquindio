@@ -6,6 +6,7 @@ import co.edu.uniquindio.exceptions.CampoVacioException;
 import co.edu.uniquindio.model.*;
 import co.edu.uniquindio.utils.CambioIdiomaEvent;
 import co.edu.uniquindio.utils.CambioIdiomaListener;
+import co.edu.uniquindio.utils.Propiedades;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -38,13 +39,30 @@ public class RealizarReservaController implements Initializable, CambioIdiomaLis
 
     public RealizarReservaController() {
     }
-
+    private final Propiedades propiedades = Propiedades.getInstance();
     @Override
     public void onCambioIdioma(CambioIdiomaEvent evento) {
-
+        cargarTextos();
+    }
+    @FXML
+    private Button regresar,reservar;
+    @FXML
+    private Label txtConfirmacion, txtPaquete, cantPersonas, fechaInicio, fechaFin, seleccionGuia;
+    public void cargarTextos()
+    {
+        txtConfirmacion.setText(propiedades.getResourceBundle().getString("pagConfirmacion"));
+        txtPaquete.setText(propiedades.getResourceBundle().getString("paqueteU"));
+        cantPersonas.setText(propiedades.getResourceBundle().getString("cantidadPersonas"));
+        fechaInicio.setText(propiedades.getResourceBundle().getString("fechaI"));
+        fechaFin.setText(propiedades.getResourceBundle().getString("fechaF"));
+        seleccionGuia.setText(propiedades.getResourceBundle().getString("seleccionGuia"));
+        reservar.setText(propiedades.getResourceBundle().getString("reservar"));
+        regresar.setText(propiedades.getResourceBundle().getString("bttVolver"));
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        Propiedades.getInstance().addCambioIdiomaListener(this);
+        cargarTextos();
         paquete = agencia.paqueteSeleccion();
         cliente = agencia.clienteSesion();
         paqueteSeleccionado.setText(paquete.getNombre());

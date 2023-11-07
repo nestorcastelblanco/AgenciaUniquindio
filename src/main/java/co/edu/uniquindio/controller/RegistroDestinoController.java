@@ -6,12 +6,14 @@ import co.edu.uniquindio.exceptions.CampoVacioException;
 import co.edu.uniquindio.model.Agencia;
 import co.edu.uniquindio.utils.CambioIdiomaEvent;
 import co.edu.uniquindio.utils.CambioIdiomaListener;
+import co.edu.uniquindio.utils.Propiedades;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -32,16 +34,33 @@ public class RegistroDestinoController implements Initializable, CambioIdiomaLis
     private TextField nombre,ciudad,descripcion, imagenes,clima;
     @FXML
     private Button botonImagenes;
+    private final Propiedades propiedades = Propiedades.getInstance();
+    @Override
+    public void onCambioIdioma(CambioIdiomaEvent evento) {
+        cargarTextos();
+    }
+    @FXML
+    private Label txtNombre,txtDestinoReg,txtCiudad,txtDescripcion,txtClima,txtImagenes;
+    public void cargarTextos()
+    {
+        txtNombre.setText(propiedades.getResourceBundle().getString("nombre"));
+        txtDestinoReg.setText(propiedades.getResourceBundle().getString("registrarDestino"));
+        txtCiudad.setText(propiedades.getResourceBundle().getString("ciudad"));
+        txtDescripcion.setText(propiedades.getResourceBundle().getString("descripcion"));
+        txtClima.setText(propiedades.getResourceBundle().getString("clima"));
+        txtImagenes.setText(propiedades.getResourceBundle().getString("imagenes"));
+        botonRegreso.setText(propiedades.getResourceBundle().getString("bttVolver"));
+        botonRegistro.setText(propiedades.getResourceBundle().getString("bttRegistro"));
+        botonImagenes.setText(propiedades.getResourceBundle().getString("imagenes"));
+    }
     ArrayList<String> imagePaths = new ArrayList<>();
     public void regresar (ActionEvent e) {
         agencia.loadStage("/paginaAdministrativa.fxml", e, "Se regresa a la pagina administrativa");
     }
     @Override
-    public void onCambioIdioma(CambioIdiomaEvent evento) {
-
-    }
-    @Override
     public void initialize(URL location, ResourceBundle resources) {
+        Propiedades.getInstance().addCambioIdiomaListener(this);
+        cargarTextos();
     }
     public void registrarDestino(ActionEvent actionEvent) {
         try

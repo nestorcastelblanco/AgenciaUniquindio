@@ -10,60 +10,60 @@
 
 <AnchorPane prefHeight="533.0" prefWidth="327.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.controller.EdicionPaquetesController">
       <Button fx:id="botonRegreso" layoutX="31.0" layoutY="481.0" mnemonicParsing="false" onAction="#regresar" prefHeight="38.0" prefWidth="98.0" text="Regresar" textOverrun="LEADING_ELLIPSIS" />
-      <Label layoutX="35.0" layoutY="362.0" prefHeight="25.0" prefWidth="110.0" text="Servicios">
+      <Label fx:id="txtServicios" layoutX="35.0" layoutY="362.0" prefHeight="25.0" prefWidth="110.0" text="Servicios">
          <font>
             <Font name="Franklin Gothic Book" size="15.0" />
          </font>
       </Label>
-      <Label contentDisplay="CENTER" layoutX="30.0" layoutY="-12.0" prefHeight="83.0" prefWidth="254.0" text="Edicion Paquetes">
+      <Label fx:id="txtPaquetes" contentDisplay="CENTER" layoutX="30.0" layoutY="-12.0" prefHeight="83.0" prefWidth="254.0" text="Edicion Paquetes">
          <font>
             <Font name="Franklin Gothic Book" size="34.0" />
          </font>
       </Label>
-      <Button fx:id="botonCrear" layoutX="203.0" layoutY="481.0" mnemonicParsing="false" onAction="#editarPaquete" prefHeight="38.0" prefWidth="98.0" text="Editar" textOverrun="LEADING_ELLIPSIS" />
+      <Button fx:id="botonEditar" layoutX="203.0" layoutY="481.0" mnemonicParsing="false" onAction="#editarPaquete" prefHeight="38.0" prefWidth="98.0" text="Editar" textOverrun="LEADING_ELLIPSIS" />
    <TextField fx:id="nombrePaquete" layoutX="32.0" layoutY="83.0" prefHeight="29.0" prefWidth="267.0">
       <font>
          <Font name="Franklin Gothic Medium Cond" size="16.0" />
       </font>
    </TextField>
-   <Label layoutX="32.0" layoutY="58.0" prefHeight="25.0" prefWidth="81.0" text="Nombre">
+   <Label fx:id="txtNombre" layoutX="32.0" layoutY="58.0" prefHeight="25.0" prefWidth="81.0" text="Nombre">
       <font>
          <Font name="Franklin Gothic Book" size="15.0" />
       </font>
    </Label>
    <TextField fx:id="servicios" layoutX="32.0" layoutY="386.0" prefHeight="29.0" prefWidth="267.0" />
-   <Label layoutX="35.0" layoutY="416.0" prefHeight="25.0" prefWidth="110.0" text="Adicionar Cupos">
+   <Label fx:id="txtCupos" layoutX="35.0" layoutY="416.0" prefHeight="25.0" prefWidth="110.0" text="Adicionar Cupos">
       <font>
          <Font name="Franklin Gothic Book" size="15.0" />
       </font>
    </Label>
    <TextField fx:id="cupos" layoutX="35.0" layoutY="441.0" prefHeight="29.0" prefWidth="118.0" />
-   <Label layoutX="32.0" layoutY="112.0" prefHeight="25.0" prefWidth="81.0" text="Destino">
+   <Label fx:id="txtDestino" layoutX="32.0" layoutY="112.0" prefHeight="25.0" prefWidth="81.0" text="Destino">
       <font>
          <Font name="Franklin Gothic Book" size="15.0" />
       </font>
    </Label>
    <ComboBox fx:id="destinosSistema" layoutX="32.0" layoutY="137.0" prefHeight="29.0" prefWidth="267.0" />
    <Button fx:id="botonDestino" layoutX="33.0" layoutY="180.0" mnemonicParsing="false" onAction="#agregarDestino" prefHeight="25.0" prefWidth="124.0" text="Agregar Destino" textOverrun="LEADING_ELLIPSIS" />
-   <Label layoutX="180.0" layoutY="416.0" prefHeight="25.0" prefWidth="118.0" text="Valor">
-      <font>
-         <Font name="Franklin Gothic Book" size="15.0" />
-      </font>
-   </Label>
    <DatePicker fx:id="inicio" layoutX="35.0" layoutY="337.0" prefHeight="25.0" prefWidth="118.0" />
    <DatePicker fx:id="fin" layoutX="176.0" layoutY="337.0" prefHeight="25.0" prefWidth="118.0" />
-   <Label layoutX="35.0" layoutY="310.0" prefHeight="25.0" prefWidth="110.0" text="Fecha Inicio">
+   <Label fx:id="txtValor" layoutX="180.0" layoutY="416.0" prefHeight="25.0" prefWidth="118.0" text="Valor">
       <font>
          <Font name="Franklin Gothic Book" size="15.0" />
       </font>
    </Label>
-   <Label layoutX="175.0" layoutY="310.0" prefHeight="25.0" prefWidth="110.0" text="Fecha Final">
+   <Label fx:id="txtInicio" layoutX="35.0" layoutY="310.0" prefHeight="25.0" prefWidth="110.0" text="Fecha Inicio">
+      <font>
+         <Font name="Franklin Gothic Book" size="15.0" />
+      </font>
+   </Label>
+   <Label fx:id="txtFinal" layoutX="175.0" layoutY="310.0" prefHeight="25.0" prefWidth="110.0" text="Fecha Final">
       <font>
          <Font name="Franklin Gothic Book" size="15.0" />
       </font>
    </Label>
    <TextField fx:id="valor" layoutX="180.0" layoutY="441.0" prefHeight="29.0" prefWidth="118.0" />
-   <Label layoutX="32.0" layoutY="211.0" prefHeight="25.0" prefWidth="136.0" text="Destinos Actuales">
+   <Label fx:id="txtDestinosActuales" layoutX="32.0" layoutY="211.0" prefHeight="25.0" prefWidth="136.0" text="Destinos Actuales">
       <font>
          <Font name="Franklin Gothic Book" size="15.0" />
       </font>

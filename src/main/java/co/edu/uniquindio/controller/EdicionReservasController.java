@@ -9,6 +9,7 @@ import co.edu.uniquindio.model.Guias;
 import co.edu.uniquindio.model.Paquetes;
 import co.edu.uniquindio.utils.CambioIdiomaEvent;
 import co.edu.uniquindio.utils.CambioIdiomaListener;
+import co.edu.uniquindio.utils.Propiedades;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -30,7 +31,7 @@ public class EdicionReservasController implements Initializable, CambioIdiomaLis
 
     private static final Logger LOGGER = Logger.getLogger(Agencia.class.getName());
     @FXML
-    private Button botonRegreso,botonRegistro, botonCrear, botonCrearDestino, botonDestino;
+    private Button botonRegreso;
     @FXML
     private ComboBox<Guias> guias;
     @FXML
@@ -47,11 +48,32 @@ public class EdicionReservasController implements Initializable, CambioIdiomaLis
     public void regresar (ActionEvent e) {
         agencia.loadStage("/paginaAdministrativa.fxml", e, "Se regresa a la pagina administrativa");
     }
+    private final Propiedades propiedades = Propiedades.getInstance();
     @Override
     public void onCambioIdioma(CambioIdiomaEvent evento) {
+        cargarTextos();
+    }
+    @FXML
+    private Label txtReserva, txtEstado,txtPaquete,txtGuia,txtInicio,txtFinal,txtAñadirPersonas,txtQuitarPersonas,txtValor;
+    @FXML
+    private Button botonEditar;
+    public void cargarTextos()
+    {
+        txtReserva.setText(propiedades.getResourceBundle().getString("edicionReserva"));
+        txtEstado.setText(propiedades.getResourceBundle().getString("estado"));
+        txtPaquete.setText(propiedades.getResourceBundle().getString("paquete"));
+        txtGuia.setText(propiedades.getResourceBundle().getString("guia"));
+        txtInicio.setText(propiedades.getResourceBundle().getString("fechaI"));
+        txtFinal.setText(propiedades.getResourceBundle().getString("fechaF"));
+        txtAñadirPersonas.setText(propiedades.getResourceBundle().getString("anadirPersonas"));
+        txtQuitarPersonas.setText(propiedades.getResourceBundle().getString("quitarPersonas"));
+        botonRegreso.setText(propiedades.getResourceBundle().getString("bttVolver"));
+        botonEditar.setText(propiedades.getResourceBundle().getString("bttEditar"));
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        Propiedades.getInstance().addCambioIdiomaListener(this);
+        cargarTextos();
         arrayGuias = agencia.enviarGuias();
         arrayPaquetes = agencia.enviarPaquetes();
         llenarListaPaquetes();

@@ -15,10 +15,9 @@
       <Pane layoutX="27.0" layoutY="57.0" prefHeight="402.0" prefWidth="372.0">
          <children>
             <Button fx:id="editar" layoutX="63.0" layoutY="30.0" mnemonicParsing="false" onAction="#editarPerfil" prefHeight="35.0" prefWidth="247.0" text="Editar Perfil" />
-            <Button layoutX="63.0" layoutY="99.0" mnemonicParsing="false" onAction="#seleccionPaquetes" prefHeight="35.0" prefWidth="247.0" text="Paquetes" />
-            <Button layoutX="63.0" layoutY="166.0" mnemonicParsing="false" onAction="#reservas" prefHeight="35.0" prefWidth="247.0" text="Visualizar Reservas" />
-            <Button layoutX="63.0" layoutY="230.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="247.0" text="Calificar Servicios" />
-            <Button layoutX="67.0" layoutY="336.0" mnemonicParsing="false" onAction="#regresar" prefHeight="35.0" prefWidth="239.0" text="Regresar" />
+            <Button fx:id="paquetes" layoutX="63.0" layoutY="99.0" mnemonicParsing="false" onAction="#seleccionPaquetes" prefHeight="35.0" prefWidth="247.0" text="Paquetes" />
+            <Button fx:id="reservas" layoutX="63.0" layoutY="166.0" mnemonicParsing="false" onAction="#reservas" prefHeight="35.0" prefWidth="247.0" text="Visualizar Reservas" />
+            <Button fx:id="regresar" layoutX="67.0" layoutY="336.0" mnemonicParsing="false" onAction="#regresar" prefHeight="35.0" prefWidth="239.0" text="Regresar" />
          </children>
       </Pane>
       <TableView fx:id="tablaDestinos" layoutX="468.0" layoutY="304.0" prefHeight="135.0" prefWidth="176.0">

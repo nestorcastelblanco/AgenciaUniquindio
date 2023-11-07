@@ -8,6 +8,7 @@ import co.edu.uniquindio.model.Destinos;
 import co.edu.uniquindio.model.Paquetes;
 import co.edu.uniquindio.utils.CambioIdiomaEvent;
 import co.edu.uniquindio.utils.CambioIdiomaListener;
+import co.edu.uniquindio.utils.Propiedades;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -34,10 +35,29 @@ public class EdicionPaquetesController implements Initializable, CambioIdiomaLis
     private TextField nombrePaquete, servicios, cupos, valor;
     @FXML
     private DatePicker inicio, fin;
-
+    private final Propiedades propiedades = Propiedades.getInstance();
     @Override
     public void onCambioIdioma(CambioIdiomaEvent evento) {
-
+        cargarTextos();
+    }
+    @FXML
+    private Label txtPaquetes, txtNombre,txtDestino,txtDestinosActuales,txtInicio,txtFinal,txtServicios,txtCupos,txtValor;
+    @FXML Button botonDestino,eliminarDestino, botonRegreso, botonEditar;
+    public void cargarTextos()
+    {
+        txtPaquetes.setText(propiedades.getResourceBundle().getString("edicionPaquete"));
+        txtNombre.setText(propiedades.getResourceBundle().getString("nombre"));
+        txtDestino.setText(propiedades.getResourceBundle().getString("txtDestinos"));
+        txtDestinosActuales.setText(propiedades.getResourceBundle().getString("destinosActuales"));
+        txtInicio.setText(propiedades.getResourceBundle().getString("fechaI"));
+        txtFinal.setText(propiedades.getResourceBundle().getString("fechaF"));
+        txtServicios.setText(propiedades.getResourceBundle().getString("servi"));
+        txtCupos.setText(propiedades.getResourceBundle().getString("adicionarCupos"));
+        txtValor.setText(propiedades.getResourceBundle().getString("precioPersona"));
+        botonDestino.setText(propiedades.getResourceBundle().getString("agregaDestino"));
+        eliminarDestino.setText(propiedades.getResourceBundle().getString("eliminarDestino"));
+        botonRegreso.setText(propiedades.getResourceBundle().getString("bttVolver"));
+        botonEditar.setText(propiedades.getResourceBundle().getString("bttEditar"));
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {

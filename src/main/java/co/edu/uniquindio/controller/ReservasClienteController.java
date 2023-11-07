@@ -4,12 +4,15 @@ import co.edu.uniquindio.model.Agencia;
 import co.edu.uniquindio.model.Reservas;
 import co.edu.uniquindio.utils.CambioIdiomaEvent;
 import co.edu.uniquindio.utils.CambioIdiomaListener;
+import co.edu.uniquindio.utils.Propiedades;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
@@ -38,12 +41,26 @@ public class ReservasClienteController implements Initializable, CambioIdiomaLis
     @FXML
     private TableColumn<Reservas, String> fechaFin;
     private ObservableList<Reservas> reservaciones = FXCollections.observableArrayList();
+    private final Propiedades propiedades = Propiedades.getInstance();
     @Override
     public void onCambioIdioma(CambioIdiomaEvent evento) {
+        cargarTextos();
     }
-
+    @FXML
+    private Label txtReservasCliente;
+    @FXML
+    private Button regresar, calificar,cancelar;
+    public void cargarTextos()
+    {
+        txtReservasCliente.setText(propiedades.getResourceBundle().getString("txtReservasCliente"));
+        regresar.setText(propiedades.getResourceBundle().getString("bttVolver"));
+        calificar.setText(propiedades.getResourceBundle().getString("calificar"));
+        cancelar.setText(propiedades.getResourceBundle().getString("cancelar"));
+    }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        Propiedades.getInstance().addCambioIdiomaListener(this);
+        cargarTextos();
         for(int i = 0 ; i<agencia.enviarReservasCliente().size();i++) {
             System.out.println(agencia.enviarReservasCliente().get(i).getCliente().getNombreCompleto() + " Codigo: " + agencia.enviarReservasCliente().get(i).getCodigo() + " Estado Calificacion: " + agencia.enviarReservasCliente().get(i).isCalificacion());
         }

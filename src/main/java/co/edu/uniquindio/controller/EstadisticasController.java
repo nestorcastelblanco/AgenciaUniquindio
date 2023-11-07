@@ -6,6 +6,7 @@ import co.edu.uniquindio.model.Guias;
 import co.edu.uniquindio.model.Paquetes;
 import co.edu.uniquindio.utils.CambioIdiomaEvent;
 import co.edu.uniquindio.utils.CambioIdiomaListener;
+import co.edu.uniquindio.utils.Propiedades;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -13,6 +14,8 @@ import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -26,12 +29,24 @@ public class EstadisticasController implements Initializable, CambioIdiomaListen
     private CategoryAxis destinosReservadosX,destinosBuscadosX,mejoresGuiasX,paquetesReservadosX;
     @FXML
     private NumberAxis destinosReservadosYdestinosBuscadosY,mejoresGuiasY,paquetesReservadosY;
+    private final Propiedades propiedades = Propiedades.getInstance();
     @Override
     public void onCambioIdioma(CambioIdiomaEvent evento) {
-
+        cargarTextos();
+    }
+    @FXML
+    private Label txtEstadisticas;
+    @FXML
+    private Button botonRegreso;
+    public void cargarTextos()
+    {
+        txtEstadisticas.setText(propiedades.getResourceBundle().getString("edicionReserva"));
+        botonRegreso.setText(propiedades.getResourceBundle().getString("bttVolver"));
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        Propiedades.getInstance().addCambioIdiomaListener(this);
+        cargarTextos();
         cargarDestinosReservados();
         cargarDestinosBuscados();
         cargarMejoresGuias();

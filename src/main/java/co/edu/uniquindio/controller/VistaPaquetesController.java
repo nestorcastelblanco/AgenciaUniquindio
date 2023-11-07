@@ -4,12 +4,15 @@ import co.edu.uniquindio.model.Agencia;
 import co.edu.uniquindio.model.Paquetes;
 import co.edu.uniquindio.utils.CambioIdiomaEvent;
 import co.edu.uniquindio.utils.CambioIdiomaListener;
+import co.edu.uniquindio.utils.Propiedades;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -39,12 +42,26 @@ public class VistaPaquetesController implements Initializable, CambioIdiomaListe
     @FXML
     private TableColumn<Paquetes, String> fechaFin;
     private ObservableList<Paquetes> paquetes = FXCollections.observableArrayList(agencia.enviarPaquetes());
+    private final Propiedades propiedades = Propiedades.getInstance();
     @Override
     public void onCambioIdioma(CambioIdiomaEvent evento) {
+        cargarTextos();
     }
-
+    @FXML
+    private Label txtPaquetesSistema;
+    @FXML
+    private Button regresar, eliminar, editar;
+    public void cargarTextos()
+    {
+        txtPaquetesSistema.setText(propiedades.getResourceBundle().getString("txtPaquetesSistema"));
+        regresar.setText(propiedades.getResourceBundle().getString("bttVolver"));
+        eliminar.setText(propiedades.getResourceBundle().getString("eliminarDestino"));
+        editar.setText(propiedades.getResourceBundle().getString("bttEditar"));
+    }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        Propiedades.getInstance().addCambioIdiomaListener(this);
+        cargarTextos();
         paquete.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombre()));
         destinos.setCellValueFactory(cellData -> new SimpleStringProperty(agencia.obtenerNombresCiudades(cellData.getValue().getDestinos())));
         personas.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNumeroPersonas() + ""));

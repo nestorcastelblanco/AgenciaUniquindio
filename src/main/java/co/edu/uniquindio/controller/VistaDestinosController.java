@@ -5,12 +5,15 @@ import co.edu.uniquindio.model.Destinos;
 import co.edu.uniquindio.model.Paquetes;
 import co.edu.uniquindio.utils.CambioIdiomaEvent;
 import co.edu.uniquindio.utils.CambioIdiomaListener;
+import co.edu.uniquindio.utils.Propiedades;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
@@ -28,11 +31,26 @@ public class VistaDestinosController implements Initializable, CambioIdiomaListe
     @FXML
     private TableColumn<Destinos, String> colNombre, colCiudad, colDescripcion, colClima;
 
+    private final Propiedades propiedades = Propiedades.getInstance();
     @Override
     public void onCambioIdioma(CambioIdiomaEvent evento) {
+        cargarTextos();
+    }
+    @FXML
+    private Label txtDestinosSistema;
+    @FXML
+    private Button regresar, eliminar, editar;
+    public void cargarTextos()
+    {
+        txtDestinosSistema.setText(propiedades.getResourceBundle().getString("txtDestinosSistema"));
+        regresar.setText(propiedades.getResourceBundle().getString("bttVolver"));
+        eliminar.setText(propiedades.getResourceBundle().getString("eliminarDestino"));
+        editar.setText(propiedades.getResourceBundle().getString("bttEditar"));
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        Propiedades.getInstance().addCambioIdiomaListener(this);
+        cargarTextos();
         agencia.inicializarDatos();
         ObservableList<Destinos> destinosA = FXCollections.observableArrayList(agencia.enviarDestinos());
         cargarTablas(destinosA);

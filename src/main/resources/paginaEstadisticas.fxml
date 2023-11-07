@@ -10,7 +10,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="638.0" prefWidth="789.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.controller.EstadisticasController">
    <children>
-      <Label layoutX="307.0" layoutY="14.0" prefHeight="46.0" prefWidth="175.0" text="ESTADISTICAS">
+      <Label fx:id="txtEstadisticas" layoutX="307.0" layoutY="14.0" prefHeight="46.0" prefWidth="175.0" text="ESTADISTICAS">
          <font>
             <Font name="Franklin Gothic Medium Cond" size="33.0" />
          </font>
@@ -51,6 +51,6 @@
             <NumberAxis fx:id="paquetesReservadosY" label="RESERVAS" side="LEFT" />
          </yAxis>
       </BarChart>
-      <Button layoutX="17.0" layoutY="599.0" mnemonicParsing="false" onAction="#volver" prefHeight="25.0" prefWidth="89.0" text="Volver" />
+      <Button fx:id="botonRegreso" layoutX="17.0" layoutY="599.0" mnemonicParsing="false" onAction="#volver" prefHeight="25.0" prefWidth="89.0" text="Volver" />
    </children>
 </AnchorPane>
