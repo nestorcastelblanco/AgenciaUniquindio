@@ -57,13 +57,13 @@ public class SeleccionClientePaquetesController implements Initializable, Cambio
     public void cargarTextos() {
         txtPaquete.setText(propiedades.getResourceBundle().getString("paquete"));
         txtDestinos.setText(propiedades.getResourceBundle().getString("txtDestinos"));
-        txtPersonas.setText(propiedades.getResourceBundle().getString("personas"));
+        txtPersonas.setText(propiedades.getResourceBundle().getString("txtPersona"));
         txtServicios.setText(propiedades.getResourceBundle().getString("servi"));
         txtValor.setText(propiedades.getResourceBundle().getString("precioPersona"));
         txtInicio.setText(propiedades.getResourceBundle().getString("fechaI"));
         txtFin.setText(propiedades.getResourceBundle().getString("fechaF"));
         regresar.setText(propiedades.getResourceBundle().getString("bttVolver"));
-        ver.setText(propiedades.getResourceBundle().getString("ver"));
+        ver.setText(propiedades.getResourceBundle().getString("txtVer"));
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -107,12 +107,14 @@ public class SeleccionClientePaquetesController implements Initializable, Cambio
 
     public void regresar(ActionEvent actionEvent) {
         agencia.loadStage("/portalAgencia.fxml", actionEvent, "Se regresa a la pagina administrativa");
+        agencia.datos();
     }
 
     public void ver(ActionEvent actionEvent) {
         if (tablaPaquetes.getSelectionModel().getSelectedIndex() == -1) {
             LOGGER.log(Level.INFO, "Se intento visualizar un paquete sin haberlo seleccionado");
-        } else {
+        } else{
+            agencia.datos();
             agencia.recibirPaqueteSeleccionado(tablaPaquetes.getSelectionModel().getSelectedItem());
             agencia.loadStage("/paginaCaracteristicasPaquete.fxml",actionEvent,"Se va a visualizar un paquete");
         }

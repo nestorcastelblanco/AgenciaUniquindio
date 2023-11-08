@@ -1,10 +1,12 @@
 package co.edu.uniquindio.controller;
+import co.edu.uniquindio.exceptions.CampoObligatorioException;
 import co.edu.uniquindio.exceptions.CampoRepetido;
 import co.edu.uniquindio.model.Agencia;
 import co.edu.uniquindio.utils.Propiedades;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -15,11 +17,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 public class PrincipalController implements Initializable {
     @FXML
-    private TextField nombreUsuario, correoUsuario, direccionUsuario, ciudadUsuario, telefonoUsuario, usuarioIngresado, contrasenaIngresada, id;
+    private TextField codigo, usuarioIngresado, contrasenaIngresada;
     @FXML
     private Label ingreso, usuario,contrasena;
     @FXML
-    private Button botonIngreso, botonRegistro, bttCambiar,botonAdmin;
+    private Button botonIngreso, botonCodigo, botonRegistro, bttCambiar,botonAdmin;
     private final Agencia agencia = Agencia.getInstance();
     private final Logger LOGGER = Logger.getLogger(Agencia.class.getName());
     private final Propiedades propiedades = Propiedades.getInstance();
@@ -54,11 +56,29 @@ public class PrincipalController implements Initializable {
     }
     public void ingresar(ActionEvent actionEvent) {
         try{
-            agencia.ingresarCliente(usuarioIngresado.getText(),contrasenaIngresada.getText());
+            agencia.ingresarCliente(usuarioIngresado.getText(),contrasenaIngresada.getText(), codigo.getText());
             agencia.loadStage("/portalAgencia.fxml",actionEvent,"Se ingresa al portal de la agencia" );
+            mostrarMensaje(Alert.AlertType.CONFIRMATION, "El codigo y credenciales fue validado correctamente");
         }catch (CampoRepetido e)
         {
+            mostrarMensaje(Alert.AlertType.WARNING, e.getMessage());
             LOGGER.log(Level.INFO, "Se ingresaron credenciales no validas");
         }
+    }
+
+    public void enviarCodigo(ActionEvent actionEvent) {
+        try
+        {
+            agencia.enviarCodigo(usuarioIngresado.getText(),contrasenaIngresada.getText());
+            mostrarMensaje(Alert.AlertType.INFORMATION, "El codigo de verificacion ha sido enviado");
+        }catch (CampoObligatorioException e) {
+            mostrarMensaje(Alert.AlertType.INFORMATION, e.getMessage());
+        }
+    }
+    public void mostrarMensaje(Alert.AlertType tipo, String mensaje){
+        Alert alert = new Alert(tipo);
+        alert.setHeaderText(null);
+        alert.setContentText(mensaje);
+        alert.show();
     }
 }

@@ -117,7 +117,6 @@ public class CalificacionesController implements Initializable, CambioIdiomaList
                 };
             }
         });
-
         // Configurar la fábrica de celdas para mostrar el nombre y la descripción en el menú desplegable
         destinosCombo.setButtonCell(new ListCell<Destinos>() {
             @Override
@@ -288,19 +287,22 @@ public class CalificacionesController implements Initializable, CambioIdiomaList
     public void regresar(ActionEvent actionEvent) {
         agencia.loadStage("/paginaReservasCliente.fxml", actionEvent, "Se regresa a la vista de reservas");
     }
-
     public void enviarCalificaciones(ActionEvent actionEvent) {
         if(agencia.getReservaCalificacion().getGuia().getNombre().equals("SIN GUIA") || agencia.getReservaCalificacion().getGuia() == null)
         {
             if (stateDestinos && !comentario.getText().isEmpty()){
-                agencia.cargarCalificaciones(arrayListDestinos,calificacionDestinos);
+                agencia.cargarCalificaciones(arrayListDestinos,calificacionDestinos, agencia.getReservaCalificacion().getPaquete());
+                agencia.mostrarMensaje(Alert.AlertType.WARNING, "La calificacion se ha completado correctamente");
             }else{
+                agencia.mostrarMensaje(Alert.AlertType.WARNING, "La calificacion no se ha completado correctamente");
                 LOGGER.log(Level.INFO, "La calificacion no se ha completado correctamente, complete los cambios necesarios");
             }
         }else{
             if (stateGuia && stateDestinos && !comentario.getText().isEmpty()){
-                agencia.cargarCalificacionesCompleta(arrayListDestinos,calificacionDestinos,calificacionGuia, agencia.getReservaCalificacion().getGuia());
+                agencia.cargarCalificacionesCompleta(arrayListDestinos,calificacionDestinos,calificacionGuia, agencia.getReservaCalificacion().getGuia(), agencia.getReservaCalificacion().getPaquete());
+                agencia.mostrarMensaje(Alert.AlertType.WARNING, "La calificacion se ha completado correctamente");
             }else{
+                agencia.mostrarMensaje(Alert.AlertType.WARNING, "La calificacion no se ha completado correctamente");
                 LOGGER.log(Level.INFO, "La calificacion no se ha completado correctamente, complete los cambios necesarios");
             }
         }

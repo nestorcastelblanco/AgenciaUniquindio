@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -44,7 +45,7 @@ public class RegistroDestinoController implements Initializable, CambioIdiomaLis
     public void cargarTextos()
     {
         txtNombre.setText(propiedades.getResourceBundle().getString("nombre"));
-        txtDestinoReg.setText(propiedades.getResourceBundle().getString("registrarDestino"));
+        txtDestinoReg.setText(propiedades.getResourceBundle().getString("registroDestino"));
         txtCiudad.setText(propiedades.getResourceBundle().getString("ciudad"));
         txtDescripcion.setText(propiedades.getResourceBundle().getString("descripcion"));
         txtClima.setText(propiedades.getResourceBundle().getString("clima"));
@@ -87,17 +88,24 @@ public class RegistroDestinoController implements Initializable, CambioIdiomaLis
                 new FileChooser.ExtensionFilter("Archivos de Imagen", "*.png", "*.jpg", "*.gif", "*.bmp"));
 
         // Mostrar el cuadro de diálogo para seleccionar archivos
-        File[] selectedFiles = fileChooser.showOpenMultipleDialog(stage).toArray(new File[0]);
+        List<File> selectedFiles = fileChooser.showOpenMultipleDialog(stage);
 
-        // Obtener las direcciones absolutas y guardarlas en el ArrayList
-        if (selectedFiles != null) {
-            for (File file : selectedFiles) {
-                imagePaths.add(file.getAbsolutePath());
+        if(selectedFiles != null && !selectedFiles.isEmpty()){
+
+        File[] imagenes = selectedFiles.toArray(new File[0]);
+
+            // Obtener las direcciones absolutas y guardarlas en el ArrayList
+            if (imagenes != null) {
+                for (File file : imagenes) {
+                    imagePaths.add(file.getAbsolutePath());
+                }
             }
+            System.out.println("Direcciones de las imágenes seleccionadas:");
+            for (String path : imagePaths) {
+                System.out.println(path);
+            }
+
         }
-        System.out.println("Direcciones de las imágenes seleccionadas:");
-        for (String path : imagePaths) {
-            System.out.println(path);
-        }
+
     }
 }

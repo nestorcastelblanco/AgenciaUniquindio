@@ -1,33 +1,21 @@
 package co.edu.uniquindio.controller;
-
 import co.edu.uniquindio.model.Agencia;
-import co.edu.uniquindio.utils.Propiedades;
 import co.edu.uniquindio.utils.CambioIdiomaEvent;
 import co.edu.uniquindio.utils.CambioIdiomaListener;
+import co.edu.uniquindio.utils.Propiedades;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-
-import java.awt.*;
+import javafx.scene.control.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
-
 public class MenuAdminController implements Initializable, CambioIdiomaListener {
     @FXML
-    private Label titulo, nombre, identificacion, labelIdiomas,experiencia;
-    @FXML
-    private TextField nombreUsuario, id,idiomas, exp;
+    private Button botonRegreso,registrarGuia ,registrarDestinos, registrarPaquetes, mostrarGuias,mostrarDestinos,mostrarPaquetes,mostrarReservas,mostrarEstadisticas;
     private final Logger LOGGER = Logger.getLogger(Agencia.class.getName());
     private final Propiedades propiedades = Propiedades.getInstance();
     private final Agencia agencia = Agencia.getInstance();
-    @Override
-    public void onCambioIdioma(CambioIdiomaEvent evento) {
-        cargarTextos();
-    }
-    @FXML
-    private javafx.scene.control.Button botonRegreso,registrarGuia ,registrarDestinos, registrarPaquetes, mostrarGuias,mostrarDestinos,mostrarPaquetes,mostrarReservas,mostrarEstadisticas;
     public void cargarTextos()
     {
         botonRegreso.setText(propiedades.getResourceBundle().getString("bttVolver"));
@@ -43,6 +31,10 @@ public class MenuAdminController implements Initializable, CambioIdiomaListener 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         Propiedades.getInstance().addCambioIdiomaListener(this);
+        cargarTextos();
+    }
+    @Override
+    public void onCambioIdioma(CambioIdiomaEvent evento) {
         cargarTextos();
     }
     public void mostrarMensaje(Alert.AlertType tipo, String mensaje){

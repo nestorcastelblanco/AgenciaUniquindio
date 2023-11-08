@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 import lombok.Getter;
 import lombok.extern.java.Log;
@@ -58,6 +59,7 @@ public class Agencia {
     private ArrayList<Clientes> clientes = new ArrayList<>();
     private ArrayList<Reservas> reservas = new ArrayList<>();
     private ArrayList<Guias> guias = new ArrayList<>();
+    private ArrayList<Integer> codigos = new ArrayList<>();
     private final Logger LOGGER=Logger.getLogger(Agencia.class.getName());
     private static Agencia agencia;
     public void inicializarDatos(){
@@ -288,6 +290,7 @@ public class Agencia {
                 .servicios(servicios)
                 .cantReservas(0)
                 .numeroPersonas(Integer.parseInt(personas))
+                .calificaciones(new ArrayList<>())
                 .build();
         paquetes.add(paquete);
         for (int i = 0 ; i<paquetes.size();i++)
@@ -625,13 +628,14 @@ public class Agencia {
                 paquete.setFin(fin);
             }
         }
+        actualizarPaquetesRecursivo(0,paqueteE,nombre,destinos,inicio,fin, servicios,valor, personas);
         borrarDatosSerializados(RUTA_PAQUETES);
         ArchivoUtils.serializarArraylistPaquetes(RUTA_PAQUETES, paquetes);
         LOGGER.info("Se ha actualizado al paquete con nombre: " + nombre);
     }
-    public void actualizarPaquetesRecursivo(int i,String nombre,ArrayList<Destinos> destinos, LocalDate inicio, LocalDate fin, String servicios, String valor, String personas) {
+    public void actualizarPaquetesRecursivo(int i,Paquetes paqueteE, String nombre,ArrayList<Destinos> destinos, LocalDate inicio, LocalDate fin, String servicios, String valor, String personas) {
         if (i<paquetes.size()) {
-            if (PAQUETE_EDICION.getNombre().equals(paquetes.get(i).getNombre())) {
+            if (paqueteE.getNombre().equals(paquetes.get(i).getNombre())) {
                 Paquetes paquete = new Paquetes();
                 paquete.setNombre(nombre);
                 paquete.setDestinos(destinos);
@@ -646,7 +650,7 @@ public class Agencia {
                 ArchivoUtils.serializarArraylistPaquetes(RUTA_PAQUETES, paquetes);
                 LOGGER.info("Se ha actualizado al paquete con nombre: " + nombre);
             }
-            actualizarPaquetesRecursivo(i+1, nombre, destinos, inicio, fin, servicios, valor, personas);
+            actualizarPaquetesRecursivo(i+1,paqueteE, nombre, destinos, inicio, fin, servicios, valor, personas);
         }
     }
     public void editarReserva(Paquetes paquete, LocalDate inicio, LocalDate fin, String agregarPersonas, String quitarPersonas, Guias selectedItem, String pendiente) throws CampoRepetido,CampoObligatorioException,CampoVacioException {
@@ -802,6 +806,9 @@ public class Agencia {
     }
     public Paquetes enviarPaqueteEdicion() {
         return PAQUETE_EDICION;
+    }
+    public Destinos enviarDestinoEdicion() {
+        return DESTINO_EDICION;
     }
     public Reservas enviarReservaEdicion() {
         return RESERVA_EDICION;
@@ -1031,14 +1038,27 @@ public class Agencia {
         ArchivoUtils.serializarArraylistDestinos(RUTA_DESTINOS, destinos);
         ArchivoUtils.serializarArraylistClientes(RUTA_CLIENTES, clientes);
     }
-    public void ingresarCliente(String usuario, String contrasena) throws CampoRepetido
+    public void ingresarCliente(String usuario, String contrasena, String codigo) throws CampoRepetido
     {
         if (agencia.buscarCliente(usuario,contrasena) == false) {
             throw new CampoRepetido("Las credenciales proporcionadas son erroneas");
-        }else{
-            LOGGER.log(Level.INFO, "Se genero el ingreso de un cliente: " + CLIENTE_SESION.getNombreCompleto() );
         }
+        if(codigo.isEmpty() || !verificarCodigo(codigo))
+        {
+            throw new CampoRepetido("El codigo proporcionado es incorrecto");
+        }
+        LOGGER.log(Level.INFO, "Se genero el ingreso de un cliente: " + CLIENTE_SESION.getNombreCompleto() );
     }
+
+    private boolean verificarCodigo(String codigo) {
+        boolean state = false;
+        if(Integer.parseInt(codigo) == codigos.get(codigos.size()-1))
+        {
+            state = true;
+        }
+        return state;
+    }
+
     public void ingresarAdmin(String usuario, String contrasena) throws CampoRepetido
     {
         if (!agencia.buscarAdmin(usuario,contrasena)) {
@@ -1113,10 +1133,6 @@ public class Agencia {
             System.out.println("Contador de busquedas del destino " + destino + " es: " + destinos.get(destinoIndex).getContBusquedas());
         }
         buscarDestinoRecursivo(destino, clienteSesion, destinoIndex + 1);
-        borrarDatosSerializados(RUTA_DESTINOS);
-        borrarDatosSerializados(RUTA_CLIENTES);
-        ArchivoUtils.serializarArraylistDestinos(RUTA_DESTINOS,destinos);
-        ArchivoUtils.serializarArraylistClientes(RUTA_CLIENTES,clientes);
     }
     public void actualizarBusquedaClienteRecursivo(Clientes clienteSesion, String destino, int clienteIndex) {
         if (clienteIndex == clientes.size()) {
@@ -1224,27 +1240,82 @@ public class Agencia {
         props.put("mail.smtp.starttls.enable", "true");
         props.put("mail.smtp.host", "smtp.gmail.com"); // Para Gmail
         props.put("mail.smtp.port", "587"); // Puerto para TLS
-
         Session session = Session.getInstance(props,
                 new javax.mail.Authenticator() {
                     protected PasswordAuthentication getPasswordAuthentication() {
                         return new PasswordAuthentication(correoEmisor, contraseñaEmisor);
                     }
                 });
-
         try {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(correoEmisor));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(cliente.getCorreo()));
             message.setSubject(asunto);
             message.setText(mensaje);
-
             Transport.send(message);
-
             System.out.println("Correo enviado satisfactoriamente a la direccion: " + cliente.getCorreo());
-
         } catch (MessagingException e) {
             e.printStackTrace();
+        }
+    }
+    public void enviarCorreoCodigo(String correo, int codigo) {
+        String correoEmisor = "traveluniquindio@gmail.com"; // Cambia esto con tu dirección de correo electrónico
+        String contraseñaEmisor = "sgfc sgay apnx qvxq"; // Cambia esto con tu contra/seña de correo electrónico
+        String asunto = "CODIGO DE VERIFICACION DE INGRESO AL PORTAL";
+        String mensaje = "El codigo de verificacion para el ingreso la portal de Travel Uniquindio es el siguiente : " + codigo;
+        Properties props = new Properties();
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", "smtp.gmail.com"); // Para Gmail
+        props.put("mail.smtp.port", "587"); // Puerto para TLS
+        Session session = Session.getInstance(props,
+                new javax.mail.Authenticator() {
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication(correoEmisor, contraseñaEmisor);
+                    }
+                });
+        try {
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(correoEmisor));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(correo));
+            message.setSubject(asunto);
+            message.setText(mensaje);
+            Transport.send(message);
+            System.out.println("Correo enviado satisfactoriamente a la direccion: " + correo);
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+    }
+    public void enviarCodigo(String usuario, String contraseña)throws CampoObligatorioException {
+        if(usuario == null || usuario.isEmpty())
+        {
+            throw new CampoObligatorioException("Debe ingresar el usuario correctamente");
+        }
+        if(contraseña == null || contraseña.isEmpty())
+        {
+            throw new CampoObligatorioException("Debe ingresar la contraseña correctamente");
+        }
+        if(!buscarCliente(usuario,contraseña))
+        {
+            throw new CampoObligatorioException("Las credenciales ingresadas no se encuentran registradas en el sistema");
+        }
+        String correoCliente = buscarCorreoCliente(0, usuario,contraseña);
+        Random random = new Random();
+        int numeroAleatorio = random.nextInt(900000) + 100000;
+        codigos.add(numeroAleatorio);
+        enviarCorreoCodigo(correoCliente, numeroAleatorio);
+    }
+
+    public String buscarCorreoCliente(int ind ,String usuario, String contraseña)
+    {
+        if(ind == clientes.size()) {
+            return null;
+        }
+        if(clientes.get(ind).getUsuario().equals(usuario) && clientes.get(ind).getContrasena().equals(contraseña))
+        {
+            return clientes.get(ind).getCorreo();
+        }else {
+            return buscarCorreoCliente(ind+1, usuario,contraseña);
         }
     }
 
@@ -1374,7 +1445,7 @@ public class Agencia {
         boolean isNumeric = (numero != null && numero.matches("[0-9]+"));
         return isNumeric;
     }
-    public void cargarCalificacionesCompleta(ArrayList<Destinos> destinosCombo, ArrayList<Integer> calificacionDestinos, int calificacionGuia, Guias guia) {
+    public void cargarCalificacionesCompleta(ArrayList<Destinos> destinosCombo, ArrayList<Integer> calificacionDestinos, int calificacionGuia, Guias guia, Paquetes paqueteCalificacion) {
         for(int i = 0 ; i<destinos.size();i++){
             for( int x = 0 ; x<destinosCombo.size();x++)
             {
@@ -1416,7 +1487,7 @@ public class Agencia {
     }
 
     //CALIFICACIONES DE RESERVAS QUE NO CUENTAN CON UN GUIA
-    public void cargarCalificaciones(ArrayList<Destinos> destinosCombo, ArrayList<Integer> calificacionDestinos) {
+    public void cargarCalificaciones(ArrayList<Destinos> destinosCombo, ArrayList<Integer> calificacionDestinos, Paquetes paqueteCalificacion) {
         for(int i = 0 ; i<destinos.size();i++){
             for( int x = 0 ; x<destinosCombo.size();x++)
             {
@@ -1441,6 +1512,13 @@ public class Agencia {
                 reserva.setCalificacion(true);
             }
         }
+        for (Paquetes paquete : paquetes){
+            if(paqueteCalificacion.getNombre().equals(paquete.getNombre()))
+            {
+                paquete.añadirCalificacion(calcularPromedioDestinos(0,calificacionDestinos,0));
+                System.out.println(paquete.getNombre() + " Promedio de calificacion: " + paquete.promedio());
+            }
+        }
         for(int i = 0 ; i<reservas.size();i++) {
             System.out.println(reservas.get(i).getCliente().getNombreCompleto() + " Codigo: " + reservas.get(i).getCodigo() + " Estado Calificacion: " + reservas.get(i).isCalificacion());
         }
@@ -1450,6 +1528,13 @@ public class Agencia {
         ArchivoUtils.serializarArraylistReservas(RUTA_RESERVAS,reservas);
         borrarDatosSerializados(RUTA_GUIAS);
         ArchivoUtils.serializarArraylist(RUTA_GUIAS,guias);
+    }
+    private float calcularPromedioDestinos(int i, ArrayList<Integer> calificacionDestinos, float cont) {
+        if(i < calificacionDestinos.size())
+        {
+           return calcularPromedioDestinos(i+1,calificacionDestinos,cont+ Float.valueOf(calificacionDestinos.get(i)));
+        }
+        return cont/calificacionDestinos.size();
     }
     public ArrayList<Destinos> ordenarPorRepeticiones() {
         HashSet<String> destinosBuscados = new HashSet<>(agencia.CLIENTE_SESION.getBusquedas());
@@ -1467,8 +1552,16 @@ public class Agencia {
         }
         return destinosBusquedas;
     }
-
-    public Destinos enviarDestinoEdicion() {
-        return DESTINO_EDICION;
+    public void mostrarMensaje(Alert.AlertType tipo, String mensaje){
+        Alert alert = new Alert(tipo);
+        alert.setHeaderText(null);
+        alert.setContentText(mensaje);
+        alert.show();
+    }
+    public void datos() {
+        borrarDatosSerializados(RUTA_DESTINOS);
+        borrarDatosSerializados(RUTA_CLIENTES);
+        ArchivoUtils.serializarArraylistDestinos(RUTA_DESTINOS,destinos);
+        ArchivoUtils.serializarArraylistClientes(RUTA_CLIENTES,clientes);
     }
 }

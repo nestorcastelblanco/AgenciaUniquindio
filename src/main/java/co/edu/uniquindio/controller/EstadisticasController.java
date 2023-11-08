@@ -40,7 +40,7 @@ public class EstadisticasController implements Initializable, CambioIdiomaListen
     private Button botonRegreso;
     public void cargarTextos()
     {
-        txtEstadisticas.setText(propiedades.getResourceBundle().getString("edicionReserva"));
+        txtEstadisticas.setText(propiedades.getResourceBundle().getString("estadisticas"));
         botonRegreso.setText(propiedades.getResourceBundle().getString("bttVolver"));
     }
     @Override

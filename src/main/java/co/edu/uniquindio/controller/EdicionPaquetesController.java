@@ -61,6 +61,8 @@ public class EdicionPaquetesController implements Initializable, CambioIdiomaLis
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        Propiedades.getInstance().addCambioIdiomaListener(this);
+        cargarTextos();
         destinosActuales = agencia.enviarPaqueteEdicion().getDestinos();
         nombrePaquete.setText(agencia.enviarPaqueteEdicion().getNombre());
         servicios.setText(agencia.enviarPaqueteEdicion().getServicios());

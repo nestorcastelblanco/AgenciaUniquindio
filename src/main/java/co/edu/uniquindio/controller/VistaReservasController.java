@@ -60,6 +60,8 @@ public class VistaReservasController implements Initializable, CambioIdiomaListe
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        Propiedades.getInstance().addCambioIdiomaListener(this);
+        cargarTextos();
         reservaciones = FXCollections.observableArrayList(agencia.enviarReservas());
         paquete.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPaquete().getNombre()));
         guia.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getGuia().getNombre()));
