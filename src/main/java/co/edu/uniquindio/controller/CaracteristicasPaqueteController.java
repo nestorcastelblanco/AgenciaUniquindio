@@ -21,7 +21,7 @@ public class CaracteristicasPaqueteController implements Initializable, CambioId
     private int numeroImagenes, cont;
     private ArrayList<String> arrayListImagenes = new ArrayList<>();
     @FXML
-    private ImageView imageView;
+    private ImageView imageView,estrella1,estrella2,estrella3,estrella4,estrella5;
     @FXML
     private Button btnAnterior;
     @FXML
@@ -79,6 +79,53 @@ public class CaracteristicasPaqueteController implements Initializable, CambioId
         }
         Image imagen = new Image(arrayListImagenes.get(cont));
         imageView.setImage(imagen);
+
+        if(paqueteSeleccionado.promedio() > 0 && paqueteSeleccionado.promedio()<=1)
+        {
+            Image imagenes = new Image("Imagenes/estrella.jpg");
+            Image imagenGris = new Image("Imagenes/estrellaGris.jpg");
+            estrella1.setImage(imagenes);
+            estrella2.setImage(imagenes);
+            estrella3.setImage(imagenGris);
+            estrella4.setImage(imagenGris);
+            estrella5.setImage(imagenGris);
+        }if(paqueteSeleccionado.promedio() > 1 && paqueteSeleccionado.promedio()<=2)
+        {
+            Image imagenes = new Image("Imagenes/estrella.jpg");
+            Image imagenGris = new Image("Imagenes/estrellaGris.jpg");
+            estrella1.setImage(imagenes);
+            estrella2.setImage(imagenes);
+            estrella3.setImage(imagenes);
+            estrella4.setImage(imagenGris);
+            estrella5.setImage(imagenGris);
+        }if(paqueteSeleccionado.promedio() >2 && paqueteSeleccionado.promedio()<=3)
+        {
+            Image imagenes = new Image("Imagenes/estrella.jpg");
+            Image imagenGris = new Image("Imagenes/estrellaGris.jpg");
+            estrella1.setImage(imagenes);
+            estrella2.setImage(imagenes);
+            estrella3.setImage(imagenes);
+            estrella4.setImage(imagenGris);
+            estrella5.setImage(imagenGris);
+        }if(paqueteSeleccionado.promedio() > 3 && paqueteSeleccionado.promedio()<=4)
+        {
+            Image imagenes = new Image("Imagenes/estrella.jpg");
+            Image imagenGris = new Image("Imagenes/estrellaGris.jpg");
+            estrella1.setImage(imagenes);
+            estrella2.setImage(imagenes);
+            estrella3.setImage(imagenes);
+            estrella4.setImage(imagenes);
+            estrella5.setImage(imagenGris);
+        }if(paqueteSeleccionado.promedio() > 4 && paqueteSeleccionado.promedio()<=5)
+        {
+            Image imagenes = new Image("Imagenes/estrella.jpg");
+            Image imagenGris = new Image("Imagenes/estrellaGris.jpg");
+            estrella1.setImage(imagenes);
+            estrella2.setImage(imagenes);
+            estrella3.setImage(imagenes);
+            estrella4.setImage(imagenes);
+            estrella5.setImage(imagenes);
+        }
     }
     public void regresar(ActionEvent actionEvent) {
         agencia.loadStage("/paginaClienteSeleccionDestino.fxml", actionEvent,"Se carga la ventana de seleccion de paquete");

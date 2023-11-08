@@ -97,9 +97,9 @@
             </Label>
          </children>
       </Pane>
-      <Pane layoutX="-16.0" layoutY="301.0" prefHeight="33.0" prefWidth="605.0" style="-fx-background-color: #DAD0CD;">
+      <Pane layoutX="-16.0" layoutY="301.0" prefHeight="33.0" prefWidth="332.0" style="-fx-background-color: #DAD0CD;">
          <children>
-            <Label fx:id="servicios" layoutX="38.0" prefHeight="33.0" prefWidth="541.0">
+            <Label fx:id="servicios" layoutX="38.0" prefHeight="33.0" prefWidth="281.0">
                <font>
                   <Font name="Franklin Gothic Book" size="16.0" />
                </font>
@@ -121,5 +121,35 @@
       <Button layoutX="461.0" layoutY="427.0" mnemonicParsing="false" onAction="#siguiente" prefHeight="60.0" prefWidth="39.0" text="&gt;" />
       <Button fx:id="regresar" layoutX="41.0" layoutY="590.0" mnemonicParsing="false" onAction="#regresar" prefHeight="25.0" prefWidth="102.0" text="Regresar" />
       <Button fx:id="seleccionar" layoutX="410.0" layoutY="590.0" mnemonicParsing="false" onAction="#seleccionado" prefHeight="25.0" prefWidth="102.0" text="Seleccionar" />
+      <Label fx:id="txtServicios1" alignment="CENTER" layoutX="371.0" layoutY="268.0" prefHeight="33.0" prefWidth="147.0" text="Calificacion">
+         <font>
+            <Font name="Franklin Gothic Medium Cond" size="20.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="estrella3" fitHeight="33.0" fitWidth="46.0" layoutX="422.0" layoutY="301.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Imagenes/estrellaGris.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="estrella4" fitHeight="33.0" fitWidth="46.0" layoutX="467.0" layoutY="301.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Imagenes/estrellaGris.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="estrella1" fitHeight="33.0" fitWidth="46.0" layoutX="331.0" layoutY="301.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Imagenes/estrellaGris.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="estrella2" fitHeight="33.0" fitWidth="46.0" layoutX="376.0" layoutY="301.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Imagenes/estrellaGris.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="estrella5" fitHeight="33.0" fitWidth="46.0" layoutX="506.0" layoutY="301.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Imagenes/estrellaGris.jpg" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

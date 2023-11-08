@@ -104,12 +104,10 @@ public class SeleccionClientePaquetesController implements Initializable, Cambio
         fin.valueProperty().addListener((observable, oldValue, newValue) ->
                 tablaPaquetes.setItems(filtrarPorFechaFin(newValue)));
     }
-
     public void regresar(ActionEvent actionEvent) {
         agencia.loadStage("/portalAgencia.fxml", actionEvent, "Se regresa a la pagina administrativa");
         agencia.datos();
     }
-
     public void ver(ActionEvent actionEvent) {
         if (tablaPaquetes.getSelectionModel().getSelectedIndex() == -1) {
             LOGGER.log(Level.INFO, "Se intento visualizar un paquete sin haberlo seleccionado");
