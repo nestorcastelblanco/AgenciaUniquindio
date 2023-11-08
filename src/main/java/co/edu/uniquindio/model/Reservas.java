@@ -17,6 +17,7 @@ public class Reservas implements Serializable {
     private Clientes cliente;
     private int numeroPersonas, codigo;
     private Paquetes paquete;
+    private float valorTotal;
     private Guias guia;
     private String estado;
 }

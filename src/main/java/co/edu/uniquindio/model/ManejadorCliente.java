@@ -5,11 +5,9 @@ import java.net.*;
 
 public class ManejadorCliente implements Runnable {
     private Socket clientSocket;
-
     public ManejadorCliente(Socket clientSocket) {
         this.clientSocket = clientSocket;
     }
-
     @Override
     public void run() {
         try (ObjectInputStream entrada = new ObjectInputStream(clientSocket.getInputStream());

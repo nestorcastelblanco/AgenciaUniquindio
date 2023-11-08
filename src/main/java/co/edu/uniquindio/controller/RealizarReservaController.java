@@ -31,7 +31,7 @@ public class RealizarReservaController implements Initializable, CambioIdiomaLis
     @FXML
     private ComboBox<Guias> comboGuia;
     @FXML
-    private TextField personas;
+    private TextField personas, cupon;
     @FXML
     private DatePicker inicio,fin;
     @FXML
@@ -116,7 +116,8 @@ public class RealizarReservaController implements Initializable, CambioIdiomaLis
     public void reservar(ActionEvent actionEvent) {
         try
         {
-            agencia.realizarReserva(paquete,cliente,inicio.getValue(),fin.getValue(),personas.getText(),comboGuia.getSelectionModel().getSelectedItem(),"PENDIENTE");
+            agencia.realizarReserva(paquete,cliente,inicio.getValue(),fin.getValue(),personas.getText(),comboGuia.getSelectionModel().getSelectedItem(),"PENDIENTE", cupon.getText());
+            agencia.mostrarMensaje(Alert.AlertType.CONFIRMATION, "Se ha generado la reserva correctamente");
             agencia.loadStage("/paginaClienteSeleccionDestino.fxml", actionEvent, "Se regresa al apartado de destinos");
         }
         catch (CampoRepetido| CampoObligatorioException| CampoVacioException e)

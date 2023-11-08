@@ -277,7 +277,7 @@ public class Agencia {
         if (servicios == null || servicios.isEmpty()) {
             throw new CampoObligatorioException("Es necesario ingresar los servicios del paquete");
         }
-        if (valor.isEmpty() || valor == null || Float.valueOf(valor)<= 0 || valor.isEmpty() || !verificarNumero(valor)) {
+        if (valor.isEmpty() || valor == null || Float.valueOf(valor)<= 0|| !verificarNumero(valor)) {
             throw new CampoObligatorioException("Se crearon valores en el precio erroneos");
         }
         Paquetes paquete = Paquetes.builder().
@@ -291,6 +291,10 @@ public class Agencia {
                 .cantReservas(0)
                 .numeroPersonas(Integer.parseInt(personas))
                 .calificaciones(new ArrayList<>())
+                .cupon(null)
+                .valorCupon(0)
+                .inicioCupon(null)
+                .finCupon(null)
                 .build();
         paquetes.add(paquete);
         for (int i = 0 ; i<paquetes.size();i++)
@@ -304,9 +308,77 @@ public class Agencia {
         ArchivoUtils.serializarArraylistPaquetes(RUTA_PAQUETES,paquetes);
         leerPaquetes();
         LOGGER.log(Level.INFO, "Se registro un nuevo Paquete");
+    }public void registrarPaqueteCupon(String nombre, ArrayList<Destinos> destinos, LocalDate inicio, LocalDate fin, String servicios,String personas, String valor, String cupon, String valorCupon, LocalDate inicioCupon, LocalDate finCupon) throws CampoRepetido,CampoVacioException,CampoObligatorioException
+    {
+        if (nombre== null || nombre.isEmpty() || !agencia.verificarNombrePaquete(nombre)) {
+            throw new CampoObligatorioException("Es necesario ingresar el nombre o el nombre es invalido");
+        }
+        if (destinos == null || destinos.isEmpty()) {
+            throw new CampoRepetido("No se añadieron destinos al paquete");
+        }
+        if(inicio == null){
+            throw new CampoObligatorioException("La fecha de inicio ingresada es erronea");
+        }
+        if(fin == null){
+            throw new CampoObligatorioException("La fecha de finalizacion ingresada es erronea");
+        }
+        if (!agencia.verificarFechas(inicio, fin)) {
+            throw new CampoObligatorioException("Las fechas ingresadas son erroneas");
+        }
+        if (personas == null || personas.isEmpty() || Float.valueOf(personas) <=0 || !verificarNumero(personas)) {
+            throw new CampoObligatorioException("Es necesario ingresar el numero valido de personas");
+        }
+        if (servicios == null || servicios.isEmpty()) {
+            throw new CampoObligatorioException("Es necesario ingresar los servicios del paquete");
+        }
+        if (valor.isEmpty() || valor == null || Float.valueOf(valor)<= 0|| !verificarNumero(valor)) {
+            throw new CampoObligatorioException("Se crearon valores en el precio erroneos");
+        }
+        if (valorCupon.isEmpty() || valorCupon == null || Float.valueOf(valorCupon)<= 0|| !verificarNumero(valorCupon)) {
+            throw new CampoObligatorioException("Se crearon valores en el precio del cupon erroneos");
+        }
+        if (cupon == null || cupon.isEmpty()) {
+            throw new CampoObligatorioException("Se crearon valores en el precio erroneos");
+        }
+        if (!agencia.verificarFechas(inicioCupon, finCupon)) {
+            throw new CampoObligatorioException("Las fechas ingresadas del cupon son erroneas");
+        }
+        Paquetes paquete = Paquetes.builder().
+                nombre(nombre)
+                .destinos(destinos)
+                .precio(Float.parseFloat(valor))
+                .inicio(inicio)
+                .fin(fin)
+                .duracion(inicio.until(fin, ChronoUnit.DAYS)+"")
+                .servicios(servicios)
+                .cantReservas(0)
+                .numeroPersonas(Integer.parseInt(personas))
+                .calificaciones(new ArrayList<>())
+                .cupon(cupon)
+                .valorCupon(Float.valueOf(valorCupon))
+                .inicioCupon(inicioCupon)
+                .finCupon(finCupon)
+                .build();
+        paquetes.add(paquete);
+        for (int i = 0 ; i<paquetes.size();i++)
+        {
+            for (int j=0 ; j<paquetes.get(i).getDestinos().size();j++)
+            {
+                System.out.println("Nombre: " + paquetes.get(i).getNombre() + " Destinos: " + paquetes.get(i).getDestinos().get(j) );
+                for(int x = 0 ; x<paquetes.get(i).getDestinos().get(j).getImagenes().size();x++)
+                {
+                    System.out.println("Direcciones: " + paquetes.get(i).getDestinos().get(j).getImagenes().get(x));
+                }
+            }
+        }
+        borrarDatosSerializados(RUTA_PAQUETES);
+        ArchivoUtils.serializarArraylistPaquetes(RUTA_PAQUETES,paquetes);
+        leerPaquetes();
+        LOGGER.log(Level.INFO, "Se registro un nuevo Paquete");
     }
-    public void realizarReserva(Paquetes paquete, Clientes cliente, LocalDate inicio, LocalDate fin, String personas, Guias selectedItem, String pendiente) throws CampoRepetido,CampoObligatorioException,CampoVacioException {
+    public void realizarReserva(Paquetes paquete, Clientes cliente, LocalDate inicio, LocalDate fin, String personas, Guias selectedItem, String pendiente, String cupon) throws CampoRepetido,CampoObligatorioException,CampoVacioException {
         Reservas reserva = new Reservas();
+        float valorDescuento = 0;
         if (paquete == null) {
             throw new CampoObligatorioException("No se cargo el paquete");
         }
@@ -322,6 +394,22 @@ public class Agencia {
         if (!agencia.verificarPersonasPaquete(paquete,personas)) {
             throw new CampoObligatorioException("El numero de personas no es valido");
         }
+        if(!(cupon == null) || !cupon.isEmpty())
+        {
+            if(paquete.getCupon().equals(cupon) && verificarCupon(inicio,fin, paquete))
+            {
+                System.out.println("Valor descontado: " + paquete.getValorCupon()/100);
+                valorDescuento = ((paquete.getPrecio() * Integer.parseInt(personas)) * (paquete.getValorCupon()/100));
+                System.out.println(valorDescuento);
+                LOGGER.log(Level.INFO, "El cupon es valido");
+                agencia.mostrarMensaje(Alert.AlertType.CONFIRMATION, "El cupon es valido, se aplicara el descuento");
+            }else {
+                agencia.mostrarMensaje(Alert.AlertType.CONFIRMATION, "El cupon no es valido, no se aplicara el descuento");
+                valorDescuento = 0;
+                LOGGER.log(Level.INFO, "El cupon no es valido");
+            }
+        }
+        float valorDescontado = valorDescuento;
         System.out.println("guia seleccionado" + selectedItem);
         if(selectedItem == null)
         {
@@ -333,25 +421,31 @@ public class Agencia {
         }else{
             reserva.setGuia(selectedItem);
         }
+        if (fin.isBefore(LocalDate.now()))
+        {
+            pendiente = "FINALIZADA";
+        }
         int numeroPersonas = Integer.parseInt(personas);
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                agencia.enviarCorreo(cliente,paquete,inicio,fin,personas, selectedItem,pendiente);
-            }
-        }){
-        }.start();
+        String estado = pendiente;
         reserva.setPaquete(paquete);
         reserva.setCliente(cliente);
         reserva.setFechaSolicitud(inicio);
         reserva.setFechaPlanificada(fin);
         reserva.setNumeroPersonas(numeroPersonas);
-        reserva.setEstado(pendiente);
+        reserva.setEstado(estado);
         reserva.setCalificacion(false);
+        reserva.setValorTotal((paquete.getPrecio() * Integer.parseInt(personas))-valorDescontado);
         Random random = new Random();
         reserva.setCodigo(random.nextInt(10000));
         reservas.add(reserva);
         ArchivoUtils.serializarArraylistReservas(RUTA_RESERVAS,reservas);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                agencia.enviarCorreo(cliente,reserva,inicio,fin,personas, selectedItem,estado);
+            }
+        }){
+        }.start();
         /*for (int i = 0 ; i< paquetes.size() ; i++)
         {
             if (paqueteSeleccion().equals(paquetes.get(i)))
@@ -383,6 +477,16 @@ public class Agencia {
             System.out.println(reservas.get(i).getCliente().getNombreCompleto() + " Codigo: " + reservas.get(i).getCodigo());
         }
     }
+
+    private boolean verificarCupon(LocalDate inicio, LocalDate fin, Paquetes paquete) {
+        boolean state = false;
+        if (inicio.isAfter(paquete.getInicioCupon()) && fin.isBefore(paquete.getFinCupon())) {
+            System.out.println("Las fechas de reserva están dentro del rango de la validez del cupon.");
+            return true;
+        }
+        return state;
+    }
+
     public void actualizarPaquetesRecursivo(int i, int x, int numeroPersonas) {
         if (i < paquetes.size()) {
             if (paqueteSeleccion().getNombre().equals(paquetes.get(i).getNombre())) {
@@ -1229,12 +1333,12 @@ public class Agencia {
         return matcher.matches();
     }
 
-    public void enviarCorreo(Clientes cliente, Paquetes paqueteSeleccionado, LocalDate inicio, LocalDate fin, String personas, Guias selectedItem, String pendiente) {
+    public void enviarCorreo(Clientes cliente, Reservas reservas, LocalDate inicio, LocalDate fin, String personas, Guias selectedItem, String pendiente) {
         String correoEmisor = "traveluniquindio@gmail.com"; // Cambia esto con tu dirección de correo electrónico
         String contraseñaEmisor = "sgfc sgay apnx qvxq"; // Cambia esto con tu contra/seña de correo electrónico
-        String destinos = obtenerNombresDestinos(paqueteSeleccionado.getDestinos());
+        String destinos = obtenerNombresDestinos(reservas.getPaquete().getDestinos());
         String asunto = "RESERVACION DE PAQUETE TURISTICO EN TRAVEL UNIQUINDIO";
-        String mensaje = "Buen dia " + cliente.getNombreCompleto() +" la reservacion de su paquete, " + paqueteSeleccionado.getNombre() + " fue realizado con exito, le recordamos las caracteristicas con las que cuenta este paquete: " + paqueteSeleccionado.getServicios() +", durante " + inicio.until(fin, ChronoUnit.DAYS) +" dias, Reservado para: " + personas + " personas, con los siguientes destinos: " + destinos + " con un valor de: " + (long) paqueteSeleccionado.getPrecio()+"COP por persona, es decir un total de: " + (long) paqueteSeleccionado.getPrecio() * Integer.parseInt(personas) +"COP con fecha de inicio el: " + inicio + " y fecha de finalizacion : " + fin + ", pronto se notificara el estado de su reserva";
+        String mensaje = "Buen dia " + cliente.getNombreCompleto() +" la reservacion de su paquete, " + reservas.getPaquete().getNombre() + " fue realizado con exito, le recordamos las caracteristicas con las que cuenta este paquete: " + reservas.getPaquete().getServicios() +", durante " + inicio.until(fin, ChronoUnit.DAYS) +" dias, Reservado para: " + personas + " personas, con los siguientes destinos: " + destinos + " con un valor de: " + (long)reservas.getPaquete().getPrecio()+"COP por persona, es decir un total de: " + (long) reservas.getValorTotal() +"COP con fecha de inicio el: " + inicio + " y fecha de finalizacion : " + fin + ", pronto se notificara el estado de su reserva";
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
@@ -1480,6 +1584,8 @@ public class Agencia {
                 reserva.setCalificacion(true);
             }
         }
+        borrarDatosSerializados(RUTA_PAQUETES);
+        ArchivoUtils.serializarArraylistPaquetes(RUTA_PAQUETES, paquetes);
         borrarDatosSerializados(RUTA_RESERVAS);
         ArchivoUtils.serializarArraylistReservas(RUTA_RESERVAS,reservas);
         borrarDatosSerializados(RUTA_GUIAS);
@@ -1524,6 +1630,8 @@ public class Agencia {
         }
         LOGGER.log(Level.INFO,"Se ha generado la calificacion correctamente");
         LOGGER.log(Level.INFO, "Se realizo la edicion de una Reserva");
+        borrarDatosSerializados(RUTA_PAQUETES);
+        ArchivoUtils.serializarArraylistPaquetes(RUTA_PAQUETES, paquetes);
         borrarDatosSerializados(RUTA_RESERVAS);
         ArchivoUtils.serializarArraylistReservas(RUTA_RESERVAS,reservas);
         borrarDatosSerializados(RUTA_GUIAS);

@@ -14,11 +14,12 @@ import java.util.ArrayList;
 public class Paquetes implements Serializable {
     private ArrayList<Destinos> destinos;
     private ArrayList<Float> calificaciones;
-    private LocalDate inicio, fin;
+    private LocalDate inicio, fin, inicioCupon, finCupon;
     private String nombre;
     private String duracion, servicios;
     private int numeroPersonas, cantReservas;
-    private float precio;
+    private float precio, valorCupon;
+    private String cupon;
     public void añadirCalificacion(Float calificacion)
     {
         calificaciones.add(calificacion);

@@ -28,13 +28,16 @@ public class CreacionPaquetesController implements Initializable, CambioIdiomaLi
      ArrayList<Destinos> destinosSeleccionados = new ArrayList<>();
     private static final Logger LOGGER = Logger.getLogger(Agencia.class.getName());
     @FXML
-    private Button botonRegreso,botonRegistro, botonCrear, botonCrearDestino, botonDestino;
+    private Button botonRegreso,botonCrear, botonCrearDestino, botonDestino,botonAgregarCupon, botonCancelarCupon;
     @FXML
     private ComboBox<Destinos> destinos;
     @FXML
-    private DatePicker fechaInicio, fechaFin;
+    private DatePicker fechaInicio, fechaFin, fechaCupon1, fechaCupon2;
     @FXML
-    private TextField nombre,servicios,personas, valor;
+    private TextField nombre,servicios,personas, valor, cupon, valorCupon;
+    @FXML
+    private Label txtValorCupon, txtCupon,txtRangoFechas;
+    private boolean stateCupon;
     public void regresar (ActionEvent e) {
         agencia.loadStage("/paginaAdministrativa.fxml", e, "Se regresa a la pagina administrativa");
     }
@@ -62,6 +65,18 @@ public class CreacionPaquetesController implements Initializable, CambioIdiomaLi
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        stateCupon = false;
+        txtCupon.setVisible(false);
+        txtValorCupon.setVisible(false);
+        cupon.setVisible(false);
+        valorCupon.setVisible(false);
+        txtRangoFechas.setVisible(false);
+        fechaCupon1.setVisible(false);
+        fechaCupon2.setVisible(false);
+        cupon.setText(null);
+        valorCupon.setText(null);
+        fechaCupon1.setValue(null);
+        fechaCupon2.setValue(null);
         Propiedades.getInstance().addCambioIdiomaListener(this);
         cargarTextos();
         destinosCombo = agencia.enviarDestinos();
@@ -126,10 +141,18 @@ public class CreacionPaquetesController implements Initializable, CambioIdiomaLi
     public void registrarPaquete(ActionEvent actionEvent) {
         try
         {
-            agencia.registrarPaquete(nombre.getText(),destinosSeleccionados,fechaInicio.getValue(),fechaFin.getValue(),servicios.getText(),personas.getText(),valor.getText());
-            nombre.setText("");destinosSeleccionados.clear();servicios.setText("");personas.setText("");valor.setText("");
-            LOGGER.log(Level.INFO,"Se registro un nuevo Destino al sistema");
-
+            if (stateCupon)
+            {
+                agencia.registrarPaqueteCupon(nombre.getText(),destinosSeleccionados,fechaInicio.getValue(),fechaFin.getValue(),servicios.getText(),personas.getText(),valor.getText(), cupon.getText(),valorCupon.getText(), fechaCupon1.getValue(), fechaCupon2.getValue());
+                nombre.setText("");destinosSeleccionados.clear();servicios.setText("");personas.setText("");valor.setText("");
+                agencia.mostrarMensaje(Alert.AlertType.CONFIRMATION, "Se registro un nuevo Paquete al sistema");
+                LOGGER.log(Level.INFO,"Se registro un nuevo Paquete al sistema");
+            }else{
+                agencia.registrarPaquete(nombre.getText(),destinosSeleccionados,fechaInicio.getValue(),fechaFin.getValue(),servicios.getText(),personas.getText(),valor.getText());
+                nombre.setText("");destinosSeleccionados.clear();servicios.setText("");personas.setText("");valor.setText("");
+                agencia.mostrarMensaje(Alert.AlertType.CONFIRMATION, "Se registro un nuevo Paquete al sistema");
+                LOGGER.log(Level.INFO,"Se registro un nuevo Paquete al sistema");
+            }
         } catch (CampoRepetido | CampoObligatorioException | CampoVacioException e) {
             mostrarMensaje(Alert.AlertType.ERROR, e.getMessage());
         }
@@ -158,5 +181,31 @@ public class CreacionPaquetesController implements Initializable, CambioIdiomaLi
 
     public void crearDestino(ActionEvent actionEvent) {
         agencia.loadStage("/paginaCreacionDestino.fxml", actionEvent,"Se ingresa a crear un Destino");
+    }
+
+    public void agregarCupon(ActionEvent actionEvent) {
+        stateCupon = true;
+        txtCupon.setVisible(true);
+        txtValorCupon.setVisible(true);
+        cupon.setVisible(true);
+        valorCupon.setVisible(true);
+        txtRangoFechas.setVisible(true);
+        fechaCupon1.setVisible(true);
+        fechaCupon2.setVisible(true);
+    }
+
+    public void cancelarCupon(ActionEvent actionEvent) {
+        stateCupon = false;
+        txtCupon.setVisible(false);
+        txtValorCupon.setVisible(false);
+        cupon.setVisible(false);
+        valorCupon.setVisible(false);
+        txtRangoFechas.setVisible(false);
+        fechaCupon1.setVisible(false);
+        fechaCupon2.setVisible(false);
+        cupon.setText(null);
+        valorCupon.setText(null);
+        fechaCupon1.setValue(null);
+        fechaCupon2.setValue(null);
     }
 }

@@ -65,17 +65,14 @@ public class CaracteristicasPaqueteController implements Initializable, CambioId
         servicios.setText(paqueteSeleccionado.getServicios());
         for(int i = 0 ; i<paqueteSeleccionado.getDestinos().size();i++)
         {
-            for(int j = 0 ; j<paqueteSeleccionado.getDestinos().get(i).getImagenes().size();j++)
-            {
-                arrayListImagenes.add(paqueteSeleccionado.getDestinos().get(i).getImagenes().get(j));
-            }
+            arrayListImagenes.addAll(paqueteSeleccionado.getDestinos().get(i).getImagenes());
         }
         System.out.println(arrayListImagenes.toString());
         numeroImagenes = arrayListImagenes.size();
         cont = 0;
         for(int i = 0 ; i<arrayListImagenes.size();i++)
         {
-            System.out.println("Imaganes: " + i + " " + arrayListImagenes.get(i));
+            System.out.println("Imagenes: " + i + " " + arrayListImagenes.get(i));
         }
         Image imagen = new Image(arrayListImagenes.get(cont));
         imageView.setImage(imagen);
