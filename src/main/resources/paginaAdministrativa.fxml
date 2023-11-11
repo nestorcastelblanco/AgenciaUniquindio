@@ -1,35 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="477.0" prefWidth="763.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.controller.MenuAdminController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="508.0" prefWidth="763.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.controller.MenuAdminController">
    <children>
-      <Pane layoutX="27.0" layoutY="57.0" prefHeight="402.0" prefWidth="372.0">
+      <Pane layoutX="107.0" layoutY="18.0" prefHeight="186.0" prefWidth="275.0" style="-fx-border-color: #000000;">
          <children>
-            <Button fx:id="botonRegreso" layoutX="-21.0" layoutY="375.0" mnemonicParsing="false" onAction="#regresar" prefHeight="38.0" prefWidth="67.0" text="Regresar">
+            <Button fx:id="registrarGuia" layoutX="14.0" layoutY="47.0" mnemonicParsing="false" onAction="#registrarGuia" prefHeight="35.0" prefWidth="247.0" text=" Guia">
                <font>
-                  <Font name="Franklin Gothic Medium Cond" size="12.0" />
+                  <Font name="Franklin Gothic Book" size="16.0" />
+               </font></Button>
+            <Button fx:id="registrarDestinos" layoutX="14.0" layoutY="92.0" mnemonicParsing="false" onAction="#registrarDestino" prefHeight="35.0" prefWidth="247.0" text="Destino">
+               <font>
+                  <Font name="Franklin Gothic Book" size="16.0" />
+               </font></Button>
+            <Button fx:id="registrarPaquetes" layoutX="14.0" layoutY="141.0" mnemonicParsing="false" onAction="#creacionPaquetes" prefHeight="35.0" prefWidth="247.0" text="Paquetes">
+               <font>
+                  <Font name="Franklin Gothic Book" size="16.0" />
+               </font></Button>
+            <Label alignment="CENTER" layoutX="14.0" layoutY="10.0" prefHeight="27.0" prefWidth="247.0" text="Registrar">
+               <font>
+                  <Font name="Franklin Gothic Book" size="20.0" />
                </font>
-            </Button>
-            <Button fx:id="registrarGuia" layoutX="91.0" layoutY="7.0" mnemonicParsing="false" onAction="#registrarGuia" prefHeight="35.0" prefWidth="247.0" text="Registrar Guia" />
-            <Button fx:id="registrarDestinos" layoutX="91.0" layoutY="52.0" mnemonicParsing="false" onAction="#registrarDestino" prefHeight="35.0" prefWidth="247.0" text="Registrar Destino" />
-            <Button fx:id="registrarPaquetes" layoutX="91.0" layoutY="98.0" mnemonicParsing="false" onAction="#creacionPaquetes" prefHeight="35.0" prefWidth="247.0" text="Registrar Paquetes" />
-            <Button fx:id="mostrarPaquetes" layoutX="91.0" layoutY="229.0" mnemonicParsing="false" onAction="#mostrarPaquetes" prefHeight="35.0" prefWidth="247.0" text="Mostrar Paquetes" />
-            <Button fx:id="mostrarReservas" layoutX="91.0" layoutY="274.0" mnemonicParsing="false" onAction="#reservas" prefHeight="35.0" prefWidth="247.0" text="Mostrar Reservas" />
-            <Button fx:id="mostrarEstadisticas" layoutX="91.0" layoutY="317.0" mnemonicParsing="false" onAction="#estadisticas" prefHeight="35.0" prefWidth="247.0" text="Mostrar Estadisticas" />
-            <Button fx:id="mostrarGuias" layoutX="91.0" layoutY="142.0" mnemonicParsing="false" onAction="#mostrarGuias" prefHeight="35.0" prefWidth="247.0" text="Mostrar Guias" />
-            <Button fx:id="mostrarDestinos" layoutX="91.0" layoutY="185.0" mnemonicParsing="false" onAction="#mostrarDestinos" prefHeight="35.0" prefWidth="247.0" text="Mostrar Destinos" />
+            </Label>
          </children>
       </Pane>
-      <ImageView fitHeight="380.0" fitWidth="388.0" layoutX="392.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="531.0" fitWidth="384.0" layoutX="391.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Imagenes/Logo.jpg" />
          </image>
       </ImageView>
+      <Button fx:id="botonRegreso" layoutX="21.0" layoutY="439.0" mnemonicParsing="false" onAction="#regresar" prefHeight="38.0" prefWidth="67.0" text="Regresar">
+         <font>
+            <Font name="Franklin Gothic Book" size="12.0" />
+         </font>
+      </Button>
+      <Pane layoutX="107.0" layoutY="214.0" prefHeight="276.0" prefWidth="275.0" style="-fx-border-color: #000000;">
+         <children>
+            <Button fx:id="mostrarPaquetes" layoutX="14.0" layoutY="138.0" mnemonicParsing="false" onAction="#mostrarPaquetes" prefHeight="35.0" prefWidth="247.0" text="Paquetes">
+               <font>
+                  <Font name="Franklin Gothic Book" size="16.0" />
+               </font>
+            </Button>
+            <Button fx:id="mostrarReservas" layoutX="14.0" layoutY="183.0" mnemonicParsing="false" onAction="#reservas" prefHeight="35.0" prefWidth="247.0" text="Reservas">
+               <font>
+                  <Font name="Franklin Gothic Book" size="16.0" />
+               </font>
+            </Button>
+            <Button fx:id="mostrarEstadisticas" layoutX="14.0" layoutY="226.0" mnemonicParsing="false" onAction="#estadisticas" prefHeight="35.0" prefWidth="247.0" text="Estadisticas">
+               <font>
+                  <Font name="Franklin Gothic Book" size="16.0" />
+               </font>
+            </Button>
+            <Button fx:id="mostrarGuias" layoutX="14.0" layoutY="51.0" mnemonicParsing="false" onAction="#mostrarGuias" prefHeight="35.0" prefWidth="247.0" text="Guias">
+               <font>
+                  <Font name="Franklin Gothic Book" size="16.0" />
+               </font>
+            </Button>
+            <Button fx:id="mostrarDestinos" layoutX="14.0" layoutY="94.0" mnemonicParsing="false" onAction="#mostrarDestinos" prefHeight="35.0" prefWidth="247.0" text="Destinos">
+               <font>
+                  <Font name="Franklin Gothic Book" size="16.0" />
+               </font>
+            </Button>
+            <Label alignment="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="27.0" prefWidth="247.0" text="Mostrar">
+               <font>
+                  <Font name="Franklin Gothic Book" size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

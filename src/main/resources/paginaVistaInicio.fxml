@@ -2,42 +2,93 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="519.0" prefWidth="701.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.controller.VistaInicioController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="509.0" prefWidth="776.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.controller.VistaInicioController">
    <children>
-      <TableView fx:id="tablaPaquetes" layoutX="39.0" layoutY="80.0" prefHeight="137.0" prefWidth="623.0">
-         <columns>
-            <TableColumn fx:id="paquete" prefWidth="105.0" text="Paquete" />
-            <TableColumn fx:id="destinos" prefWidth="109.0" text="Destinos" />
-            <TableColumn fx:id="personas" prefWidth="64.0" text="Personas" />
-            <TableColumn fx:id="servicios" prefWidth="105.0" text="Servicios" />
-            <TableColumn fx:id="valorPersona" prefWidth="100.0" text="Valor Persona" />
-            <TableColumn fx:id="fechaInicio" prefWidth="71.0" text="Inicio" />
-            <TableColumn fx:id="fechaFin" prefWidth="67.0" text="Fin" />
-         </columns>
-      </TableView>
-      <Label alignment="CENTER" layoutX="46.0" layoutY="14.0" prefHeight="56.0" prefWidth="609.0" text=" PAQUETES TRAVEL UNIQUINDIO">
+      <Label alignment="CENTER" layoutX="218.0" layoutY="14.0" prefHeight="56.0" prefWidth="340.0" text="Travel Uniquindio">
          <font>
             <Font name="Franklin Gothic Medium Cond" size="40.0" />
          </font>
       </Label>
-      <TableView fx:id="tablaDestinos" layoutX="39.0" layoutY="303.0" prefHeight="137.0" prefWidth="623.0">
-         <columns>
-            <TableColumn fx:id="colNombre" prefWidth="105.0" text="Nombre" />
-            <TableColumn fx:id="colCiudad" prefWidth="144.0" text="Ciudad" />
-            <TableColumn fx:id="colDescripcion" prefWidth="229.0" text="Descripcion" />
-            <TableColumn fx:id="colClima" prefWidth="143.0" text="Clima" />
-         </columns>
-      </TableView>
-      <Label alignment="CENTER" layoutX="46.0" layoutY="237.0" prefHeight="56.0" prefWidth="609.0" text=" DESTINOS TRAVEL UNIQUINDIO">
+      <Label alignment="CENTER" layoutX="456.0" layoutY="73.0" prefHeight="56.0" prefWidth="232.0" text="Destinos ofertados">
          <font>
-            <Font name="Franklin Gothic Medium Cond" size="40.0" />
+            <Font name="Franklin Gothic Medium Cond" size="25.0" />
          </font>
       </Label>
-      <Button layoutX="305.0" layoutY="466.0" mnemonicParsing="false" onAction="#ingresar" prefHeight="25.0" prefWidth="92.0" text="INGRESAR" />
+      <Button layoutX="342.0" layoutY="465.0" mnemonicParsing="false" onAction="#ingresar" prefHeight="25.0" prefWidth="92.0" text="Ingresar">
+         <font>
+            <Font name="Franklin Gothic Book" size="14.0" />
+         </font></Button>
+      <Label alignment="CENTER" layoutX="73.0" layoutY="70.0" prefHeight="56.0" prefWidth="221.0" text="Paquetes para ti">
+         <font>
+            <Font name="Franklin Gothic Medium Cond" size="25.0" />
+         </font>
+      </Label>
+      <Button layoutX="8.0" layoutY="236.0" mnemonicParsing="false" onAction="#lImagenPaquetes" prefHeight="122.0" prefWidth="52.0" text="&lt;">
+         <font>
+            <Font name="Franklin Gothic Book" size="27.0" />
+         </font>
+      </Button>
+      <Button layoutX="305.0" layoutY="236.0" mnemonicParsing="false" onAction="#rImagenPaquetes" prefHeight="122.0" prefWidth="52.0" text="&gt;">
+         <font>
+            <Font name="Franklin Gothic Book" size="27.0" />
+         </font>
+      </Button>
+      <Button alignment="CENTER" contentDisplay="BOTTOM" layoutX="408.0" layoutY="236.0" mnemonicParsing="false" onAction="#lImagenDestinos" prefHeight="122.0" prefWidth="52.0" text="&lt;">
+         <font>
+            <Font name="Franklin Gothic Book" size="27.0" />
+         </font>
+      </Button>
+      <Button layoutX="705.0" layoutY="236.0" mnemonicParsing="false" onAction="#rImagenDestinos" prefHeight="122.0" prefWidth="52.0" text="&gt;">
+         <font>
+            <Font name="Franklin Gothic Book" size="27.0" />
+         </font>
+      </Button>
+      <Label fx:id="labelPaquete" alignment="CENTER" layoutX="88.0" layoutY="126.0" prefHeight="56.0" prefWidth="190.0">
+         <font>
+            <Font name="Franklin Gothic Medium Cond" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelDestinos" alignment="CENTER" layoutX="476.0" layoutY="129.0" prefHeight="56.0" prefWidth="190.0">
+         <font>
+            <Font name="Franklin Gothic Medium Cond" size="18.0" />
+         </font>
+      </Label>
+      <Button layoutX="34.0" layoutY="129.0" mnemonicParsing="false" onAction="#lPaquetes" prefHeight="25.0" prefWidth="52.0" text="&lt;">
+         <font>
+            <Font name="Franklin Gothic Book" size="27.0" />
+         </font>
+      </Button>
+      <Button layoutX="273.0" layoutY="129.0" mnemonicParsing="false" onAction="#rPaquetes" prefHeight="25.0" prefWidth="52.0" text="&gt;">
+         <font>
+            <Font name="Franklin Gothic Book" size="27.0" />
+         </font>
+      </Button>
+      <Button layoutX="427.0" layoutY="132.0" mnemonicParsing="false" onAction="#lDestinos" prefHeight="0.0" prefWidth="52.0" text="&lt;">
+         <font>
+            <Font name="Franklin Gothic Book" size="27.0" />
+         </font>
+      </Button>
+      <Button layoutX="666.0" layoutY="132.0" mnemonicParsing="false" onAction="#rDestinos" prefHeight="25.0" prefWidth="52.0" text="&gt;">
+         <font>
+            <Font name="Franklin Gothic Book" size="27.0" />
+         </font>
+      </Button>
+      <Pane layoutX="50.0" layoutY="200.0" prefHeight="236.0" prefWidth="262.0" style="-fx-border-color: #000000;">
+         <children>
+            <ImageView fx:id="imagenPaquetes" disable="true" fitHeight="236.0" fitWidth="262.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+         </children>
+      </Pane>
+      <Pane layoutX="453.0" layoutY="200.0" prefHeight="236.0" prefWidth="262.0" style="-fx-border-color: #000000;">
+         <children>
+            <ImageView fx:id="imagenDestinos" fitHeight="236.0" fitWidth="262.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

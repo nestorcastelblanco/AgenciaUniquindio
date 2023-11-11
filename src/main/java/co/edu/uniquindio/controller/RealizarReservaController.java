@@ -48,6 +48,7 @@ public class RealizarReservaController implements Initializable, CambioIdiomaLis
     private Button regresar,reservar;
     @FXML
     private Label txtConfirmacion, txtPaquete, cantPersonas, fechaInicio, fechaFin, seleccionGuia;
+    float valorDescuento = 0;
     public void cargarTextos()
     {
         txtConfirmacion.setText(propiedades.getResourceBundle().getString("pagConfirmacion"));
@@ -116,7 +117,7 @@ public class RealizarReservaController implements Initializable, CambioIdiomaLis
     public void reservar(ActionEvent actionEvent) {
         try
         {
-            agencia.realizarReserva(paquete,cliente,inicio.getValue(),fin.getValue(),personas.getText(),comboGuia.getSelectionModel().getSelectedItem(),"PENDIENTE", cupon.getText());
+            agencia.realizarReserva(paquete,cliente,inicio.getValue(),fin.getValue(),personas.getText(),comboGuia.getSelectionModel().getSelectedItem(),"PENDIENTE", valorDescuento);
             agencia.mostrarMensaje(Alert.AlertType.CONFIRMATION, "Se ha generado la reserva correctamente");
             agencia.loadStage("/paginaClienteSeleccionDestino.fxml", actionEvent, "Se regresa al apartado de destinos");
         }
@@ -133,5 +134,15 @@ public class RealizarReservaController implements Initializable, CambioIdiomaLis
     }
     public void volver(ActionEvent actionEvent) {
         agencia.loadStage("/paginaCaracteristicasPaquete.fxml",actionEvent,"Se regresa al menu de vista");
+    }
+
+    public void validar(ActionEvent actionEvent) {
+        try{
+            valorDescuento = agencia.verificarCupon(paquete,inicio.getValue(), fin.getValue(),cupon.getText(), personas.getText());
+        }catch (CampoObligatorioException e)
+        {
+            mostrarMensaje(Alert.AlertType.ERROR, e.getMessage());
+        }
+
     }
 }

@@ -8,24 +8,37 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="477.0" prefWidth="763.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.controller.PortalAgenciaController">
    <children>
       <ToolBar layoutY="-3.0" prefHeight="35.0" prefWidth="763.0" />
       <Pane layoutX="27.0" layoutY="57.0" prefHeight="402.0" prefWidth="372.0">
          <children>
-            <Button fx:id="editar" layoutX="63.0" layoutY="30.0" mnemonicParsing="false" onAction="#editarPerfil" prefHeight="35.0" prefWidth="247.0" text="Editar Perfil" />
-            <Button fx:id="paquetes" layoutX="63.0" layoutY="99.0" mnemonicParsing="false" onAction="#seleccionPaquetes" prefHeight="35.0" prefWidth="247.0" text="Paquetes" />
-            <Button fx:id="reservas" layoutX="63.0" layoutY="166.0" mnemonicParsing="false" onAction="#reservas" prefHeight="35.0" prefWidth="247.0" text="Visualizar Reservas" />
-            <Button fx:id="regresar" layoutX="67.0" layoutY="336.0" mnemonicParsing="false" onAction="#regresar" prefHeight="35.0" prefWidth="239.0" text="Regresar" />
+            <Button fx:id="editar" layoutX="63.0" layoutY="6.0" mnemonicParsing="false" onAction="#editarPerfil" prefHeight="35.0" prefWidth="247.0" text="Editar Perfil">
+               <font>
+                  <Font name="Franklin Gothic Book" size="15.0" />
+               </font></Button>
+            <Button fx:id="paquetes" layoutX="63.0" layoutY="62.0" mnemonicParsing="false" onAction="#seleccionPaquetes" prefHeight="35.0" prefWidth="247.0" text="Paquetes">
+               <font>
+                  <Font name="Franklin Gothic Book" size="15.0" />
+               </font></Button>
+            <Button fx:id="reservas" layoutX="63.0" layoutY="118.0" mnemonicParsing="false" onAction="#reservas" prefHeight="35.0" prefWidth="247.0" text="Visualizar Reservas">
+               <font>
+                  <Font name="Franklin Gothic Book" size="15.0" />
+               </font></Button>
+            <Button fx:id="regresar" layoutX="67.0" layoutY="336.0" mnemonicParsing="false" onAction="#regresar" prefHeight="35.0" prefWidth="239.0" text="Regresar">
+               <font>
+                  <Font name="Franklin Gothic Book" size="15.0" />
+               </font></Button>
+            <TableView fx:id="tablaDestinos" layoutX="67.0" layoutY="168.0" prefHeight="154.0" prefWidth="239.0">
+              <columns>
+                <TableColumn fx:id="colDestinos" prefWidth="238.0" text="DESTINOS RECOMENDADOS" />
+              </columns>
+            </TableView>
          </children>
       </Pane>
-      <TableView fx:id="tablaDestinos" layoutX="468.0" layoutY="304.0" prefHeight="135.0" prefWidth="176.0">
-        <columns>
-          <TableColumn fx:id="colDestinos" prefWidth="174.0" text="DESTINOS RECOMENDADOS" />
-        </columns>
-      </TableView>
-      <ImageView fitHeight="230.0" fitWidth="247.0" layoutX="441.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="334.0" fitWidth="315.0" layoutX="408.0" layoutY="88.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Imagenes/Logo.jpg" />
          </image>

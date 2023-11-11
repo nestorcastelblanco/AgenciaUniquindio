@@ -9,14 +9,17 @@
 <AnchorPane prefHeight="396.0" prefWidth="326.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.controller.EdicionDestinoController">
       <TextField fx:id="descripcion" layoutX="32.0" layoutY="197.0" prefHeight="29.0" prefWidth="267.0">
          <font>
-            <Font name="Franklin Gothic Medium Cond" size="16.0" />
+            <Font name="Franklin Gothic Book" size="16.0" />
          </font></TextField>
-      <Label fx:id="txtDescripcion" layoutX="32.0" layoutY="172.0" prefHeight="25.0" prefWidth="81.0" text="Descripcion">
+      <Label fx:id="txtDescripcion" layoutX="32.0" layoutY="172.0" prefHeight="25.0" prefWidth="200.0" text="Descripcion">
          <font>
             <Font name="Franklin Gothic Book" size="15.0" />
          </font></Label>
-      <Button fx:id="botonRegreso" layoutX="30.0" layoutY="348.0" mnemonicParsing="false" onAction="#regresar" prefHeight="38.0" prefWidth="98.0" text="Regresar" textOverrun="LEADING_ELLIPSIS" />
-      <Label fx:id="txtClima" layoutX="32.0" layoutY="226.0" prefHeight="25.0" prefWidth="110.0" text="Clima">
+      <Button fx:id="botonRegreso" layoutX="30.0" layoutY="348.0" mnemonicParsing="false" onAction="#regresar" prefHeight="38.0" prefWidth="98.0" text="Regresar" textOverrun="LEADING_ELLIPSIS">
+      <font>
+         <Font name="Franklin Gothic Book" size="12.0" />
+      </font></Button>
+      <Label fx:id="txtClima" layoutX="32.0" layoutY="226.0" prefHeight="25.0" prefWidth="211.0" text="Clima">
          <font>
             <Font name="Franklin Gothic Book" size="15.0" />
          </font>
@@ -26,32 +29,41 @@
             <Font name="Franklin Gothic Book" size="34.0" />
          </font>
       </Label>
-      <Button fx:id="botonEditar" layoutX="195.0" layoutY="348.0" mnemonicParsing="false" onAction="#registrarDestino" prefHeight="38.0" prefWidth="98.0" text="Editar" textOverrun="LEADING_ELLIPSIS" />
+      <Button fx:id="botonEditar" layoutX="195.0" layoutY="348.0" mnemonicParsing="false" onAction="#registrarDestino" prefHeight="38.0" prefWidth="98.0" text="Editar" textOverrun="LEADING_ELLIPSIS">
+      <font>
+         <Font name="Franklin Gothic Book" size="12.0" />
+      </font></Button>
    <TextField fx:id="nombre" layoutX="32.0" layoutY="83.0" prefHeight="29.0" prefWidth="267.0">
       <font>
-         <Font name="Franklin Gothic Medium Cond" size="16.0" />
+         <Font name="Franklin Gothic Book" size="16.0" />
       </font>
    </TextField>
-   <Label fx:id="txtNombre" layoutX="32.0" layoutY="58.0" prefHeight="25.0" prefWidth="81.0" text="Nombre">
+   <Label fx:id="txtNombre" layoutX="32.0" layoutY="58.0" prefHeight="25.0" prefWidth="200.0" text="Nombre">
       <font>
          <Font name="Franklin Gothic Book" size="15.0" />
       </font>
    </Label>
-   <Label fx:id="txtCiudad" layoutX="32.0" layoutY="112.0" prefHeight="25.0" prefWidth="110.0" text="Ciudad">
+   <Label fx:id="txtCiudad" layoutX="32.0" layoutY="112.0" prefHeight="25.0" prefWidth="200.0" text="Ciudad">
       <font>
          <Font name="Franklin Gothic Book" size="15.0" />
       </font>
    </Label>
    <TextField fx:id="ciudad" layoutX="32.0" layoutY="137.0" prefHeight="29.0" prefWidth="267.0">
       <font>
-         <Font name="Franklin Gothic Medium Cond" size="16.0" />
+         <Font name="Franklin Gothic Book" size="16.0" />
       </font>
    </TextField>
-   <TextField fx:id="clima" layoutX="32.0" layoutY="251.0" prefHeight="29.0" prefWidth="267.0" />
-   <Label fx:id="txtImagenes" layoutX="34.0" layoutY="280.0" prefHeight="25.0" prefWidth="110.0" text="Imagenes">
+   <TextField fx:id="clima" layoutX="32.0" layoutY="251.0" prefHeight="29.0" prefWidth="267.0">
+      <font>
+         <Font name="Franklin Gothic Book" size="16.0" />
+      </font></TextField>
+   <Label fx:id="txtImagenes" layoutX="34.0" layoutY="280.0" prefHeight="25.0" prefWidth="182.0" text="Imagenes">
       <font>
          <Font name="Franklin Gothic Book" size="15.0" />
       </font>
    </Label>
-   <Button fx:id="botonImagenes" layoutX="33.0" layoutY="305.0" mnemonicParsing="false" onAction="#cargarImagenes" prefHeight="15.0" prefWidth="260.0" text="Cargar Imagenes" />
+   <Button fx:id="botonImagenes" layoutX="33.0" layoutY="305.0" mnemonicParsing="false" onAction="#cargarImagenes" prefHeight="15.0" prefWidth="260.0" text="Cargar Imagenes">
+      <font>
+         <Font name="Franklin Gothic Book" size="12.0" />
+      </font></Button>
 </AnchorPane>

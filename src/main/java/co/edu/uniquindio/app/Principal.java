@@ -18,7 +18,6 @@ public class Principal extends Application {
         stage.setTitle("TRAVEL UNIQUINDIO");
         stage.show();
     }
-
     public static void main(String[] args) {
         launch(Principal.class, args );
     }

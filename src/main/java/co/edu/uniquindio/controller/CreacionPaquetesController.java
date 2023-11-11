@@ -144,9 +144,9 @@ public class CreacionPaquetesController implements Initializable, CambioIdiomaLi
             if (stateCupon)
             {
                 agencia.registrarPaqueteCupon(nombre.getText(),destinosSeleccionados,fechaInicio.getValue(),fechaFin.getValue(),servicios.getText(),personas.getText(),valor.getText(), cupon.getText(),valorCupon.getText(), fechaCupon1.getValue(), fechaCupon2.getValue());
-                nombre.setText("");destinosSeleccionados.clear();servicios.setText("");personas.setText("");valor.setText("");
                 agencia.mostrarMensaje(Alert.AlertType.CONFIRMATION, "Se registro un nuevo Paquete al sistema");
                 LOGGER.log(Level.INFO,"Se registro un nuevo Paquete al sistema");
+                agencia.loadStage("/paginaCreacionPaquete.fxml", actionEvent, "Se vuelve a cargar la pagina");
             }else{
                 agencia.registrarPaquete(nombre.getText(),destinosSeleccionados,fechaInicio.getValue(),fechaFin.getValue(),servicios.getText(),personas.getText(),valor.getText());
                 nombre.setText("");destinosSeleccionados.clear();servicios.setText("");personas.setText("");valor.setText("");

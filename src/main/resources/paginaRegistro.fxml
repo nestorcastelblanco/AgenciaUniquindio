@@ -10,63 +10,87 @@
    <children>
       <TextField fx:id="nombreUsuario" layoutX="57.0" layoutY="104.0" prefHeight="30.0" prefWidth="325.0">
          <font>
-            <Font name="Franklin Gothic Medium Cond" size="12.0" />
+            <Font name="Franklin Gothic Book" size="16.0" />
          </font></TextField>
-      <TextField fx:id="correoUsuario" layoutX="57.0" layoutY="164.0" prefHeight="30.0" prefWidth="325.0" />
-      <TextField fx:id="direccionUsuario" layoutX="57.0" layoutY="224.0" prefHeight="30.0" prefWidth="149.0" />
-      <TextField fx:id="ciudadUsuario" layoutX="57.0" layoutY="284.0" prefHeight="30.0" prefWidth="149.0" />
-      <TextField fx:id="telefonoUsuario" layoutX="233.0" layoutY="284.0" prefHeight="30.0" prefWidth="149.0" />
-      <TextField fx:id="usuarioIngresado" layoutX="57.0" layoutY="344.0" prefHeight="30.0" prefWidth="149.0" />
-      <TextField fx:id="contrasenaIngresada" layoutX="233.0" layoutY="344.0" prefHeight="30.0" prefWidth="149.0" />
-      <Label fx:id="titulo" alignment="CENTER" contentDisplay="CENTER" layoutX="57.0" layoutY="6.0" prefHeight="59.0" prefWidth="325.0" text="FORMATO DE REGISTRO" textAlignment="CENTER">
+      <TextField fx:id="correoUsuario" layoutX="57.0" layoutY="164.0" prefHeight="30.0" prefWidth="325.0">
+         <font>
+            <Font name="Franklin Gothic Book" size="16.0" />
+         </font></TextField>
+      <TextField fx:id="direccionUsuario" layoutX="57.0" layoutY="224.0" prefHeight="30.0" prefWidth="149.0">
+         <font>
+            <Font name="Franklin Gothic Book" size="16.0" />
+         </font></TextField>
+      <TextField fx:id="ciudadUsuario" layoutX="57.0" layoutY="284.0" prefHeight="30.0" prefWidth="149.0">
+         <font>
+            <Font name="Franklin Gothic Book" size="16.0" />
+         </font></TextField>
+      <TextField fx:id="telefonoUsuario" layoutX="233.0" layoutY="284.0" prefHeight="30.0" prefWidth="149.0">
+         <font>
+            <Font name="Franklin Gothic Book" size="16.0" />
+         </font></TextField>
+      <TextField fx:id="usuarioIngresado" layoutX="57.0" layoutY="344.0" prefHeight="30.0" prefWidth="149.0">
+         <font>
+            <Font name="Franklin Gothic Book" size="16.0" />
+         </font></TextField>
+      <TextField fx:id="contrasenaIngresada" layoutX="233.0" layoutY="344.0" prefHeight="30.0" prefWidth="149.0">
+         <font>
+            <Font name="Franklin Gothic Book" size="16.0" />
+         </font></TextField>
+      <Label fx:id="titulo" alignment="CENTER" contentDisplay="CENTER" layoutX="57.0" layoutY="6.0" prefHeight="59.0" prefWidth="325.0" text="Formato de Registro" textAlignment="CENTER">
          <font>
             <Font name="Franklin Gothic Medium Cond" size="35.0" />
          </font>
       </Label>
       <Label fx:id="nombre" layoutX="57.0" layoutY="74.0" prefHeight="30.0" prefWidth="325.0" text="Nombre Completo">
          <font>
-            <Font name="Franklin Gothic Medium Cond" size="22.0" />
+            <Font name="Franklin Gothic Book" size="22.0" />
          </font>
       </Label>
       <Label fx:id="correo" layoutX="57.0" layoutY="134.0" prefHeight="30.0" prefWidth="325.0" text="Correo Electronico">
          <font>
-            <Font name="Franklin Gothic Medium Cond" size="22.0" />
+            <Font name="Franklin Gothic Book" size="22.0" />
          </font>
       </Label>
       <Label fx:id="direccion" layoutX="57.0" layoutY="194.0" prefHeight="30.0" prefWidth="149.0" text="Direccion">
          <font>
-            <Font name="Franklin Gothic Medium Cond" size="22.0" />
+            <Font name="Franklin Gothic Book" size="22.0" />
          </font>
       </Label>
       <Label fx:id="ciudad" layoutX="57.0" layoutY="254.0" prefHeight="30.0" prefWidth="149.0" text="Ciudad">
          <font>
-            <Font name="Franklin Gothic Medium Cond" size="22.0" />
+            <Font name="Franklin Gothic Book" size="22.0" />
          </font>
       </Label>
       <Label fx:id="telefono" layoutX="233.0" layoutY="254.0" prefHeight="30.0" prefWidth="149.0" text="Telefono">
          <font>
-            <Font name="Franklin Gothic Medium Cond" size="22.0" />
+            <Font name="Franklin Gothic Book" size="22.0" />
          </font>
       </Label>
       <Label fx:id="usuario" layoutX="57.0" layoutY="314.0" prefHeight="30.0" prefWidth="149.0" text="Usuario">
          <font>
-            <Font name="Franklin Gothic Medium Cond" size="22.0" />
+            <Font name="Franklin Gothic Book" size="22.0" />
          </font>
       </Label>
       <Label fx:id="contrasena" layoutX="233.0" layoutY="314.0" prefHeight="30.0" prefWidth="149.0" text="Contraseña">
          <font>
-            <Font name="Franklin Gothic Medium Cond" size="22.0" />
+            <Font name="Franklin Gothic Book" size="22.0" />
          </font>
       </Label>
       <Button fx:id="botonRegreso" layoutX="80.0" layoutY="392.0" mnemonicParsing="false" onAction="#regresar" prefHeight="38.0" prefWidth="103.0" text="Regresar">
          <font>
-            <Font name="Franklin Gothic Medium Cond" size="12.0" />
+            <Font name="Franklin Gothic Book" size="12.0" />
          </font></Button>
-      <Button fx:id="botonRegistro" layoutX="256.0" layoutY="392.0" mnemonicParsing="false" onAction="#registrar" prefHeight="38.0" prefWidth="103.0" text="Registrar" />
-      <TextField fx:id="id" layoutX="233.0" layoutY="224.0" prefHeight="30.0" prefWidth="149.0" />
+      <Button fx:id="botonRegistro" layoutX="256.0" layoutY="392.0" mnemonicParsing="false" onAction="#registrar" prefHeight="38.0" prefWidth="103.0" text="Registrar">
+         <font>
+            <Font name="Franklin Gothic Book" size="12.0" />
+         </font></Button>
+      <TextField fx:id="id" layoutX="233.0" layoutY="224.0" prefHeight="30.0" prefWidth="149.0">
+         <font>
+            <Font name="Franklin Gothic Book" size="16.0" />
+         </font></TextField>
       <Label fx:id="identificacion" layoutX="233.0" layoutY="194.0" prefHeight="30.0" prefWidth="149.0" text="Identificacion">
          <font>
-            <Font name="Franklin Gothic Medium Cond" size="22.0" />
+            <Font name="Franklin Gothic Book" size="22.0" />
          </font>
       </Label>
    </children>

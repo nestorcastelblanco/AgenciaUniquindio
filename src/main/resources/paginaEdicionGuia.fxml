@@ -10,13 +10,16 @@
 <AnchorPane prefHeight="421.0" prefWidth="326.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.controller.EdicionGuiaController">
    <TextField fx:id="idiomas" layoutX="32.0" layoutY="202.0" prefHeight="29.0" prefWidth="267.0">
       <font>
-         <Font name="Franklin Gothic Medium Cond" size="16.0" />
+         <Font name="Franklin Gothic Book" size="13.0" />
       </font></TextField>
    <Label fx:id="txtIdiomas" layoutX="32.0" layoutY="177.0" prefHeight="25.0" prefWidth="81.0" text="Idiomas">
       <font>
          <Font name="Franklin Gothic Book" size="15.0" />
       </font></Label>
-   <Button fx:id="botonRegreso" layoutX="24.0" layoutY="367.0" mnemonicParsing="false" onAction="#regresar" prefHeight="38.0" prefWidth="98.0" text="Regresar" textOverrun="LEADING_ELLIPSIS" />
+   <Button fx:id="botonRegreso" layoutX="32.0" layoutY="367.0" mnemonicParsing="false" onAction="#regresar" prefHeight="38.0" prefWidth="98.0" text="Regresar" textOverrun="LEADING_ELLIPSIS">
+      <font>
+         <Font name="Franklin Gothic Book" size="13.0" />
+      </font></Button>
    <Label fx:id="txtExperiencia" layoutX="32.0" layoutY="231.0" prefHeight="25.0" prefWidth="110.0" text="Experiencia">
       <font>
          <Font name="Franklin Gothic Book" size="15.0" />
@@ -27,10 +30,13 @@
          <Font name="Franklin Gothic Book" size="34.0" />
       </font>
    </Label>
-   <Button fx:id="botonEditar" layoutX="197.0" layoutY="367.0" mnemonicParsing="false" onAction="#editar" prefHeight="38.0" prefWidth="98.0" text="Editar" textOverrun="LEADING_ELLIPSIS" />
+   <Button fx:id="botonEditar" layoutX="201.0" layoutY="367.0" mnemonicParsing="false" onAction="#editar" prefHeight="38.0" prefWidth="98.0" text="Editar" textOverrun="LEADING_ELLIPSIS">
+      <font>
+         <Font name="Franklin Gothic Book" size="13.0" />
+      </font></Button>
    <TextField fx:id="nombre" layoutX="32.0" layoutY="88.0" prefHeight="29.0" prefWidth="267.0">
       <font>
-         <Font name="Franklin Gothic Medium Cond" size="16.0" />
+         <Font name="Franklin Gothic Book" size="13.0" />
       </font>
    </TextField>
    <Label fx:id="txtNombre" layoutX="32.0" layoutY="63.0" prefHeight="25.0" prefWidth="81.0" text="Nombre">
@@ -45,12 +51,15 @@
    </Label>
    <TextField fx:id="cedula" layoutX="32.0" layoutY="142.0" prefHeight="29.0" prefWidth="267.0">
       <font>
-         <Font name="Franklin Gothic Medium Cond" size="16.0" />
+         <Font name="Franklin Gothic Book" size="13.0" />
       </font>
    </TextField>
-   <TextField fx:id="experiencia" layoutX="28.0" layoutY="256.0" prefHeight="29.0" prefWidth="267.0" />
-   <ComboBox fx:id="comboPaquete" layoutX="28.0" layoutY="316.0" prefHeight="29.0" prefWidth="267.0" />
-   <Label fx:id="txtPaqueteCubrir" layoutX="28.0" layoutY="291.0" prefHeight="25.0" prefWidth="136.0" text="Paquete a Cubrir">
+   <TextField fx:id="experiencia" layoutX="32.0" layoutY="256.0" prefHeight="29.0" prefWidth="267.0">
+      <font>
+         <Font name="Franklin Gothic Book" size="13.0" />
+      </font></TextField>
+   <ComboBox fx:id="comboPaquete" layoutX="32.0" layoutY="316.0" prefHeight="29.0" prefWidth="267.0" />
+   <Label fx:id="txtPaqueteCubrir" layoutX="32.0" layoutY="291.0" prefHeight="25.0" prefWidth="136.0" text="Paquete a Cubrir">
       <font>
          <Font name="Franklin Gothic Book" size="15.0" />
       </font>

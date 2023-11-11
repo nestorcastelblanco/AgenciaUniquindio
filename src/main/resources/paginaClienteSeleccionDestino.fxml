@@ -7,10 +7,11 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="462.0" prefWidth="701.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.controller.SeleccionClientePaquetesController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="418.0" prefWidth="701.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.controller.SeleccionClientePaquetesController">
    <children>
-      <TableView fx:id="tablaPaquetes" layoutX="39.0" layoutY="107.0" prefHeight="277.0" prefWidth="623.0">
+      <TableView fx:id="tablaPaquetes" layoutX="45.0" layoutY="81.0" prefHeight="277.0" prefWidth="623.0">
         <columns>
           <TableColumn fx:id="paquete" prefWidth="105.0" text="Paquete" />
           <TableColumn fx:id="destinos" prefWidth="109.0" text="Destinos" />
@@ -21,21 +22,63 @@
             <TableColumn fx:id="fechaFin" prefWidth="67.0" text="Fin" />
         </columns>
       </TableView>
-      <Button fx:id="regresar" layoutX="39.0" layoutY="397.0" mnemonicParsing="false" onAction="#regresar" prefHeight="25.0" prefWidth="112.0" text="Regresar" />
-      <Button fx:id="ver" layoutX="550.0" layoutY="397.0" mnemonicParsing="false" onAction="#ver" prefHeight="25.0" prefWidth="112.0" text="Ver" />
-      <TextField fx:id="paquetesFiltro" layoutX="39.0" layoutY="61.0" prefHeight="25.0" prefWidth="97.0" />
-      <TextField fx:id="destino" layoutX="151.0" layoutY="61.0" prefHeight="25.0" prefWidth="82.0" />
-      <TextField fx:id="persona" layoutX="252.0" layoutY="61.0" prefHeight="25.0" prefWidth="48.0" />
-      <DatePicker fx:id="inicio" layoutX="518.0" layoutY="61.0" prefHeight="25.0" prefWidth="65.0" />
-      <TextField fx:id="valor" layoutX="420.0" layoutY="61.0" prefHeight="25.0" prefWidth="82.0" />
-      <DatePicker fx:id="fin" layoutX="597.0" layoutY="61.0" prefHeight="25.0" prefWidth="65.0" />
-      <TextField fx:id="services" layoutX="318.0" layoutY="61.0" prefHeight="25.0" prefWidth="82.0" />
-      <Label fx:id="txtPaquete" alignment="CENTER" layoutX="39.0" layoutY="27.0" prefHeight="25.0" prefWidth="97.0" text="Paquete" />
-      <Label fx:id="txtDestinos" alignment="CENTER" layoutX="144.0" layoutY="27.0" prefHeight="25.0" prefWidth="97.0" text="Destinos" />
-      <Label fx:id="txtPersonas" alignment="CENTER" layoutX="248.0" layoutY="27.0" prefHeight="25.0" prefWidth="57.0" text="Personas" />
-      <Label fx:id="txtServicios" alignment="CENTER" layoutX="331.0" layoutY="27.0" prefHeight="25.0" prefWidth="57.0" text="Servicios" />
-      <Label fx:id="txtInicio" alignment="CENTER" layoutX="522.0" layoutY="27.0" prefHeight="25.0" prefWidth="57.0" text="Inicio" />
-      <Label fx:id="txtValor" alignment="CENTER" layoutX="433.0" layoutY="27.0" prefHeight="25.0" prefWidth="57.0" text="Valor" />
-      <Label fx:id="txtFin" alignment="CENTER" layoutX="601.0" layoutY="27.0" prefHeight="25.0" prefWidth="57.0" text="Fin" />
+      <Button fx:id="regresar" layoutX="45.0" layoutY="371.0" mnemonicParsing="false" onAction="#regresar" prefHeight="25.0" prefWidth="112.0" text="Regresar">
+         <font>
+            <Font name="Franklin Gothic Book" size="12.0" />
+         </font></Button>
+      <Button fx:id="ver" layoutX="556.0" layoutY="371.0" mnemonicParsing="false" onAction="#ver" prefHeight="25.0" prefWidth="112.0" text="Ver">
+         <font>
+            <Font name="Franklin Gothic Book" size="12.0" />
+         </font></Button>
+      <TextField fx:id="paquetesFiltro" layoutX="45.0" layoutY="35.0" prefHeight="25.0" prefWidth="97.0">
+         <font>
+            <Font name="Franklin Gothic Book" size="12.0" />
+         </font></TextField>
+      <TextField fx:id="destino" layoutX="157.0" layoutY="35.0" prefHeight="25.0" prefWidth="82.0">
+         <font>
+            <Font name="Franklin Gothic Book" size="12.0" />
+         </font></TextField>
+      <TextField fx:id="persona" layoutX="258.0" layoutY="35.0" prefHeight="25.0" prefWidth="48.0">
+         <font>
+            <Font name="Franklin Gothic Book" size="12.0" />
+         </font></TextField>
+      <DatePicker fx:id="inicio" layoutX="524.0" layoutY="35.0" prefHeight="25.0" prefWidth="65.0" />
+      <TextField fx:id="valor" layoutX="426.0" layoutY="35.0" prefHeight="25.0" prefWidth="82.0">
+         <font>
+            <Font name="Franklin Gothic Book" size="12.0" />
+         </font></TextField>
+      <DatePicker fx:id="fin" layoutX="603.0" layoutY="35.0" prefHeight="25.0" prefWidth="65.0" />
+      <TextField fx:id="services" layoutX="324.0" layoutY="35.0" prefHeight="25.0" prefWidth="82.0">
+         <font>
+            <Font name="Franklin Gothic Book" size="12.0" />
+         </font></TextField>
+      <Label fx:id="txtPaquete" alignment="CENTER" layoutX="45.0" layoutY="14.0" prefHeight="25.0" prefWidth="97.0" text="Paquete">
+         <font>
+            <Font name="Franklin Gothic Book" size="12.0" />
+         </font></Label>
+      <Label fx:id="txtDestinos" alignment="CENTER" layoutX="150.0" layoutY="14.0" prefHeight="25.0" prefWidth="97.0" text="Destinos">
+         <font>
+            <Font name="Franklin Gothic Book" size="12.0" />
+         </font></Label>
+      <Label fx:id="txtPersonas" alignment="CENTER" layoutX="241.0" layoutY="14.0" prefHeight="25.0" prefWidth="82.0" text="Personas">
+         <font>
+            <Font name="Franklin Gothic Book" size="12.0" />
+         </font></Label>
+      <Label fx:id="txtServicios" alignment="CENTER" layoutX="324.0" layoutY="14.0" prefHeight="25.0" prefWidth="82.0" text="Servicios">
+         <font>
+            <Font name="Franklin Gothic Book" size="12.0" />
+         </font></Label>
+      <Label fx:id="txtInicio" alignment="CENTER" layoutX="515.0" layoutY="14.0" prefHeight="25.0" prefWidth="82.0" text="Inicio">
+         <font>
+            <Font name="Franklin Gothic Book" size="12.0" />
+         </font></Label>
+      <Label fx:id="txtValor" alignment="CENTER" layoutX="426.0" layoutY="14.0" prefHeight="25.0" prefWidth="82.0" text="Valor">
+         <font>
+            <Font name="Franklin Gothic Book" size="12.0" />
+         </font></Label>
+      <Label fx:id="txtFin" alignment="CENTER" layoutX="595.0" layoutY="14.0" prefHeight="25.0" prefWidth="82.0" text="Fin">
+         <font>
+            <Font name="Franklin Gothic Book" size="12.0" />
+         </font></Label>
    </children>
 </AnchorPane>

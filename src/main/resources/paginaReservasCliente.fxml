@@ -20,13 +20,22 @@
             <TableColumn fx:id="fechaFin" prefWidth="67.0" text="Fin" />
         </columns>
       </TableView>
-      <Button fx:id="regresar" layoutX="39.0" layoutY="384.0" mnemonicParsing="false" onAction="#regresar" prefHeight="25.0" prefWidth="112.0" text="Regresar" />
-      <Button fx:id="cancelar" layoutX="550.0" layoutY="384.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="25.0" prefWidth="112.0" text="Cancelar" />
-      <Label fx:id="txtReservasCliente" alignment="CENTER" layoutX="46.0" layoutY="14.0" prefHeight="56.0" prefWidth="609.0" text="RESERVAS REALIZADAS">
+      <Button fx:id="regresar" layoutX="39.0" layoutY="384.0" mnemonicParsing="false" onAction="#regresar" prefHeight="25.0" prefWidth="112.0" text="Regresar">
+         <font>
+            <Font name="Franklin Gothic Book" size="12.0" />
+         </font></Button>
+      <Button fx:id="cancelar" layoutX="550.0" layoutY="384.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="25.0" prefWidth="112.0" text="Cancelar">
+         <font>
+            <Font name="Franklin Gothic Book" size="12.0" />
+         </font></Button>
+      <Label fx:id="txtReservasCliente" alignment="CENTER" layoutX="46.0" layoutY="14.0" prefHeight="56.0" prefWidth="609.0" text="Reservas Realizadas">
          <font>
             <Font name="Franklin Gothic Medium Cond" size="48.0" />
          </font>
       </Label>
-      <Button fx:id="calificar" layoutX="295.0" layoutY="384.0" mnemonicParsing="false" onAction="#calificar" prefHeight="25.0" prefWidth="112.0" text="Calificar" />
+      <Button fx:id="calificar" layoutX="295.0" layoutY="384.0" mnemonicParsing="false" onAction="#calificar" prefHeight="25.0" prefWidth="112.0" text="Calificar">
+         <font>
+            <Font name="Franklin Gothic Book" size="12.0" />
+         </font></Button>
    </children>
 </AnchorPane>

@@ -66,6 +66,7 @@ public class EdicionDestinoController implements Initializable, CambioIdiomaList
         descripcion.setText(agencia.enviarDestinoEdicion().getDescripcion());
         clima.setText(agencia.enviarDestinoEdicion().getClima());
         imagePaths = agencia.enviarDestinoEdicion().getImagenes();
+        imagePaths.removeAll(imagePaths);
     }
     public void registrarDestino(ActionEvent actionEvent) {
         try

@@ -1,6 +1,7 @@
 package co.edu.uniquindio.controller;
 
 import co.edu.uniquindio.model.Agencia;
+import co.edu.uniquindio.model.Destinos;
 import co.edu.uniquindio.model.Paquetes;
 import co.edu.uniquindio.utils.CambioIdiomaEvent;
 import co.edu.uniquindio.utils.CambioIdiomaListener;
@@ -19,7 +20,7 @@ import java.util.ResourceBundle;
 public class CaracteristicasPaqueteController implements Initializable, CambioIdiomaListener {
     private final Agencia agencia = Agencia.getInstance();
     private int numeroImagenes, cont;
-    private ArrayList<String> arrayListImagenes = new ArrayList<>();
+    ArrayList<String> arrayListImagenes = new ArrayList<>();
     @FXML
     private ImageView imageView,estrella1,estrella2,estrella3,estrella4,estrella5;
     @FXML
@@ -63,16 +64,43 @@ public class CaracteristicasPaqueteController implements Initializable, CambioId
         fechaFin.setText(paqueteSeleccionado.getFin().toString());
         cupos.setText(paqueteSeleccionado.getNumeroPersonas()+"");
         servicios.setText(paqueteSeleccionado.getServicios());
-        for(int i = 0 ; i<paqueteSeleccionado.getDestinos().size();i++)
+
+        ArrayList<Destinos> destinos = paqueteSeleccionado.getDestinos();
+        /*
+        for ( int i = 0; i<destinos.size(); i++)
         {
-            arrayListImagenes.addAll(paqueteSeleccionado.getDestinos().get(i).getImagenes());
+            for(int j = 0 ; j<agencia.getDestinos().size();j++)
+            {
+                System.out.println("i" + i + destinos.get(i).getNombre());
+                System.out.println("j" + j + agencia.getDestinos().get(j).getNombre());
+                if (destinos.get(i).getNombre().equals(agencia.getDestinos().get(j).getNombre()))
+                {
+                    System.out.println("ENTRO AL IF" + i + destinos.get(i).getNombre());
+                    System.out.println("ENTRO AL IF" + j + agencia.getDestinos().get(j).getNombre());
+
+                    for(int x = 0; x<agencia.getDestinos().get(j).getImagenes().size();x++)
+                    {
+                        arrayListImagenes.add(agencia.getDestinos().get(j).getImagenes().get(x));
+                    }
+                }
+            }
         }
-        System.out.println(arrayListImagenes.toString());
+
+         */
+        for (Destinos destino : destinos) {
+            arrayListImagenes.addAll(destino.getImagenes());
+        }
+        for (int i = 0 ; i<arrayListImagenes.size();i++)
+        {
+            System.out.println("Imagen : " + i + arrayListImagenes.get(i));
+        }
         numeroImagenes = arrayListImagenes.size();
         cont = 0;
+
         for(int i = 0 ; i<arrayListImagenes.size();i++)
         {
             System.out.println("Imagenes: " + i + " " + arrayListImagenes.get(i));
+
         }
         Image imagen = new Image(arrayListImagenes.get(cont));
         imageView.setImage(imagen);

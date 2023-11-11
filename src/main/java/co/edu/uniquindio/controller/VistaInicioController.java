@@ -11,66 +11,237 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class VistaInicioController implements Initializable, CambioIdiomaListener {
+public
+class VistaInicioController implements Initializable, CambioIdiomaListener {
     private final Agencia agencia = Agencia.getInstance();
     private final Logger LOGGER = Logger.getLogger(Agencia.class.getName());
     @FXML
-    private TableView<Paquetes> tablaPaquetes;
+    private ImageView imagenPaquetes, imagenDestinos;
     @FXML
-    private TableColumn<Paquetes, String> paquete;
-    @FXML
-    private TableColumn<Paquetes, String> destinos;
-    @FXML
-    private TableColumn<Paquetes, String> personas;
-    @FXML
-    private TableColumn<Paquetes, String> servicios;
-    @FXML
-    private TableColumn<Paquetes, String> valorPersona;
-    @FXML
-    private TableColumn<Paquetes, String> fechaInicio;
-    @FXML
-    private TableColumn<Paquetes, String> fechaFin;
-    @FXML
-    private TableView<Destinos> tablaDestinos;
-    @FXML
-    private TableColumn<Destinos, String> colNombre, colCiudad, colDescripcion, colClima;
-
+    private Label labelPaquete, labelDestinos;
+    int numeroPaquetes, numeroDestinos, indicePaquete, indiceDestinos, indiceImagenPaquete, indiceImagenDestino, numeroImagenesPaquete, numeroImagenesDestino;
+    ArrayList<Paquetes> paquetesCargados = new ArrayList<>();
+    ArrayList<Destinos> destinosCargados = new ArrayList<>();
+    ArrayList<String> imagenesPaquete = new ArrayList<>();
+    ArrayList<String> imagenesDestino = new ArrayList<>();
     @Override
     public void onCambioIdioma(CambioIdiomaEvent evento) {
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         agencia.inicializarDatos();
-        ObservableList<Paquetes> paquetes = FXCollections.observableArrayList(agencia.enviarPaquetes());
-        ObservableList<Destinos> destinosA = FXCollections.observableArrayList(agencia.enviarDestinos());
-        cargarTablas(paquetes,destinosA);
-    }
-    public void cargarTablas(ObservableList<Paquetes> paquetes, ObservableList<Destinos> destinosA)
-    {
-        paquete.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombre()));
-        destinos.setCellValueFactory(cellData -> new SimpleStringProperty(agencia.obtenerNombresCiudades(cellData.getValue().getDestinos())));
-        personas.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNumeroPersonas() + ""));
-        servicios.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getServicios()));
-        valorPersona.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPrecio() + ""));
-        fechaInicio.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getInicio().toString()));
-        fechaFin.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getFin().toString()));
-        tablaPaquetes.setItems(paquetes);
 
-        colNombre.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombre()));
-        colCiudad.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCiudad()));
-        colClima.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getClima()));
-        colDescripcion.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDescripcion()));
-        tablaDestinos.setItems(destinosA);
+        indicePaquete = 0;
+        indiceDestinos = 0;
+        indiceImagenDestino = 0;
+        indiceImagenPaquete = 0;
+
+        paquetesCargados = agencia.enviarPaquetes();
+        destinosCargados = agencia.enviarDestinos();
+
+        labelPaquete.setText(paquetesCargados.get(indicePaquete).getNombre());
+        labelDestinos.setText(destinosCargados.get(indiceDestinos).getCiudad());
+
+        for(int i = 0 ; i<paquetesCargados.get(indicePaquete).getDestinos().size();i++)
+        {
+            imagenesPaquete.addAll(paquetesCargados.get(indicePaquete).getDestinos().get(i).getImagenes());
+        }
+        for(int i = 0 ; i<destinosCargados.get(indiceDestinos).getImagenes().size();i++)
+        {
+            imagenesDestino.addAll(destinosCargados.get(indicePaquete).getImagenes());
+        }
+
+        Image imagenPaquete = new Image(imagenesPaquete.get(0));
+        Image imagenDestino = new Image(imagenesPaquete.get(0));
+
+        imagenPaquetes.setImage(imagenPaquete);
+        imagenDestinos.setImage(imagenDestino);
+
+        numeroPaquetes = paquetesCargados.size();
+        numeroDestinos = destinosCargados.size();
+        numeroImagenesDestino = imagenesDestino.size();
+        numeroImagenesPaquete = imagenesPaquete.size();
     }
+
     public void ingresar(ActionEvent actionEvent) {
         agencia.loadStage("/paginaPrincipal.fxml", actionEvent, "Se carga la pagina de loggin");
+    }
+
+    public void lPaquetes(ActionEvent actionEvent) {
+        indicePaquete-=1;
+        indiceImagenPaquete = 0;
+        if(indicePaquete == -1)
+        {
+            indicePaquete = numeroPaquetes-1;
+            labelPaquete.setText(paquetesCargados.get(indicePaquete).getNombre());
+            imagenesPaquete.removeAll(imagenesPaquete);
+            for(int i = 0 ; i<paquetesCargados.get(indicePaquete).getDestinos().size();i++)
+            {
+                imagenesPaquete.addAll(paquetesCargados.get(indicePaquete).getDestinos().get(i).getImagenes());
+            }
+            numeroImagenesPaquete = imagenesPaquete.size();
+            Image imagen = new Image(imagenesPaquete.get(indiceImagenPaquete));
+            imagenPaquetes.setImage(imagen);
+        }else {
+            labelPaquete.setText(paquetesCargados.get(indicePaquete).getNombre());
+            imagenesPaquete.removeAll(imagenesPaquete);
+            for(int i = 0 ; i<paquetesCargados.get(indicePaquete).getDestinos().size();i++)
+            {
+                imagenesPaquete.addAll(paquetesCargados.get(indicePaquete).getDestinos().get(i).getImagenes());
+            }
+            numeroImagenesPaquete = imagenesPaquete.size();
+            Image imagen = new Image(imagenesPaquete.get(indiceImagenPaquete));
+            imagenPaquetes.setImage(imagen);
+        }
+    }
+
+    public void rPaquetes(ActionEvent actionEvent) {
+        indicePaquete+=1;
+        indiceImagenPaquete = 0;
+        if(indicePaquete == numeroPaquetes)
+        {
+            indicePaquete = 0;
+            labelPaquete.setText(paquetesCargados.get(indicePaquete).getNombre());
+            imagenesPaquete.removeAll(imagenesPaquete);
+            for(int i = 0 ; i<paquetesCargados.get(indicePaquete).getDestinos().size();i++)
+            {
+                imagenesPaquete.addAll(paquetesCargados.get(indicePaquete).getDestinos().get(i).getImagenes());
+            }
+            numeroImagenesPaquete = paquetesCargados.size();
+            Image imagen = new Image(imagenesPaquete.get(indiceImagenPaquete));
+            imagenPaquetes.setImage(imagen);
+        }else {
+            labelPaquete.setText(paquetesCargados.get(indicePaquete).getNombre());
+            imagenesPaquete.removeAll(imagenesPaquete);
+            for(int i = 0 ; i<paquetesCargados.get(indicePaquete).getDestinos().size();i++)
+            {
+                imagenesPaquete.addAll(paquetesCargados.get(indicePaquete).getDestinos().get(i).getImagenes());
+            }
+            numeroImagenesPaquete = imagenesPaquete.size();
+            Image imagen = new Image(imagenesPaquete.get(indiceImagenPaquete));
+            imagenPaquetes.setImage(imagen);
+        }
+    }
+    public void lImagenPaquetes(ActionEvent actionEvent) {
+        indiceImagenPaquete-=1;
+        if(indiceImagenPaquete == -1)
+        {
+            indiceImagenPaquete = numeroImagenesPaquete-1;
+            Image imagen = new Image(imagenesPaquete.get(indiceImagenPaquete));
+            imagenPaquetes.setImage(imagen);
+        }else{
+            Image imagen = new Image(imagenesPaquete.get(indiceImagenPaquete));
+            imagenPaquetes.setImage(imagen);
+        }
+    }
+
+    public void rImagenPaquetes(ActionEvent actionEvent) {
+        indiceImagenPaquete+=1;
+        if(indiceImagenPaquete == numeroImagenesPaquete)
+        {
+            indiceImagenPaquete = 0;
+            Image imagen = new Image(imagenesPaquete.get(indiceImagenPaquete));
+            imagenPaquetes.setImage(imagen);
+        }else{
+            Image imagen = new Image(imagenesPaquete.get(indiceImagenPaquete));
+            imagenPaquetes.setImage(imagen);
+        }
+    }
+
+    public void lDestinos(ActionEvent actionEvent) {
+        indiceDestinos-=1;
+        indiceImagenDestino = 0;
+        if(indiceDestinos == -1)
+        {
+            indiceDestinos = numeroDestinos-1;
+            labelDestinos.setText(destinosCargados.get(indiceDestinos).getNombre());
+            imagenesDestino.removeAll(imagenesDestino);
+            imagenesDestino.addAll(destinosCargados.get(indiceDestinos).getImagenes());
+
+            numeroImagenesDestino = imagenesDestino.size();
+
+            Image imagen = new Image(imagenesDestino.get(indiceImagenDestino));
+            imagenDestinos.setImage(imagen);
+
+        }else {
+
+            labelDestinos.setText(destinosCargados.get(indiceDestinos).getNombre());
+
+            imagenesDestino.removeAll(imagenesDestino);
+            imagenesDestino.addAll(destinosCargados.get(indiceDestinos).getImagenes());
+
+            numeroImagenesDestino = imagenesDestino.size();
+
+            Image imagen = new Image(imagenesDestino.get(indiceImagenDestino));
+            imagenDestinos.setImage(imagen);
+        }
+    }
+
+    public void rDestinos(ActionEvent actionEvent) {
+        indiceDestinos+=1;
+        indiceImagenDestino = 0;
+        if(indiceDestinos == numeroDestinos)
+        {
+
+            indiceDestinos = 0;
+            labelDestinos.setText(destinosCargados.get(indiceDestinos).getNombre());
+            imagenesDestino.removeAll(imagenesDestino);
+            imagenesDestino.addAll(destinosCargados.get(indiceDestinos).getImagenes());
+
+            numeroImagenesDestino = imagenesDestino.size();
+
+            Image imagen = new Image(imagenesDestino.get(indiceImagenDestino));
+            imagenDestinos.setImage(imagen);
+
+        }else {
+
+            labelDestinos.setText(destinosCargados.get(indiceDestinos).getNombre());
+
+            imagenesDestino.removeAll(imagenesDestino);
+            imagenesDestino.addAll(destinosCargados.get(indiceDestinos).getImagenes());
+
+            numeroImagenesDestino = imagenesDestino.size();
+
+            Image imagen = new Image(imagenesDestino.get(indiceImagenDestino));
+            imagenDestinos.setImage(imagen);
+        }
+    }
+
+    public void lImagenDestinos(ActionEvent actionEvent) {
+        indiceImagenDestino-=1;
+        if(indiceImagenDestino == -1)
+        {
+            indiceImagenDestino = numeroImagenesDestino-1;
+            Image imagen = new Image(imagenesDestino.get(indiceImagenDestino));
+            imagenDestinos.setImage(imagen);
+        }else{
+            Image imagen = new Image(imagenesDestino.get(indiceImagenDestino));
+            imagenDestinos.setImage(imagen);
+        }
+    }
+
+    public void rImagenDestinos(ActionEvent actionEvent) {
+        indiceImagenDestino+=1;
+        if(indiceImagenDestino == numeroImagenesDestino)
+        {
+            indiceImagenDestino = 0;
+            Image imagen = new Image(imagenesDestino.get(indiceImagenDestino));
+            imagenDestinos.setImage(imagen);
+        }else{
+            Image imagen = new Image(imagenesDestino.get(indiceImagenDestino));
+            imagenDestinos.setImage(imagen);
+        }
     }
 }

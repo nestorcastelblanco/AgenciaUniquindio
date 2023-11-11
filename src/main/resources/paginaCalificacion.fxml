@@ -47,9 +47,18 @@
          </image>
       </ImageView>
       <Button fx:id="bttDestino4" layoutX="396.0" layoutY="151.0" mnemonicParsing="false" onAction="#dest4" prefHeight="22.0" prefWidth="20.0" style="-fx-background-color: 808080;" />
-      <Button fx:id="bttDestino" layoutX="246.0" layoutY="266.0" mnemonicParsing="false" onAction="#calificarDestino" prefHeight="25.0" prefWidth="120.0" text="Calificar Destino" />
-      <TextField fx:id="comentario" layoutX="53.0" layoutY="222.0" prefHeight="29.0" prefWidth="503.0" />
-      <Label fx:id="txtComentarios" layoutX="53.0" layoutY="197.0" prefHeight="25.0" prefWidth="120.0" text="Comentarios" />
+      <Button fx:id="bttDestino" layoutX="246.0" layoutY="266.0" mnemonicParsing="false" onAction="#calificarDestino" prefHeight="25.0" prefWidth="120.0" text="Calificar Destino">
+         <font>
+            <Font name="Franklin Gothic Book" size="12.0" />
+         </font></Button>
+      <TextField fx:id="comentario" layoutX="53.0" layoutY="222.0" prefHeight="29.0" prefWidth="503.0">
+         <font>
+            <Font name="Franklin Gothic Book" size="15.0" />
+         </font></TextField>
+      <Label fx:id="txtComentarios" layoutX="53.0" layoutY="197.0" prefHeight="25.0" prefWidth="120.0" text="Comentarios">
+         <font>
+            <Font name="Franklin Gothic Book" size="12.0" />
+         </font></Label>
       <ImageView fx:id="estrellaGuia1" fitHeight="79.0" fitWidth="100.0" layoutX="53.0" layoutY="356.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Imagenes/estrellaGris.jpg" />
@@ -80,13 +89,22 @@
          </image>
       </ImageView>
       <Button fx:id="bttGuia4" layoutX="396.0" layoutY="385.0" mnemonicParsing="false" onAction="#guia4" prefHeight="22.0" prefWidth="20.0" style="-fx-background-color: 808080;" />
-      <Button fx:id="regresar" layoutX="26.0" layoutY="497.0" mnemonicParsing="false" onAction="#regresar" prefHeight="25.0" prefWidth="80.0" text="Regresar" />
+      <Button fx:id="regresar" layoutX="26.0" layoutY="497.0" mnemonicParsing="false" onAction="#regresar" prefHeight="25.0" prefWidth="80.0" text="Regresar">
+         <font>
+            <Font name="Franklin Gothic Book" size="12.0" />
+         </font></Button>
       <Label fx:id="txtDestinos" alignment="CENTER" layoutX="121.0" layoutY="21.0" prefHeight="47.0" prefWidth="370.0" text="DESTINOS">
          <font>
             <Font name="Franklin Gothic Medium Cond" size="24.0" />
          </font>
       </Label>
-      <Button fx:id="bttGuia" layoutX="263.0" layoutY="448.0" mnemonicParsing="false" onAction="#calificarGuia" prefHeight="25.0" prefWidth="80.0" text="Calificar" />
-      <Button fx:id="enviar" layoutX="436.0" layoutY="497.0" mnemonicParsing="false" onAction="#enviarCalificaciones" prefHeight="25.0" prefWidth="147.0" text="Enviar Calificaciones" />
+      <Button fx:id="bttGuia" layoutX="263.0" layoutY="448.0" mnemonicParsing="false" onAction="#calificarGuia" prefHeight="25.0" prefWidth="80.0" text="Calificar">
+         <font>
+            <Font name="Franklin Gothic Book" size="12.0" />
+         </font></Button>
+      <Button fx:id="enviar" layoutX="436.0" layoutY="497.0" mnemonicParsing="false" onAction="#enviarCalificaciones" prefHeight="25.0" prefWidth="147.0" text="Enviar Calificaciones">
+         <font>
+            <Font name="Franklin Gothic Book" size="12.0" />
+         </font></Button>
    </children>
 </AnchorPane>

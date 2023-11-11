@@ -26,16 +26,16 @@
       </ToolBar>
       <Pane layoutX="27.0" layoutY="57.0" prefHeight="402.0" prefWidth="372.0">
          <children>
-            <TextField fx:id="usuarioIngresado" layoutX="73.0" layoutY="88.0" prefHeight="30.0" prefWidth="230.0">
+            <TextField fx:id="usuarioIngresado" alignment="CENTER" layoutX="73.0" layoutY="88.0" prefHeight="30.0" prefWidth="230.0">
                <font>
                   <Font name="Franklin Gothic Book" size="12.0" />
                </font>
             </TextField>
-            <TextField fx:id="contrasenaIngresada" layoutX="73.0" layoutY="161.0" prefHeight="30.0" prefWidth="230.0">
+            <TextField fx:id="contrasenaIngresada" alignment="CENTER" layoutX="73.0" layoutY="161.0" prefHeight="30.0" prefWidth="230.0">
                <font>
                   <Font name="Franklin Gothic Book" size="12.0" />
                </font></TextField>
-            <Label fx:id="usuario" layoutX="145.0" layoutY="43.0" prefHeight="38.0" prefWidth="86.0" text="Usuario">
+            <Label fx:id="usuario" layoutX="143.0" layoutY="49.0" prefHeight="38.0" prefWidth="86.0" text="Usuario">
                <font>
                   <Font name="Franklin Gothic Medium Cond" size="30.0" />
                </font>
@@ -45,14 +45,20 @@
                   <Font name="Franklin Gothic Medium Cond" size="30.0" />
                </font>
             </Label>
-            <Button fx:id="botonIngreso" layoutX="50.0" layoutY="335.0" mnemonicParsing="false" onAction="#ingresar" prefHeight="38.0" prefWidth="103.0" text="Ingresar" />
-            <Button fx:id="botonRegistro" layoutX="229.0" layoutY="335.0" mnemonicParsing="false" onAction="#registrar" prefHeight="38.0" prefWidth="103.0" text="Registrar" />
-            <Label fx:id="ingreso" alignment="CENTER" layoutX="36.0" layoutY="-6.0" prefHeight="55.0" prefWidth="309.0" text="INGRESO">
+            <Button fx:id="botonIngreso" layoutX="50.0" layoutY="335.0" mnemonicParsing="false" onAction="#ingresar" prefHeight="38.0" prefWidth="103.0" text="Ingresar">
+               <font>
+                  <Font name="Franklin Gothic Book" size="12.0" />
+               </font></Button>
+            <Button fx:id="botonRegistro" layoutX="229.0" layoutY="335.0" mnemonicParsing="false" onAction="#registrar" prefHeight="38.0" prefWidth="103.0" text="Registrar">
+               <font>
+                  <Font name="Franklin Gothic Book" size="12.0" />
+               </font></Button>
+            <Label fx:id="ingreso" alignment="CENTER" layoutX="36.0" layoutY="-6.0" prefHeight="55.0" prefWidth="309.0" text="Ingreso">
                <font>
                   <Font name="Franklin Gothic Medium Cond" size="38.0" />
                </font>
             </Label>
-            <TextField fx:id="codigo" layoutX="145.0" layoutY="279.0" prefHeight="30.0" prefWidth="86.0">
+            <TextField fx:id="codigo" alignment="CENTER" layoutX="145.0" layoutY="279.0" prefHeight="30.0" prefWidth="86.0">
                <font>
                   <Font name="Franklin Gothic Book" size="14.0" />
                </font>
@@ -62,7 +68,10 @@
                   <Font name="Franklin Gothic Medium Cond" size="30.0" />
                </font>
             </Label>
-            <Button fx:id="botonCodigo" layoutX="132.0" layoutY="201.0" mnemonicParsing="false" onAction="#enviarCodigo" prefHeight="25.0" prefWidth="113.0" text="Enviar Codigo" />
+            <Button fx:id="botonCodigo" layoutX="132.0" layoutY="201.0" mnemonicParsing="false" onAction="#enviarCodigo" prefHeight="25.0" prefWidth="113.0" text="Enviar Codigo">
+               <font>
+                  <Font name="Franklin Gothic Book" size="12.0" />
+               </font></Button>
          </children>
       </Pane>
       <ImageView fitHeight="402.0" fitWidth="388.0" layoutX="367.0" layoutY="38.0" pickOnBounds="true">

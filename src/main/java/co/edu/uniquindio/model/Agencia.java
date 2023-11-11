@@ -297,13 +297,6 @@ public class Agencia {
                 .finCupon(null)
                 .build();
         paquetes.add(paquete);
-        for (int i = 0 ; i<paquetes.size();i++)
-        {
-            for (int j=0 ; j<paquetes.get(i).getDestinos().size();j++)
-            {
-                System.out.println("Nombre: " + paquetes.get(i).getNombre() + " Destinos: " + paquetes.get(i).getDestinos().get(j));
-            }
-        }
         borrarDatosSerializados(RUTA_PAQUETES);
         ArchivoUtils.serializarArraylistPaquetes(RUTA_PAQUETES,paquetes);
         leerPaquetes();
@@ -376,7 +369,7 @@ public class Agencia {
         leerPaquetes();
         LOGGER.log(Level.INFO, "Se registro un nuevo Paquete");
     }
-    public void realizarReserva(Paquetes paquete, Clientes cliente, LocalDate inicio, LocalDate fin, String personas, Guias selectedItem, String pendiente, String cupon) throws CampoRepetido,CampoObligatorioException,CampoVacioException {
+    public void realizarReserva(Paquetes paquete, Clientes cliente, LocalDate inicio, LocalDate fin, String personas, Guias selectedItem, String pendiente, float descuento) throws CampoRepetido,CampoObligatorioException,CampoVacioException {
         Reservas reserva = new Reservas();
         float valorDescuento = 0;
         if (paquete == null) {
@@ -394,22 +387,6 @@ public class Agencia {
         if (!agencia.verificarPersonasPaquete(paquete,personas)) {
             throw new CampoObligatorioException("El numero de personas no es valido");
         }
-        if(!(cupon == null) || !cupon.isEmpty())
-        {
-            if(paquete.getCupon().equals(cupon) && verificarCupon(inicio,fin, paquete))
-            {
-                System.out.println("Valor descontado: " + paquete.getValorCupon()/100);
-                valorDescuento = ((paquete.getPrecio() * Integer.parseInt(personas)) * (paquete.getValorCupon()/100));
-                System.out.println(valorDescuento);
-                LOGGER.log(Level.INFO, "El cupon es valido");
-                agencia.mostrarMensaje(Alert.AlertType.CONFIRMATION, "El cupon es valido, se aplicara el descuento");
-            }else {
-                agencia.mostrarMensaje(Alert.AlertType.CONFIRMATION, "El cupon no es valido, no se aplicara el descuento");
-                valorDescuento = 0;
-                LOGGER.log(Level.INFO, "El cupon no es valido");
-            }
-        }
-        float valorDescontado = valorDescuento;
         System.out.println("guia seleccionado" + selectedItem);
         if(selectedItem == null)
         {
@@ -434,7 +411,7 @@ public class Agencia {
         reserva.setNumeroPersonas(numeroPersonas);
         reserva.setEstado(estado);
         reserva.setCalificacion(false);
-        reserva.setValorTotal((paquete.getPrecio() * Integer.parseInt(personas))-valorDescontado);
+        reserva.setValorTotal((paquete.getPrecio() * Integer.parseInt(personas))-descuento);
         Random random = new Random();
         reserva.setCodigo(random.nextInt(10000));
         reservas.add(reserva);
@@ -478,13 +455,37 @@ public class Agencia {
         }
     }
 
-    private boolean verificarCupon(LocalDate inicio, LocalDate fin, Paquetes paquete) {
-        boolean state = false;
-        if (inicio.isAfter(paquete.getInicioCupon()) && fin.isBefore(paquete.getFinCupon())) {
-            System.out.println("Las fechas de reserva están dentro del rango de la validez del cupon.");
-            return true;
+    public float verificarCupon(Paquetes paquete, LocalDate inicio, LocalDate fin, String cupon, String personas) throws CampoObligatorioException{
+        float valorDescuento = 0;
+        if (inicio == null || fin == null) {
+            throw new CampoObligatorioException("Las fechas ingresadas son erroneas");
+        }if (!agencia.verificarFechasCuponRecursivo(inicio, fin, paquete,0)) {
+            throw new CampoObligatorioException("Las fechas ingresadas son erroneas");
         }
-        return state;
+        if(cupon == null || cupon.isEmpty())
+        {
+            throw new CampoObligatorioException("Debe ingresar el cupon para hacer la validacion");
+        }
+        if(personas == null || personas.isEmpty())
+        {
+            throw new CampoObligatorioException("Debe ingresar el numero de personas para hacer la validacion");
+        }
+        float valorInicial = paquete.getPrecio() * Integer.parseInt(personas);
+        if(paquete.getCupon()  == null)
+        {
+            mostrarMensaje(Alert.AlertType.INFORMATION, "El paquete no cuenta con cupon");
+            return 0;
+        }else{
+            if (cupon.equals(paquete.getCupon()))
+            {
+                valorDescuento = valorInicial *(paquete.getValorCupon()/100);
+                mostrarMensaje(Alert.AlertType.CONFIRMATION, "El cupon ingresado esta disponible y el valor con el descuento es: " + valorDescuento);
+            }else {
+                mostrarMensaje(Alert.AlertType.ERROR, "El cupon ingresado no esta disponible");
+                return 0;
+            }
+        }
+        return valorDescuento;
     }
 
     public void actualizarPaquetesRecursivo(int i, int x, int numeroPersonas) {
@@ -1543,6 +1544,17 @@ public class Agencia {
         }
         return verificarFechasReservaRecursivo(inicio, fin, paquete, paqueteIndex + 1);
     }
+    public boolean verificarFechasCuponRecursivo(LocalDate inicio, LocalDate fin, Paquetes paquete, int paqueteIndex) {
+        if (paqueteIndex == paquetes.size()) {
+            return false;
+        }
+        if ((inicio.isAfter(paquete.getInicioCupon()) || inicio.isEqual(paquete.getInicioCupon())) &&
+                (fin.isBefore(paquete.getFinCupon()) || fin.isEqual(paquete.getFinCupon()))) {
+            System.out.println("Las fechas del cupon están dentro del rango");
+            return true;
+        }
+        return verificarFechasReservaRecursivo(inicio, fin, paquete, paqueteIndex + 1);
+    }
 
     private boolean verificarNumero(String numero)
     {
@@ -1672,4 +1684,5 @@ public class Agencia {
         ArchivoUtils.serializarArraylistDestinos(RUTA_DESTINOS,destinos);
         ArchivoUtils.serializarArraylistClientes(RUTA_CLIENTES,clientes);
     }
+
 }
