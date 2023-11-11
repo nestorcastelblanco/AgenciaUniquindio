@@ -79,7 +79,7 @@ public class EstadisticasController implements Initializable, CambioIdiomaListen
         for (int i =0; i<guias.size();i++)
         {
 
-            setMejoresGuias.getData().add(new XYChart.Data<>(guias.get(i).getNombre(),guias.get(i).promedio()));
+            setMejoresGuias.getData().add(new XYChart.Data<>(guias.get(i).getNombre(),agencia.promedioGuias(guias.get(i))));
         }
         mejoresGuias.getData().addAll(setMejoresGuias);
     }

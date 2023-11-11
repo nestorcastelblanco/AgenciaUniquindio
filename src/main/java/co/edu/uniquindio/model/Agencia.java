@@ -1634,7 +1634,7 @@ public class Agencia {
             if(paqueteCalificacion.getNombre().equals(paquete.getNombre()))
             {
                 paquete.añadirCalificacion(calcularPromedioDestinos(0,calificacionDestinos,0));
-                System.out.println(paquete.getNombre() + " Promedio de calificacion: " + paquete.promedio());
+                System.out.println(paquete.getNombre() + " Promedio de calificacion: " + agencia.promedioPaquetes(paquete));
             }
         }
         for(int i = 0 ; i<reservas.size();i++) {
@@ -1684,5 +1684,58 @@ public class Agencia {
         ArchivoUtils.serializarArraylistDestinos(RUTA_DESTINOS,destinos);
         ArchivoUtils.serializarArraylistClientes(RUTA_CLIENTES,clientes);
     }
+    public float promedioGuias(Guias guia)
+    { /*
+        float promedio = 0;
+        for(int i = 0 ; i< guia.getCalificaciones().size();i++)
+        {
+            promedio += (float)guia.getCalificaciones().get(i);
+        }
+        return promedio/guia.getCalificaciones().size();
+        */
+        return calcularPromedio(guia);
+    }
+    public float promedioGuiasRecursivo(Guias guia, int indice) {
+        // Caso base: si el índice es igual al tamaño de la lista de calificaciones, devolver 0
+        if (indice == guia.getCalificaciones().size()) {
+            return 0;
+        } else {
+            // Sumar la calificación actual y llamar recursivamente con el siguiente índice
+            return (float) guia.getCalificaciones().get(indice) + promedioGuiasRecursivo(guia, indice + 1);
+        }
+    }
+    public float calcularPromedio(Guias guia) {
+        // Llamar al método recursivo para obtener la suma de las calificaciones
+        float sumaCalificaciones = promedioGuiasRecursivo(guia, 0);
 
+        // Calcular y devolver el promedio dividiendo la suma por la cantidad de calificaciones
+        return sumaCalificaciones / guia.getCalificaciones().size();
+    }
+    public float promedioPaquetes(Paquetes paquete)
+    { /*
+        float promedio = 0;
+        for(int i = 0 ; i< paquete.getCalificaciones().size();i++)
+        {
+            promedio += (float)paquete.getCalificaciones().get(i);
+        }
+        return promedio/paquete.getCalificaciones().size();
+        */
+        return calcularPromedioPaquetes(paquete);
+    }
+    public float promedioPaquetesRecursivo(Paquetes paquete, int indice) {
+        // Caso base: si el índice es igual al tamaño de la lista de calificaciones, devolver 0
+        if (indice == paquete.getCalificaciones().size()) {
+            return 0;
+        } else {
+            // Sumar la calificación actual y llamar recursivamente con el siguiente índice
+            return (float) paquete.getCalificaciones().get(indice) + promedioPaquetesRecursivo(paquete, indice + 1);
+        }
+    }
+    public float calcularPromedioPaquetes(Paquetes paquete) {
+        // Llamar al método recursivo para obtener la suma de las calificaciones
+        float sumaCalificaciones = promedioPaquetesRecursivo(paquete, 0);
+
+        // Calcular y devolver el promedio dividiendo la suma por la cantidad de calificaciones
+        return sumaCalificaciones / paquete.getCalificaciones().size();
+    }
 }

@@ -30,13 +30,4 @@ public class Guias implements Serializable {
         return calificaciones;
     }
 
-    public float promedio()
-    {
-        float promedio = 0;
-        for(int i = 0 ; i< calificaciones.size();i++)
-        {
-            promedio += (float)calificaciones.get(i);
-        }
-        return promedio/calificaciones.size();
-    }
 }
