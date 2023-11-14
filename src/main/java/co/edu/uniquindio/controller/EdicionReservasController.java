@@ -140,6 +140,7 @@ public class EdicionReservasController implements Initializable, CambioIdiomaLis
         if(agencia.enviarGuias().isEmpty())
         {
             LOGGER.log(Level.INFO,"Se intento generar una lista de elementos vacios");
+            agencia.mostrarMensaje(Alert.AlertType.ERROR, "Debe seleccionar un elemento");
         }else
         {
             arrayGuias.stream().toList();
@@ -184,7 +185,8 @@ public class EdicionReservasController implements Initializable, CambioIdiomaLis
         try
         {
             agencia.editarReserva(paquetes.getSelectionModel().getSelectedItem(),fechaInicio.getValue(),fechaFin.getValue(),agregarPersonas.getText(),quitarPersonas.getText(),guias.getSelectionModel().getSelectedItem(),estado.getSelectionModel().getSelectedItem());
-            LOGGER.log(Level.INFO,"Se edito un paquete");
+            LOGGER.log(Level.INFO,"Se edito una reserva");
+            agencia.mostrarMensaje(Alert.AlertType.CONFIRMATION, "Se edito una reserva correctamente");
         } catch (CampoRepetido | CampoObligatorioException | CampoVacioException e) {
             mostrarMensaje(Alert.AlertType.ERROR, e.getMessage());
         }

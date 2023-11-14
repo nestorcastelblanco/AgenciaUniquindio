@@ -12,10 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -77,7 +74,8 @@ public class VistaReservasController implements Initializable, CambioIdiomaListe
     }
     public void editar(ActionEvent actionEvent) {
         if (tablaReservas.getSelectionModel().getSelectedIndex() == -1) {
-            LOGGER.log(Level.INFO, "Se intento editar un paquete sin haberlo seleccionado");
+            LOGGER.log(Level.INFO, "Se intento editar una reserva sin haberlo seleccionado");
+            agencia.mostrarMensaje(Alert.AlertType.ERROR, "Se intento editar una reserva sin haberla seleccionado");
         } else {
             agencia.recibirReservaEdicion(tablaReservas.getSelectionModel().getSelectedItem());
             agencia.loadStage("/paginaEdicionReserva.fxml",actionEvent,"Se va a editar una reserva");
@@ -86,6 +84,7 @@ public class VistaReservasController implements Initializable, CambioIdiomaListe
     public void eliminar(ActionEvent actionEvent) {
         if (tablaReservas.getSelectionModel().getSelectedIndex() == -1) {
             LOGGER.log(Level.INFO, "Se intento cancelar una reserva sin haberlo seleccionado");
+            agencia.mostrarMensaje(Alert.AlertType.ERROR, "Se intento cancelar una reserva sin haberla seleccionado");
         } else {
             agencia.recibirReservaCancelacion(tablaReservas.getSelectionModel().getSelectedItem());
             agencia.loadStage("/paginaVistaReservas.fxml",actionEvent, "Se cargo la pagina actualizada");

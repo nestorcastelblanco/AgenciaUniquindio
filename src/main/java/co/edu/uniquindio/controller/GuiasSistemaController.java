@@ -12,10 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -72,6 +69,7 @@ public class GuiasSistemaController implements Initializable, CambioIdiomaListen
     public void eliminar(ActionEvent actionEvent) {
         if (tablaGuias.getSelectionModel().getSelectedIndex() == -1) {
             LOGGER.log(Level.INFO, "Se intento eliminar un guia sin haberlo seleccionado");
+            agencia.mostrarMensaje(Alert.AlertType.ERROR, "Se intento eliminr un guia sin seleccionarlo");
         } else {
             agencia.recibirGuiaEliminado(tablaGuias.getSelectionModel().getSelectedItem());
             agencia.loadStage("/paginaGuias.fxml",actionEvent, "Se cargo la pagina actualizada");
@@ -81,6 +79,7 @@ public class GuiasSistemaController implements Initializable, CambioIdiomaListen
     public void editar(ActionEvent actionEvent) {
         if (tablaGuias.getSelectionModel().getSelectedIndex() == -1) {
             LOGGER.log(Level.INFO, "Se intento editar un guia sin haberlo seleccionado");
+            agencia.mostrarMensaje(Alert.AlertType.ERROR, "Se intento editar un guia sin haberlo seleccionado");
         } else {
             agencia.enviarGuiaEdicion(tablaGuias.getSelectionModel().getSelectedItem());
             agencia.loadStage("/paginaEdicionGuia.fxml", actionEvent, "Se carga la ventana de edicion de guia");

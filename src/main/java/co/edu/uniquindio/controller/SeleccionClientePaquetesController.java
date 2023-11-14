@@ -111,6 +111,7 @@ public class SeleccionClientePaquetesController implements Initializable, Cambio
     public void ver(ActionEvent actionEvent) {
         if (tablaPaquetes.getSelectionModel().getSelectedIndex() == -1) {
             LOGGER.log(Level.INFO, "Se intento visualizar un paquete sin haberlo seleccionado");
+            agencia.mostrarMensaje(Alert.AlertType.ERROR, "Se intento visualizar un paquete sin haberlo seleccionado");
         } else{
             agencia.datos();
             agencia.recibirPaqueteSeleccionado(tablaPaquetes.getSelectionModel().getSelectedItem());

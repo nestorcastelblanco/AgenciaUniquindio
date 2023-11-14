@@ -83,10 +83,6 @@ public class CreacionPaquetesController implements Initializable, CambioIdiomaLi
         llenarListaDestinos();
     }
     public void llenarListaDestinos() {
-        for(int i = 0 ; i<destinosCombo.size();i++)
-        {
-            System.out.println("Destinos cargados :" + destinosCombo.get(i).getNombre());
-        }
         if(agencia.enviarDestinos().isEmpty())
         {
             LOGGER.log(Level.INFO,"Se intento generar una lista de elementos vacios");
@@ -96,10 +92,6 @@ public class CreacionPaquetesController implements Initializable, CambioIdiomaLi
             ObservableList<Destinos> listaDestinos = FXCollections.observableArrayList(destinosCombo);
             System.out.print("Lista combo" + listaDestinos);
             ArrayList<Destinos> dest = new ArrayList<>(listaDestinos);
-            for(int j = 0 ; j<dest.size();j++)
-            {
-                System.out.println("Destinos cargados despues del Observable :" + dest.get(j).getNombre());
-            }
             destinos.setItems(listaDestinos);
             cargarAtributos();
         }
@@ -167,13 +159,16 @@ public class CreacionPaquetesController implements Initializable, CambioIdiomaLi
         if(destinos.getSelectionModel().getSelectedIndex() == -1 )
         {
             LOGGER.log(Level.INFO, "Se intento registrar un Destino sin haberlo seleccionado");
+            agencia.mostrarMensaje(Alert.AlertType.INFORMATION, "Se intento registrar un Destino sin haberlo seleccionado");
         }else {
             if (destinosSeleccionados.contains(destinos.getSelectionModel().getSelectedItem()))
             {
                 LOGGER.log(Level.INFO,"El destino seleccionado ya fue ingresado al paquete");
+                agencia.mostrarMensaje(Alert.AlertType.INFORMATION, "El destino seleccionado ya fue ingresado al paquete");
             }else {
                 destinosSeleccionados.add(destinos.getSelectionModel().getSelectedItem());
                 System.out.println("Arraylist de destinos seleccionados: " + destinosSeleccionados.toString());
+                agencia.mostrarMensaje(Alert.AlertType.INFORMATION, "Se establecio un nuevo destino");
                 LOGGER.log(Level.INFO, "Se establecio un nuevo destino  " + destinos.getSelectionModel().getSelectedItem().getNombre() + " " + destinos.getSelectionModel().getSelectedItem().getCiudad());
             }
         }

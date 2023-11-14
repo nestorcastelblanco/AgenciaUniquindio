@@ -11,10 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -61,9 +58,6 @@ public class ReservasClienteController implements Initializable, CambioIdiomaLis
     public void initialize(URL location, ResourceBundle resources) {
         Propiedades.getInstance().addCambioIdiomaListener(this);
         cargarTextos();
-        for(int i = 0 ; i<agencia.enviarReservasCliente().size();i++) {
-            System.out.println(agencia.enviarReservasCliente().get(i).getCliente().getNombreCompleto() + " Codigo: " + agencia.enviarReservasCliente().get(i).getCodigo() + " Estado Calificacion: " + agencia.enviarReservasCliente().get(i).isCalificacion());
-        }
         reservaciones = FXCollections.observableArrayList(agencia.enviarReservasCliente());
         paquete.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPaquete().getNombre()));
         guia.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getGuia().getNombre()));
@@ -79,7 +73,8 @@ public class ReservasClienteController implements Initializable, CambioIdiomaLis
     }
     public void cancelar(ActionEvent actionEvent) {
         if (tablaReservas.getSelectionModel().getSelectedIndex() == -1) {
-            LOGGER.log(Level.INFO, "Se intento cancelar un paquete sin haberlo seleccionado");
+            LOGGER.log(Level.INFO, "Se intento cancelar una reserva sin haberla seleccionado");
+            agencia.mostrarMensaje(Alert.AlertType.ERROR, "Se intento cancelar una reserva sin haberla seleccionado");
         } else {
             agencia.recibirReservaCancelacion(tablaReservas.getSelectionModel().getSelectedItem());
             agencia.loadStage("/paginaReservasCliente.fxml",actionEvent, "Se cargo la pagina actualizada");
@@ -89,12 +84,14 @@ public class ReservasClienteController implements Initializable, CambioIdiomaLis
     public void calificar(ActionEvent actionEvent) {
         if (tablaReservas.getSelectionModel().getSelectedIndex() == -1) {
             LOGGER.log(Level.INFO, "Se intento calificar un paquete sin haberlo seleccionado");
+            agencia.mostrarMensaje(Alert.AlertType.ERROR, "Se intento calificar un paquete sin haberlo seleccionado");
         } else {
             if(agencia.recibirReservaCalificacion(tablaReservas.getSelectionModel().getSelectedItem()))
             {
                 agencia.loadStage("/paginaCalificacion.fxml", actionEvent, "Se cargo la pagina de calificacion de Destinos");
             }else {
-                LOGGER.log(Level.INFO, "Se trato de ingresar a calificar un paquete sin haber terminado");
+                agencia.mostrarMensaje(Alert.AlertType.ERROR, "Se intento calificar un paquete previamente calificado");
+                LOGGER.log(Level.INFO, "Se trato de ingresar a calificar un paquete ya calificado");
             }
         }
     }

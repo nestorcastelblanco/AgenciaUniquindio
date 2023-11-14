@@ -53,6 +53,20 @@ public class EstadisticasController implements Initializable, CambioIdiomaListen
         cargarPaquetesReservados();
     }
 
+    private void cargarDestinosReservadosRecursivo(ArrayList<Destinos> destinos, int index, XYChart.Series setDestinosReservados) {
+        if (index < destinos.size()) {
+            System.out.println(destinos.get(index).getNombre() + ", " + destinos.get(index).getContReservas());
+            setDestinosReservados.getData().add(new XYChart.Data<>(destinos.get(index).getNombre(), destinos.get(index).getContReservas()));
+            cargarDestinosReservadosRecursivo(destinos, index + 1, setDestinosReservados);
+        }
+    }
+    private void cargarDestinosReservados() {
+        XYChart.Series setDestinosReservados = new XYChart.Series<>();
+        ArrayList<Destinos> destinos = agencia.enviarDestinos();
+        cargarDestinosReservadosRecursivo(destinos, 0, setDestinosReservados);
+        destinosReservados.getData().addAll(setDestinosReservados);
+    }
+    /*
     private void cargarDestinosReservados() {
         XYChart.Series setDestinosReservados = new XYChart.Series<>();
         ArrayList<Destinos> destinos = agencia.enviarDestinos();
@@ -63,6 +77,23 @@ public class EstadisticasController implements Initializable, CambioIdiomaListen
         }
         destinosReservados.getData().addAll(setDestinosReservados);
     }
+
+     */
+    private void cargarDestinosBuscadosRecursivo(ArrayList<Destinos> destinos, int index, XYChart.Series setDestinosBuscados) {
+        if (index < destinos.size()) {
+            System.out.println("Buscados" + destinos.get(index).getNombre() + " cont: " + destinos.get(index).getContBusquedas());
+            setDestinosBuscados.getData().add(new XYChart.Data<>(destinos.get(index).getNombre(), destinos.get(index).getContBusquedas()));
+            cargarDestinosBuscadosRecursivo(destinos, index + 1, setDestinosBuscados);
+        }
+    }
+
+    private void cargarDestinosBuscados() {
+        XYChart.Series setDestinosBuscados = new XYChart.Series<>();
+        ArrayList<Destinos> destinos = agencia.enviarDestinos();
+        cargarDestinosBuscadosRecursivo(destinos, 0, setDestinosBuscados);
+        destinosBuscados.getData().addAll(setDestinosBuscados);
+    }
+    /*
     private void cargarDestinosBuscados() {
         XYChart.Series setDestinosBuscados = new XYChart.Series<>();
 
@@ -73,6 +104,29 @@ public class EstadisticasController implements Initializable, CambioIdiomaListen
         }
         destinosBuscados.getData().addAll(setDestinosBuscados);
     }
+     */
+    private void cargarMejoresGuiasRecursivo(ArrayList<Guias> guias, int index, XYChart.Series setMejoresGuias) {
+        if (index < guias.size()) {
+            System.out.println(guias.get(index).getNombre());
+            System.out.println(agencia.promedioGuias(guias.get(index)));
+            if (Float.isNaN(agencia.promedioGuias(guias.get(index))))
+            {
+                setMejoresGuias.getData().add(new XYChart.Data<>(guias.get(index).getNombre(),0));
+                cargarMejoresGuiasRecursivo(guias, index + 1, setMejoresGuias);
+            }else {
+                setMejoresGuias.getData().add(new XYChart.Data<>(guias.get(index).getNombre(), agencia.promedioGuias(guias.get(index))));
+                cargarMejoresGuiasRecursivo(guias, index + 1, setMejoresGuias);
+            }
+        }
+    }
+
+    private void cargarMejoresGuias() {
+        XYChart.Series setMejoresGuias = new XYChart.Series<>();
+        ArrayList<Guias> guias = agencia.enviarGuias();
+        cargarMejoresGuiasRecursivo(guias, 0, setMejoresGuias);
+        mejoresGuias.getData().addAll(setMejoresGuias);
+    }
+    /*
     private void cargarMejoresGuias() {
         XYChart.Series setMejoresGuias = new XYChart.Series<>();
         ArrayList<Guias> guias = agencia.enviarGuias();
@@ -82,7 +136,22 @@ public class EstadisticasController implements Initializable, CambioIdiomaListen
             setMejoresGuias.getData().add(new XYChart.Data<>(guias.get(i).getNombre(),agencia.promedioGuias(guias.get(i))));
         }
         mejoresGuias.getData().addAll(setMejoresGuias);
+    }         */
+
+    private void cargarPaquetesReservadosRecursivo(ArrayList<Paquetes> paquetes, int index, XYChart.Series setPaquetesReservados) {
+        if (index < paquetes.size()) {
+            setPaquetesReservados.getData().add(new XYChart.Data<>(paquetes.get(index).getNombre(), paquetes.get(index).getCantReservas()));
+            cargarPaquetesReservadosRecursivo(paquetes, index + 1, setPaquetesReservados);
+        }
     }
+
+    private void cargarPaquetesReservados() {
+        XYChart.Series setPaquetesReservados = new XYChart.Series<>();
+        ArrayList<Paquetes> paquetes = agencia.enviarPaquetes();
+        cargarPaquetesReservadosRecursivo(paquetes, 0, setPaquetesReservados);
+        paquetesReservados.getData().addAll(setPaquetesReservados);
+    }
+    /*
     private void cargarPaquetesReservados() {
         XYChart.Series setPaquetesReservados = new XYChart.Series<>();
         ArrayList<Paquetes> paquetes = agencia.enviarPaquetes();
@@ -92,6 +161,8 @@ public class EstadisticasController implements Initializable, CambioIdiomaListen
         }
         paquetesReservados.getData().addAll(setPaquetesReservados);
     }
+
+     */
 
     public void volver(ActionEvent actionEvent) {
         agencia.loadStage("/paginaAdministrativa.fxml", actionEvent, "Se vuelve a la pagina administrativa");

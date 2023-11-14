@@ -50,6 +50,14 @@ public class CaracteristicasPaqueteController implements Initializable, CambioId
         seleccionar.setText(propiedades.getResourceBundle().getString("seleccionar"));
         txtDestinos.setText(propiedades.getResourceBundle().getString("nombreDestinos"));
     }
+    public void cargarImages(int ind, ArrayList<Destinos> destinos)
+    {
+        if (ind < destinos.size())
+        {
+            arrayListImagenes.addAll(destinos.get(ind).getImagenes());
+            cargarImages(ind+1, destinos);
+        }
+    }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         Propiedades.getInstance().addCambioIdiomaListener(this);
@@ -87,13 +95,13 @@ public class CaracteristicasPaqueteController implements Initializable, CambioId
         }
 
          */
+/*
         for (Destinos destino : destinos) {
             arrayListImagenes.addAll(destino.getImagenes());
         }
-        for (int i = 0 ; i<arrayListImagenes.size();i++)
-        {
-            System.out.println("Imagen : " + i + arrayListImagenes.get(i));
-        }
+
+ */
+        cargarImages(0, destinos);
         numeroImagenes = arrayListImagenes.size();
         cont = 0;
 
@@ -105,53 +113,58 @@ public class CaracteristicasPaqueteController implements Initializable, CambioId
         Image imagen = new Image(arrayListImagenes.get(cont));
         imageView.setImage(imagen);
 
-        if(paqueteSeleccionado.promedio() > 0 && paqueteSeleccionado.promedio()<=1)
+        if(paqueteSeleccionado.getCalificaciones().size() != 0)
         {
-            Image imagenes = new Image("Imagenes/estrella.jpg");
-            Image imagenGris = new Image("Imagenes/estrellaGris.jpg");
-            estrella1.setImage(imagenes);
-            estrella2.setImage(imagenes);
-            estrella3.setImage(imagenGris);
-            estrella4.setImage(imagenGris);
-            estrella5.setImage(imagenGris);
-        }if(paqueteSeleccionado.promedio() > 1 && paqueteSeleccionado.promedio()<=2)
-        {
-            Image imagenes = new Image("Imagenes/estrella.jpg");
-            Image imagenGris = new Image("Imagenes/estrellaGris.jpg");
-            estrella1.setImage(imagenes);
-            estrella2.setImage(imagenes);
-            estrella3.setImage(imagenes);
-            estrella4.setImage(imagenGris);
-            estrella5.setImage(imagenGris);
-        }if(paqueteSeleccionado.promedio() >2 && paqueteSeleccionado.promedio()<=3)
-        {
-            Image imagenes = new Image("Imagenes/estrella.jpg");
-            Image imagenGris = new Image("Imagenes/estrellaGris.jpg");
-            estrella1.setImage(imagenes);
-            estrella2.setImage(imagenes);
-            estrella3.setImage(imagenes);
-            estrella4.setImage(imagenGris);
-            estrella5.setImage(imagenGris);
-        }if(paqueteSeleccionado.promedio() > 3 && paqueteSeleccionado.promedio()<=4)
-        {
-            Image imagenes = new Image("Imagenes/estrella.jpg");
-            Image imagenGris = new Image("Imagenes/estrellaGris.jpg");
-            estrella1.setImage(imagenes);
-            estrella2.setImage(imagenes);
-            estrella3.setImage(imagenes);
-            estrella4.setImage(imagenes);
-            estrella5.setImage(imagenGris);
-        }if(paqueteSeleccionado.promedio() > 4 && paqueteSeleccionado.promedio()<=5)
-        {
-            Image imagenes = new Image("Imagenes/estrella.jpg");
-            Image imagenGris = new Image("Imagenes/estrellaGris.jpg");
-            estrella1.setImage(imagenes);
-            estrella2.setImage(imagenes);
-            estrella3.setImage(imagenes);
-            estrella4.setImage(imagenes);
-            estrella5.setImage(imagenes);
+                if(agencia.promedioPaquetes(paqueteSeleccionado) > 0 && agencia.promedioPaquetes(paqueteSeleccionado)<=1)
+                {
+                    Image imagenes = new Image("Imagenes/estrella.jpg");
+                    Image imagenGris = new Image("Imagenes/estrellaGris.jpg");
+                    estrella1.setImage(imagenes);
+                    estrella2.setImage(imagenes);
+                    estrella3.setImage(imagenGris);
+                    estrella4.setImage(imagenGris);
+                    estrella5.setImage(imagenGris);
+                }
+                if(agencia.promedioPaquetes(paqueteSeleccionado)> 1 && agencia.promedioPaquetes(paqueteSeleccionado)<=2)
+            {
+                Image imagenes = new Image("Imagenes/estrella.jpg");
+                Image imagenGris = new Image("Imagenes/estrellaGris.jpg");
+                estrella1.setImage(imagenes);
+                estrella2.setImage(imagenes);
+                estrella3.setImage(imagenes);
+                estrella4.setImage(imagenGris);
+                estrella5.setImage(imagenGris);
+            }if(agencia.promedioPaquetes(paqueteSeleccionado) >2 && agencia.promedioPaquetes(paqueteSeleccionado)<=3)
+            {
+                Image imagenes = new Image("Imagenes/estrella.jpg");
+                Image imagenGris = new Image("Imagenes/estrellaGris.jpg");
+                estrella1.setImage(imagenes);
+                estrella2.setImage(imagenes);
+                estrella3.setImage(imagenes);
+                estrella4.setImage(imagenGris);
+                estrella5.setImage(imagenGris);
+            }if(agencia.promedioPaquetes(paqueteSeleccionado) > 3 && agencia.promedioPaquetes(paqueteSeleccionado)<=4)
+            {
+                Image imagenes = new Image("Imagenes/estrella.jpg");
+                Image imagenGris = new Image("Imagenes/estrellaGris.jpg");
+                estrella1.setImage(imagenes);
+                estrella2.setImage(imagenes);
+                estrella3.setImage(imagenes);
+                estrella4.setImage(imagenes);
+                estrella5.setImage(imagenGris);
+            }if(agencia.promedioPaquetes(paqueteSeleccionado) > 4 && agencia.promedioPaquetes(paqueteSeleccionado)<=5)
+            {
+                Image imagenes = new Image("Imagenes/estrella.jpg");
+                Image imagenGris = new Image("Imagenes/estrellaGris.jpg");
+                estrella1.setImage(imagenes);
+                estrella2.setImage(imagenes);
+                estrella3.setImage(imagenes);
+                estrella4.setImage(imagenes);
+                estrella5.setImage(imagenes);
+            }
         }
     }
+
     public void regresar(ActionEvent actionEvent) {
         agencia.loadStage("/paginaClienteSeleccionDestino.fxml", actionEvent,"Se carga la ventana de seleccion de paquete");
     }

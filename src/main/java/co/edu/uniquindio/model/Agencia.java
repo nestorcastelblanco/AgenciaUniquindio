@@ -68,6 +68,10 @@ public class Agencia {
         leerDestinos();
         leerPaquetes();
         leerReservas();
+        for (int i = 0 ; i<guias.size(); i++)
+        {
+            System.out.println(guias.get(i).getNombre() +" " + promedioGuias(guias.get(i)));
+        }
     }
     private Agencia()
     {
@@ -280,6 +284,8 @@ public class Agencia {
         if (valor.isEmpty() || valor == null || Float.valueOf(valor)<= 0|| !verificarNumero(valor)) {
             throw new CampoObligatorioException("Se crearon valores en el precio erroneos");
         }
+        ArrayList<Float> calificaciones = new ArrayList<>();
+        calificaciones.add((float) 0);
         Paquetes paquete = Paquetes.builder().
                 nombre(nombre)
                 .destinos(destinos)
@@ -290,7 +296,7 @@ public class Agencia {
                 .servicios(servicios)
                 .cantReservas(0)
                 .numeroPersonas(Integer.parseInt(personas))
-                .calificaciones(new ArrayList<>())
+                .calificaciones(calificaciones)
                 .cupon(null)
                 .valorCupon(0)
                 .inicioCupon(null)
@@ -336,6 +342,8 @@ public class Agencia {
         if (!agencia.verificarFechas(inicioCupon, finCupon)) {
             throw new CampoObligatorioException("Las fechas ingresadas del cupon son erroneas");
         }
+        ArrayList<Float> calificaciones = new ArrayList<>();
+        calificaciones.add((float) 0);
         Paquetes paquete = Paquetes.builder().
                 nombre(nombre)
                 .destinos(destinos)
@@ -346,13 +354,14 @@ public class Agencia {
                 .servicios(servicios)
                 .cantReservas(0)
                 .numeroPersonas(Integer.parseInt(personas))
-                .calificaciones(new ArrayList<>())
+                .calificaciones(calificaciones)
                 .cupon(cupon)
                 .valorCupon(Float.valueOf(valorCupon))
                 .inicioCupon(inicioCupon)
                 .finCupon(finCupon)
                 .build();
         paquetes.add(paquete);
+        /*
         for (int i = 0 ; i<paquetes.size();i++)
         {
             for (int j=0 ; j<paquetes.get(i).getDestinos().size();j++)
@@ -364,6 +373,8 @@ public class Agencia {
                 }
             }
         }
+
+         */
         borrarDatosSerializados(RUTA_PAQUETES);
         ArchivoUtils.serializarArraylistPaquetes(RUTA_PAQUETES,paquetes);
         leerPaquetes();
@@ -721,6 +732,7 @@ public class Agencia {
         if (valor == null || Float.valueOf(valor) <= 0 || valor.isEmpty() || !verificarNumero(valor)) {
             throw new CampoObligatorioException("Se crearon valores en el precio erroneos");
         }
+        /*
         for (Paquetes paquete : paquetes) {
             if (paqueteE.getNombre().equals(paquete.getNombre())) {
                 paquete.setNombre(nombre);
@@ -733,6 +745,8 @@ public class Agencia {
                 paquete.setFin(fin);
             }
         }
+
+         */
         actualizarPaquetesRecursivo(0,paqueteE,nombre,destinos,inicio,fin, servicios,valor, personas);
         borrarDatosSerializados(RUTA_PAQUETES);
         ArchivoUtils.serializarArraylistPaquetes(RUTA_PAQUETES, paquetes);
@@ -746,6 +760,11 @@ public class Agencia {
                 paquete.setDestinos(destinos);
                 paquete.setDuracion(inicio.until(fin, ChronoUnit.DAYS) + "");
                 paquete.setServicios(servicios);
+                paquete.setCalificaciones(paqueteE.getCalificaciones());
+                paquete.setCupon(paqueteE.getCupon());
+                paquete.setInicioCupon(paqueteE.getInicioCupon());
+                paquete.setFinCupon(paqueteE.getFinCupon());
+                paquete.setValorCupon(paqueteE.getValorCupon());
                 paquete.setPrecio(Float.parseFloat(valor));
                 paquete.setNumeroPersonas(paquetes.get(i).getNumeroPersonas() + Integer.parseInt(personas));
                 paquete.setInicio(inicio);
@@ -1577,7 +1596,7 @@ public class Agencia {
         {
             if (guias.get(j).getIdentificacion().equals(guia.getIdentificacion()))
             {
-                guias.get(j).addCalificacion(calificacionGuia);
+                guias.get(j).addCalificacion((float)calificacionGuia);
                 guias.set(j,guias.get(j));
                 System.out.println(guias.get(j).getNombre() + " Calificacion: " + calificacionGuia);
             }
@@ -1697,7 +1716,7 @@ public class Agencia {
     }
     public float promedioGuiasRecursivo(Guias guia, int indice) {
         // Caso base: si el índice es igual al tamaño de la lista de calificaciones, devolver 0
-        if (indice == guia.getCalificaciones().size()) {
+        if (indice == guia.getCalificaciones().size() || guia.getCalificaciones() == null) {
             return 0;
         } else {
             // Sumar la calificación actual y llamar recursivamente con el siguiente índice

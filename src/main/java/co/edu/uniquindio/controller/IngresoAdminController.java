@@ -8,6 +8,7 @@ import co.edu.uniquindio.utils.CambioIdiomaListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -46,10 +47,12 @@ public class IngresoAdminController implements Initializable, CambioIdiomaListen
     public void admin(ActionEvent actionEvent) {
         try{
             agencia.ingresarAdmin(usuarioIngresado.getText(),contrasenaIngresada.getText());
+            agencia.mostrarMensaje(Alert.AlertType.CONFIRMATION, "Credenciales administrativas validas");
             agencia.loadStage("/paginaAdministrativa.fxml",actionEvent,"Se ingresa al portal de administracion" );
         }catch (CampoRepetido e)
         {
             LOGGER.log(Level.INFO, "Se ingresaron credenciales no validas");
+            agencia.mostrarMensaje(Alert.AlertType.ERROR, "Se ingresaron credenciales que no son validas");
         }
     }
     public void volver(ActionEvent actionEvent) {

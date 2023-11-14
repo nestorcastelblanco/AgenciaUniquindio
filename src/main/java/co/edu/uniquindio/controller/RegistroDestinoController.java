@@ -68,6 +68,7 @@ public class RegistroDestinoController implements Initializable, CambioIdiomaLis
         {
             agencia.registrarDestino(nombre.getText(),ciudad.getText(),descripcion.getText(),imagePaths, clima.getText());
             LOGGER.log(Level.INFO,"Se registro un nuevo Destino al sistema");
+            agencia.mostrarMensaje(Alert.AlertType.INFORMATION, "Se regisstro un nuevo destino");
             agencia.loadStage("/paginaCreacionDestino.fxml", actionEvent,"Se vuelve a cargar la pagina de registro");
         } catch (CampoRepetido | CampoObligatorioException | CampoVacioException e) {
             mostrarMensaje(Alert.AlertType.ERROR, e.getMessage());

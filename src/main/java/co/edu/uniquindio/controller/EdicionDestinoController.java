@@ -73,6 +73,7 @@ public class EdicionDestinoController implements Initializable, CambioIdiomaList
         {
             agencia.editarDestino(nombre.getText(),ciudad.getText(),descripcion.getText(),imagePaths, clima.getText());
             LOGGER.log(Level.INFO,"Se edito un  Destino en el sistema");
+            agencia.mostrarMensaje(Alert.AlertType.INFORMATION, "Se edito un Destino en el sistema");
             imagePaths.removeAll(imagePaths);
         } catch (CampoRepetido | CampoObligatorioException | CampoVacioException e) {
             mostrarMensaje(Alert.AlertType.ERROR, e.getMessage());
@@ -106,4 +107,6 @@ public class EdicionDestinoController implements Initializable, CambioIdiomaList
             System.out.println(path);
         }
     }
+
+
 }

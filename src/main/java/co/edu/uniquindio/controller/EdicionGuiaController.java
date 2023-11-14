@@ -118,9 +118,11 @@ public class EdicionGuiaController implements Initializable, CambioIdiomaListene
             if(comboPaquete.getSelectionModel().getSelectedIndex() != -1)
             {
                 agencia.editarGuia(nombre.getText(),experiencia.getText(),cedula.getText(),idiomas.getText(), comboPaquete.getSelectionModel().getSelectedItem());
+                agencia.mostrarMensaje(Alert.AlertType.CONFIRMATION, "Se registro un nuevo guia al sistema");
                 LOGGER.log(Level.INFO,"Se registro un nuevo guia al sistema");
             }else {
-                LOGGER.log(Level.INFO, "No se ha seleccionado un paquete");
+                LOGGER.log(Level.INFO, "No se ha seleccionado un Paquete");
+                agencia.mostrarMensaje(Alert.AlertType.ERROR, "No se ha seleccionado algun paquete");
             }
         } catch (CampoRepetido |CampoObligatorioException|CampoVacioException e) {
             mostrarMensaje(Alert.AlertType.ERROR, e.getMessage());

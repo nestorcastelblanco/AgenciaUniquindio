@@ -39,40 +39,49 @@ class VistaInicioController implements Initializable, CambioIdiomaListener {
     @Override
     public void onCambioIdioma(CambioIdiomaEvent evento) {
     }
+
+    private void inicializarImagenesPaqueteRecursivo(int index, Paquetes paquete) {
+        if (index < paquete.getDestinos().size()) {
+            imagenesPaquete.addAll(paquete.getDestinos().get(index).getImagenes());
+            inicializarImagenesPaqueteRecursivo(index + 1, paquete);
+        }
+    }
+    private void inicializarImagenesDestinoRecursivo(int index, Destinos destinos) {
+        if (index < destinos.getImagenes().size()) {
+            imagenesDestino.addAll(destinos.getImagenes());
+            inicializarImagenesDestinoRecursivo(index + 1, destinos);
+        }
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         agencia.inicializarDatos();
-
         indicePaquete = 0;
         indiceDestinos = 0;
         indiceImagenDestino = 0;
         indiceImagenPaquete = 0;
-
         paquetesCargados = agencia.enviarPaquetes();
         destinosCargados = agencia.enviarDestinos();
 
-        labelPaquete.setText(paquetesCargados.get(indicePaquete).getNombre());
-        labelDestinos.setText(destinosCargados.get(indiceDestinos).getCiudad());
-
-        for(int i = 0 ; i<paquetesCargados.get(indicePaquete).getDestinos().size();i++)
+        if (paquetesCargados.size() != 0 && destinosCargados.size() != 0 )
         {
-            imagenesPaquete.addAll(paquetesCargados.get(indicePaquete).getDestinos().get(i).getImagenes());
+            labelPaquete.setText(paquetesCargados.get(indicePaquete).getNombre());
+            labelDestinos.setText(destinosCargados.get(indiceDestinos).getCiudad());
+
+            inicializarImagenesPaqueteRecursivo(0, paquetesCargados.get(indicePaquete));
+            inicializarImagenesDestinoRecursivo(0, destinosCargados.get(indiceDestinos));
+
+            Image imagenPaquete = new Image(imagenesPaquete.get(0));
+            Image imagenDestino = new Image(imagenesPaquete.get(0));
+
+            imagenPaquetes.setImage(imagenPaquete);
+            imagenDestinos.setImage(imagenDestino);
+
+            numeroPaquetes = paquetesCargados.size();
+            numeroDestinos = destinosCargados.size();
+            numeroImagenesDestino = imagenesDestino.size();
+            numeroImagenesPaquete = imagenesPaquete.size();
         }
-        for(int i = 0 ; i<destinosCargados.get(indiceDestinos).getImagenes().size();i++)
-        {
-            imagenesDestino.addAll(destinosCargados.get(indicePaquete).getImagenes());
-        }
-
-        Image imagenPaquete = new Image(imagenesPaquete.get(0));
-        Image imagenDestino = new Image(imagenesPaquete.get(0));
-
-        imagenPaquetes.setImage(imagenPaquete);
-        imagenDestinos.setImage(imagenDestino);
-
-        numeroPaquetes = paquetesCargados.size();
-        numeroDestinos = destinosCargados.size();
-        numeroImagenesDestino = imagenesDestino.size();
-        numeroImagenesPaquete = imagenesPaquete.size();
     }
 
     public void ingresar(ActionEvent actionEvent) {
@@ -87,20 +96,14 @@ class VistaInicioController implements Initializable, CambioIdiomaListener {
             indicePaquete = numeroPaquetes-1;
             labelPaquete.setText(paquetesCargados.get(indicePaquete).getNombre());
             imagenesPaquete.removeAll(imagenesPaquete);
-            for(int i = 0 ; i<paquetesCargados.get(indicePaquete).getDestinos().size();i++)
-            {
-                imagenesPaquete.addAll(paquetesCargados.get(indicePaquete).getDestinos().get(i).getImagenes());
-            }
+            inicializarImagenesPaqueteRecursivo(0, paquetesCargados.get(indicePaquete));
             numeroImagenesPaquete = imagenesPaquete.size();
             Image imagen = new Image(imagenesPaquete.get(indiceImagenPaquete));
             imagenPaquetes.setImage(imagen);
         }else {
             labelPaquete.setText(paquetesCargados.get(indicePaquete).getNombre());
             imagenesPaquete.removeAll(imagenesPaquete);
-            for(int i = 0 ; i<paquetesCargados.get(indicePaquete).getDestinos().size();i++)
-            {
-                imagenesPaquete.addAll(paquetesCargados.get(indicePaquete).getDestinos().get(i).getImagenes());
-            }
+            inicializarImagenesPaqueteRecursivo(0, paquetesCargados.get(indicePaquete));
             numeroImagenesPaquete = imagenesPaquete.size();
             Image imagen = new Image(imagenesPaquete.get(indiceImagenPaquete));
             imagenPaquetes.setImage(imagen);
@@ -115,20 +118,14 @@ class VistaInicioController implements Initializable, CambioIdiomaListener {
             indicePaquete = 0;
             labelPaquete.setText(paquetesCargados.get(indicePaquete).getNombre());
             imagenesPaquete.removeAll(imagenesPaquete);
-            for(int i = 0 ; i<paquetesCargados.get(indicePaquete).getDestinos().size();i++)
-            {
-                imagenesPaquete.addAll(paquetesCargados.get(indicePaquete).getDestinos().get(i).getImagenes());
-            }
+            inicializarImagenesPaqueteRecursivo(0, paquetesCargados.get(indicePaquete));
             numeroImagenesPaquete = paquetesCargados.size();
             Image imagen = new Image(imagenesPaquete.get(indiceImagenPaquete));
             imagenPaquetes.setImage(imagen);
         }else {
             labelPaquete.setText(paquetesCargados.get(indicePaquete).getNombre());
             imagenesPaquete.removeAll(imagenesPaquete);
-            for(int i = 0 ; i<paquetesCargados.get(indicePaquete).getDestinos().size();i++)
-            {
-                imagenesPaquete.addAll(paquetesCargados.get(indicePaquete).getDestinos().get(i).getImagenes());
-            }
+            inicializarImagenesPaqueteRecursivo(0, paquetesCargados.get(indicePaquete));
             numeroImagenesPaquete = imagenesPaquete.size();
             Image imagen = new Image(imagenesPaquete.get(indiceImagenPaquete));
             imagenPaquetes.setImage(imagen);

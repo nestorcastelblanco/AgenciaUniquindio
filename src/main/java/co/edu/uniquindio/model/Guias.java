@@ -14,7 +14,7 @@ public class Guias implements Serializable {
     private int contViajes;
     private Paquetes paquete;
     private ArrayList<String> lenguajes = new ArrayList<>();
-    private ArrayList<Integer> calificaciones = new ArrayList<>();
+    private ArrayList<Float> calificaciones = new ArrayList<>();
 
     public void addLenguajes(String idioma) {
         lenguajes.add(idioma);
@@ -23,10 +23,10 @@ public class Guias implements Serializable {
         return lenguajes;
     }
 
-    public void addCalificacion(Integer idioma) {
+    public void addCalificacion(Float idioma) {
         calificaciones.add(idioma);
     }
-    public ArrayList<Integer> getCalificaciones() {
+    public ArrayList<Float> getCalificaciones() {
         return calificaciones;
     }
 

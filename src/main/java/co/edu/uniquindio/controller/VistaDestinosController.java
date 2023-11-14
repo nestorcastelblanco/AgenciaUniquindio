@@ -12,10 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -70,6 +67,7 @@ public class VistaDestinosController implements Initializable, CambioIdiomaListe
     public void eliminar(ActionEvent actionEvent) {
         if (tablaDestinos.getSelectionModel().getSelectedIndex() == -1) {
             LOGGER.log(Level.INFO, "Se intento cancelar un destino sin haberlo seleccionado");
+            agencia.mostrarMensaje(Alert.AlertType.ERROR, "Se intento eliminar un destino sin haberlo seleccionado");
         } else {
             agencia.recibirDestinoCancelacion(tablaDestinos.getSelectionModel().getSelectedItem());
             agencia.loadStage("/paginaVistaDestinos.fxml",actionEvent, "Se cargo la pagina actualizada");
@@ -77,7 +75,8 @@ public class VistaDestinosController implements Initializable, CambioIdiomaListe
     }
     public void editar(ActionEvent actionEvent) {
         if (tablaDestinos.getSelectionModel().getSelectedIndex() == -1) {
-            LOGGER.log(Level.INFO, "Se intento editar un paquete sin haberlo seleccionado");
+            LOGGER.log(Level.INFO, "Se intento editar un destino sin haberlo seleccionado");
+            agencia.mostrarMensaje(Alert.AlertType.ERROR, "Se intento editar un destino sin haberlo seleccionado");
         } else {
             agencia.recibirDestinoEdicion(tablaDestinos.getSelectionModel().getSelectedItem());
             agencia.loadStage("/paginaEdicionDestino.fxml",actionEvent,"Se va a editar un destino");

@@ -79,11 +79,22 @@ public class CalificacionesController implements Initializable, CambioIdiomaList
             bttGuia5.setVisible(false);
         }
         guiaLabel.setText(agencia.getReservaCalificacion().getGuia().getNombre());
-        for(int i = 0 ; i<arrayListDestinos.size();i++)
+        /*for(int i = 0 ; i<arrayListDestinos.size();i++)
         {
             calificacionDestinos.add(0);
         }
+
+         */
+        calificacion(0);
         llenarCombo();
+    }
+    public void calificacion (int ind)
+    {
+        if(ind<arrayListDestinos.size())
+        {
+            calificacionDestinos.add(0);
+            calificacion(ind+1);
+        }
     }
     public void llenarCombo() {
         if(arrayListDestinos.isEmpty())
@@ -208,16 +219,20 @@ public class CalificacionesController implements Initializable, CambioIdiomaList
         if(destinosCombo.getSelectionModel().getSelectedIndex() == -1 )
         {
             LOGGER.log(Level.INFO, "No se ha seleccionado algun destino");
+            agencia.mostrarMensaje(Alert.AlertType.ERROR, "No se ha seleccionado algun destino");
         }else {
             if(calificacionDestinos.get(destinosCombo.getSelectionModel().getSelectedIndex()) == 0)
             {
                 LOGGER.log(Level.INFO, "No se ha calificado el destino aún");
+                agencia.mostrarMensaje(Alert.AlertType.ERROR, "No se ha calificado el destino aún");
             }else {
                     if(calificacionDestinos.contains(0))
                     {
                         LOGGER.log(Level.INFO, "No se han calificado todos los destinos");
+                        agencia.mostrarMensaje(Alert.AlertType.ERROR, "No se han calificado todos los destinos");
                     }else {
                         LOGGER.log(Level.INFO, "Todos los destinos calificados");
+                        agencia.mostrarMensaje(Alert.AlertType.CONFIRMATION, "Todos los destinos calificados");
                         stateDestinos = true;
                     }
             }
@@ -227,9 +242,11 @@ public class CalificacionesController implements Initializable, CambioIdiomaList
         if(calificacionGuia == 0)
         {
             LOGGER.log(Level.INFO, "Ingrese una calificacion para el guia");
+            agencia.mostrarMensaje(Alert.AlertType.ERROR, "Ingrese una calificacion para el guia");
             stateGuia = false;
         }else {
             LOGGER.log(Level.INFO, "La calificacion es correcta");
+            agencia.mostrarMensaje(Alert.AlertType.CONFIRMATION, "La calificacion es correcta");
             stateGuia = true;
         }
     }
@@ -292,7 +309,7 @@ public class CalificacionesController implements Initializable, CambioIdiomaList
         {
             if (stateDestinos && !comentario.getText().isEmpty()){
                 agencia.cargarCalificaciones(arrayListDestinos,calificacionDestinos, agencia.getReservaCalificacion().getPaquete());
-                agencia.mostrarMensaje(Alert.AlertType.WARNING, "La calificacion se ha completado correctamente");
+                agencia.mostrarMensaje(Alert.AlertType.CONFIRMATION, "La calificacion se ha completado correctamente");
             }else{
                 agencia.mostrarMensaje(Alert.AlertType.WARNING, "La calificacion no se ha completado correctamente");
                 LOGGER.log(Level.INFO, "La calificacion no se ha completado correctamente, complete los cambios necesarios");
@@ -300,7 +317,7 @@ public class CalificacionesController implements Initializable, CambioIdiomaList
         }else{
             if (stateGuia && stateDestinos && !comentario.getText().isEmpty()){
                 agencia.cargarCalificacionesCompleta(arrayListDestinos,calificacionDestinos,calificacionGuia, agencia.getReservaCalificacion().getGuia(), agencia.getReservaCalificacion().getPaquete());
-                agencia.mostrarMensaje(Alert.AlertType.WARNING, "La calificacion se ha completado correctamente");
+                agencia.mostrarMensaje(Alert.AlertType.CONFIRMATION, "La calificacion se ha completado correctamente");
             }else{
                 agencia.mostrarMensaje(Alert.AlertType.WARNING, "La calificacion no se ha completado correctamente");
                 LOGGER.log(Level.INFO, "La calificacion no se ha completado correctamente, complete los cambios necesarios");

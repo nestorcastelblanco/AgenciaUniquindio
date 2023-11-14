@@ -171,6 +171,7 @@ public class EdicionPaquetesController implements Initializable, CambioIdiomaLis
         try
         {
             agencia.editarPaquetes(agencia.getPAQUETE_EDICION(),nombrePaquete.getText(), destinosActuales, inicio.getValue(), fin.getValue(), servicios.getText(), cupos.getText(), valor.getText());
+            agencia.mostrarMensaje(Alert.AlertType.CONFIRMATION, "El paquete fue editado");
         }catch (CampoRepetido|CampoVacioException|CampoObligatorioException e)
         {
             mostrarMensaje(Alert.AlertType.WARNING, e.getMessage());
@@ -182,7 +183,7 @@ public class EdicionPaquetesController implements Initializable, CambioIdiomaLis
         alert.setContentText(mensaje);
         alert.show();
     }
-    public void agregarDestino(ActionEvent actionEvent) {
+    /*public void agregarDestino(ActionEvent actionEvent) {
         boolean state = true;
         if (destinosSistema.getSelectionModel().getSelectedIndex() == -1)
         {
@@ -206,6 +207,45 @@ public class EdicionPaquetesController implements Initializable, CambioIdiomaLis
             }
         }
     }
+
+     */
+    public void agregarDestino(ActionEvent actionEvent) {
+        if (destinosSistema.getSelectionModel().isEmpty()) {
+            LOGGER.log(Level.INFO, "Se intentó añadir un destino sin seleccionarlo");
+            agencia.mostrarMensaje(Alert.AlertType.ERROR, "No se ha seleccionado algun destino");
+            return;
+        }
+
+        Destinos destinoSeleccionado = destinosSistema.getSelectionModel().getSelectedItem();
+
+        if (destinosActuales.stream().anyMatch(destino -> destino.getNombre().equals(destinoSeleccionado.getNombre()))) {
+            System.out.println("El paquete actual ya cuenta con ese destino");
+        } else {
+            destinosActuales.add(destinoSeleccionado);
+            agencia.mostrarMensaje(Alert.AlertType.CONFIRMATION, "Se añadio el destino");
+            System.out.println("Se añadió el destino: " + destinoSeleccionado.getNombre() + " a los destinos del paquete");
+            llenarListaDestinosPaquete();
+        }
+    }
+
+    public void eliminarDestino(ActionEvent actionEvent) {
+        if (destinosPaquete.getSelectionModel().isEmpty()) {
+            LOGGER.log(Level.INFO, "Se intentó eliminar un destino sin seleccionarlo");
+            agencia.mostrarMensaje(Alert.AlertType.ERROR, "No se ha seleccionado un destino para eliminar");
+            return;
+        }
+
+        Destinos destinoSeleccionado = destinosPaquete.getSelectionModel().getSelectedItem();
+
+        if (destinosActuales.contains(destinoSeleccionado)) {
+            destinosActuales.remove(destinoSeleccionado);
+            llenarListaDestinosPaquete();
+        } else {
+            System.out.println("El paquete actual no cuenta con ese destino");
+            LOGGER.log(Level.INFO, "El paquete actual no cuenta con ese destino");
+        }
+    }
+    /*
     public void eliminarDestino(ActionEvent actionEvent) {
         if (destinosPaquete.getSelectionModel().getSelectedIndex() == -1)
         {
@@ -227,4 +267,6 @@ public class EdicionPaquetesController implements Initializable, CambioIdiomaLis
             }
         }
     }
+
+     */
 }

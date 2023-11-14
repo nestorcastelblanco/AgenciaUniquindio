@@ -44,7 +44,7 @@ public class RegistroGuiaController implements Initializable, CambioIdiomaListen
     private Label txtGuia, txtNombre,txtCedula,txtIdiomas,txtExperiencia,txtPaqueteCubrir;
     public void cargarTextos()
     {
-        txtGuia.setText(propiedades.getResourceBundle().getString("edicionGuia"));
+        txtGuia.setText(propiedades.getResourceBundle().getString("registroGuia"));
         txtNombre.setText(propiedades.getResourceBundle().getString("nombre"));
         txtCedula.setText(propiedades.getResourceBundle().getString("identificacion"));
         txtIdiomas.setText(propiedades.getResourceBundle().getString("idioma"));
@@ -113,9 +113,11 @@ public class RegistroGuiaController implements Initializable, CambioIdiomaListen
             if(comboPaquete.getSelectionModel().getSelectedIndex() != -1)
             {
                 agencia.registrarGuia(nombre.getText(),experiencia.getText(),cedula.getText(),idiomas.getText(), comboPaquete.getSelectionModel().getSelectedItem());
+                agencia.mostrarMensaje(Alert.AlertType.INFORMATION, "Se registro un nuevo guia al sistema");
                 LOGGER.log(Level.INFO,"Se registro un nuevo guia al sistema");
             }else {
                 LOGGER.log(Level.INFO, "No se ha seleccionado un paquete");
+                agencia.mostrarMensaje(Alert.AlertType.ERROR, "No se ha seleccionado algun paquete");
             }
         } catch (CampoRepetido |CampoObligatorioException|CampoVacioException e) {
             mostrarMensaje(Alert.AlertType.ERROR, e.getMessage());
