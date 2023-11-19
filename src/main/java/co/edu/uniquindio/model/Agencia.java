@@ -1279,12 +1279,31 @@ public class Agencia {
 
          */
 
+<<<<<<< HEAD
+=======
     public String obtenerIdiomas(ArrayList<String> idiomas) {
         StringBuilder resultado = new StringBuilder();
         obtenerIdiomasRecursivo(idiomas, resultado, 0);
         return resultado.toString();
     }
 
+    private void obtenerIdiomasRecursivo(ArrayList<String> idiomas, StringBuilder resultado, int index) {
+        if (index < idiomas.size()) {
+            resultado.append(idiomas.get(index)).append(", ");
+            obtenerIdiomasRecursivo(idiomas, resultado, index + 1);
+        } else if (resultado.length() > 0) {
+            resultado.setLength(resultado.length() - 2);
+        }
+    }
+/*
+>>>>>>> 17dc66d539462bc818682027b2f9d17a49890159
+    public String obtenerIdiomas(ArrayList<String> idiomas) {
+        StringBuilder resultado = new StringBuilder();
+        obtenerIdiomasRecursivo(idiomas, resultado, 0);
+        return resultado.toString();
+    }
+
+<<<<<<< HEAD
     private void obtenerIdiomasRecursivo(ArrayList<String> idiomas, StringBuilder resultado, int index) {
         if (index < idiomas.size()) {
             resultado.append(idiomas.get(index)).append(", ");
@@ -1312,6 +1331,14 @@ public class Agencia {
         obtenerNombresCiudadesRecursivo(destinos, nombres, 0);
         return nombres.toString();
     }
+=======
+ */
+public String obtenerNombresCiudades(ArrayList<Destinos> destinos) {
+    StringBuilder nombres = new StringBuilder();
+    obtenerNombresCiudadesRecursivo(destinos, nombres, 0);
+    return nombres.toString();
+}
+>>>>>>> 17dc66d539462bc818682027b2f9d17a49890159
 
     private void obtenerNombresCiudadesRecursivo(ArrayList<Destinos> destinos, StringBuilder nombres, int index) {
         if (index < destinos.size()) {
@@ -1552,7 +1579,11 @@ public class Agencia {
             return true;
         }
         if(nombre.equals(paquetes.get(ind).getNombre())){
+<<<<<<< HEAD
             return false;
+=======
+                return false;
+>>>>>>> 17dc66d539462bc818682027b2f9d17a49890159
         }
         return verificarNombrePaqueteRecursivo(nombre, ind+1);
     }
@@ -1674,7 +1705,11 @@ public class Agencia {
 
     private void procesarGuia(ArrayList<Guias> guias, int calificacionGuia, Guias guia, int index) {
         if (guias.get(index).getIdentificacion().equals(guia.getIdentificacion())) {
+<<<<<<< HEAD
             guias.get(index).addCalificacion((float) calificacionGuia);
+=======
+            guias.get(index).addCalificacion(calificacionGuia);
+>>>>>>> 17dc66d539462bc818682027b2f9d17a49890159
             guias.set(index, guias.get(index));
             System.out.println(guias.get(index).getNombre() + " Calificacion: " + calificacionGuia);
         }

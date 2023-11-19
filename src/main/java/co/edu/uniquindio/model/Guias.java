@@ -10,11 +10,11 @@ import java.util.ArrayList;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Guias extends ArrayList<Guias> implements Serializable {
     private String nombre, identificacion, exp;
-    private float promedioCalificacion;
+    private Integer promedioCalificacion;
     private int contViajes;
     private Paquetes paquete;
     private ArrayList<String> lenguajes = new ArrayList<>();
-    private ArrayList<Float> calificaciones = new ArrayList<>();
+    private ArrayList<Integer> calificaciones = new ArrayList<>();
 
     public void addLenguajes(String idioma) {
         lenguajes.add(idioma);
@@ -23,10 +23,10 @@ public class Guias extends ArrayList<Guias> implements Serializable {
         return lenguajes;
     }
 
-    public void addCalificacion(Float idioma) {
+    public void addCalificacion(Integer idioma) {
         calificaciones.add(idioma);
     }
-    public ArrayList<Float> getCalificaciones() {
+    public ArrayList<Integer> getCalificaciones() {
         return calificaciones;
     }
 
