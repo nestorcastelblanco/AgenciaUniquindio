@@ -1,9 +1,7 @@
 package co.edu.uniquindio.controller;
 
-import co.edu.uniquindio.model.Agencia;
 import co.edu.uniquindio.model.AgenciaCliente;
 import co.edu.uniquindio.model.Guias;
-import co.edu.uniquindio.model.Reservas;
 import co.edu.uniquindio.utils.CambioIdiomaEvent;
 import co.edu.uniquindio.utils.CambioIdiomaListener;
 import co.edu.uniquindio.utils.Propiedades;
@@ -14,7 +12,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;

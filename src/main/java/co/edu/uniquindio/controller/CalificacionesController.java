@@ -15,11 +15,8 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Callback;
-
 import java.net.URL;
-import java.time.format.DecimalStyle;
 import java.util.ArrayList;
-import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -65,8 +62,8 @@ public class CalificacionesController implements Initializable, CambioIdiomaList
         Propiedades.getInstance().addCambioIdiomaListener(this);
         cargarTextos();
         Guias guia = agencia.guiaCalificacion();
-        System.out.println("GUIA DE LA RESERVA" + guia);
-        if(guia.equals("SIN GUIA") || guia == null || guia.isEmpty())
+        System.out.println("GUIA DE LA RESERVA " + guia.getNombre());
+        if(guia.getNombre().equals("SIN GUIA"))
         {
             guiaLabel.setVisible(false);
             estrellaGuia1.setVisible(false);

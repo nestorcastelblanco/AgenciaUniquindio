@@ -16,14 +16,13 @@ import javafx.scene.control.*;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.util.Callback;
-import co.edu.uniquindio.model.Agencia;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 public class RealizarReservaController implements Initializable, CambioIdiomaListener {
-    private Logger LOGGER = Logger.getLogger(Agencia.class.getName());
+    private Logger LOGGER = Logger.getLogger(AgenciaCliente.class.getName());
     private final AgenciaCliente agencia = AgenciaCliente.getInstance();
     private Paquetes paquete = new Paquetes();
     private Clientes cliente = new Clientes();

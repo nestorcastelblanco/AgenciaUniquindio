@@ -1,7 +1,5 @@
 package co.edu.uniquindio.controller;
 
-import co.edu.uniquindio.exceptions.CampoRepetido;
-import co.edu.uniquindio.model.Agencia;
 import co.edu.uniquindio.model.AgenciaCliente;
 import co.edu.uniquindio.utils.Propiedades;
 import co.edu.uniquindio.utils.CambioIdiomaEvent;
@@ -28,7 +26,7 @@ public class IngresoAdminController implements Initializable, CambioIdiomaListen
     @FXML
     private Button botonVolver, botonIngreso;
     private final AgenciaCliente agencia = AgenciaCliente.getInstance();
-    private final Logger LOGGER = Logger.getLogger(Agencia.class.getName());
+    private final Logger LOGGER = Logger.getLogger(AgenciaCliente.class.getName());
     private final Propiedades propiedades = Propiedades.getInstance();
     @Override
     public void initialize(URL location, ResourceBundle resources) {

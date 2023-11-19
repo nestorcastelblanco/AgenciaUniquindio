@@ -1,6 +1,4 @@
 package co.edu.uniquindio.controller;
-
-import co.edu.uniquindio.model.Agencia;
 import co.edu.uniquindio.model.AgenciaCliente;
 import co.edu.uniquindio.model.Paquetes;
 import co.edu.uniquindio.utils.CambioIdiomaEvent;
@@ -13,7 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
+
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -22,7 +20,7 @@ import java.util.logging.Logger;
 
 public class VistaPaquetesController implements Initializable, CambioIdiomaListener {
     private final AgenciaCliente agencia = AgenciaCliente.getInstance();
-    private final Logger LOGGER = Logger.getLogger(Agencia.class.getName());
+    private final Logger LOGGER = Logger.getLogger(AgenciaCliente.class.getName());
     @FXML
     private TableView<Paquetes> tablaPaquetes;
     @FXML

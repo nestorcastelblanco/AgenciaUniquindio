@@ -1,9 +1,7 @@
 package co.edu.uniquindio.controller;
 
-import co.edu.uniquindio.model.Agencia;
+
 import co.edu.uniquindio.model.AgenciaCliente;
-import co.edu.uniquindio.model.Destinos;
-import co.edu.uniquindio.model.Paquetes;
 import co.edu.uniquindio.utils.CambioIdiomaEvent;
 import co.edu.uniquindio.utils.CambioIdiomaListener;
 import co.edu.uniquindio.utils.Propiedades;
@@ -14,7 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
@@ -24,7 +22,7 @@ import java.util.logging.Logger;
 
 public class PortalAgenciaController implements Initializable, CambioIdiomaListener {
         private final AgenciaCliente agencia = AgenciaCliente.getInstance();
-        private final Logger LOGGER = Logger.getLogger(Agencia.class.getName());
+        private final Logger LOGGER = Logger.getLogger(AgenciaCliente.class.getName());
         private ObservableList<String> destinos = FXCollections.observableArrayList(agencia.ordenarPorRepeticiones());
         @FXML
         private TableView<String> tablaDestinos;

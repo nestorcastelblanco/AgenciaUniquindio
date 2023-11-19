@@ -26,7 +26,7 @@ public class EdicionReservasController implements Initializable, CambioIdiomaLis
     private static ArrayList<Guias> arrayGuias  = new ArrayList<>();
     private static ArrayList<Paquetes> arrayPaquetes  = new ArrayList<>();
 
-    private static final Logger LOGGER = Logger.getLogger(Agencia.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(AgenciaCliente.class.getName());
     @FXML
     private Button botonRegreso;
     @FXML

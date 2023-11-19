@@ -33,7 +33,7 @@ public class AgenciaCliente {
         }
         return agenciaCliente;
     }
-    public String registrarCliente(String nombre, String correo, String direccion,String ciudad, String telefono, String usuario, String contrasena, String id) throws CampoVacioException, CampoObligatorioException, CampoRepetido
+    public synchronized String registrarCliente(String nombre, String correo, String direccion,String ciudad, String telefono, String usuario, String contrasena, String id) throws CampoVacioException, CampoObligatorioException, CampoRepetido
     {
         try (Socket socket = new Socket(HOST, PUERTO)){
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
@@ -63,7 +63,7 @@ public class AgenciaCliente {
         }
     }
 
-    public ArrayList<Clientes> listarClientes() {
+    public synchronized ArrayList<Clientes> listarClientes() {
         try (Socket socket = new Socket(HOST, PUERTO)) {
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
@@ -80,7 +80,7 @@ public class AgenciaCliente {
         }
     }
 
-    public void loadStage(String url, Event event, String mensaje){
+    public synchronized void loadStage(String url, Event event, String mensaje){
         try
         {
             ((Node)(event.getSource())).getScene().getWindow().hide();
@@ -96,7 +96,7 @@ public class AgenciaCliente {
         }
     }
 
-    public ArrayList<Destinos> reservaCalificacion() {
+    public synchronized ArrayList<Destinos> reservaCalificacion() {
         try (Socket socket = new Socket(HOST, PUERTO)) {
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
@@ -112,7 +112,7 @@ public class AgenciaCliente {
             throw new RuntimeException(e);
         }
     }
-    public Paquetes reservaCalificacionPaquete() {
+    public synchronized Paquetes reservaCalificacionPaquete() {
         try (Socket socket = new Socket(HOST, PUERTO)) {
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
@@ -128,24 +128,23 @@ public class AgenciaCliente {
             throw new RuntimeException(e);
         }
     }
-    public Guias guiaCalificacion() {
+    public synchronized Guias guiaCalificacion() {
         try (Socket socket = new Socket(HOST, PUERTO)) {
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
             out.writeObject(Mensaje.builder()
                     .tipo("recibirGuiaCalificacion").build());
-            Object respuesta = in.readObject();
-            Guias list = (Guias) respuesta;
+            Guias respuesta = (Guias) in.readObject();
             in.close();
             out.close();
-            return list;
+            return respuesta;
         } catch (Exception e) {
             log.severe(e.getMessage());
             throw new RuntimeException(e);
         }
     }
 
-    public void cargarCalificaciones(ArrayList<Destinos> arrayListDestinos, ArrayList<Integer> calificacionDestinos, Paquetes paquetes) {
+    public synchronized void cargarCalificaciones(ArrayList<Destinos> arrayListDestinos, ArrayList<Integer> calificacionDestinos, Paquetes paquetes) {
         try (Socket socket = new Socket(HOST, PUERTO)){
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
@@ -167,7 +166,7 @@ public class AgenciaCliente {
         }
     }
 
-    public void cargarCalificacionesCompleta(ArrayList<Destinos> arrayListDestinos, ArrayList<Integer> calificacionDestinos, int calificacionGuia, Guias guias, Paquetes paquetes) {
+    public synchronized void cargarCalificacionesCompleta(ArrayList<Destinos> arrayListDestinos, ArrayList<Integer> calificacionDestinos, int calificacionGuia, Guias guias, Paquetes paquetes) {
         try (Socket socket = new Socket(HOST, PUERTO)){
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
@@ -191,7 +190,7 @@ public class AgenciaCliente {
         }
     }
 
-    public ArrayList<Guias> enviarGuias() {
+    public synchronized ArrayList<Guias> enviarGuias() {
         try (Socket socket = new Socket(HOST, PUERTO)) {
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
@@ -206,7 +205,7 @@ public class AgenciaCliente {
             throw new RuntimeException(e);
         }
     }
-    public String ingresarCliente(String usuario, String contraseña, String codigo)
+    public synchronized String ingresarCliente(String usuario, String contraseña, String codigo)
     {
         try (Socket socket = new Socket(HOST, PUERTO)){
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
@@ -227,7 +226,7 @@ public class AgenciaCliente {
             return e.toString();
         }
     }
-    public String enviarCodigo(String usuario, String contraseña)
+    public synchronized String enviarCodigo(String usuario, String contraseña)
     {
         try (Socket socket = new Socket(HOST, PUERTO)){
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
@@ -248,7 +247,7 @@ public class AgenciaCliente {
             throw new RuntimeException(e);
         }
     }
-    public void inicializarDatos() {
+    public synchronized void inicializarDatos() {
         try (Socket socket = new Socket(HOST, PUERTO)){
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
@@ -266,7 +265,7 @@ public class AgenciaCliente {
         }
     }
 
-    public String ingresarAdmin (String usuario, String contrasena) throws IOException
+    public synchronized String ingresarAdmin (String usuario, String contrasena) throws IOException
     {
         try (Socket socket = new Socket(HOST, PUERTO)){
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
@@ -287,7 +286,7 @@ public class AgenciaCliente {
         }
     }
 
-    public ArrayList<Paquetes> enviarPaquetes() {
+    public synchronized ArrayList<Paquetes> enviarPaquetes() {
         try (Socket socket = new Socket(HOST, PUERTO)) {
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
@@ -304,7 +303,7 @@ public class AgenciaCliente {
         }
     }
 
-    public String registrarGuia(String text, String text1, String text2, String text3, Paquetes selectedItem) {
+    public synchronized String registrarGuia(String text, String text1, String text2, String text3, Paquetes selectedItem) {
         try (Socket socket = new Socket(HOST, PUERTO)) {
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
@@ -327,7 +326,7 @@ public class AgenciaCliente {
         }
     }
 
-    public String registrarDestino(String text, String text1, String text2, ArrayList<String> imagePaths, String text3) throws CampoObligatorioException{
+    public synchronized String registrarDestino(String text, String text1, String text2, ArrayList<String> imagePaths, String text3) throws CampoObligatorioException{
         try (Socket socket = new Socket(HOST, PUERTO)) {
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
@@ -350,7 +349,7 @@ public class AgenciaCliente {
         }
     }
 
-    public ArrayList<Destinos> enviarDestinos() {
+    public synchronized ArrayList<Destinos> enviarDestinos() {
         try (Socket socket = new Socket(HOST, PUERTO)) {
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
@@ -367,7 +366,7 @@ public class AgenciaCliente {
         }
     }
 
-    public String registrarPaqueteCupon(String text, ArrayList<Destinos> destinosSeleccionados, LocalDate value, LocalDate value1, String text1, String text2,
+    public synchronized String registrarPaqueteCupon(String text, ArrayList<Destinos> destinosSeleccionados, LocalDate value, LocalDate value1, String text1, String text2,
                                       String text3, String text4, String text5, LocalDate value2, LocalDate value3) {
         try (Socket socket = new Socket(HOST, PUERTO)) {
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
@@ -399,7 +398,7 @@ public class AgenciaCliente {
         }
     }
 
-    public String registrarPaquete(String text, ArrayList<Destinos> destinosSeleccionados, LocalDate value, LocalDate value1, String text1, String text2, String text3) {
+    public synchronized String registrarPaquete(String text, ArrayList<Destinos> destinosSeleccionados, LocalDate value, LocalDate value1, String text1, String text2, String text3) {
         try (Socket socket = new Socket(HOST, PUERTO)) {
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
@@ -427,7 +426,7 @@ public class AgenciaCliente {
         }
     }
 
-    public void recibirDestinoCancelacion(Destinos selectedItem) {
+    public synchronized void recibirDestinoCancelacion(Destinos selectedItem) {
         try (Socket socket = new Socket(HOST, PUERTO)) {
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
@@ -446,7 +445,7 @@ public class AgenciaCliente {
         }
     }
 
-    public void recibirDestinoEdicion(Destinos selectedItem) {
+    public synchronized void recibirDestinoEdicion(Destinos selectedItem) {
         try (Socket socket = new Socket(HOST, PUERTO)) {
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
@@ -465,7 +464,7 @@ public class AgenciaCliente {
         }
     }
 
-    public String obtenerNombresCiudades(ArrayList<Destinos> destinos) {
+    public synchronized String obtenerNombresCiudades(ArrayList<Destinos> destinos) {
         try (Socket socket = new Socket(HOST, PUERTO)) {
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
@@ -485,7 +484,7 @@ public class AgenciaCliente {
         }
     }
 
-    public void recibirPaqueteEdicion(Paquetes selectedItem) {
+    public synchronized void recibirPaqueteEdicion(Paquetes selectedItem) {
         try (Socket socket = new Socket(HOST, PUERTO)) {
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
@@ -504,7 +503,7 @@ public class AgenciaCliente {
         }
     }
 
-    public void recibirPaqueteCancelacion(Paquetes selectedItem) {
+    public synchronized void recibirPaqueteCancelacion(Paquetes selectedItem) {
         try (Socket socket = new Socket(HOST, PUERTO)) {
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
@@ -523,7 +522,7 @@ public class AgenciaCliente {
         }
     }
 
-    public ArrayList<Reservas> enviarReservas() {
+    public synchronized ArrayList<Reservas> enviarReservas() {
         try (Socket socket = new Socket(HOST, PUERTO)) {
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
@@ -542,7 +541,7 @@ public class AgenciaCliente {
         }
     }
 
-    public void recibirReservaEdicion(Reservas selectedItem) {
+    public synchronized void recibirReservaEdicion(Reservas selectedItem) {
         try (Socket socket = new Socket(HOST, PUERTO)) {
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
@@ -561,7 +560,7 @@ public class AgenciaCliente {
         }
     }
 
-    public void recibirReservaCancelacion(Reservas selectedItem) {
+    public synchronized void recibirReservaCancelacion(Reservas selectedItem) {
         try (Socket socket = new Socket(HOST, PUERTO)) {
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
@@ -580,7 +579,7 @@ public class AgenciaCliente {
         }
     }
 
-    public String obtenerNombresDestinos(ArrayList<Destinos> destinos) {
+    public synchronized String obtenerNombresDestinos(ArrayList<Destinos> destinos) {
         try (Socket socket = new Socket(HOST, PUERTO)) {
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
@@ -600,7 +599,7 @@ public class AgenciaCliente {
         }
     }
 
-    public void datos() {
+    public synchronized void datos() {
         try (Socket socket = new Socket(HOST, PUERTO)) {
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
@@ -618,7 +617,7 @@ public class AgenciaCliente {
         }
     }
 
-    public void recibirPaqueteSeleccionado(Paquetes selectedItem) {
+    public synchronized void recibirPaqueteSeleccionado(Paquetes selectedItem) {
         try (Socket socket = new Socket(HOST, PUERTO)) {
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
@@ -637,7 +636,7 @@ public class AgenciaCliente {
         }
     }
 
-    public Clientes getCLIENTE_SESION() {
+    public synchronized Clientes getCLIENTE_SESION() {
         try (Socket socket = new Socket(HOST, PUERTO)) {
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
@@ -656,7 +655,7 @@ public class AgenciaCliente {
         }
     }
 
-    public void buscarDestino(String destino, Clientes clienteSesion) {
+    public synchronized void buscarDestino(String destino, Clientes clienteSesion) {
         try (Socket socket = new Socket(HOST, PUERTO)) {
 
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
@@ -680,7 +679,7 @@ public class AgenciaCliente {
         }
     }
 
-    public Paquetes paqueteSeleccion() {
+    public synchronized Paquetes paqueteSeleccion() {
         try (Socket socket = new Socket(HOST, PUERTO)) {
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
@@ -699,7 +698,7 @@ public class AgenciaCliente {
         }
     }
 
-    public Clientes clienteSesion() {
+    public synchronized Clientes clienteSesion() {
         try (Socket socket = new Socket(HOST, PUERTO)) {
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
@@ -718,7 +717,7 @@ public class AgenciaCliente {
         }
     }
 
-    public ArrayList<Guias> enviarGuiasPaquete(Paquetes paquete) {
+    public synchronized ArrayList<Guias> enviarGuiasPaquete(Paquetes paquete) {
         try (Socket socket = new Socket(HOST, PUERTO)) {
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
@@ -738,7 +737,7 @@ public class AgenciaCliente {
         }
     }
 
-    public String realizarReserva(Paquetes paquete, Clientes cliente, LocalDate value, LocalDate value1, String text, Guias selectedItem, String pendiente, double valorDescuento) {
+    public synchronized String realizarReserva(Paquetes paquete, Clientes cliente, LocalDate value, LocalDate value1, String text, Guias selectedItem, String pendiente, double valorDescuento) {
         try (Socket socket = new Socket(HOST, PUERTO)) {
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
@@ -767,7 +766,7 @@ public class AgenciaCliente {
         }
     }
 
-    public float verificarCupon(Paquetes paquete, LocalDate value, LocalDate value1, String text, String text1) {
+    public synchronized float verificarCupon(Paquetes paquete, LocalDate value, LocalDate value1, String text, String text1) {
         try (Socket socket = new Socket(HOST, PUERTO)) {
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
@@ -794,7 +793,7 @@ public class AgenciaCliente {
         }
     }
 
-    public ArrayList<String> ordenarPorRepeticiones() {
+    public synchronized ArrayList<String> ordenarPorRepeticiones() {
         try (Socket socket = new Socket(HOST, PUERTO)) {
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
@@ -813,7 +812,7 @@ public class AgenciaCliente {
         }
     }
 
-    public void recibirGuiaEliminado(Guias selectedItem) {
+    public synchronized void recibirGuiaEliminado(Guias selectedItem) {
         try (Socket socket = new Socket(HOST, PUERTO)) {
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
@@ -832,7 +831,7 @@ public class AgenciaCliente {
         }
     }
 
-    public void enviarGuiaEdicion(Guias selectedItem) {
+    public synchronized void enviarGuiaEdicion(Guias selectedItem) {
         try (Socket socket = new Socket(HOST, PUERTO)) {
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
@@ -851,7 +850,7 @@ public class AgenciaCliente {
         }
     }
 
-    public String obtenerIdiomas(ArrayList<String> lenguajes) {
+    public synchronized String obtenerIdiomas(ArrayList<String> lenguajes) {
         try (Socket socket = new Socket(HOST, PUERTO)) {
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
@@ -873,7 +872,7 @@ public class AgenciaCliente {
             throw new RuntimeException(e);
         }
     }
-    public float promedioPaquetes(Paquetes paqueteSeleccionado) {
+    public synchronized float promedioPaquetes(Paquetes paqueteSeleccionado) {
         try (Socket socket = new Socket(HOST, PUERTO)) {
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
@@ -893,7 +892,7 @@ public class AgenciaCliente {
         }
     }
 
-    public ArrayList<Reservas> enviarReservasCliente() {
+    public synchronized ArrayList<Reservas> enviarReservasCliente() {
         try (Socket socket = new Socket(HOST, PUERTO)) {
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
@@ -912,7 +911,7 @@ public class AgenciaCliente {
         }
     }
 
-    public Destinos enviarDestinoEdicion() {
+    public synchronized Destinos enviarDestinoEdicion() {
         try (Socket socket = new Socket(HOST, PUERTO)) {
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
@@ -931,7 +930,7 @@ public class AgenciaCliente {
         }
     }
 
-    public String editarDestino(String text, String text1, String text2, ArrayList<String> imagePaths, String text3) {
+    public synchronized String editarDestino(String text, String text1, String text2, ArrayList<String> imagePaths, String text3) {
         try (Socket socket = new Socket(HOST, PUERTO)) {
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
@@ -958,7 +957,7 @@ public class AgenciaCliente {
         }
     }
 
-    public Guias recibirGuiaEdicion() {
+    public synchronized Guias recibirGuiaEdicion() {
         try (Socket socket = new Socket(HOST, PUERTO)) {
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
@@ -977,7 +976,7 @@ public class AgenciaCliente {
         }
     }
 
-    public String editarGuia(String text, String text1, String text2, String text3, Paquetes selectedItem) {
+    public synchronized String editarGuia(String text, String text1, String text2, String text3, Paquetes selectedItem) {
         try (Socket socket = new Socket(HOST, PUERTO)) {
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
@@ -1004,7 +1003,7 @@ public class AgenciaCliente {
         }
     }
 
-    public ArrayList<Destinos> getDestinos() {
+    public synchronized ArrayList<Destinos> getDestinos() {
         try (Socket socket = new Socket(HOST, PUERTO)) {
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
@@ -1023,7 +1022,7 @@ public class AgenciaCliente {
         }
     }
 
-    public Paquetes enviarPaqueteEdicion() {
+    public synchronized Paquetes enviarPaqueteEdicion() {
         try (Socket socket = new Socket(HOST, PUERTO)) {
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
@@ -1042,7 +1041,7 @@ public class AgenciaCliente {
         }
     }
 
-    public Paquetes getPAQUETE_EDICION() {
+    public synchronized Paquetes getPAQUETE_EDICION() {
         try (Socket socket = new Socket(HOST, PUERTO)) {
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
@@ -1061,7 +1060,7 @@ public class AgenciaCliente {
         }
     }
 
-    public String editarPaquetes(Paquetes paqueteEdicion, String text, ArrayList<Destinos> destinosActuales, LocalDate value, LocalDate value1, String text1, String text2, String text3) {
+    public synchronized String editarPaquetes(Paquetes paqueteEdicion, String text, ArrayList<Destinos> destinosActuales, LocalDate value, LocalDate value1, String text1, String text2, String text3) {
         try (Socket socket = new Socket(HOST, PUERTO)) {
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
@@ -1092,7 +1091,7 @@ public class AgenciaCliente {
         }
     }
 
-    public String realizarEdicion(String text, String text1, String text2, String text3, String text4, String text5, String text6, String text7) {
+    public synchronized String realizarEdicion(String text, String text1, String text2, String text3, String text4, String text5, String text6, String text7) {
         try (Socket socket = new Socket(HOST, PUERTO)) {
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
@@ -1123,7 +1122,7 @@ public class AgenciaCliente {
         }
     }
 
-    public Reservas enviarReservaEdicion() {
+    public synchronized Reservas enviarReservaEdicion() {
         try (Socket socket = new Socket(HOST, PUERTO)) {
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
@@ -1142,7 +1141,7 @@ public class AgenciaCliente {
         }
     }
 
-    public String editarReserva(Paquetes selectedItem, LocalDate value, LocalDate value1, String text, String text1, Guias selectedItem1, String selectedItem2) {
+    public synchronized String editarReserva(Paquetes selectedItem, LocalDate value, LocalDate value1, String text, String text1, Guias selectedItem1, String selectedItem2) {
         try (Socket socket = new Socket(HOST, PUERTO)) {
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
@@ -1172,7 +1171,7 @@ public class AgenciaCliente {
         }
     }
 
-    public float promedioGuias(Guias guias) {
+    public synchronized float promedioGuias(Guias guias) {
         try (Socket socket = new Socket(HOST, PUERTO)) {
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
@@ -1191,7 +1190,7 @@ public class AgenciaCliente {
         }
     }
 
-    public boolean recibirReservaCalificacion(Reservas selectedItem) {
+    public synchronized boolean recibirReservaCalificacion(Reservas selectedItem) {
         try (Socket socket = new Socket(HOST, PUERTO)) {
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream in = new ObjectInputStream(socket.getInputStream());

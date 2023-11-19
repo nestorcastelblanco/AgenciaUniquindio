@@ -1,6 +1,5 @@
 package co.edu.uniquindio.app;
 
-import co.edu.uniquindio.model.Agencia;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

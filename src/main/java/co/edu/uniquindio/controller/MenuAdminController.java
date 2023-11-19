@@ -1,5 +1,4 @@
 package co.edu.uniquindio.controller;
-import co.edu.uniquindio.model.Agencia;
 import co.edu.uniquindio.model.AgenciaCliente;
 import co.edu.uniquindio.utils.CambioIdiomaEvent;
 import co.edu.uniquindio.utils.CambioIdiomaListener;
@@ -10,11 +9,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Logger;
 public class MenuAdminController implements Initializable, CambioIdiomaListener {
     @FXML
     private Button botonRegreso,registrarGuia ,registrarDestinos, registrarPaquetes, mostrarGuias,mostrarDestinos,mostrarPaquetes,mostrarReservas,mostrarEstadisticas;
-    private final Logger LOGGER = Logger.getLogger(Agencia.class.getName());
     private final Propiedades propiedades = Propiedades.getInstance();
     private final AgenciaCliente agencia = AgenciaCliente.getInstance();
     public void cargarTextos()

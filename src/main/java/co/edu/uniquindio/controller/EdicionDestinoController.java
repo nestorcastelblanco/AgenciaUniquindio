@@ -1,9 +1,5 @@
 package co.edu.uniquindio.controller;
 
-import co.edu.uniquindio.exceptions.CampoObligatorioException;
-import co.edu.uniquindio.exceptions.CampoRepetido;
-import co.edu.uniquindio.exceptions.CampoVacioException;
-import co.edu.uniquindio.model.Agencia;
 import co.edu.uniquindio.model.AgenciaCliente;
 import co.edu.uniquindio.utils.CambioIdiomaEvent;
 import co.edu.uniquindio.utils.CambioIdiomaListener;
@@ -28,7 +24,7 @@ import java.util.logging.Logger;
 
 public class EdicionDestinoController implements Initializable, CambioIdiomaListener {
     private final AgenciaCliente agencia = AgenciaCliente.getInstance();
-    private static final Logger LOGGER = Logger.getLogger(Agencia.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(AgenciaCliente.class.getName());
     @FXML
     private Button botonRegreso,botonEditar;
     @FXML

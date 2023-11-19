@@ -1,9 +1,5 @@
 package co.edu.uniquindio.controller;
 
-import co.edu.uniquindio.exceptions.CampoObligatorioException;
-import co.edu.uniquindio.exceptions.CampoRepetido;
-import co.edu.uniquindio.exceptions.CampoVacioException;
-import co.edu.uniquindio.model.Agencia;
 import co.edu.uniquindio.model.AgenciaCliente;
 import co.edu.uniquindio.utils.CambioIdiomaEvent;
 import co.edu.uniquindio.utils.CambioIdiomaListener;
@@ -14,16 +10,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-
 import java.net.URL;
-import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class EdicionPerfilController implements Initializable, CambioIdiomaListener {
     private final AgenciaCliente agencia = AgenciaCliente.getInstance();
-    private final Logger LOGGER = Logger.getLogger(Agencia.class.getName());
+    private final Logger LOGGER = Logger.getLogger(AgenciaCliente.class.getName());
     @FXML
     private TextField nombreUsuario, correoUsuario, direccionUsuario, id, ciudadUsuario, telefonoUsuario,usuarioIngresado,contrasenaIngresada;
     @FXML

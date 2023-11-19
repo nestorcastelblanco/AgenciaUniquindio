@@ -1,5 +1,4 @@
 package co.edu.uniquindio.controller;
-import co.edu.uniquindio.model.Agencia;
 import co.edu.uniquindio.model.AgenciaCliente;
 import co.edu.uniquindio.model.Paquetes;
 import co.edu.uniquindio.utils.CambioIdiomaEvent;
@@ -21,7 +20,7 @@ import java.util.logging.Logger;
 
 public class RegistroGuiaController implements Initializable, CambioIdiomaListener {
     private final AgenciaCliente agencia = AgenciaCliente.getInstance();
-    private static final Logger LOGGER = Logger.getLogger(Agencia.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(AgenciaCliente.class.getName());
     @FXML
     private Button botonRegreso,botonRegistro;
     @FXML

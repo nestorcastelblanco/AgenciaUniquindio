@@ -1,15 +1,10 @@
 package co.edu.uniquindio.controller;
 
-import co.edu.uniquindio.exceptions.CampoObligatorioException;
-import co.edu.uniquindio.exceptions.CampoRepetido;
-import co.edu.uniquindio.exceptions.CampoVacioException;
-import co.edu.uniquindio.model.Agencia;
 import co.edu.uniquindio.model.AgenciaCliente;
 import co.edu.uniquindio.model.Destinos;
 import co.edu.uniquindio.utils.CambioIdiomaEvent;
 import co.edu.uniquindio.utils.CambioIdiomaListener;
 import co.edu.uniquindio.utils.Propiedades;
-import com.sun.javafx.scene.shape.ArcHelper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -27,7 +22,7 @@ public class CreacionPaquetesController implements Initializable, CambioIdiomaLi
     private static final AgenciaCliente agencia = AgenciaCliente.getInstance();
     ArrayList<Destinos> destinosCombo =   new ArrayList<>(agencia.enviarDestinos());
      ArrayList<Destinos> destinosSeleccionados = new ArrayList<>();
-    private static final Logger LOGGER = Logger.getLogger(Agencia.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(AgenciaCliente.class.getName());
     @FXML
     private Button botonRegreso,botonCrear, botonCrearDestino, botonDestino,botonAgregarCupon, botonCancelarCupon;
     @FXML
