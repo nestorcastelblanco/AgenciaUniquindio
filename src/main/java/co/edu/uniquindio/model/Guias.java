@@ -8,7 +8,7 @@ import java.util.ArrayList;
 @Setter
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Guias implements Serializable {
+public class Guias extends ArrayList<Guias> implements Serializable {
     private String nombre, identificacion, exp;
     private float promedioCalificacion;
     private int contViajes;

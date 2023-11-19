@@ -1,6 +1,7 @@
 package co.edu.uniquindio.controller;
 
 import co.edu.uniquindio.model.Agencia;
+import co.edu.uniquindio.model.AgenciaCliente;
 import co.edu.uniquindio.model.Destinos;
 import co.edu.uniquindio.model.Paquetes;
 import co.edu.uniquindio.utils.CambioIdiomaEvent;
@@ -22,13 +23,13 @@ import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
 public class PortalAgenciaController implements Initializable, CambioIdiomaListener {
-        private final Agencia agencia = Agencia.getInstance();
+        private final AgenciaCliente agencia = AgenciaCliente.getInstance();
         private final Logger LOGGER = Logger.getLogger(Agencia.class.getName());
-        private ObservableList<Destinos> destinos = FXCollections.observableArrayList(agencia.ordenarPorRepeticiones());
+        private ObservableList<String> destinos = FXCollections.observableArrayList(agencia.ordenarPorRepeticiones());
         @FXML
-        private TableView<Destinos> tablaDestinos;
+        private TableView<String> tablaDestinos;
         @FXML
-        private TableColumn<Destinos, String> colDestinos;
+        private TableColumn<String, String> colDestinos;
         private final Propiedades propiedades = Propiedades.getInstance();
         @Override
         public void onCambioIdioma(CambioIdiomaEvent evento) {
@@ -45,9 +46,9 @@ public class PortalAgenciaController implements Initializable, CambioIdiomaListe
         }
         @Override
         public void initialize(URL location, ResourceBundle resources) {
-            Propiedades.getInstance().addCambioIdiomaListener(this);
-            cargarTextos();
-            colDestinos.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombre()));
+            //Propiedades.getInstance().addCambioIdiomaListener(this);
+            //cargarTextos();
+            colDestinos.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue()));
             tablaDestinos.setItems(destinos);
         }
         public void regresar(ActionEvent actionEvent) {

@@ -1,6 +1,7 @@
 package co.edu.uniquindio.controller;
 
 import co.edu.uniquindio.model.Agencia;
+import co.edu.uniquindio.model.AgenciaCliente;
 import co.edu.uniquindio.model.Paquetes;
 import co.edu.uniquindio.utils.ArchivoUtils;
 import co.edu.uniquindio.utils.CambioIdiomaEvent;
@@ -22,7 +23,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class SeleccionClientePaquetesController implements Initializable, CambioIdiomaListener {
-    private final Agencia agencia = Agencia.getInstance();
+    private final AgenciaCliente agencia = AgenciaCliente.getInstance();
     private final Logger LOGGER = Logger.getLogger(Agencia.class.getName());
     @FXML
     private TextField paquetesFiltro,destino,persona,services,valor;
@@ -111,7 +112,7 @@ public class SeleccionClientePaquetesController implements Initializable, Cambio
     public void ver(ActionEvent actionEvent) {
         if (tablaPaquetes.getSelectionModel().getSelectedIndex() == -1) {
             LOGGER.log(Level.INFO, "Se intento visualizar un paquete sin haberlo seleccionado");
-            agencia.mostrarMensaje(Alert.AlertType.ERROR, "Se intento visualizar un paquete sin haberlo seleccionado");
+            mostrarMensaje(Alert.AlertType.ERROR, "Se intento visualizar un paquete sin haberlo seleccionado");
         } else{
             agencia.datos();
             agencia.recibirPaqueteSeleccionado(tablaPaquetes.getSelectionModel().getSelectedItem());
@@ -123,6 +124,7 @@ public class SeleccionClientePaquetesController implements Initializable, Cambio
     }
 
     private ObservableList<Paquetes> filtrarPorDestino(String destino) {
+        System.out.println("Nombre destino escrito : " + destino);
         agencia.buscarDestino(destino, agencia.getCLIENTE_SESION());
         return paquetes.filtered(paquete -> agencia.obtenerNombresDestinos(paquete.getDestinos()).toLowerCase().contains(destino.toLowerCase()));
     }
@@ -150,5 +152,10 @@ public class SeleccionClientePaquetesController implements Initializable, Cambio
     private ObservableList<Paquetes> filtrarPorFechaFin(LocalDate fechaFin) {
         return paquetes.filtered(paquete -> paquete.getFin().isEqual(fechaFin));
     }
-
+    public void mostrarMensaje(Alert.AlertType tipo, String mensaje){
+        Alert alert = new Alert(tipo);
+        alert.setHeaderText(null);
+        alert.setContentText(mensaje);
+        alert.show();
+    }
 }

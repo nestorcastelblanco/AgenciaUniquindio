@@ -1,5 +1,6 @@
 package co.edu.uniquindio.controller;
 import co.edu.uniquindio.model.Agencia;
+import co.edu.uniquindio.model.AgenciaCliente;
 import co.edu.uniquindio.utils.CambioIdiomaEvent;
 import co.edu.uniquindio.utils.CambioIdiomaListener;
 import co.edu.uniquindio.utils.Propiedades;
@@ -15,7 +16,7 @@ public class MenuAdminController implements Initializable, CambioIdiomaListener 
     private Button botonRegreso,registrarGuia ,registrarDestinos, registrarPaquetes, mostrarGuias,mostrarDestinos,mostrarPaquetes,mostrarReservas,mostrarEstadisticas;
     private final Logger LOGGER = Logger.getLogger(Agencia.class.getName());
     private final Propiedades propiedades = Propiedades.getInstance();
-    private final Agencia agencia = Agencia.getInstance();
+    private final AgenciaCliente agencia = AgenciaCliente.getInstance();
     public void cargarTextos()
     {
         botonRegreso.setText(propiedades.getResourceBundle().getString("bttVolver"));

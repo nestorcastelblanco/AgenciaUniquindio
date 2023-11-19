@@ -1,7 +1,8 @@
 package co.edu.uniquindio.controller;
 
-import co.edu.uniquindio.model.Agencia;
+import co.edu.uniquindio.model.AgenciaCliente;
 import co.edu.uniquindio.model.Destinos;
+import co.edu.uniquindio.model.Guias;
 import co.edu.uniquindio.utils.CambioIdiomaEvent;
 import co.edu.uniquindio.utils.CambioIdiomaListener;
 import co.edu.uniquindio.utils.Propiedades;
@@ -24,9 +25,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class CalificacionesController implements Initializable, CambioIdiomaListener {
-    private final Agencia agencia = Agencia.getInstance();
-    private static final Logger LOGGER = Logger.getLogger(Agencia.class.getName());
-    private ArrayList<Destinos> arrayListDestinos = new ArrayList<>(agencia.getReservaCalificacion().getPaquete().getDestinos());
+    private final AgenciaCliente agencia = AgenciaCliente.getInstance();
+    private static final Logger LOGGER = Logger.getLogger(AgenciaCliente.class.getName());
+    private ArrayList<Destinos> arrayListDestinos = agencia.reservaCalificacion();
     @FXML
     private ImageView estrellaDes1,estrellaDes2,estrellaDes3,estrellaDes4,estrellaDes5;
     @FXML
@@ -63,7 +64,9 @@ public class CalificacionesController implements Initializable, CambioIdiomaList
     public void initialize(URL location, ResourceBundle resources) {
         Propiedades.getInstance().addCambioIdiomaListener(this);
         cargarTextos();
-        if(agencia.getReservaCalificacion().getGuia().getNombre().equals("SIN GUIA") || agencia.getReservaCalificacion().getGuia() == null)
+        Guias guia = agencia.guiaCalificacion();
+        System.out.println("GUIA DE LA RESERVA" + guia);
+        if(guia.equals("SIN GUIA") || guia == null || guia.isEmpty())
         {
             guiaLabel.setVisible(false);
             estrellaGuia1.setVisible(false);
@@ -77,8 +80,9 @@ public class CalificacionesController implements Initializable, CambioIdiomaList
             bttGuia3.setVisible(false);
             bttGuia4.setVisible(false);
             bttGuia5.setVisible(false);
+            stateGuia = true;
         }
-        guiaLabel.setText(agencia.getReservaCalificacion().getGuia().getNombre());
+        guiaLabel.setText(agencia.guiaCalificacion().getNombre());
         /*for(int i = 0 ; i<arrayListDestinos.size();i++)
         {
             calificacionDestinos.add(0);
@@ -219,20 +223,20 @@ public class CalificacionesController implements Initializable, CambioIdiomaList
         if(destinosCombo.getSelectionModel().getSelectedIndex() == -1 )
         {
             LOGGER.log(Level.INFO, "No se ha seleccionado algun destino");
-            agencia.mostrarMensaje(Alert.AlertType.ERROR, "No se ha seleccionado algun destino");
+            mostrarMensaje(Alert.AlertType.ERROR, "No se ha seleccionado algun destino");
         }else {
             if(calificacionDestinos.get(destinosCombo.getSelectionModel().getSelectedIndex()) == 0)
             {
                 LOGGER.log(Level.INFO, "No se ha calificado el destino aún");
-                agencia.mostrarMensaje(Alert.AlertType.ERROR, "No se ha calificado el destino aún");
+                mostrarMensaje(Alert.AlertType.ERROR, "No se ha calificado el destino aún");
             }else {
                     if(calificacionDestinos.contains(0))
                     {
                         LOGGER.log(Level.INFO, "No se han calificado todos los destinos");
-                        agencia.mostrarMensaje(Alert.AlertType.ERROR, "No se han calificado todos los destinos");
+                        mostrarMensaje(Alert.AlertType.ERROR, "No se han calificado todos los destinos");
                     }else {
                         LOGGER.log(Level.INFO, "Todos los destinos calificados");
-                        agencia.mostrarMensaje(Alert.AlertType.CONFIRMATION, "Todos los destinos calificados");
+                        mostrarMensaje(Alert.AlertType.CONFIRMATION, "Todos los destinos calificados");
                         stateDestinos = true;
                     }
             }
@@ -242,11 +246,11 @@ public class CalificacionesController implements Initializable, CambioIdiomaList
         if(calificacionGuia == 0)
         {
             LOGGER.log(Level.INFO, "Ingrese una calificacion para el guia");
-            agencia.mostrarMensaje(Alert.AlertType.ERROR, "Ingrese una calificacion para el guia");
+            mostrarMensaje(Alert.AlertType.ERROR, "Ingrese una calificacion para el guia");
             stateGuia = false;
         }else {
             LOGGER.log(Level.INFO, "La calificacion es correcta");
-            agencia.mostrarMensaje(Alert.AlertType.CONFIRMATION, "La calificacion es correcta");
+            mostrarMensaje(Alert.AlertType.CONFIRMATION, "La calificacion es correcta");
             stateGuia = true;
         }
     }
@@ -305,23 +309,29 @@ public class CalificacionesController implements Initializable, CambioIdiomaList
         agencia.loadStage("/paginaReservasCliente.fxml", actionEvent, "Se regresa a la vista de reservas");
     }
     public void enviarCalificaciones(ActionEvent actionEvent) {
-        if(agencia.getReservaCalificacion().getGuia().getNombre().equals("SIN GUIA") || agencia.getReservaCalificacion().getGuia() == null)
+        if(agencia.guiaCalificacion().equals("SIN GUIA") || agencia.guiaCalificacion() == null)
         {
             if (stateDestinos && !comentario.getText().isEmpty()){
-                agencia.cargarCalificaciones(arrayListDestinos,calificacionDestinos, agencia.getReservaCalificacion().getPaquete());
-                agencia.mostrarMensaje(Alert.AlertType.CONFIRMATION, "La calificacion se ha completado correctamente");
+                agencia.cargarCalificaciones(arrayListDestinos,calificacionDestinos, agencia.reservaCalificacionPaquete());
+                mostrarMensaje(Alert.AlertType.CONFIRMATION, "La calificacion se ha completado correctamente");
             }else{
-                agencia.mostrarMensaje(Alert.AlertType.WARNING, "La calificacion no se ha completado correctamente");
+                mostrarMensaje(Alert.AlertType.WARNING, "La calificacion no se ha completado correctamente");
                 LOGGER.log(Level.INFO, "La calificacion no se ha completado correctamente, complete los cambios necesarios");
             }
         }else{
             if (stateGuia && stateDestinos && !comentario.getText().isEmpty()){
-                agencia.cargarCalificacionesCompleta(arrayListDestinos,calificacionDestinos,calificacionGuia, agencia.getReservaCalificacion().getGuia(), agencia.getReservaCalificacion().getPaquete());
-                agencia.mostrarMensaje(Alert.AlertType.CONFIRMATION, "La calificacion se ha completado correctamente");
+                agencia.cargarCalificacionesCompleta(arrayListDestinos,calificacionDestinos,calificacionGuia, agencia.guiaCalificacion(), agencia.reservaCalificacionPaquete());
+                mostrarMensaje(Alert.AlertType.CONFIRMATION, "La calificacion se ha completado correctamente");
             }else{
-                agencia.mostrarMensaje(Alert.AlertType.WARNING, "La calificacion no se ha completado correctamente");
+                mostrarMensaje(Alert.AlertType.WARNING, "La calificacion no se ha completado correctamente");
                 LOGGER.log(Level.INFO, "La calificacion no se ha completado correctamente, complete los cambios necesarios");
             }
         }
+    }
+    public void mostrarMensaje(Alert.AlertType tipo, String mensaje){
+        Alert alert = new Alert(tipo);
+        alert.setHeaderText(null);
+        alert.setContentText(mensaje);
+        alert.show();
     }
 }

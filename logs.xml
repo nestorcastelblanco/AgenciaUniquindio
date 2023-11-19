@@ -28820,3 +28820,420 @@
   <message>Se genero el ingreso de un cliente: null</message>
 </record>
 </log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-11-14T22:13:46.434625300Z</date>
+  <millis>1700000026434</millis>
+  <nanos>625300</nanos>
+  <sequence>3</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.controller.RegistroController</class>
+  <method>cargarTextos</method>
+  <thread>17</thread>
+  <message>Se cargaron los textos de la ventana de registro</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-11-14T22:26:33.921588400Z</date>
+  <millis>1700000793921</millis>
+  <nanos>588400</nanos>
+  <sequence>3</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.controller.RegistroController</class>
+  <method>cargarTextos</method>
+  <thread>17</thread>
+  <message>Se cargaron los textos de la ventana de registro</message>
+</record>
+<record>
+  <date>2023-11-14T22:26:52.144179500Z</date>
+  <millis>1700000812144</millis>
+  <nanos>179500</nanos>
+  <sequence>4</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.controller.RegistroController</class>
+  <method>registrar</method>
+  <thread>17</thread>
+  <message>Se registro un nuevo usuario</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-11-14T23:39:16.967178400Z</date>
+  <millis>1700005156967</millis>
+  <nanos>178400</nanos>
+  <sequence>3</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.controller.RegistroController</class>
+  <method>cargarTextos</method>
+  <thread>17</thread>
+  <message>Se cargaron los textos de la ventana de registro</message>
+</record>
+<record>
+  <date>2023-11-14T23:39:39.316829400Z</date>
+  <millis>1700005179316</millis>
+  <nanos>829400</nanos>
+  <sequence>4</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.controller.RegistroController</class>
+  <method>registrar</method>
+  <thread>17</thread>
+  <message>Se registro un nuevo usuario</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-11-15T03:15:27.404818Z</date>
+  <millis>1700018127404</millis>
+  <nanos>818000</nanos>
+  <sequence>3</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.controller.PrincipalController</class>
+  <method>ingresar</method>
+  <thread>17</thread>
+  <message>Se ingresaron credenciales no validas</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-11-15T03:19:20.311416200Z</date>
+  <millis>1700018360311</millis>
+  <nanos>416200</nanos>
+  <sequence>3</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.controller.PrincipalController</class>
+  <method>ingresar</method>
+  <thread>17</thread>
+  <message>Se ingresaron credenciales no validas</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-11-15T03:21:57.420994900Z</date>
+  <millis>1700018517420</millis>
+  <nanos>994900</nanos>
+  <sequence>3</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.controller.PrincipalController</class>
+  <method>ingresar</method>
+  <thread>17</thread>
+  <message>Se ingresaron credenciales no validas</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-11-15T03:22:36.312416800Z</date>
+  <millis>1700018556312</millis>
+  <nanos>416800</nanos>
+  <sequence>3</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.controller.PrincipalController</class>
+  <method>ingresar</method>
+  <thread>17</thread>
+  <message>Se ingresaron credenciales no validas</message>
+</record>
+<record>
+  <date>2023-11-15T03:23:21.302823700Z</date>
+  <millis>1700018601302</millis>
+  <nanos>823700</nanos>
+  <sequence>5</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.controller.PrincipalController</class>
+  <method>ingresar</method>
+  <thread>17</thread>
+  <message>Se ingresaron credenciales no validas</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-11-15T03:24:37.073976400Z</date>
+  <millis>1700018677073</millis>
+  <nanos>976400</nanos>
+  <sequence>3</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.controller.PrincipalController</class>
+  <method>ingresar</method>
+  <thread>17</thread>
+  <message>Se ingresaron credenciales no validas</message>
+</record>
+<record>
+  <date>2023-11-15T03:27:21.704197900Z</date>
+  <millis>1700018841704</millis>
+  <nanos>197900</nanos>
+  <sequence>5</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.controller.PrincipalController</class>
+  <method>admin</method>
+  <thread>17</thread>
+  <message>Se ingresa la pagina administrativa</message>
+</record>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-11-15T03:31:22.613727100Z</date>
+  <millis>1700019082613</millis>
+  <nanos>727100</nanos>
+  <sequence>3</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.controller.PrincipalController</class>
+  <method>ingresar</method>
+  <thread>17</thread>
+  <message>Se ingresaron credenciales no validas</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-11-15T03:32:02.883123500Z</date>
+  <millis>1700019122883</millis>
+  <nanos>123500</nanos>
+  <sequence>3</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.controller.PrincipalController</class>
+  <method>ingresar</method>
+  <thread>17</thread>
+  <message>Se ingresaron credenciales no validas</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-11-15T03:40:59.706991500Z</date>
+  <millis>1700019659706</millis>
+  <nanos>991500</nanos>
+  <sequence>3</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.controller.PrincipalController</class>
+  <method>ingresar</method>
+  <thread>17</thread>
+  <message>Se ingresaron credenciales no validas</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-11-15T16:07:09.019452Z</date>
+  <millis>1700064429019</millis>
+  <nanos>452000</nanos>
+  <sequence>5</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.controller.PrincipalController</class>
+  <method>admin</method>
+  <thread>17</thread>
+  <message>Se ingresa la pagina administrativa</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-11-15T16:24:16.630682100Z</date>
+  <millis>1700065456630</millis>
+  <nanos>682100</nanos>
+  <sequence>3</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.controller.PrincipalController</class>
+  <method>admin</method>
+  <thread>17</thread>
+  <message>Se ingresa la pagina administrativa</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-11-15T16:26:34.003933700Z</date>
+  <millis>1700065594003</millis>
+  <nanos>933700</nanos>
+  <sequence>3</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.controller.PrincipalController</class>
+  <method>admin</method>
+  <thread>17</thread>
+  <message>Se ingresa la pagina administrativa</message>
+</record>
+<record>
+  <date>2023-11-15T16:27:09.672157200Z</date>
+  <millis>1700065629672</millis>
+  <nanos>157200</nanos>
+  <sequence>6</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.controller.RegistroGuiaController</class>
+  <method>registarGuia</method>
+  <thread>17</thread>
+  <message>Se registro un nuevo guia al sistema</message>
+</record>
+<record>
+  <date>2023-11-15T16:31:33.636957900Z</date>
+  <millis>1700065893636</millis>
+  <nanos>957900</nanos>
+  <sequence>12</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.controller.PrincipalController</class>
+  <method>admin</method>
+  <thread>17</thread>
+  <message>Se ingresa la pagina administrativa</message>
+</record>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-11-15T16:33:29.795191600Z</date>
+  <millis>1700066009795</millis>
+  <nanos>191600</nanos>
+  <sequence>3</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.controller.PrincipalController</class>
+  <method>admin</method>
+  <thread>17</thread>
+  <message>Se ingresa la pagina administrativa</message>
+</record>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-11-15T16:36:28.980949600Z</date>
+  <millis>1700066188980</millis>
+  <nanos>949600</nanos>
+  <sequence>3</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.controller.PrincipalController</class>
+  <method>admin</method>
+  <thread>17</thread>
+  <message>Se ingresa la pagina administrativa</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-11-15T16:46:59.570699900Z</date>
+  <millis>1700066819570</millis>
+  <nanos>699900</nanos>
+  <sequence>3</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.controller.PrincipalController</class>
+  <method>admin</method>
+  <thread>17</thread>
+  <message>Se ingresa la pagina administrativa</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-11-15T17:29:14.850421500Z</date>
+  <millis>1700069354850</millis>
+  <nanos>421500</nanos>
+  <sequence>3</sequence>
+  <logger>co.edu.uniquindio.model.Agencia</logger>
+  <level>INFO</level>
+  <class>co.edu.uniquindio.controller.PrincipalController</class>
+  <method>admin</method>
+  <thread>17</thread>
+  <message>Se ingresa la pagina administrativa</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>

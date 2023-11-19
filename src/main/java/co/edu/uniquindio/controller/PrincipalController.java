@@ -2,6 +2,7 @@ package co.edu.uniquindio.controller;
 import co.edu.uniquindio.exceptions.CampoObligatorioException;
 import co.edu.uniquindio.exceptions.CampoRepetido;
 import co.edu.uniquindio.model.Agencia;
+import co.edu.uniquindio.model.AgenciaCliente;
 import co.edu.uniquindio.utils.Propiedades;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -22,7 +23,7 @@ public class PrincipalController implements Initializable {
     private Label ingreso, usuario,contrasena;
     @FXML
     private Button botonIngreso, botonCodigo, botonRegistro, bttCambiar,botonAdmin;
-    private final Agencia agencia = Agencia.getInstance();
+    private final AgenciaCliente agencia = AgenciaCliente.getInstance();
     private final Logger LOGGER = Logger.getLogger(Agencia.class.getName());
     private final Propiedades propiedades = Propiedades.getInstance();
     private boolean esIngles = false;
@@ -55,24 +56,20 @@ public class PrincipalController implements Initializable {
         agencia.inicializarDatos();
     }
     public void ingresar(ActionEvent actionEvent) {
-        try{
-            agencia.ingresarCliente(usuarioIngresado.getText(),contrasenaIngresada.getText(), codigo.getText());
-            agencia.loadStage("/portalAgencia.fxml",actionEvent,"Se ingresa al portal de la agencia" );
+        if(agencia.ingresarCliente(usuarioIngresado.getText(),contrasenaIngresada.getText(), codigo.getText()).equals("El cliente ha sido verificado correctamente")) {
+            agencia.loadStage("/portalAgencia.fxml", actionEvent, "Se ingresa al portal de la agencia");
             mostrarMensaje(Alert.AlertType.CONFIRMATION, "El codigo y credenciales fue validado correctamente");
-        }catch (CampoRepetido e)
-        {
-            mostrarMensaje(Alert.AlertType.WARNING, e.getMessage());
+        }else{
+            mostrarMensaje(Alert.AlertType.WARNING,agencia.ingresarCliente(usuarioIngresado.getText(),contrasenaIngresada.getText(), codigo.getText()));
             LOGGER.log(Level.INFO, "Se ingresaron credenciales no validas");
         }
     }
 
     public void enviarCodigo(ActionEvent actionEvent) {
-        try
-        {
-            agencia.enviarCodigo(usuarioIngresado.getText(),contrasenaIngresada.getText());
-            mostrarMensaje(Alert.AlertType.INFORMATION, "El codigo de verificacion ha sido enviado");
-        }catch (CampoObligatorioException e) {
-            mostrarMensaje(Alert.AlertType.INFORMATION, e.getMessage());
+         if(agencia.enviarCodigo(usuarioIngresado.getText(),contrasenaIngresada.getText()).equals("Se ha enviado el codigo de verificacion")) {
+             mostrarMensaje(Alert.AlertType.INFORMATION, "El codigo de verificacion ha sido enviado");
+         }else{
+            mostrarMensaje(Alert.AlertType.INFORMATION,agencia.enviarCodigo(usuarioIngresado.getText(),contrasenaIngresada.getText()) );
         }
     }
     public void mostrarMensaje(Alert.AlertType tipo, String mensaje){

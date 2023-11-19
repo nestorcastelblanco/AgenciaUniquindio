@@ -4,6 +4,7 @@ import co.edu.uniquindio.exceptions.CampoObligatorioException;
 import co.edu.uniquindio.exceptions.CampoRepetido;
 import co.edu.uniquindio.exceptions.CampoVacioException;
 import co.edu.uniquindio.model.Agencia;
+import co.edu.uniquindio.model.AgenciaCliente;
 import co.edu.uniquindio.utils.CambioIdiomaEvent;
 import co.edu.uniquindio.utils.CambioIdiomaListener;
 import co.edu.uniquindio.utils.Propiedades;
@@ -27,7 +28,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class RegistroDestinoController implements Initializable, CambioIdiomaListener {
-    private final Agencia agencia = Agencia.getInstance();
+    private final AgenciaCliente agencia = AgenciaCliente.getInstance();
     private static final Logger LOGGER = Logger.getLogger(Agencia.class.getName());
     @FXML
     private Button botonRegreso,botonRegistro;
@@ -63,15 +64,14 @@ public class RegistroDestinoController implements Initializable, CambioIdiomaLis
         Propiedades.getInstance().addCambioIdiomaListener(this);
         cargarTextos();
     }
-    public void registrarDestino(ActionEvent actionEvent) {
-        try
-        {
-            agencia.registrarDestino(nombre.getText(),ciudad.getText(),descripcion.getText(),imagePaths, clima.getText());
+    public void registrarDestino(ActionEvent actionEvent) throws CampoRepetido,CampoVacioException,CampoObligatorioException {
+        String mensaje = agencia.registrarDestino(nombre.getText(),ciudad.getText(),descripcion.getText(),imagePaths, clima.getText());
+        if(mensaje.equals("El registro de destino fue exitoso")){
             LOGGER.log(Level.INFO,"Se registro un nuevo Destino al sistema");
-            agencia.mostrarMensaje(Alert.AlertType.INFORMATION, "Se regisstro un nuevo destino");
+            mostrarMensaje(Alert.AlertType.INFORMATION, "Se registro un nuevo destino");
             agencia.loadStage("/paginaCreacionDestino.fxml", actionEvent,"Se vuelve a cargar la pagina de registro");
-        } catch (CampoRepetido | CampoObligatorioException | CampoVacioException e) {
-            mostrarMensaje(Alert.AlertType.ERROR, e.getMessage());
+        }else{
+            mostrarMensaje(Alert.AlertType.WARNING, mensaje);
         }
     }
     public void mostrarMensaje(Alert.AlertType tipo, String mensaje){

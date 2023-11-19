@@ -4,6 +4,7 @@ import co.edu.uniquindio.exceptions.CampoObligatorioException;
 import co.edu.uniquindio.exceptions.CampoRepetido;
 import co.edu.uniquindio.exceptions.CampoVacioException;
 import co.edu.uniquindio.model.Agencia;
+import co.edu.uniquindio.model.AgenciaCliente;
 import co.edu.uniquindio.model.Paquetes;
 import co.edu.uniquindio.model.Paquetes;
 import co.edu.uniquindio.utils.CambioIdiomaEvent;
@@ -24,7 +25,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class EdicionGuiaController implements Initializable, CambioIdiomaListener {
-    private final Agencia agencia = Agencia.getInstance();
+    private final AgenciaCliente agencia = AgenciaCliente.getInstance();
     private static final Logger LOGGER = Logger.getLogger(Agencia.class.getName());
     @FXML
     private Button botonRegreso,botonEditar;
@@ -112,20 +113,21 @@ public class EdicionGuiaController implements Initializable, CambioIdiomaListene
         });
     }
     public void editar(ActionEvent actionEvent) {
-        try
+        System.out.println(comboPaquete.getSelectionModel().getSelectedIndex());
+        if(comboPaquete.getSelectionModel().getSelectedIndex() != -1)
         {
-            System.out.println(comboPaquete.getSelectionModel().getSelectedIndex());
-            if(comboPaquete.getSelectionModel().getSelectedIndex() != -1)
-            {
-                agencia.editarGuia(nombre.getText(),experiencia.getText(),cedula.getText(),idiomas.getText(), comboPaquete.getSelectionModel().getSelectedItem());
-                agencia.mostrarMensaje(Alert.AlertType.CONFIRMATION, "Se registro un nuevo guia al sistema");
-                LOGGER.log(Level.INFO,"Se registro un nuevo guia al sistema");
-            }else {
-                LOGGER.log(Level.INFO, "No se ha seleccionado un Paquete");
-                agencia.mostrarMensaje(Alert.AlertType.ERROR, "No se ha seleccionado algun paquete");
+            String mensaje = agencia.editarGuia(nombre.getText(),experiencia.getText(),cedula.getText(),idiomas.getText(), comboPaquete.getSelectionModel().getSelectedItem());
+
+            if (mensaje.equals("Se edito el guia correctamente")){
+                mostrarMensaje(Alert.AlertType.CONFIRMATION, "Se edito el guia en el sistema");
+                LOGGER.log(Level.INFO,"Se edito un guia al sistema");
+            }else{
+                mostrarMensaje(Alert.AlertType.CONFIRMATION, mensaje);
             }
-        } catch (CampoRepetido |CampoObligatorioException|CampoVacioException e) {
-            mostrarMensaje(Alert.AlertType.ERROR, e.getMessage());
+
+        }else {
+            LOGGER.log(Level.INFO, "No se ha seleccionado un Paquete");
+            mostrarMensaje(Alert.AlertType.ERROR, "No se ha seleccionado algun paquete");
         }
     }
     public void mostrarMensaje(Alert.AlertType tipo, String mensaje){

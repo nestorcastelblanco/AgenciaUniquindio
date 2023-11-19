@@ -1,9 +1,6 @@
 package co.edu.uniquindio.controller;
 
-import co.edu.uniquindio.model.Agencia;
-import co.edu.uniquindio.model.Destinos;
-import co.edu.uniquindio.model.Guias;
-import co.edu.uniquindio.model.Paquetes;
+import co.edu.uniquindio.model.*;
 import co.edu.uniquindio.utils.CambioIdiomaEvent;
 import co.edu.uniquindio.utils.CambioIdiomaListener;
 import co.edu.uniquindio.utils.Propiedades;
@@ -22,7 +19,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class EstadisticasController implements Initializable, CambioIdiomaListener {
-    private final Agencia agencia = Agencia.getInstance();
+    private final AgenciaCliente agencia = AgenciaCliente.getInstance();
     @FXML
     private BarChart<?,?> destinosReservados, destinosBuscados,mejoresGuias,paquetesReservados;
     @FXML
@@ -108,7 +105,6 @@ public class EstadisticasController implements Initializable, CambioIdiomaListen
     private void cargarMejoresGuiasRecursivo(ArrayList<Guias> guias, int index, XYChart.Series setMejoresGuias) {
         if (index < guias.size()) {
             System.out.println(guias.get(index).getNombre());
-            System.out.println(agencia.promedioGuias(guias.get(index)));
             if (Float.isNaN(agencia.promedioGuias(guias.get(index))))
             {
                 setMejoresGuias.getData().add(new XYChart.Data<>(guias.get(index).getNombre(),0));
@@ -119,7 +115,6 @@ public class EstadisticasController implements Initializable, CambioIdiomaListen
             }
         }
     }
-
     private void cargarMejoresGuias() {
         XYChart.Series setMejoresGuias = new XYChart.Series<>();
         ArrayList<Guias> guias = agencia.enviarGuias();

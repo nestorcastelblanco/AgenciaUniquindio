@@ -3,7 +3,7 @@ package co.edu.uniquindio.controller;
 import co.edu.uniquindio.exceptions.CampoObligatorioException;
 import co.edu.uniquindio.exceptions.CampoRepetido;
 import co.edu.uniquindio.exceptions.CampoVacioException;
-import co.edu.uniquindio.model.Agencia;
+import co.edu.uniquindio.model.AgenciaCliente;
 import co.edu.uniquindio.utils.Propiedades;
 import co.edu.uniquindio.utils.CambioIdiomaEvent;
 import co.edu.uniquindio.utils.CambioIdiomaListener;
@@ -27,9 +27,10 @@ public class RegistroController implements Initializable, CambioIdiomaListener {
     private TextField nombreUsuario, correoUsuario, direccionUsuario, ciudadUsuario, telefonoUsuario, usuarioIngresado, contrasenaIngresada, id;
     @FXML
     private Button botonRegreso, botonRegistro, bttCambiar;
-    private final Agencia agencia = Agencia.getInstance();
+    private final AgenciaCliente agencia = AgenciaCliente.getInstance();
     private final Propiedades propiedades = Propiedades.getInstance();
-    private final Logger LOGGER = Logger.getLogger(Agencia.class.getName());
+    private final AgenciaCliente agenciaCliente = new AgenciaCliente();
+    private final Logger LOGGER = Logger.getLogger(AgenciaCliente.class.getName());
     @Override
     public void onCambioIdioma(CambioIdiomaEvent evento) {
         cargarTextos();
@@ -52,13 +53,14 @@ public class RegistroController implements Initializable, CambioIdiomaListener {
         identificacion.setText(propiedades.getResourceBundle().getString("identificacion"));
         LOGGER.log(Level.INFO,"Se cargaron los textos de la ventana de registro");
     }
-    public void registrar(ActionEvent actionEvent) {
-        try {
-            agencia.registrarCliente(nombreUsuario.getText(), correoUsuario.getText(), direccionUsuario.getText(), ciudadUsuario.getText(), telefonoUsuario.getText(), usuarioIngresado.getText(), contrasenaIngresada.getText(), id.getText());
+    public void registrar(ActionEvent actionEvent) throws CampoRepetido, CampoVacioException, CampoObligatorioException {
+        String mensaje = agenciaCliente.registrarCliente(nombreUsuario.getText(), correoUsuario.getText(), direccionUsuario.getText(), ciudadUsuario.getText(), telefonoUsuario.getText(), usuarioIngresado.getText(), contrasenaIngresada.getText(), id.getText());
+        if(mensaje.equals("Se registro un nuevo usuario"))
+        {
             LOGGER.log(Level.INFO, "Se registro un nuevo usuario");
-            mostrarMensaje(Alert.AlertType.INFORMATION, "Se registro un nuevo usuario");
-        } catch (CampoVacioException | CampoRepetido | CampoObligatorioException e) {
-            mostrarMensaje(Alert.AlertType.ERROR, e.getMessage());
+            mostrarMensaje(Alert.AlertType.INFORMATION, mensaje);
+        } else {
+            mostrarMensaje(Alert.AlertType.ERROR, mensaje);
         }
     }
     public void mostrarMensaje(Alert.AlertType tipo, String mensaje){
@@ -68,6 +70,6 @@ public class RegistroController implements Initializable, CambioIdiomaListener {
         alert.show();
     }
     public void regresar(ActionEvent actionEvent) {
-        agencia.loadStage("/paginaPrincipal.fxml", actionEvent,"Se ingreso a la pagina principal");
+        agenciaCliente.loadStage("/paginaPrincipal.fxml", actionEvent,"Se ingreso a la pagina principal");
     }
 }

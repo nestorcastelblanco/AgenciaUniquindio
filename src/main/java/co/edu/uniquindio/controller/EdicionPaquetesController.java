@@ -4,6 +4,7 @@ import co.edu.uniquindio.exceptions.CampoObligatorioException;
 import co.edu.uniquindio.exceptions.CampoRepetido;
 import co.edu.uniquindio.exceptions.CampoVacioException;
 import co.edu.uniquindio.model.Agencia;
+import co.edu.uniquindio.model.AgenciaCliente;
 import co.edu.uniquindio.model.Destinos;
 import co.edu.uniquindio.model.Paquetes;
 import co.edu.uniquindio.utils.CambioIdiomaEvent;
@@ -25,7 +26,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class EdicionPaquetesController implements Initializable, CambioIdiomaListener {
-    private final Agencia agencia = Agencia.getInstance();
+    private final AgenciaCliente agencia = AgenciaCliente.getInstance();
     private final Logger LOGGER = Logger.getLogger(Agencia.class.getName());
     private ArrayList<Destinos> destinosCargados = agencia.getDestinos();
     private ArrayList<Destinos> destinosActuales = new ArrayList<>();
@@ -168,13 +169,11 @@ public class EdicionPaquetesController implements Initializable, CambioIdiomaLis
         agencia.loadStage("/paginaVistaPaquetes.fxml", actionEvent, "Se regresa a la vista de paquetes de administrador");
     }
     public void editarPaquete(ActionEvent actionEvent) {
-        try
-        {
-            agencia.editarPaquetes(agencia.getPAQUETE_EDICION(),nombrePaquete.getText(), destinosActuales, inicio.getValue(), fin.getValue(), servicios.getText(), cupos.getText(), valor.getText());
-            agencia.mostrarMensaje(Alert.AlertType.CONFIRMATION, "El paquete fue editado");
-        }catch (CampoRepetido|CampoVacioException|CampoObligatorioException e)
-        {
-            mostrarMensaje(Alert.AlertType.WARNING, e.getMessage());
+        String mensaje = agencia.editarPaquetes(agencia.getPAQUETE_EDICION(),nombrePaquete.getText(), destinosActuales, inicio.getValue(), fin.getValue(), servicios.getText(), cupos.getText(), valor.getText());
+        if(mensaje.equals("El paquete fue editado correctamente")){
+            mostrarMensaje(Alert.AlertType.CONFIRMATION, "El paquete fue editado");
+        }else{
+            mostrarMensaje(Alert.AlertType.CONFIRMATION, mensaje);
         }
     }
     public void mostrarMensaje(Alert.AlertType tipo, String mensaje){
@@ -212,17 +211,16 @@ public class EdicionPaquetesController implements Initializable, CambioIdiomaLis
     public void agregarDestino(ActionEvent actionEvent) {
         if (destinosSistema.getSelectionModel().isEmpty()) {
             LOGGER.log(Level.INFO, "Se intentó añadir un destino sin seleccionarlo");
-            agencia.mostrarMensaje(Alert.AlertType.ERROR, "No se ha seleccionado algun destino");
+            mostrarMensaje(Alert.AlertType.ERROR, "No se ha seleccionado algun destino");
             return;
         }
-
         Destinos destinoSeleccionado = destinosSistema.getSelectionModel().getSelectedItem();
 
         if (destinosActuales.stream().anyMatch(destino -> destino.getNombre().equals(destinoSeleccionado.getNombre()))) {
             System.out.println("El paquete actual ya cuenta con ese destino");
         } else {
             destinosActuales.add(destinoSeleccionado);
-            agencia.mostrarMensaje(Alert.AlertType.CONFIRMATION, "Se añadio el destino");
+            mostrarMensaje(Alert.AlertType.CONFIRMATION, "Se añadio el destino");
             System.out.println("Se añadió el destino: " + destinoSeleccionado.getNombre() + " a los destinos del paquete");
             llenarListaDestinosPaquete();
         }
@@ -231,7 +229,7 @@ public class EdicionPaquetesController implements Initializable, CambioIdiomaLis
     public void eliminarDestino(ActionEvent actionEvent) {
         if (destinosPaquete.getSelectionModel().isEmpty()) {
             LOGGER.log(Level.INFO, "Se intentó eliminar un destino sin seleccionarlo");
-            agencia.mostrarMensaje(Alert.AlertType.ERROR, "No se ha seleccionado un destino para eliminar");
+            mostrarMensaje(Alert.AlertType.ERROR, "No se ha seleccionado un destino para eliminar");
             return;
         }
 

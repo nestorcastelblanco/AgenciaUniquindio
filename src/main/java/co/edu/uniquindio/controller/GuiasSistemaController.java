@@ -1,6 +1,7 @@
 package co.edu.uniquindio.controller;
 
 import co.edu.uniquindio.model.Agencia;
+import co.edu.uniquindio.model.AgenciaCliente;
 import co.edu.uniquindio.model.Guias;
 import co.edu.uniquindio.model.Reservas;
 import co.edu.uniquindio.utils.CambioIdiomaEvent;
@@ -20,8 +21,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class GuiasSistemaController implements Initializable, CambioIdiomaListener {
-    private final Agencia agencia = Agencia.getInstance();
-    private final Logger LOGGER = Logger.getLogger(Agencia.class.getName());
+    private final AgenciaCliente agencia = AgenciaCliente.getInstance();
+    private final Logger LOGGER = Logger.getLogger(AgenciaCliente.class.getName());
     @FXML
     private TableView<Guias> tablaGuias;
     @FXML
@@ -69,7 +70,7 @@ public class GuiasSistemaController implements Initializable, CambioIdiomaListen
     public void eliminar(ActionEvent actionEvent) {
         if (tablaGuias.getSelectionModel().getSelectedIndex() == -1) {
             LOGGER.log(Level.INFO, "Se intento eliminar un guia sin haberlo seleccionado");
-            agencia.mostrarMensaje(Alert.AlertType.ERROR, "Se intento eliminr un guia sin seleccionarlo");
+            mostrarMensaje(Alert.AlertType.ERROR, "Se intento eliminr un guia sin seleccionarlo");
         } else {
             agencia.recibirGuiaEliminado(tablaGuias.getSelectionModel().getSelectedItem());
             agencia.loadStage("/paginaGuias.fxml",actionEvent, "Se cargo la pagina actualizada");
@@ -79,10 +80,16 @@ public class GuiasSistemaController implements Initializable, CambioIdiomaListen
     public void editar(ActionEvent actionEvent) {
         if (tablaGuias.getSelectionModel().getSelectedIndex() == -1) {
             LOGGER.log(Level.INFO, "Se intento editar un guia sin haberlo seleccionado");
-            agencia.mostrarMensaje(Alert.AlertType.ERROR, "Se intento editar un guia sin haberlo seleccionado");
+            mostrarMensaje(Alert.AlertType.ERROR, "Se intento editar un guia sin haberlo seleccionado");
         } else {
             agencia.enviarGuiaEdicion(tablaGuias.getSelectionModel().getSelectedItem());
             agencia.loadStage("/paginaEdicionGuia.fxml", actionEvent, "Se carga la ventana de edicion de guia");
         }
+    }
+    public void mostrarMensaje(Alert.AlertType tipo, String mensaje){
+        Alert alert = new Alert(tipo);
+        alert.setHeaderText(null);
+        alert.setContentText(mensaje);
+        alert.show();
     }
 }

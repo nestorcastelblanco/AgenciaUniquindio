@@ -14,18 +14,16 @@ import javafx.stage.Stage;
 import lombok.Getter;
 import lombok.extern.java.Log;
 
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Properties;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.PasswordAuthentication;
-import java.io.*;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
@@ -68,12 +66,8 @@ public class Agencia {
         leerDestinos();
         leerPaquetes();
         leerReservas();
-        for (int i = 0 ; i<guias.size(); i++)
-        {
-            System.out.println(guias.get(i).getNombre() +" " + promedioGuias(guias.get(i)));
-        }
     }
-    private Agencia()
+    public Agencia()
     {
         try {
             LOGGER.addHandler(new FileHandler("logs.xml", true));
@@ -460,10 +454,6 @@ public class Agencia {
         ArchivoUtils.serializarArraylistPaquetes(RUTA_PAQUETES,paquetes);
          */
         actualizarPaquetesRecursivo(0,0,numeroPersonas);
-        for(int i = 0 ; i<reservas.size();i++)
-        {
-            System.out.println(reservas.get(i).getCliente().getNombreCompleto() + " Codigo: " + reservas.get(i).getCodigo());
-        }
     }
 
     public float verificarCupon(Paquetes paquete, LocalDate inicio, LocalDate fin, String cupon, String personas) throws CampoObligatorioException{
@@ -518,16 +508,21 @@ public class Agencia {
     private void actualizarDestinosRecursivo(int x) {
         if (x < paqueteSeleccion().getDestinos().size()) {
             String nombreDestinoPaquete = paqueteSeleccion().getDestinos().get(x).getNombre();
-            for (int j = 0; j < destinos.size(); j++) {
-                if (destinos.get(j).getNombre().equals(nombreDestinoPaquete)) {
-                    System.out.println("Se actualiza ");
-                    destinos.get(j).setContReservas(destinos.get(j).getContReservas() + 1);
-                }
-            }
+            actualizarDestino(0,nombreDestinoPaquete);
             actualizarDestinosRecursivo(x + 1);
         } else {
             borrarDatosSerializados(RUTA_DESTINOS);
             ArchivoUtils.serializarArraylistDestinos(RUTA_DESTINOS, destinos);
+        }
+    }
+    //ACTUALIZADO 14/11
+    private void actualizarDestino(int index, String nombreDestinoPaquete) {
+        if (index < destinos.size()) {
+            if (destinos.get(index).getNombre().equals(nombreDestinoPaquete)) {
+                System.out.println("Se actualiza ");
+                destinos.get(index).setContReservas(destinos.get(index).getContReservas() + 1);
+            }
+            actualizarDestino(index+1,nombreDestinoPaquete);
         }
     }
     public void realizarEdicion(String nombre, String correo, String direccion, String id, String ciudad, String telefono, String usuario, String contrasena) throws CampoRepetido,CampoObligatorioException,CampoVacioException {
@@ -575,13 +570,6 @@ public class Agencia {
         actualizarClientesRecursivo(0,nombre,correo,direccion,ciudad,id,telefono,usuario,contrasena);
         borrarDatosSerializados(RUTA_CLIENTES);
         ArchivoUtils.serializarArraylistClientes(RUTA_CLIENTES, clientes);
-        for(int i = 0; i<clientes.size();i++)
-        {
-            System.out.println(clientes.get(i).getNombreCompleto() + " " + clientes.get(i).getCorreo() + " " );
-            System.out.println(clientes.get(i).getDireccion() + " " + clientes.get(i).getCiudad() + " " );
-            System.out.println(clientes.get(i).getIdentificacion() + " " + clientes.get(i).getTelefono() + " " );
-            System.out.println(clientes.get(i).getUsuario() + " " + clientes.get(i).getContrasena() + " " );
-        }
     }
     public void actualizarClientesRecursivo(int i, String nombre, String correo, String direccion, String ciudad, String id, String telefono, String usuario, String contrasena) {
         if (i < clientes.size()) {
@@ -649,12 +637,6 @@ public class Agencia {
         borrarDatosSerializados(RUTA_GUIAS);
         ArchivoUtils.serializarArraylist(RUTA_GUIAS,guias);
         LOGGER.log(Level.INFO, "Se edito un guia");
-        for(int i = 0; i<guias.size();i++)
-        {
-            System.out.println(guias.get(i).getNombre() + " " + guias.get(i).getIdentificacion() + " " );
-            System.out.println(guias.get(i).getExp() + " " + guias.get(i).getPaquete().getNombre() + " " );
-            System.out.println(obtenerIdiomas(guias.get(i).getLenguajes()));
-        }
     }
     public void actualizarGuiasRecursivo(int i, String nombre, String id, String exp, Paquetes paqueteGuia, String idiomas) {
         if (i < guias.size()) {
@@ -1268,6 +1250,22 @@ public class Agencia {
         }
         actualizarBusquedaClienteRecursivo(clienteSesion, destino, clienteIndex + 1);
     }
+
+    public String obtenerNombresDestinos(ArrayList<Destinos> destinos) {
+        StringBuilder nombres = new StringBuilder();
+        obtenerNombresDestinosRecursivo(destinos, nombres, 0);
+        return nombres.toString();
+    }
+
+    private void obtenerNombresDestinosRecursivo(ArrayList<Destinos> destinos, StringBuilder nombres, int index) {
+        if (index < destinos.size()) {
+            nombres.append(destinos.get(index).getNombre()).append(", ");
+            obtenerNombresDestinosRecursivo(destinos, nombres, index + 1);
+        } else if (nombres.length() > 2) {
+            nombres.setLength(nombres.length() - 2);
+        }
+    }
+        /*
     public String obtenerNombresDestinos(ArrayList<Destinos> destinos) {
         StringBuilder nombres = new StringBuilder();
         for (Destinos destino : destinos) {
@@ -1278,17 +1276,52 @@ public class Agencia {
         }
         return nombres.toString();
     }
+
+         */
+
     public String obtenerIdiomas(ArrayList<String> idiomas) {
         StringBuilder resultado = new StringBuilder();
-        for (String idioma : idiomas) {
-            resultado.append(idioma).append(", ");
-        }
-        // Eliminar la coma y el espacio final
-        if (resultado.length() > 0) {
-            resultado.setLength(resultado.length() - 2);
-        }
+        obtenerIdiomasRecursivo(idiomas, resultado, 0);
         return resultado.toString();
     }
+
+    private void obtenerIdiomasRecursivo(ArrayList<String> idiomas, StringBuilder resultado, int index) {
+        if (index < idiomas.size()) {
+            resultado.append(idiomas.get(index)).append(", ");
+            obtenerIdiomasRecursivo(idiomas, resultado, index + 1);
+        } else if (resultado.length() > 0) {
+            resultado.setLength(resultado.length() - 2);
+        }
+    }
+    /*
+        public String obtenerIdiomas(ArrayList<String> idiomas) {
+            StringBuilder resultado = new StringBuilder();
+            for (String idioma : idiomas) {
+                resultado.append(idioma).append(", ");
+            }
+            // Eliminar la coma y el espacio final
+            if (resultado.length() > 0) {
+                resultado.setLength(resultado.length() - 2);
+            }
+            return resultado.toString();
+        }
+
+     */
+    public String obtenerNombresCiudades(ArrayList<Destinos> destinos) {
+        StringBuilder nombres = new StringBuilder();
+        obtenerNombresCiudadesRecursivo(destinos, nombres, 0);
+        return nombres.toString();
+    }
+
+    private void obtenerNombresCiudadesRecursivo(ArrayList<Destinos> destinos, StringBuilder nombres, int index) {
+        if (index < destinos.size()) {
+            nombres.append(destinos.get(index).getCiudad()).append(", ");
+            obtenerNombresCiudadesRecursivo(destinos, nombres, index + 1);
+        } else if (nombres.length() > 2) {
+            nombres.setLength(nombres.length() - 2);
+        }
+    }
+    /*
     public String obtenerNombresCiudades(ArrayList<Destinos> destinos) {
         StringBuilder nombres = new StringBuilder();
         for (Destinos destino : destinos) {
@@ -1299,6 +1332,8 @@ public class Agencia {
         }
         return nombres.toString();
     }
+
+     */
     public boolean verificarCredenciales(String usuario, String contrasena)
     {
         /*
@@ -1484,31 +1519,44 @@ public class Agencia {
         }
     }
     public void loadStage(String url, Event event, String mensaje){
-            try
-            {
-                ((Node)(event.getSource())).getScene().getWindow().hide();
-                Parent root = FXMLLoader.load(Objects.requireNonNull(Agencia.class.getResource(url)));
-                Scene scene = new Scene(root);
-                Stage newStage = new Stage();
-                newStage.setScene(scene);
-                newStage.setTitle("Travel Uniquindio");
-                newStage.show();
-            } catch (Exception ignored)
-            {
-                LOGGER.log(Level.INFO,mensaje);
-            }
+        try
+        {
+            ((Node)(event.getSource())).getScene().getWindow().hide();
+            Parent root = FXMLLoader.load(Objects.requireNonNull(Agencia.class.getResource(url)));
+            Scene scene = new Scene(root);
+            Stage newStage = new Stage();
+            newStage.setScene(scene);
+            newStage.setTitle("Travel Uniquindio");
+            newStage.show();
+        } catch (Exception ignored)
+        {
+            LOGGER.log(Level.INFO,mensaje);
+        }
     }
     private boolean verificarNombrePaquete(String nombre) {
-        boolean state = true;
+        /*boolean state = true;
         for (int i = 0; i<paquetes.size();i++)
         {
-            if(nombre.equals(paquetes.get(i).getNombre()))
+            if(nombre.equals(paquetes.get                                                                                                                                            (i).getNombre()))
             {
                 state = false;
             }
         }
-        return state;
+
+         */
+        return verificarNombrePaqueteRecursivo(nombre,0);
     }
+    private boolean verificarNombrePaqueteRecursivo(String nombre, int ind)
+    {
+        if(ind == paquetes.size()) {
+            return true;
+        }
+        if(nombre.equals(paquetes.get(ind).getNombre())){
+            return false;
+        }
+        return verificarNombrePaqueteRecursivo(nombre, ind+1);
+    }
+
     private boolean verificarFechas(LocalDate inicio, LocalDate fin) {
         boolean state = true;
         if (inicio.isAfter(fin))
@@ -1580,6 +1628,76 @@ public class Agencia {
         boolean isNumeric = (numero != null && numero.matches("[0-9]+"));
         return isNumeric;
     }
+
+    public void cargarCalificacionesCompleta(ArrayList<Destinos> destinosCombo, ArrayList<Integer> calificacionDestinos, int calificacionGuia, Guias guia, Paquetes paqueteCalificacion) {
+        cargarCalificacionesRecursivo(destinos, destinosCombo, calificacionDestinos, paqueteCalificacion, 0);
+        cargarCalificacionesGuiaRecursivo(guias, calificacionGuia, guia, 0);
+        cargarCalificacionesPaquete(calificacionDestinos, paqueteCalificacion,0);
+        procesarReservas(reservas, 0);
+
+        LOGGER.log(Level.INFO, "Se ha generado la calificacion correctamente");
+
+        borrarDatosSerializados(RUTA_PAQUETES);
+        ArchivoUtils.serializarArraylistPaquetes(RUTA_PAQUETES, paquetes);
+        borrarDatosSerializados(RUTA_RESERVAS);
+        ArchivoUtils.serializarArraylistReservas(RUTA_RESERVAS, reservas);
+        borrarDatosSerializados(RUTA_GUIAS);
+        ArchivoUtils.serializarArraylist(RUTA_GUIAS, guias);
+    }
+
+    private void cargarCalificacionesRecursivo(ArrayList<Destinos> destinos, ArrayList<Destinos> destinosCombo, ArrayList<Integer> calificacionDestinos, Paquetes paqueteCalificacion, int index) {
+        if (index < destinos.size()) {
+            procesarDestino(destinos, destinosCombo, calificacionDestinos, paqueteCalificacion, index, 0);
+            index++;
+            cargarCalificacionesRecursivo(destinos, destinosCombo, calificacionDestinos, paqueteCalificacion, index);
+        }
+    }
+
+    private void cargarCalificacionesGuiaRecursivo(ArrayList<Guias> guias, int calificacionGuia, Guias guia, int index) {
+        if (index < guias.size()) {
+            procesarGuia(guias, calificacionGuia, guia, index);
+            index++;
+            cargarCalificacionesGuiaRecursivo(guias, calificacionGuia, guia, index);
+        }
+    }
+
+    private void procesarDestino(ArrayList<Destinos> destinos, ArrayList<Destinos> destinosCombo, ArrayList<Integer> calificacionDestinos, Paquetes paqueteCalificacion, int index, int innerIndex) {
+        if (innerIndex < destinosCombo.size()) {
+            if (destinos.get(index).getNombre().equals(destinosCombo.get(innerIndex).getNombre())) {
+                destinos.get(index).añadirCalificacion(calificacionDestinos.get(innerIndex));
+                destinos.set(index, destinos.get(index));
+                System.out.println(destinos.get(index).getNombre() + " Calificacion: " + calificacionDestinos.get(innerIndex));
+            }
+            procesarDestino(destinos, destinosCombo, calificacionDestinos, paqueteCalificacion, index, innerIndex + 1);
+        }
+    }
+
+    private void procesarGuia(ArrayList<Guias> guias, int calificacionGuia, Guias guia, int index) {
+        if (guias.get(index).getIdentificacion().equals(guia.getIdentificacion())) {
+            guias.get(index).addCalificacion((float) calificacionGuia);
+            guias.set(index, guias.get(index));
+            System.out.println(guias.get(index).getNombre() + " Calificacion: " + calificacionGuia);
+        }
+    }
+
+    private void procesarReservas(ArrayList<Reservas> reservas, int index) {
+        if (index < reservas.size()) {
+            if (RESERVA_CALIFICACION.getCodigo() == reservas.get(index).getCodigo()) {
+                Reservas reserva = reservas.get(index);
+                reserva.setPaquete(RESERVA_CALIFICACION.getPaquete());
+                reserva.setCliente(RESERVA_CALIFICACION.getCliente());
+                reserva.setFechaSolicitud(RESERVA_CALIFICACION.getFechaSolicitud());
+                reserva.setFechaPlanificada(RESERVA_CALIFICACION.getFechaPlanificada());
+                reserva.setNumeroPersonas(RESERVA_CALIFICACION.getNumeroPersonas());
+                reserva.setEstado(RESERVA_CALIFICACION.getEstado());
+                reserva.setGuia(RESERVA_CALIFICACION.getGuia());
+                reserva.setCodigo(RESERVA_CALIFICACION.getCodigo());
+                reserva.setCalificacion(true);
+            }
+            procesarReservas(reservas, index + 1);
+        }
+    }
+    /*
     public void cargarCalificacionesCompleta(ArrayList<Destinos> destinosCombo, ArrayList<Integer> calificacionDestinos, int calificacionGuia, Guias guia, Paquetes paqueteCalificacion) {
         for(int i = 0 ; i<destinos.size();i++){
             for( int x = 0 ; x<destinosCombo.size();x++)
@@ -1621,10 +1739,22 @@ public class Agencia {
         ArchivoUtils.serializarArraylistReservas(RUTA_RESERVAS,reservas);
         borrarDatosSerializados(RUTA_GUIAS);
         ArchivoUtils.serializarArraylist(RUTA_GUIAS,guias);
-    }
+    }*/
 
     //CALIFICACIONES DE RESERVAS QUE NO CUENTAN CON UN GUIA
     public void cargarCalificaciones(ArrayList<Destinos> destinosCombo, ArrayList<Integer> calificacionDestinos, Paquetes paqueteCalificacion) {
+        cargarCalificacionesRecursivo(destinos, destinosCombo, calificacionDestinos, paqueteCalificacion, 0);
+        procesarReservas(reservas, 0);
+        cargarCalificacionesPaquete(calificacionDestinos, paqueteCalificacion,0);
+        LOGGER.log(Level.INFO, "Se ha generado la calificacion correctamente");
+
+        borrarDatosSerializados(RUTA_PAQUETES);
+        ArchivoUtils.serializarArraylistPaquetes(RUTA_PAQUETES, paquetes);
+        borrarDatosSerializados(RUTA_RESERVAS);
+        ArchivoUtils.serializarArraylistReservas(RUTA_RESERVAS, reservas);
+        borrarDatosSerializados(RUTA_GUIAS);
+        ArchivoUtils.serializarArraylist(RUTA_GUIAS, guias);
+        /*
         for(int i = 0 ; i<destinos.size();i++){
             for( int x = 0 ; x<destinosCombo.size();x++)
             {
@@ -1667,14 +1797,57 @@ public class Agencia {
         ArchivoUtils.serializarArraylistReservas(RUTA_RESERVAS,reservas);
         borrarDatosSerializados(RUTA_GUIAS);
         ArchivoUtils.serializarArraylist(RUTA_GUIAS,guias);
+
+         */
     }
-    private float calcularPromedioDestinos(int i, ArrayList<Integer> calificacionDestinos, float cont) {
+
+    private void cargarCalificacionesPaquete(ArrayList<Integer> calificacionDestinos, Paquetes paqueteCalificacion, int i) {
+        if (i<paquetes.size()){
+            if (paquetes.get(i).getNombre().equals(paqueteCalificacion.getNombre()))
+            {
+                paquetes.get(i).añadirCalificacion(calcularPromedioDestinos(0,calificacionDestinos,0));
+            }
+            cargarCalificacionesPaquete(calificacionDestinos,paqueteCalificacion,i+1);
+        }
+    }
+
+    private Float calcularPromedioDestinos(int i, ArrayList<Integer> calificacionDestinos, float cont) {
         if(i < calificacionDestinos.size())
         {
-           return calcularPromedioDestinos(i+1,calificacionDestinos,cont+ Float.valueOf(calificacionDestinos.get(i)));
+            return calcularPromedioDestinos(i+1,calificacionDestinos,cont+ Float.valueOf(calificacionDestinos.get(i)));
         }
         return cont/calificacionDestinos.size();
     }
+    public ArrayList<Destinos> ordenarPorRepeticiones() {
+        HashSet<String> destinosBuscados = new HashSet<>(agencia.CLIENTE_SESION.getBusquedas());
+        ArrayList<String> arrayBuscados = new ArrayList<>(destinosBuscados);
+        ArrayList<Destinos> destinosBusquedas = new ArrayList<>();
+
+        ordenarPorRepeticionesRecursivo(0, arrayBuscados, destinosBusquedas);
+
+        return destinosBusquedas;
+    }
+
+    private void ordenarPorRepeticionesRecursivo(int index, ArrayList<String> arrayBuscados, ArrayList<Destinos> destinosBusquedas) {
+        if (index < arrayBuscados.size()) {
+            String nombreBuscado = arrayBuscados.get(index);
+
+            buscarDestino(nombreBuscado, 0, destinosBusquedas);
+
+            ordenarPorRepeticionesRecursivo(index + 1, arrayBuscados, destinosBusquedas);
+        }
+    }
+
+    private void buscarDestino(String nombreBuscado, int index, ArrayList<Destinos> destinosBusquedas) {
+        if (index < agencia.getDestinos().size()) {
+            if (nombreBuscado.equals(agencia.getDestinos().get(index).getNombre())) {
+                destinosBusquedas.add(agencia.getDestinos().get(index));
+            }
+
+            buscarDestino(nombreBuscado, index + 1, destinosBusquedas);
+        }
+    }
+    /*
     public ArrayList<Destinos> ordenarPorRepeticiones() {
         HashSet<String> destinosBuscados = new HashSet<>(agencia.CLIENTE_SESION.getBusquedas());
         ArrayList<String> arrayBuscados = new ArrayList<>(destinosBuscados);
@@ -1691,6 +1864,8 @@ public class Agencia {
         }
         return destinosBusquedas;
     }
+
+     */
     public void mostrarMensaje(Alert.AlertType tipo, String mensaje){
         Alert alert = new Alert(tipo);
         alert.setHeaderText(null);

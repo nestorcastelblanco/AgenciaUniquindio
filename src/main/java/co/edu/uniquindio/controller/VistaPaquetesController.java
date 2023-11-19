@@ -1,6 +1,7 @@
 package co.edu.uniquindio.controller;
 
 import co.edu.uniquindio.model.Agencia;
+import co.edu.uniquindio.model.AgenciaCliente;
 import co.edu.uniquindio.model.Paquetes;
 import co.edu.uniquindio.utils.CambioIdiomaEvent;
 import co.edu.uniquindio.utils.CambioIdiomaListener;
@@ -20,7 +21,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class VistaPaquetesController implements Initializable, CambioIdiomaListener {
-    private final Agencia agencia = Agencia.getInstance();
+    private final AgenciaCliente agencia = AgenciaCliente.getInstance();
     private final Logger LOGGER = Logger.getLogger(Agencia.class.getName());
     @FXML
     private TableView<Paquetes> tablaPaquetes;
@@ -74,7 +75,7 @@ public class VistaPaquetesController implements Initializable, CambioIdiomaListe
     public void editar(ActionEvent actionEvent) {
         if (tablaPaquetes.getSelectionModel().getSelectedIndex() == -1) {
             LOGGER.log(Level.INFO, "Se intento editar un paquete sin haberlo seleccionado");
-            agencia.mostrarMensaje(Alert.AlertType.ERROR, "Se intento iditar un paquete sin haberlo seleccionado");
+            mostrarMensaje(Alert.AlertType.ERROR, "Se intento iditar un paquete sin haberlo seleccionado");
         } else {
             agencia.recibirPaqueteEdicion(tablaPaquetes.getSelectionModel().getSelectedItem());
             agencia.loadStage("/paginaEdicionPaquete.fxml",actionEvent,"Se va a editar un paquete");
@@ -83,10 +84,16 @@ public class VistaPaquetesController implements Initializable, CambioIdiomaListe
     public void eliminar(ActionEvent actionEvent) {
         if (tablaPaquetes.getSelectionModel().getSelectedIndex() == -1) {
             LOGGER.log(Level.INFO, "Se intento cancelar un paquete sin haberlo seleccionado");
-            agencia.mostrarMensaje(Alert.AlertType.ERROR, "Se intento eliminar un paquete sin haberlo seleccionado");
+            mostrarMensaje(Alert.AlertType.ERROR, "Se intento eliminar un paquete sin haberlo seleccionado");
         } else {
             agencia.recibirPaqueteCancelacion(tablaPaquetes.getSelectionModel().getSelectedItem());
             agencia.loadStage("/paginaVistaPaquetes.fxml",actionEvent, "Se cargo la pagina actualizada");
         }
+    }
+    public void mostrarMensaje(Alert.AlertType tipo, String mensaje){
+        Alert alert = new Alert(tipo);
+        alert.setHeaderText(null);
+        alert.setContentText(mensaje);
+        alert.show();
     }
 }

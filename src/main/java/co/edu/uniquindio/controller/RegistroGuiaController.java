@@ -1,10 +1,6 @@
 package co.edu.uniquindio.controller;
-
-import co.edu.uniquindio.exceptions.CampoObligatorioException;
-import co.edu.uniquindio.exceptions.CampoRepetido;
-import co.edu.uniquindio.exceptions.CampoVacioException;
 import co.edu.uniquindio.model.Agencia;
-import co.edu.uniquindio.model.Paquetes;
+import co.edu.uniquindio.model.AgenciaCliente;
 import co.edu.uniquindio.model.Paquetes;
 import co.edu.uniquindio.utils.CambioIdiomaEvent;
 import co.edu.uniquindio.utils.CambioIdiomaListener;
@@ -24,7 +20,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class RegistroGuiaController implements Initializable, CambioIdiomaListener {
-    private final Agencia agencia = Agencia.getInstance();
+    private final AgenciaCliente agencia = AgenciaCliente.getInstance();
     private static final Logger LOGGER = Logger.getLogger(Agencia.class.getName());
     @FXML
     private Button botonRegreso,botonRegistro;
@@ -107,20 +103,21 @@ public class RegistroGuiaController implements Initializable, CambioIdiomaListen
         });
     }
     public void registarGuia(ActionEvent actionEvent) {
-        try
+        System.out.println(comboPaquete.getSelectionModel().getSelectedIndex());
+        if(comboPaquete.getSelectionModel().getSelectedIndex() != -1)
         {
-            System.out.println(comboPaquete.getSelectionModel().getSelectedIndex());
-            if(comboPaquete.getSelectionModel().getSelectedIndex() != -1)
-            {
-                agencia.registrarGuia(nombre.getText(),experiencia.getText(),cedula.getText(),idiomas.getText(), comboPaquete.getSelectionModel().getSelectedItem());
-                agencia.mostrarMensaje(Alert.AlertType.INFORMATION, "Se registro un nuevo guia al sistema");
+            String mensaje =  agencia.registrarGuia(nombre.getText(),experiencia.getText(),cedula.getText(),idiomas.getText(), comboPaquete.getSelectionModel().getSelectedItem());
+
+            if (mensaje.equals("El guia fue registrado correctamente")){
+                mostrarMensaje(Alert.AlertType.INFORMATION, "Se registro un nuevo guia al sistema");
                 LOGGER.log(Level.INFO,"Se registro un nuevo guia al sistema");
-            }else {
-                LOGGER.log(Level.INFO, "No se ha seleccionado un paquete");
-                agencia.mostrarMensaje(Alert.AlertType.ERROR, "No se ha seleccionado algun paquete");
+            }else{
+                mostrarMensaje(Alert.AlertType.INFORMATION, mensaje);
             }
-        } catch (CampoRepetido |CampoObligatorioException|CampoVacioException e) {
-            mostrarMensaje(Alert.AlertType.ERROR, e.getMessage());
+
+        }else {
+            LOGGER.log(Level.INFO, "No se ha seleccionado un paquete");
+            mostrarMensaje(Alert.AlertType.ERROR, "No se ha seleccionado algun paquete");
         }
     }
     public void mostrarMensaje(Alert.AlertType tipo, String mensaje){

@@ -1,6 +1,7 @@
 package co.edu.uniquindio.controller;
 
 import co.edu.uniquindio.model.Agencia;
+import co.edu.uniquindio.model.AgenciaCliente;
 import co.edu.uniquindio.model.Destinos;
 import co.edu.uniquindio.model.Paquetes;
 import co.edu.uniquindio.utils.CambioIdiomaEvent;
@@ -20,7 +21,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class VistaDestinosController implements Initializable, CambioIdiomaListener {
-    private final Agencia agencia = Agencia.getInstance();
+    private final AgenciaCliente agencia = AgenciaCliente.getInstance();
     private final Logger LOGGER = Logger.getLogger(Agencia.class.getName());
 
     @FXML
@@ -67,7 +68,7 @@ public class VistaDestinosController implements Initializable, CambioIdiomaListe
     public void eliminar(ActionEvent actionEvent) {
         if (tablaDestinos.getSelectionModel().getSelectedIndex() == -1) {
             LOGGER.log(Level.INFO, "Se intento cancelar un destino sin haberlo seleccionado");
-            agencia.mostrarMensaje(Alert.AlertType.ERROR, "Se intento eliminar un destino sin haberlo seleccionado");
+            mostrarMensaje(Alert.AlertType.ERROR, "Se intento eliminar un destino sin haberlo seleccionado");
         } else {
             agencia.recibirDestinoCancelacion(tablaDestinos.getSelectionModel().getSelectedItem());
             agencia.loadStage("/paginaVistaDestinos.fxml",actionEvent, "Se cargo la pagina actualizada");
@@ -76,10 +77,16 @@ public class VistaDestinosController implements Initializable, CambioIdiomaListe
     public void editar(ActionEvent actionEvent) {
         if (tablaDestinos.getSelectionModel().getSelectedIndex() == -1) {
             LOGGER.log(Level.INFO, "Se intento editar un destino sin haberlo seleccionado");
-            agencia.mostrarMensaje(Alert.AlertType.ERROR, "Se intento editar un destino sin haberlo seleccionado");
+            mostrarMensaje(Alert.AlertType.ERROR, "Se intento editar un destino sin haberlo seleccionado");
         } else {
             agencia.recibirDestinoEdicion(tablaDestinos.getSelectionModel().getSelectedItem());
             agencia.loadStage("/paginaEdicionDestino.fxml",actionEvent,"Se va a editar un destino");
         }
+    }
+    public void mostrarMensaje(Alert.AlertType tipo, String mensaje){
+        Alert alert = new Alert(tipo);
+        alert.setHeaderText(null);
+        alert.setContentText(mensaje);
+        alert.show();
     }
 }

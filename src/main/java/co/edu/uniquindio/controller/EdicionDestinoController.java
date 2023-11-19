@@ -4,6 +4,7 @@ import co.edu.uniquindio.exceptions.CampoObligatorioException;
 import co.edu.uniquindio.exceptions.CampoRepetido;
 import co.edu.uniquindio.exceptions.CampoVacioException;
 import co.edu.uniquindio.model.Agencia;
+import co.edu.uniquindio.model.AgenciaCliente;
 import co.edu.uniquindio.utils.CambioIdiomaEvent;
 import co.edu.uniquindio.utils.CambioIdiomaListener;
 import co.edu.uniquindio.utils.Propiedades;
@@ -26,7 +27,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class EdicionDestinoController implements Initializable, CambioIdiomaListener {
-    private final Agencia agencia = Agencia.getInstance();
+    private final AgenciaCliente agencia = AgenciaCliente.getInstance();
     private static final Logger LOGGER = Logger.getLogger(Agencia.class.getName());
     @FXML
     private Button botonRegreso,botonEditar;
@@ -69,15 +70,15 @@ public class EdicionDestinoController implements Initializable, CambioIdiomaList
         imagePaths.removeAll(imagePaths);
     }
     public void registrarDestino(ActionEvent actionEvent) {
-        try
-        {
-            agencia.editarDestino(nombre.getText(),ciudad.getText(),descripcion.getText(),imagePaths, clima.getText());
+        String mensaje = agencia.editarDestino(nombre.getText(),ciudad.getText(),descripcion.getText(),imagePaths, clima.getText());
+        if(mensaje.equals("Se edito un destino correctamente")){
             LOGGER.log(Level.INFO,"Se edito un  Destino en el sistema");
-            agencia.mostrarMensaje(Alert.AlertType.INFORMATION, "Se edito un Destino en el sistema");
-            imagePaths.removeAll(imagePaths);
-        } catch (CampoRepetido | CampoObligatorioException | CampoVacioException e) {
-            mostrarMensaje(Alert.AlertType.ERROR, e.getMessage());
+            mostrarMensaje(Alert.AlertType.INFORMATION, "Se edito un Destino en el sistema");
+            agencia.loadStage("/paginaEdicionDestino.fxml", actionEvent,"Se carga la pagina de edicion de destinos");
+        }else{
+            mostrarMensaje(Alert.AlertType.INFORMATION, mensaje);
         }
+
     }
     public void mostrarMensaje(Alert.AlertType tipo, String mensaje){
         Alert alert = new Alert(tipo);
@@ -97,14 +98,16 @@ public class EdicionDestinoController implements Initializable, CambioIdiomaList
         File[] selectedFiles = fileChooser.showOpenMultipleDialog(stage).toArray(new File[0]);
 
         // Obtener las direcciones absolutas y guardarlas en el ArrayList
-        if (selectedFiles != null) {
+        if ((selectedFiles != null && selectedFiles.length > 0)){
             for (File file : selectedFiles) {
                 imagePaths.add(file.getAbsolutePath());
             }
-        }
-        System.out.println("Direcciones de las imágenes seleccionadas:");
-        for (String path : imagePaths) {
-            System.out.println(path);
+            System.out.println("Direcciones de las imágenes seleccionadas:");
+            for (String path : imagePaths) {
+                System.out.println(path);
+            }
+        }else{
+            mostrarMensaje(Alert.AlertType.INFORMATION, "No se cargaron imagenes");
         }
     }
 

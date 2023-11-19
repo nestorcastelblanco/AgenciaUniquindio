@@ -3,10 +3,7 @@ package co.edu.uniquindio.controller;
 import co.edu.uniquindio.exceptions.CampoObligatorioException;
 import co.edu.uniquindio.exceptions.CampoRepetido;
 import co.edu.uniquindio.exceptions.CampoVacioException;
-import co.edu.uniquindio.model.Agencia;
-import co.edu.uniquindio.model.Destinos;
-import co.edu.uniquindio.model.Guias;
-import co.edu.uniquindio.model.Paquetes;
+import co.edu.uniquindio.model.*;
 import co.edu.uniquindio.utils.CambioIdiomaEvent;
 import co.edu.uniquindio.utils.CambioIdiomaListener;
 import co.edu.uniquindio.utils.Propiedades;
@@ -25,7 +22,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class EdicionReservasController implements Initializable, CambioIdiomaListener {
-    private final Agencia agencia = Agencia.getInstance();
+    private final AgenciaCliente agencia = AgenciaCliente.getInstance();
     private static ArrayList<Guias> arrayGuias  = new ArrayList<>();
     private static ArrayList<Paquetes> arrayPaquetes  = new ArrayList<>();
 
@@ -140,7 +137,7 @@ public class EdicionReservasController implements Initializable, CambioIdiomaLis
         if(agencia.enviarGuias().isEmpty())
         {
             LOGGER.log(Level.INFO,"Se intento generar una lista de elementos vacios");
-            agencia.mostrarMensaje(Alert.AlertType.ERROR, "Debe seleccionar un elemento");
+            mostrarMensaje(Alert.AlertType.ERROR, "Debe seleccionar un elemento");
         }else
         {
             arrayGuias.stream().toList();
@@ -182,13 +179,12 @@ public class EdicionReservasController implements Initializable, CambioIdiomaLis
         });
     }
     public void registrarPaquete(ActionEvent actionEvent) {
-        try
-        {
-            agencia.editarReserva(paquetes.getSelectionModel().getSelectedItem(),fechaInicio.getValue(),fechaFin.getValue(),agregarPersonas.getText(),quitarPersonas.getText(),guias.getSelectionModel().getSelectedItem(),estado.getSelectionModel().getSelectedItem());
+        String mensaje = agencia.editarReserva(paquetes.getSelectionModel().getSelectedItem(),fechaInicio.getValue(),fechaFin.getValue(),agregarPersonas.getText(),quitarPersonas.getText(),guias.getSelectionModel().getSelectedItem(),estado.getSelectionModel().getSelectedItem());
+        if(mensaje.equals("La reserva se edito correctamente")){
+            mostrarMensaje(Alert.AlertType.CONFIRMATION, "Se edito una reserva correctamente");
             LOGGER.log(Level.INFO,"Se edito una reserva");
-            agencia.mostrarMensaje(Alert.AlertType.CONFIRMATION, "Se edito una reserva correctamente");
-        } catch (CampoRepetido | CampoObligatorioException | CampoVacioException e) {
-            mostrarMensaje(Alert.AlertType.ERROR, e.getMessage());
+        }else{
+            mostrarMensaje(Alert.AlertType.CONFIRMATION, "No se logro editar la reserva");
         }
     }
     public void llenarListaEstados() {

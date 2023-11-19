@@ -4,6 +4,7 @@ import co.edu.uniquindio.exceptions.CampoObligatorioException;
 import co.edu.uniquindio.exceptions.CampoRepetido;
 import co.edu.uniquindio.exceptions.CampoVacioException;
 import co.edu.uniquindio.model.Agencia;
+import co.edu.uniquindio.model.AgenciaCliente;
 import co.edu.uniquindio.utils.CambioIdiomaEvent;
 import co.edu.uniquindio.utils.CambioIdiomaListener;
 import co.edu.uniquindio.utils.Propiedades;
@@ -21,7 +22,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class EdicionPerfilController implements Initializable, CambioIdiomaListener {
-    private final Agencia agencia = Agencia.getInstance();
+    private final AgenciaCliente agencia = AgenciaCliente.getInstance();
     private final Logger LOGGER = Logger.getLogger(Agencia.class.getName());
     @FXML
     private TextField nombreUsuario, correoUsuario, direccionUsuario, id, ciudadUsuario, telefonoUsuario,usuarioIngresado,contrasenaIngresada;
@@ -62,13 +63,13 @@ public class EdicionPerfilController implements Initializable, CambioIdiomaListe
         agencia.loadStage("/portalAgencia.fxml", actionEvent,"Se regresa al portal de la agencia");
     }
     public void editar(ActionEvent actionEvent) {
-        try{
-            agencia.realizarEdicion(nombreUsuario.getText(),correoUsuario.getText(),direccionUsuario.getText(),id.getText(),ciudadUsuario.getText(),telefonoUsuario.getText(),usuarioIngresado.getText(),contrasenaIngresada.getText());
+        String mensaje = agencia.realizarEdicion(nombreUsuario.getText(),correoUsuario.getText(),direccionUsuario.getText(),id.getText(),ciudadUsuario.getText(),telefonoUsuario.getText(),usuarioIngresado.getText(),contrasenaIngresada.getText());
+        if(mensaje.equals("Se realizo la edicion del perfil correctamente")){
             LOGGER.log(Level.INFO, "Se realizo la edicion del perfil correctamente");
-            mostrarMensaje(Alert.AlertType.INFORMATION,"Se realizo la edicion del perfil correctamente" );
-        } catch (CampoRepetido | CampoVacioException | CampoObligatorioException e) {
-            mostrarMensaje(Alert.AlertType.ERROR, e.getMessage());
+        }else{
+            mostrarMensaje(Alert.AlertType.INFORMATION,mensaje);
         }
+
     }
     public void mostrarMensaje(Alert.AlertType tipo, String mensaje){
         Alert alert = new Alert(tipo);

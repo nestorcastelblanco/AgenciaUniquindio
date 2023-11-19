@@ -24,7 +24,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 public class RealizarReservaController implements Initializable, CambioIdiomaListener {
     private Logger LOGGER = Logger.getLogger(Agencia.class.getName());
-    private final Agencia agencia = Agencia.getInstance();
+    private final AgenciaCliente agencia = AgenciaCliente.getInstance();
     private Paquetes paquete = new Paquetes();
     private Clientes cliente = new Clientes();
     private ArrayList<Guias> guiasBase = new ArrayList<>();
@@ -114,16 +114,13 @@ public class RealizarReservaController implements Initializable, CambioIdiomaLis
             }
         });
     }
-    public void reservar(ActionEvent actionEvent) {
-        try
-        {
-            agencia.realizarReserva(paquete,cliente,inicio.getValue(),fin.getValue(),personas.getText(),comboGuia.getSelectionModel().getSelectedItem(),"PENDIENTE", valorDescuento);
-            agencia.mostrarMensaje(Alert.AlertType.CONFIRMATION, "Se ha generado la reserva correctamente");
+    public void reservar(ActionEvent actionEvent) throws CampoRepetido,CampoObligatorioException,CampoVacioException{
+        String mensaje = agencia.realizarReserva(paquete,cliente,inicio.getValue(),fin.getValue(),personas.getText(),comboGuia.getSelectionModel().getSelectedItem(),"PENDIENTE", valorDescuento);
+        if(mensaje.equals("Se genero la reserva correctamente")){
+            mostrarMensaje(Alert.AlertType.CONFIRMATION, "Se ha generado la reserva correctamente");
             agencia.loadStage("/paginaClienteSeleccionDestino.fxml", actionEvent, "Se regresa al apartado de destinos");
-        }
-        catch (CampoRepetido| CampoObligatorioException| CampoVacioException e)
-        {
-            mostrarMensaje(Alert.AlertType.WARNING, e.getMessage());
+        }else{
+            mostrarMensaje(Alert.AlertType.WARNING, "No se ha generado la reserva correctamente");
         }
     }
     public void mostrarMensaje(Alert.AlertType tipo, String mensaje){
@@ -137,12 +134,12 @@ public class RealizarReservaController implements Initializable, CambioIdiomaLis
     }
 
     public void validar(ActionEvent actionEvent) {
-        try{
-            valorDescuento = agencia.verificarCupon(paquete,inicio.getValue(), fin.getValue(),cupon.getText(), personas.getText());
-        }catch (CampoObligatorioException e)
-        {
-            mostrarMensaje(Alert.AlertType.ERROR, e.getMessage());
+        double valor = agencia.verificarCupon(paquete,inicio.getValue(), fin.getValue(),cupon.getText(), personas.getText());
+        valorDescuento = (float) valor;
+        if(valorDescuento == 0){
+            mostrarMensaje(Alert.AlertType.INFORMATION, "El cupon ingresado no fue valido");
+        }else{
+            mostrarMensaje(Alert.AlertType.CONFIRMATION, "El cupon ingresado es correcto y se aplicara un descuento de: " + valorDescuento);
         }
-
     }
 }

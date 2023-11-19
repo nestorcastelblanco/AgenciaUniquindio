@@ -4,6 +4,7 @@ import co.edu.uniquindio.exceptions.CampoObligatorioException;
 import co.edu.uniquindio.exceptions.CampoRepetido;
 import co.edu.uniquindio.exceptions.CampoVacioException;
 import co.edu.uniquindio.model.Agencia;
+import co.edu.uniquindio.model.AgenciaCliente;
 import co.edu.uniquindio.model.Destinos;
 import co.edu.uniquindio.utils.CambioIdiomaEvent;
 import co.edu.uniquindio.utils.CambioIdiomaListener;
@@ -23,7 +24,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class CreacionPaquetesController implements Initializable, CambioIdiomaListener {
-    private static final Agencia agencia = Agencia.getInstance();
+    private static final AgenciaCliente agencia = AgenciaCliente.getInstance();
     ArrayList<Destinos> destinosCombo =   new ArrayList<>(agencia.enviarDestinos());
      ArrayList<Destinos> destinosSeleccionados = new ArrayList<>();
     private static final Logger LOGGER = Logger.getLogger(Agencia.class.getName());
@@ -131,22 +132,25 @@ public class CreacionPaquetesController implements Initializable, CambioIdiomaLi
     }
 
     public void registrarPaquete(ActionEvent actionEvent) {
-        try
+        if (stateCupon)
         {
-            if (stateCupon)
-            {
-                agencia.registrarPaqueteCupon(nombre.getText(),destinosSeleccionados,fechaInicio.getValue(),fechaFin.getValue(),servicios.getText(),personas.getText(),valor.getText(), cupon.getText(),valorCupon.getText(), fechaCupon1.getValue(), fechaCupon2.getValue());
-                agencia.mostrarMensaje(Alert.AlertType.CONFIRMATION, "Se registro un nuevo Paquete al sistema");
+            String mensaje = agencia.registrarPaqueteCupon(nombre.getText(),destinosSeleccionados,fechaInicio.getValue(),fechaFin.getValue(),servicios.getText(),personas.getText(),valor.getText(), cupon.getText(),valorCupon.getText(), fechaCupon1.getValue(), fechaCupon2.getValue());
+            if(mensaje.equals("El paquete ha sido registrado correctamente")){
+                mostrarMensaje(Alert.AlertType.CONFIRMATION, "Se registro un nuevo Paquete al sistema");
                 LOGGER.log(Level.INFO,"Se registro un nuevo Paquete al sistema");
                 agencia.loadStage("/paginaCreacionPaquete.fxml", actionEvent, "Se vuelve a cargar la pagina");
-            }else{
-                agencia.registrarPaquete(nombre.getText(),destinosSeleccionados,fechaInicio.getValue(),fechaFin.getValue(),servicios.getText(),personas.getText(),valor.getText());
-                nombre.setText("");destinosSeleccionados.clear();servicios.setText("");personas.setText("");valor.setText("");
-                agencia.mostrarMensaje(Alert.AlertType.CONFIRMATION, "Se registro un nuevo Paquete al sistema");
-                LOGGER.log(Level.INFO,"Se registro un nuevo Paquete al sistema");
+            }else {
+
             }
-        } catch (CampoRepetido | CampoObligatorioException | CampoVacioException e) {
-            mostrarMensaje(Alert.AlertType.ERROR, e.getMessage());
+        } else{
+            String mensaje1 = agencia.registrarPaquete(nombre.getText(),destinosSeleccionados,fechaInicio.getValue(),fechaFin.getValue(),servicios.getText(),personas.getText(),valor.getText());
+            if(mensaje1.equals("Paquete registrado correctamente")){
+                nombre.setText("");destinosSeleccionados.clear();servicios.setText("");personas.setText("");valor.setText("");
+                mostrarMensaje(Alert.AlertType.CONFIRMATION, "Se registro un nuevo Paquete al sistema");
+                LOGGER.log(Level.INFO,"Se registro un nuevo Paquete al sistema");
+            }else{
+                mostrarMensaje(Alert.AlertType.INFORMATION, mensaje1);
+            }
         }
     }
     public void mostrarMensaje(Alert.AlertType tipo, String mensaje){
@@ -159,16 +163,16 @@ public class CreacionPaquetesController implements Initializable, CambioIdiomaLi
         if(destinos.getSelectionModel().getSelectedIndex() == -1 )
         {
             LOGGER.log(Level.INFO, "Se intento registrar un Destino sin haberlo seleccionado");
-            agencia.mostrarMensaje(Alert.AlertType.INFORMATION, "Se intento registrar un Destino sin haberlo seleccionado");
+            mostrarMensaje(Alert.AlertType.INFORMATION, "Se intento registrar un Destino sin haberlo seleccionado");
         }else {
             if (destinosSeleccionados.contains(destinos.getSelectionModel().getSelectedItem()))
             {
                 LOGGER.log(Level.INFO,"El destino seleccionado ya fue ingresado al paquete");
-                agencia.mostrarMensaje(Alert.AlertType.INFORMATION, "El destino seleccionado ya fue ingresado al paquete");
+                mostrarMensaje(Alert.AlertType.INFORMATION, "El destino seleccionado ya fue ingresado al paquete");
             }else {
                 destinosSeleccionados.add(destinos.getSelectionModel().getSelectedItem());
                 System.out.println("Arraylist de destinos seleccionados: " + destinosSeleccionados.toString());
-                agencia.mostrarMensaje(Alert.AlertType.INFORMATION, "Se establecio un nuevo destino");
+                mostrarMensaje(Alert.AlertType.INFORMATION, "Se establecio un nuevo destino");
                 LOGGER.log(Level.INFO, "Se establecio un nuevo destino  " + destinos.getSelectionModel().getSelectedItem().getNombre() + " " + destinos.getSelectionModel().getSelectedItem().getCiudad());
             }
         }

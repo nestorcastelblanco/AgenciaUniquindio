@@ -1,6 +1,7 @@
 package co.edu.uniquindio.controller;
 
 import co.edu.uniquindio.model.Agencia;
+import co.edu.uniquindio.model.AgenciaCliente;
 import co.edu.uniquindio.model.Paquetes;
 import co.edu.uniquindio.model.Reservas;
 import co.edu.uniquindio.utils.CambioIdiomaEvent;
@@ -20,7 +21,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class VistaReservasController implements Initializable, CambioIdiomaListener {
-    private final Agencia agencia = Agencia.getInstance();
+    private final AgenciaCliente agencia = AgenciaCliente.getInstance();
     private final Logger LOGGER = Logger.getLogger(Agencia.class.getName());
     @FXML
     private TableView<Reservas> tablaReservas;
@@ -75,7 +76,7 @@ public class VistaReservasController implements Initializable, CambioIdiomaListe
     public void editar(ActionEvent actionEvent) {
         if (tablaReservas.getSelectionModel().getSelectedIndex() == -1) {
             LOGGER.log(Level.INFO, "Se intento editar una reserva sin haberlo seleccionado");
-            agencia.mostrarMensaje(Alert.AlertType.ERROR, "Se intento editar una reserva sin haberla seleccionado");
+            mostrarMensaje(Alert.AlertType.ERROR, "Se intento editar una reserva sin haberla seleccionado");
         } else {
             agencia.recibirReservaEdicion(tablaReservas.getSelectionModel().getSelectedItem());
             agencia.loadStage("/paginaEdicionReserva.fxml",actionEvent,"Se va a editar una reserva");
@@ -84,10 +85,16 @@ public class VistaReservasController implements Initializable, CambioIdiomaListe
     public void eliminar(ActionEvent actionEvent) {
         if (tablaReservas.getSelectionModel().getSelectedIndex() == -1) {
             LOGGER.log(Level.INFO, "Se intento cancelar una reserva sin haberlo seleccionado");
-            agencia.mostrarMensaje(Alert.AlertType.ERROR, "Se intento cancelar una reserva sin haberla seleccionado");
+            mostrarMensaje(Alert.AlertType.ERROR, "Se intento cancelar una reserva sin haberla seleccionado");
         } else {
             agencia.recibirReservaCancelacion(tablaReservas.getSelectionModel().getSelectedItem());
             agencia.loadStage("/paginaVistaReservas.fxml",actionEvent, "Se cargo la pagina actualizada");
         }
+    }
+    public void mostrarMensaje(Alert.AlertType tipo, String mensaje){
+        Alert alert = new Alert(tipo);
+        alert.setHeaderText(null);
+        alert.setContentText(mensaje);
+        alert.show();
     }
 }
